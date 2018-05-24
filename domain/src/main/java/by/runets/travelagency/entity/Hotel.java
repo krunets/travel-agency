@@ -1,15 +1,21 @@
 package by.runets.travelagency.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Hotel {
-	private int id;
+public class Hotel<K> extends Entity<K> {
 	private String name;
 	private String phone;
 	private int stars;
+	
+	public Hotel (K id, String name, String phone, int stars) {
+		super(id);
+		this.name = name;
+		this.phone = phone;
+		this.stars = stars;
+	}
 }

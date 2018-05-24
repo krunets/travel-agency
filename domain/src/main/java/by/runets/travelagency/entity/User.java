@@ -1,14 +1,19 @@
 package by.runets.travelagency.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class User {
-	private int id;
+public class User <K> extends Entity<K> {
 	private String login;
 	private String password;
+	
+	public User (K id, String login, String password) {
+		super(id);
+		this.login = login;
+		this.password = password;
+	}
 }

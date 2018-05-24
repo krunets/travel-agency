@@ -1,13 +1,18 @@
 package by.runets.travelagency.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Country {
-	private int id;
+public class Country<K> extends Entity <K> {
 	private String name;
+	
+	public Country (K id, String name) {
+		super(id);
+		this.name = name;
+	}
 }
