@@ -15,4 +15,5 @@ public class Country<K> extends Entity <K> {
 		super(id);
 		this.name = name;
 	}
+	
 }

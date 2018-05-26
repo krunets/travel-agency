@@ -1,12 +1,14 @@
 package by.runets.travelagency.repository.impl;
 
+import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Entity;
 import by.runets.travelagency.repository.IRepository;
 import lombok.AllArgsConstructor;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @AllArgsConstructor
 public class AbstractRepository<T extends Entity, K> implements IRepository<T, K> {
@@ -34,10 +36,14 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	@Override
 	public void update (T entity) {
 		Optional<T> optional = Optional.ofNullable(entity);
+		int index[] = {0};
 		optional.ifPresent(checkedEntity -> {
-			data.stream()
-					.filter(e -> e.getId() == checkedEntity.getId())
-					.map(e -> e == checkedEntity);
+			data.forEach(e -> {
+				if (e.getId() == checkedEntity.getId()) {
+					data.set(index[0], checkedEntity);
+				}
+				index[0]++;
+			});
 		});
 	}
 	
