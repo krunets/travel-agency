@@ -15,7 +15,6 @@
 
     <properties>
         <domain.version>1.0-SNAPSHOT</domain.version>
-        <lombok.version>1.16.18</lombok.version>
     </properties>
 
     <dependencies>
@@ -24,27 +23,5 @@
             <artifactId>domain</artifactId>
             <version>${domain.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

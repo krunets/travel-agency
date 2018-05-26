@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class AbstractRepository<T extends Entity, K> implements IRepository<T, K> {
@@ -17,8 +18,10 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	}
 	
 	@Override
-	public Optional<List<T>> readAll () {
-		return Optional.of(data);
+	public List<Optional<T>> readAll () {
+		return data.stream()
+				.map(Optional::ofNullable)
+				.collect(Collectors.toList());
 	}
 	
 	@Override
@@ -30,13 +33,19 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	
 	@Override
 	public void update (T entity) {
-		data.stream()
-				.filter(e -> e.getId() == entity.getId())
-				.map(e -> e == entity);
+		Optional<T> optional = Optional.ofNullable(entity);
+		optional.ifPresent(checkedEntity -> {
+			data.stream()
+					.filter(e -> e.getId() == checkedEntity.getId())
+					.map(e -> e == checkedEntity);
+		});
 	}
 	
 	@Override
 	public void delete (T entity) {
-		data.removeIf(e -> e.getId() == entity.getId());
+		Optional<T> optional = Optional.ofNullable(entity);
+		optional.ifPresent(checkedEntity -> {
+			data.removeIf(e -> e.getId() == entity.getId());
+		});
 	}
 }

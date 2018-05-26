@@ -12,4 +12,16 @@
         <artifactId>travelagency</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
+    <properties>
+        <repository.version>1.0-SNAPSHOT</repository.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>by.runets</groupId>
+            <artifactId>repository</artifactId>
+            <version>${repository.version}</version>
+        </dependency>
+    </dependencies>
 </project>

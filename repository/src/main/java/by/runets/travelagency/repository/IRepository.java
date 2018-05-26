@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IRepository <T extends Entity, K> {
 	void create(T entity);
-	Optional<List<T>> readAll();
+	List<Optional<T>> readAll();
 	Optional<T> read(K id);
 	void update(T entity);
 	void delete(T entity);
