@@ -1,10 +1,10 @@
 package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.entity.Review;
-import by.runets.travelagency.repository.impl.AbstractRepository;
+import by.runets.travelagency.repository.IRepository;
 
-public class ReviewService extends AbstractService<Review<Integer>, Integer> {
-	public ReviewService (AbstractRepository<Review<Integer>, Integer> repository) {
+public class ReviewService extends AbstractService<Review, Integer> {
+	public ReviewService (IRepository<Review, Integer> repository) {
 		super(repository);
 	}
 }
