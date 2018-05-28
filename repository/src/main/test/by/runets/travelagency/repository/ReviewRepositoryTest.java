@@ -54,7 +54,6 @@ public class ReviewRepositoryTest {
 				Optional.of(new Review<Integer>(1, "Content 11")),
 				Optional.of(new Review<Integer>(2, "Content2")),
 				Optional.of(new Review<Integer>(3, "Content3")),
-				Optional.of(new Review<Integer>(4, "Content4")),
 				Optional.of(new Review<Integer>(5, "Content5"))));
 		
 		Review entityToUpdate = new Review<Integer>(1, "Content 11");

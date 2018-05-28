@@ -40,8 +40,7 @@ public class CountryRepositoryTest {
 		List<Optional<Country>> actual = new ArrayList<>(Arrays.asList(
 				Optional.of(new Country<Integer>(1, "Belarus1")),
 				Optional.of(new Country<Integer>(2, "USA")),
-				Optional.of(new Country<Integer>(3, "France")),
-				Optional.of(new Country<Integer>(4, "Italy"))
+				Optional.of(new Country<Integer>(3, "France"))
 		));
 		Country countryToUpdate = new Country<Integer>(1, "Belarus1");
 		repository.update(countryToUpdate);

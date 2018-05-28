@@ -1,6 +1,5 @@
 package by.runets.travelagency.repository;
 
-import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.repository.impl.HotelRepository;
 import org.junit.Assert;
@@ -56,7 +55,6 @@ public class HotelRepositoryTest {
 				Optional.of(new Hotel<Integer>(1, "Marriot1", "123 24 23", 5)),
 				Optional.of(new Hotel<Integer>(2, "DoubleTree by Hilton", "232 12 12", 5)),
 				Optional.of(new Hotel<Integer>(3, "Prezident-Otel", "111 11 11", 4)),
-				Optional.of(new Hotel<Integer>(4, "Aqua-Minsk", "123 11 11", 2)),
 				Optional.of(new Hotel<Integer>(5, "Trump International Hotel Washington DC", "101 10 01", 5))));
 		Hotel entityToUpdate = new Hotel<Integer>(1, "Marriot1", "123 24 23", 5);
 		repository.update(entityToUpdate);
