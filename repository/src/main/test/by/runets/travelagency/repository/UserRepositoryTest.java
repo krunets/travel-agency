@@ -41,8 +41,8 @@ public class UserRepositoryTest {
 				Optional.of(new User<Integer>(3, "traveler1", "traveler1"))
 		));
 		
-		User<Integer> entityToDelete = new User<Integer>(2, "admin", "admin");
-		repository.delete(entityToDelete);
+		User<Integer> entity = new User<Integer>(2, "admin", "admin");
+		repository.delete(entity);
 		
 		List<Optional<User>> expected = repository.readAll();
 		Assert.assertEquals(actual, expected);
