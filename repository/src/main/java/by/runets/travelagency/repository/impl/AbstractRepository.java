@@ -1,14 +1,12 @@
 package by.runets.travelagency.repository.impl;
 
-import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Entity;
 import by.runets.travelagency.repository.IRepository;
 import lombok.AllArgsConstructor;
 
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @AllArgsConstructor
 public class AbstractRepository<T extends Entity, K> implements IRepository<T, K> {
