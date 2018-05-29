@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Is inherited from common class and provides list of users.
+ */
 public class UserRepository extends AbstractRepository<User, Integer> {
 	private static List<User> users = new ArrayList<>(Arrays.asList(
 			new User<Integer>(1, "root", "root"),

@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Is inherited from common class and provides list of tours.
+ */
 public class TourRepository extends AbstractRepository<Tour, Integer> {
 	private static List<Tour> tours = new ArrayList<>(Arrays.asList(
 			new Tour<Integer>(1, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100)),

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Is inherited from common class and provides list of reviews.
+ */
 public class ReviewRepository extends AbstractRepository<Review, Integer> {
 	private static List<Review> reviews = new ArrayList<>(Arrays.asList(
 			new Review<Integer>(1, "Content 1"),

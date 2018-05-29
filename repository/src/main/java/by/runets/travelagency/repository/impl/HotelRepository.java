@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Is inherited from common class and provides list of hotels.
+ */
 public class HotelRepository extends AbstractRepository<Hotel, Integer> {
 	private static List<Hotel> hotels = new ArrayList<>(Arrays.asList(
 			new Hotel<Integer>(1, "Marriot", "123 23 23", 5),

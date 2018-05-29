@@ -1,5 +1,8 @@
 package by.runets.travelagency.entity;
 
+/**
+ * Class that represents the enum of the tour type.
+ */
 public enum TourType {
 	ADVENTURE("Adventure tourism"),
 	ATOMIC("Atomic tourism"),
@@ -11,11 +14,19 @@ public enum TourType {
 	
 	private String type;
 	
-	TourType (String type) {
+	/**
+	 *
+	 * @param type constructor argument which initializes tourtype type field.
+	 */
+	TourType(final String type) {
 		this.type = type;
 	}
 	
-	public String getType () {
+	/**
+	 *
+	 * @return type of tour.
+	 */
+	public String getType() {
 		return type;
 	}
 }

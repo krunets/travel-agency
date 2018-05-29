@@ -8,17 +8,30 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
 
+/**
+ * Class that represents the entity of the tour.
+ * @param <K> is a generic param which represents a key param.
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class Tour <K> extends Entity<K>{
+public class Tour<K> extends Entity<K> {
 	private String photo;
 	private LocalDate date;
 	private Duration duration;
 	private String description;
 	private BigDecimal cost;
 	
-	public Tour (K id, String photo, LocalDate date, Duration duration, String description, BigDecimal cost) {
+	/**
+	 * Constructor with arguments.
+	 * @param id constructor argument which initializes tour id field.
+	 * @param photo constructor argument which initializes tour photo field.
+	 * @param date constructor argument which initializes tour date field.
+	 * @param duration constructor argument which initializes tour duration field.
+	 * @param description constructor argument which initializes tour description field.
+	 * @param cost constructor argument which initializes tour cost field.
+	 */
+	public Tour(final K id, final String photo, final LocalDate date, final Duration duration, final String description, final BigDecimal cost) {
 		super(id);
 		this.photo = photo;
 		this.date = date;
