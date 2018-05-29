@@ -3,14 +3,18 @@ package by.runets.travelagency.repository.impl;
 import by.runets.travelagency.entity.Entity;
 import by.runets.travelagency.repository.IRepository;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.LogManager;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 /** Common class which implements common CRUD interface and provides default methods implementing. */
 public class AbstractRepository<T extends Entity, K> implements IRepository<T, K> {
+	private final static Logger LOGGER = LoggerFactory.getLogger(AbstractRepository.class);
 	private List<T> data;
 	
 	/**
@@ -20,7 +24,9 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 */
 	@Override
 	public void create(T entity) {
-		data.add(entity);
+		if (data.add(entity)) {
+			LOGGER.info("The entity " + entity + " added to collection.");
+		}
 	}
 	
 	/**
@@ -30,6 +36,7 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 */
 	@Override
 	public List<Optional<T>> readAll() {
+		LOGGER.info("Read all method invoke");
 		return data.stream().map(Optional::ofNullable).collect(Collectors.toList());
 	}
 	
@@ -41,7 +48,14 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 */
 	@Override
 	public Optional<T> read(K id) {
-		return data.stream().filter(entity -> entity.getId() == id).findFirst();
+		LOGGER.info("Read entity by id from collection method invoke");
+		return data.stream().filter(entity -> {
+			boolean state = entity.getId() == id;
+			if (state) {
+				LOGGER.info("Find entity " + entity + " by id " + id);
+			}
+			return state;
+		}).findFirst();
 	}
 	
 	/**
@@ -50,6 +64,7 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 */
 	@Override
 	public void update(T entity) {
+		LOGGER.info("Update entity in collection method invoke");
 		Optional<T> optional = Optional.ofNullable(entity);
 		int index[] = {0};
 		optional.ifPresent(
@@ -57,6 +72,7 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 					data.forEach(
 							e -> {
 								if (e.getId() == checkedEntity.getId()) {
+									LOGGER.info("Object " + e + " is updating to " + checkedEntity);
 									data.set(index[0], checkedEntity);
 								}
 								index[0]++;
@@ -70,10 +86,17 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 */
 	@Override
 	public void delete(T entity) {
+		LOGGER.info("Delete entity from collection method invoke");
 		Optional<T> optional = Optional.ofNullable(entity);
 		optional.ifPresent(
 				checkedEntity -> {
-					data.removeIf(e -> e.getId() == entity.getId());
+					data.removeIf(e -> {
+						boolean state = e.getId() == entity.getId();
+						if (state) {
+							LOGGER.info("The entity " + entity + " removed from collection.");
+						}
+						return state;
+					});
 				});
 	}
 }

@@ -23,6 +23,13 @@
             <artifactId>domain</artifactId>
             <version>${domain.version}</version>
         </dependency>
+
+        <!-- Sl4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${sl4j.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
