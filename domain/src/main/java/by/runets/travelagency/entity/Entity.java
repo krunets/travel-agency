@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 /**
- *
  * Common class which provides generic id field.
+ *
  * @param <K> is a generic param which represents a key param.
  */
 @Data

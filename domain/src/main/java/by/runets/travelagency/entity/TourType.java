@@ -15,18 +15,16 @@ public enum TourType {
 	private String type;
 	
 	/**
-	 *
 	 * @param type constructor argument which initializes tourtype type field.
 	 */
-	TourType(final String type) {
+	TourType (final String type) {
 		this.type = type;
 	}
 	
 	/**
-	 *
 	 * @return type of tour.
 	 */
-	public String getType() {
+	public String getType () {
 		return type;
 	}
 }

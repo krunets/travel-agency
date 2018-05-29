@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * Class that represents the entity of the user.
+ *
  * @param <K> is a generic param which represents a key param.
  */
 @EqualsAndHashCode(callSuper = true)
@@ -17,11 +18,12 @@ public class User<K> extends Entity<K> {
 	
 	/**
 	 * Constructor with arguments.
-	 * @param id constructor argument which initializes user id field.
-	 * @param login constructor argument which initializes user login field.
+	 *
+	 * @param id       constructor argument which initializes user id field.
+	 * @param login    constructor argument which initializes user login field.
 	 * @param password constructor argument which initializes user password field.
 	 */
-	public User(final K id, final String login, final String password) {
+	public User (final K id, final String login, final String password) {
 		super(id);
 		this.login = login;
 		this.password = password;

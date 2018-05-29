@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * Class that represents the entity of the review.
+ *
  * @param <K> is a generic param which represents a key param.
  */
 @EqualsAndHashCode(callSuper = true)
@@ -16,10 +17,11 @@ public class Review<K> extends Entity<K> {
 	
 	/**
 	 * Constructor with arguments.
-	 * @param id constructor argument which initializes review id field.
+	 *
+	 * @param id      constructor argument which initializes review id field.
 	 * @param content constructor argument which initializes review content field.
 	 */
-	public Review(final K id, final String content) {
+	public Review (final K id, final String content) {
 		super(id);
 		this.content = content;
 	}
