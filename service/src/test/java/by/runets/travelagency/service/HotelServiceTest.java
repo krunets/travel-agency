@@ -20,21 +20,21 @@ public class HotelServiceTest {
 	private IService<Hotel, Integer> service = new HotelService(repository);
 	
 	@Test
-	public void testRead() {
+	public void testRead () {
 		when(repository.read(any(Integer.class))).thenReturn(Optional.of(new Hotel<Integer>()));
 		
 		assertThat(service.read(any(Integer.class)), is(notNullValue()));
 	}
 	
 	@Test
-	public void testReadAll() {
+	public void testReadAll () {
 		when(repository.readAll()).thenReturn(new ArrayList<Optional<Hotel>>());
 		
 		assertThat(service.readAll(), is(notNullValue()));
 	}
 	
 	@Test
-	public void testUpdate() {
+	public void testUpdate () {
 		Hotel<Integer> hotel = new Hotel<Integer>(1, "Marriot1", "123 24 23", 5);
 		
 		service.update(hotel);
@@ -43,7 +43,7 @@ public class HotelServiceTest {
 	}
 	
 	@Test
-	public void testDelete() {
+	public void testDelete () {
 		Hotel<Integer> hotel = new Hotel<Integer>(1, "Marriot1", "123 24 23", 5);
 		
 		service.delete(hotel);
@@ -52,7 +52,7 @@ public class HotelServiceTest {
 	}
 	
 	@Test
-	public void testCreate() {
+	public void testCreate () {
 		Hotel<Integer> hotel = new Hotel<Integer>(7, "Marriot2", "123 24 23", 5);
 		
 		service.create(hotel);
