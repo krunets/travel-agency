@@ -11,8 +11,12 @@ import java.util.Optional;
 import java.util.logging.LogManager;
 import java.util.stream.Collectors;
 
+/**
+ * Common class which implements common CRUD interface and provides default methods implementing.
+ * @param <T> is a generic param which must be inherited from Entity class.
+ * @param <K> is a generic param which represents a key param.
+ */
 @AllArgsConstructor
-/** Common class which implements common CRUD interface and provides default methods implementing. */
 public class AbstractRepository<T extends Entity, K> implements IRepository<T, K> {
 	private final static Logger LOGGER = LoggerFactory.getLogger(AbstractRepository.class);
 	private List<T> data;
