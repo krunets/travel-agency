@@ -1,0 +1,10 @@
+Jenkins credentials
+http://localhost:8080
+admin role, all permissions
+user: Kiryl_Runets
+password: root
+
+Sonarqube credentials
+http://localhost:9000
+login: admin
+password: admin
