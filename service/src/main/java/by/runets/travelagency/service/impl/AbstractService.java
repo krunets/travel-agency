@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * This is a common class which implements common CRUD interface and provides default method implementing.
  * @param <T> is a generic param which must be inherited from Entity class.
- * @param <K> is a generic param which represents a key param.
+ * @param <K>  is a generic param which represents a key param.
  */
 @AllArgsConstructor
 public class AbstractService<T extends Entity, K> implements IService<T, K> {
