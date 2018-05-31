@@ -15,8 +15,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
-	private IRepository<User, Integer> repository = mock(UserRepository.class);
-	private IService<User, Integer> service = new UserService(repository);
+	private final IRepository<User, Integer> repository = mock(UserRepository.class);
+	private final IService<User, Integer> service = new UserService(repository);
 	
 	@Test
 	public void testRead() {

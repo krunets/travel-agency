@@ -14,7 +14,7 @@
     </parent>
 
     <properties>
-        <repository.version>1.0-SNAPSHOT</repository.version>
+        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
         <mockito.version>2.18.3</mockito.version>
     </properties>
 
@@ -22,11 +22,11 @@
         <dependency>
             <groupId>by.runets</groupId>
             <artifactId>repository</artifactId>
-            <version>${repository.version}</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!-- Mockito -->
         <dependency>
-            <!-- Mockito -->
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>${mockito.version}</version>
@@ -46,10 +46,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>

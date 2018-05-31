@@ -17,10 +17,25 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 public class Tour<K> extends Entity<K> {
+	/**
+	 * This is a field which represents a tour photo.
+	 */
 	private String photo;
+	/**
+	 * This is a field which represents a tour date.
+	 */
 	private LocalDate date;
+	/**
+	 * This is a field which represents a tour duration.
+	 */
 	private Duration duration;
+	/**
+	 * This is a field which represents a tour description.
+	 */
 	private String description;
+	/**
+	 * This is a field which represents a tour cost.
+	 */
 	private BigDecimal cost;
 	
 	/**

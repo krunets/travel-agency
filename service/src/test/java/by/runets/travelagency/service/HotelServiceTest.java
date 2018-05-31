@@ -16,8 +16,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class HotelServiceTest {
-	private IRepository<Hotel, Integer> repository = mock(HotelRepository.class);
-	private IService<Hotel, Integer> service = new HotelService(repository);
+	private final IRepository<Hotel, Integer> repository = mock(HotelRepository.class);
+	private final IService<Hotel, Integer> service = new HotelService(repository);
 	
 	@Test
 	public void testRead () {

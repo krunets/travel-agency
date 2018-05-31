@@ -11,8 +11,10 @@ public enum TourType {
 	ECO("Eco tourism"),
 	GEO("Geo tourism"),
 	INDUSTRIAL("Industrial tourism");
-	
-	private String type;
+	/**
+	 * This is a field which represents a tour type.
+	 */
+	private final String type;
 	
 	/**
 	 * @param type constructor argument which initializes tourtype type field.

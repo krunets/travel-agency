@@ -1,6 +1,7 @@
 package by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Country;
+import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.repository.IRepository;
 import by.runets.travelagency.repository.impl.CountryRepository;
 import by.runets.travelagency.service.impl.CountryService;
@@ -16,8 +17,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class CountryServiceTest {
-	private IRepository<Country, Integer> repository = mock(CountryRepository.class);
-	private IService<Country, Integer> service = new CountryService(repository);
+	private final IRepository<Country, Integer> repository = mock(CountryRepository.class);
+	private final IService<Country, Integer> service = new CountryService(repository);
 	
 	@Test
 	public void testRead() {
@@ -26,6 +27,7 @@ public class CountryServiceTest {
 		Country<Integer> country = new Country<>(1, "213");
 		assertThat(service.read(country.getId()), is(notNullValue()));
 	}
+	
 	
 	@Test
 	public void testUpdate () {

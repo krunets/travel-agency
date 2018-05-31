@@ -10,9 +10,9 @@ import java.util.Optional;
  * @param <K> is a generic param which represents a key param.
  */
 public interface IRepository<T extends Entity, K> {
-	void create(T entity);
+	void create(final T entity);
 	List<Optional<T>> readAll();
-	Optional<T> read(K id);
-	void update(T entity);
-	void delete(T entity);
+	Optional<T> read(final K id);
+	void update(final T entity);
+	void delete(final T entity);
 }

@@ -13,6 +13,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Review<K> extends Entity<K> {
+	/**
+	 * This is a field which represents a content of review.
+	 */
 	private String content;
 	
 	/**

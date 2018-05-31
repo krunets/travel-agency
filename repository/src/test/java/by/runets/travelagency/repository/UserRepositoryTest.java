@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserRepositoryTest {
-	private IRepository<User, Integer> repository = new UserRepository();
+	private final IRepository<User, Integer> repository = new UserRepository();
 	
 	@Test
 	public void testReadAll() {

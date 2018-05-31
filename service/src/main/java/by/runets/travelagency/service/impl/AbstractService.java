@@ -3,7 +3,6 @@ package by.runets.travelagency.service.impl;
 import by.runets.travelagency.entity.Entity;
 import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.repository.IRepository;
-import by.runets.travelagency.repository.impl.AbstractRepository;
 import by.runets.travelagency.service.IService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -28,7 +27,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * @param entity  generic exemplar.
 	 */
 	@Override
-	public void create(T entity) {
+	public void create(final T entity) {
 		LOGGER.info("Create method in service layer is invoked.");
 		repository.create(entity);
 	}
@@ -54,12 +53,11 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * @return entity.
 	 */
 	@Override
-	public T read(K id) {
+	public T read(final K id) {
 		LOGGER.info("Read entity by id method in service layer is invoked.");
 		return repository
 				.read(id)
-				.orElseThrow(
-						() -> new ResourceNotFoundException("The entity by id " + id + " does not exist."));
+				.orElseThrow(() -> new ResourceNotFoundException("The entity by id " + id + " does not exist."));
 	}
 	
 	/**
@@ -67,7 +65,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * @param entity generic exemplar.
 	 */
 	@Override
-	public void update(T entity) {
+	public void update(final T entity) {
 		LOGGER.info("Update entity method in service layer is invoked.");
 		repository.update(entity);
 	}
@@ -77,7 +75,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * @param entity generic exemplar.
 	 */
 	@Override
-	public void delete(T entity) {
+	public void delete(final T entity) {
 		LOGGER.info("Delete entity method in service layer is invoked.");
 		repository.delete(entity);
 	}

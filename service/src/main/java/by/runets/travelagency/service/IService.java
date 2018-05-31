@@ -10,9 +10,9 @@ import java.util.List;
  * @param <K> is a generic param which represents a key param.
  */
 public interface IService <T extends Entity, K> {
-	void create(T entity);
+	void create(final T entity);
 	List<T> readAll();
-	T read(K id);
-	void update(T entity);
-	void delete(T entity);
+	T read(final K id);
+	void update(final T entity);
+	void delete(final T entity);
 }

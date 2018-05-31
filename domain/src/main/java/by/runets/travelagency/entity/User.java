@@ -13,7 +13,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class User<K> extends Entity<K> {
+	/**
+	 * This is a field which represents a user login.
+	 */
 	private String login;
+	/**
+	 * This is a field which represents a user password.
+	 */
 	private String password;
 	
 	/**

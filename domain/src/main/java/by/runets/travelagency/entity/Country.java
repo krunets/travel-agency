@@ -15,6 +15,9 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 public class Country<K> extends Entity<K> {
+	/**
+	 * This is a field which represents a Country name.
+	 */
 	@NonNull
 	private String name;
 	

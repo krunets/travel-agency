@@ -18,8 +18,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class TourServiceTest {
-	private IRepository<Tour, Integer> repository = mock(TourRepository.class);
-	private IService<Tour, Integer> service = new TourService(repository);
+	private final IRepository<Tour, Integer> repository = mock(TourRepository.class);
+	private final IService<Tour, Integer> service = new TourService(repository);
 	
 	@Test
 	public void testRead() {

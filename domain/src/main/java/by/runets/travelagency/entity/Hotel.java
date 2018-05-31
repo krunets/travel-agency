@@ -13,8 +13,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Hotel<K> extends Entity<K> {
+	/**
+	 * This is a field which represents hotel name.
+	 */
 	private String name;
+	/**
+	 * This is a field which represents a hotel phone.
+	 */
 	private String phone;
+	/**
+	 * This is a field which represents a hotel stars rating.
+	 */
 	private int stars;
 	
 	/**

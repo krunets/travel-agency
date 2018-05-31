@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.LogManager;
 import java.util.stream.Collectors;
 
 /**
@@ -27,7 +26,7 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 * @param entity generic exemplar.
 	 */
 	@Override
-	public void create(T entity) {
+	public void create(final T entity) {
 		if (data.add(entity)) {
 			LOGGER.info("The entity " + entity + " added to collection.");
 		}
@@ -51,7 +50,7 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 * @return entity from collection.
 	 */
 	@Override
-	public Optional<T> read(K id) {
+	public Optional<T> read(final K id) {
 		LOGGER.info("Read entity by id from collection method invoke");
 		return data.stream().filter(entity -> {
 			boolean state = entity.getId() == id;
@@ -67,7 +66,7 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 * @param entity entity generic exemplar
 	 */
 	@Override
-	public void update(T entity) {
+	public void update(final T entity) {
 		LOGGER.info("Update entity in collection method invoke");
 		Optional<T> optional = Optional.ofNullable(entity);
 		int index[] = {0};
@@ -89,7 +88,7 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 * @param entity generic exemplar.
 	 */
 	@Override
-	public void delete(T entity) {
+	public void delete(final T entity) {
 		LOGGER.info("Delete entity from collection method invoke");
 		Optional<T> optional = Optional.ofNullable(entity);
 		optional.ifPresent(
