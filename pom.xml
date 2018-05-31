@@ -5,7 +5,7 @@
 
   <groupId>by.runets</groupId>
   <artifactId>travelagency</artifactId>
-  <version>${travel.agency.version</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>travelagency</name>
@@ -13,17 +13,17 @@
 
   <properties>
     <java.version>1.8</java.version>
+    <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
 
     <lombok.version>1.16.18</lombok.version>
     <junit.version>4.12</junit.version>
     <sl4j.version>1.7.25</sl4j.version>
 
     <jacoco.version>0.8.1</jacoco.version>
-    <checkstyle.version>2.17</checkstyle.version>
+    <checkstyle.version>3.0.0</checkstyle.version>
     <findbugs.version>3.0.5</findbugs.version>
 
   </properties>
-
   <modules>
     <module>domain</module>
     <module>repository</module>
@@ -93,7 +93,6 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Jacoco plugin -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
