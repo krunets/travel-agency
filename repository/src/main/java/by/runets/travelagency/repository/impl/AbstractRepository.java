@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 @AllArgsConstructor
 public class AbstractRepository<T extends Entity, K> implements IRepository<T, K> {
-	private final static Logger LOGGER = LoggerFactory.getLogger(AbstractRepository.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRepository.class);
 	private List<T> data;
 	
 	/**
@@ -69,18 +69,16 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	public void update(final T entity) {
 		LOGGER.info("Update entity in collection method invoke");
 		Optional<T> optional = Optional.ofNullable(entity);
-		int index[] = {0};
+		int[] index = {0};
 		optional.ifPresent(
-				checkedEntity -> {
-					data.forEach(
-							e -> {
-								if (e.getId() == checkedEntity.getId()) {
-									LOGGER.info("Object " + e + " is updating to " + checkedEntity);
-									data.set(index[0], checkedEntity);
-								}
-								index[0]++;
-							});
-				});
+				checkedEntity -> data.forEach(
+						e -> {
+							if (e.getId() == checkedEntity.getId()) {
+								LOGGER.info("Object " + e + " is updating to " + checkedEntity);
+								data.set(index[0], checkedEntity);
+							}
+							index[0]++;
+						}));
 	}
 	
 	/**
@@ -92,14 +90,12 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 		LOGGER.info("Delete entity from collection method invoke");
 		Optional<T> optional = Optional.ofNullable(entity);
 		optional.ifPresent(
-				checkedEntity -> {
-					data.removeIf(e -> {
-						boolean state = e.getId() == entity.getId();
-						if (state) {
-							LOGGER.info("The entity " + entity + " removed from collection.");
-						}
-						return state;
-					});
-				});
+				checkedEntity -> data.removeIf(e -> {
+					boolean state = e.getId() == entity.getId();
+					if (state) {
+						LOGGER.info("The entity " + entity + " removed from collection.");
+					}
+					return state;
+				}));
 	}
 }

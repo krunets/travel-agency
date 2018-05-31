@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 @AllArgsConstructor
 public class AbstractService<T extends Entity, K> implements IService<T, K> {
-	private final static Logger LOGGER = LoggerFactory.getLogger(AbstractService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractService.class);
 	private final IRepository<T, K> repository;
 	
 	/**

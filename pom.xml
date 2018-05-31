@@ -1,123 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>by.runets</groupId>
-  <artifactId>travelagency</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <groupId>by.runets</groupId>
+    <artifactId>travelagency</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <name>travelagency</name>
-  <description>Travel agency project</description>
+    <name>travelagency</name>
+    <description>Travel agency project</description>
 
-  <properties>
-    <java.version>1.8</java.version>
-    <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
 
-    <lombok.version>1.16.18</lombok.version>
-    <junit.version>4.12</junit.version>
-    <sl4j.version>1.7.25</sl4j.version>
+        <lombok.version>1.16.18</lombok.version>
+        <junit.version>4.12</junit.version>
+        <sl4j.version>1.7.25</sl4j.version>
 
-    <jacoco.version>0.8.1</jacoco.version>
-    <checkstyle.version>3.0.0</checkstyle.version>
-    <findbugs.version>3.0.5</findbugs.version>
+        <jacoco.version>0.8.1</jacoco.version>
+        <checkstyle.version>3.0.0</checkstyle.version>
+        <findbugs.version>3.0.5</findbugs.version>
 
-  </properties>
-  <modules>
-    <module>domain</module>
-    <module>repository</module>
-    <module>service</module>
-  </modules>
+    </properties>
+    <modules>
+        <module>domain</module>
+        <module>repository</module>
+        <module>service</module>
+    </modules>
 
-  <dependencies>
-    <!-- Lombok -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
-      <scope>provided</scope>
-    </dependency>
+    <dependencies>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
-    <!-- Junit -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+        <!-- Junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-  <build>
-    <plugins>
-      <!-- Checkstyle-plugin -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${checkstyle.version}</version>
-        <executions>
-          <execution>
-            <id>site</id>
-            <phase>site</phase>
-            <configuration>
-              <configLocation>checkstyle/google-checkstyle.xml</configLocation>
-              <encoding>UTF-8</encoding>
-              <consoleOutput>true</consoleOutput>
-              <failsOnError>true</failsOnError>
-            </configuration>
-            <goals>
-              <goal>checkstyle</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- Findbugs-plugin -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>${findbugs.version}</version>
-        <configuration>
-          <effort>Max</effort>
-          <failOnError>true</failOnError>
-          <threshold>Low</threshold>
-          <xmlOutput>true</xmlOutput>
-          <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <id>analyze-compile</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco.version}</version>
-        <configuration>
-          <skip>false</skip>
-          <output>file</output>
-          <append>true</append>
-        </configuration>
-        <executions>
-          <execution>
-            <id>jacoco-initialize</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>jacoco-site</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <plugins>
+            <!-- Checkstyle-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.version}</version>
+                <executions>
+                    <execution>
+                        <id>site</id>
+                        <phase>site</phase>
+                        <configuration>
+                            <configLocation>checkstyle/google-checkstyle.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                        <goals>
+                            <goal>checkstyle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Findbugs-plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${findbugs.version}</version>
+                <configuration>
+                    <effort>Max</effort>
+                    <failOnError>true</failOnError>
+                    <threshold>Low</threshold>
+                    <xmlOutput>true</xmlOutput>
+                    <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>analyze-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Jacoco -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <configuration>
+                    <skip>false</skip>
+                    <output>file</output>
+                    <append>true</append>
+                    <excludes>
+                        <exclude>domain/src/main/java/by/runets/travelagency/entity/*.java</exclude>
+                        <exclude>service/src/main/java/by/runets/travelagency/exception/*.java</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
