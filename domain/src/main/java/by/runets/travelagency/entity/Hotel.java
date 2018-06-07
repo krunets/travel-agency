@@ -25,6 +25,10 @@ public class Hotel<K> extends Entity<K> {
 	 * This is a field which represents a hotel stars rating.
 	 */
 	private int stars;
+	/**
+	 * This is a field which represents a country.
+	 */
+	private Country<K> country;
 	
 	/**
 	 * Constructor with arguments.
@@ -34,10 +38,11 @@ public class Hotel<K> extends Entity<K> {
 	 * @param phone constructor argument which initializes hotel phone field.
 	 * @param stars constructor argument which initializes hotel stars field.
 	 */
-	public Hotel (final K id, final String name, final String phone, final int stars) {
+	public Hotel (final K id, final String name, final String phone, final int stars, final Country<K> country) {
 		super(id);
 		this.name = name;
 		this.phone = phone;
 		this.stars = stars;
+		this.country = country;
 	}
 }

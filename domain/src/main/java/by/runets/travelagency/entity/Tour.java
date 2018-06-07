@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Class that represents the entity of the tour.
@@ -37,6 +38,18 @@ public class Tour<K> extends Entity<K> {
 	 * This is a field which represents a tour cost.
 	 */
 	private BigDecimal cost;
+	/**
+	 * This is a field which represents a tour type.
+	 */
+	private TourType tourType;
+	/**
+	 * This is a field which represents a tour user list.
+	 */
+	private List<User<K>> users;
+	/**
+	 * This is a field which represents a tour country list.
+	 */
+	private List<Country<K>> countries;
 	
 	/**
 	 * Constructor with arguments.
@@ -47,14 +60,21 @@ public class Tour<K> extends Entity<K> {
 	 * @param duration    constructor argument which initializes tour duration field.
 	 * @param description constructor argument which initializes tour description field.
 	 * @param cost        constructor argument which initializes tour cost field.
+	 * @param tourType    constructor argument which initializes tour type field.
+	 * @param users    constructor argument which initializes tour user list field.
+	 * @param countries    constructor argument which initializes tour country list field.
 	 */
 	public Tour (final K id, final String photo, final LocalDate date,
-							 final Duration duration, final String description, final BigDecimal cost) {
+							 final Duration duration, final String description,
+							 final BigDecimal cost, final TourType tourType, final List<User<K>> users, final List<Country<K>> countries) {
 		super(id);
 		this.photo = photo;
 		this.date = date;
 		this.duration = duration;
 		this.description = description;
 		this.cost = cost;
+		this.tourType = tourType;
+		this.users = users;
+		this.countries = countries;
 	}
 }
