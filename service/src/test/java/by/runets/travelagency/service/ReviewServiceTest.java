@@ -34,7 +34,7 @@ public class ReviewServiceTest {
 	
 	@Test
 	public void testCreate() {
-		Review<Integer> review = new Review<Integer>(5, "Content 1");
+		Review<Integer> review = new Review<Integer>(5, "Content 1", null);
 		
 		service.create(review);
 		verify(repository, times(1)).create(review);
@@ -42,7 +42,7 @@ public class ReviewServiceTest {
 	
 	@Test
 	public void testUpdate() {
-		Review<Integer> review = new Review<Integer>(1, "Content 1");
+		Review<Integer> review = new Review<Integer>(1, "Content 1", null);
 		
 		service.update(review);
 		verify(repository, times(1)).update(review);
@@ -50,7 +50,7 @@ public class ReviewServiceTest {
 	
 	@Test
 	public void testDelete() {
-		Review<Integer> review = new Review<Integer>(1, "Content 1");
+		Review<Integer> review = new Review<Integer>(1, "Content 1", null);
 		
 		service.delete(review);
 		verify(repository, times(1)).delete(review);

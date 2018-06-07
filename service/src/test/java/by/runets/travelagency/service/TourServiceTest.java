@@ -1,6 +1,7 @@
 package by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Tour;
+import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.repository.IRepository;
 import by.runets.travelagency.repository.impl.TourRepository;
 import by.runets.travelagency.service.impl.TourService;
@@ -37,7 +38,7 @@ public class TourServiceTest {
 	
 	@Test
 	public void testCreate() {
-		Tour<Integer> tour = new Tour<Integer>(123, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100));
+		Tour<Integer> tour = new Tour<Integer>(123, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null);
 		
 		service.create(tour);
 		verify(repository, times(1)).create(tour);
@@ -45,7 +46,7 @@ public class TourServiceTest {
 	
 	@Test
 	public void testUpdate() {
-		Tour<Integer> tour = new Tour<Integer>(1, "Photo12", LocalDate.parse("2018-07-13"), Duration.ofDays(10), "description1", new BigDecimal(100));
+		Tour<Integer> tour = new Tour<Integer>(1, "Photo12", LocalDate.parse("2018-07-13"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null);
 		
 		service.update(tour);
 		verify(repository, times(1)).update(tour);
@@ -53,7 +54,7 @@ public class TourServiceTest {
 	
 	@Test
 	public void testDelete() {
-		Tour<Integer> tour = new Tour<Integer>(1, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100));
+		Tour<Integer> tour = new Tour<Integer>(1, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null);
 		
 		service.delete(tour);
 		verify(repository, times(1)).delete(tour);

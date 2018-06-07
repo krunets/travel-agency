@@ -34,7 +34,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testCreate() {
-		User<Integer> user = new User<Integer>(5, "admin", "admin");
+		User<Integer> user = new User<Integer>(5, "admin", "admin", null, null);
 		
 		service.create(user);
 		verify(repository, times(1)).create(user);
@@ -42,7 +42,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testUpdate() {
-		User<Integer> user = new User<Integer>(2, "admin1", "admin1");
+		User<Integer> user = new User<Integer>(2, "admin1", "admin1", null, null);
 		
 		service.update(user);
 		verify(repository, times(1)).update(user);
@@ -50,7 +50,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testDelete() {
-		User<Integer> user = new User<Integer>(2, "admin", "admin");
+		User<Integer> user = new User<Integer>(2, "admin", "admin", null, null);
 		
 		service.delete(user);
 		verify(repository, times(1)).delete(user);

@@ -16,11 +16,11 @@ public class ReviewRepositoryTest {
 	@Test
 	public void readAllTest () {
 		List<Optional<Review>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new Review<Integer>(1, "Content 1")),
-				Optional.of(new Review<Integer>(2, "Content2")),
-				Optional.of(new Review<Integer>(3, "Content3")),
-				Optional.of(new Review<Integer>(4, "Content4")),
-				Optional.of(new Review<Integer>(5, "Content5"))));
+				Optional.of(new Review<Integer>(1, "Content 1", null)),
+				Optional.of(new Review<Integer>(2, "Content2", null)),
+				Optional.of(new Review<Integer>(3, "Content3", null)),
+				Optional.of(new Review<Integer>(4, "Content4", null)),
+				Optional.of(new Review<Integer>(5, "Content5", null))));
 		
 		List<Optional<Review>> expected = repository.readAll();
 		Assert.assertEquals(actual, expected);
@@ -28,7 +28,7 @@ public class ReviewRepositoryTest {
 	@Test
 	public void testReadById() {
 		Optional<Review> expected = repository.read(1);
-		Optional<Review> actual = Optional.of(new Review<Integer>(1, "Content 1"));
+		Optional<Review> actual = Optional.of(new Review<Integer>(1, "Content 1", null));
 		
 		Assert.assertEquals(actual, expected);
 	}
@@ -36,12 +36,12 @@ public class ReviewRepositoryTest {
 	@Test
 	public void testDelete () {
 		List<Optional<Review>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new Review<Integer>(1, "Content 1")),
-				Optional.of(new Review<Integer>(2, "Content2")),
-				Optional.of(new Review<Integer>(3, "Content3")),
-				Optional.of(new Review<Integer>(5, "Content5"))));
+				Optional.of(new Review<Integer>(1, "Content 1", null)),
+				Optional.of(new Review<Integer>(2, "Content2", null)),
+				Optional.of(new Review<Integer>(3, "Content3", null)),
+				Optional.of(new Review<Integer>(5, "Content5", null))));
 		
-		Review entityToDelete = new Review<Integer>(4, "Content4");
+		Review entityToDelete = new Review<Integer>(4, "Content4", null);
 		repository.delete(entityToDelete);
 		
 		List<Optional<Review>> expected = repository.readAll();
@@ -51,12 +51,12 @@ public class ReviewRepositoryTest {
 	@Test
 	public void testUpdate() {
 		List<Optional<Review>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new Review<Integer>(1, "Content 11")),
-				Optional.of(new Review<Integer>(2, "Content2")),
-				Optional.of(new Review<Integer>(3, "Content3")),
-				Optional.of(new Review<Integer>(5, "Content5"))));
+				Optional.of(new Review<Integer>(1, "Content 11", null)),
+				Optional.of(new Review<Integer>(2, "Content2", null)),
+				Optional.of(new Review<Integer>(3, "Content3", null)),
+				Optional.of(new Review<Integer>(5, "Content5", null))));
 		
-		Review entityToUpdate = new Review<Integer>(1, "Content 11");
+		Review entityToUpdate = new Review<Integer>(1, "Content 11", null);
 		repository.update(entityToUpdate);
 		
 		List<Optional<Review>> expected = repository.readAll();

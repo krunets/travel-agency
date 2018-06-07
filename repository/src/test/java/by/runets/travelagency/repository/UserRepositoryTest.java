@@ -16,9 +16,9 @@ public class UserRepositoryTest {
 	@Test
 	public void testReadAll() {
 		List<Optional<User>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new User<Integer>(1, "root", "root")),
-				Optional.of(new User<Integer>(2, "admin", "admin")),
-				Optional.of(new User<Integer>(3, "traveler1", "traveler1"))
+				Optional.of(new User<Integer>(1, "root", "root", null, null)),
+				Optional.of(new User<Integer>(2, "admin", "admin", null, null)),
+				Optional.of(new User<Integer>(3, "traveler1", "traveler1", null, null))
 				));
 		
 		List<Optional<User>> expected = repository.readAll();
@@ -29,7 +29,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testReadById() {
 		Optional<User> expected = repository.read(1);
-		Optional<User> actual = Optional.of(new User<Integer>(1, "root", "root"));
+		Optional<User> actual = Optional.of(new User<Integer>(1, "root", "root", null, null));
 		
 		Assert.assertEquals(actual, expected);
 	}
@@ -37,11 +37,11 @@ public class UserRepositoryTest {
 	@Test
 	public void testDelete() {
 		List<Optional<User>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new User<Integer>(1, "root", "root")),
-				Optional.of(new User<Integer>(3, "traveler1", "traveler1"))
+				Optional.of(new User<Integer>(1, "root", "root", null, null)),
+				Optional.of(new User<Integer>(3, "traveler1", "traveler1", null, null))
 		));
 		
-		User<Integer> entity = new User<Integer>(2, "admin", "admin");
+		User<Integer> entity = new User<Integer>(2, "admin", "admin", null, null);
 		repository.delete(entity);
 		
 		List<Optional<User>> expected = repository.readAll();
@@ -51,11 +51,11 @@ public class UserRepositoryTest {
 	@Test
 	public void testUpdate() {
 		List<Optional<User>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new User<Integer>(1, "root2", "root23")),
-				Optional.of(new User<Integer>(3, "traveler1", "traveler1"))
+				Optional.of(new User<Integer>(1, "root2", "root23", null, null)),
+				Optional.of(new User<Integer>(3, "traveler1", "traveler1", null, null))
 		));
 		
-		User<Integer> entityToUpdate = new User<Integer>(1, "root2", "root23");
+		User<Integer> entityToUpdate = new User<Integer>(1, "root2", "root23", null, null);
 		repository.update(entityToUpdate);
 		
 		List<Optional<User>> expected = repository.readAll();

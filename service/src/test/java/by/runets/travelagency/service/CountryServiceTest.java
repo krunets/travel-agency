@@ -24,14 +24,14 @@ public class CountryServiceTest {
 	public void testRead() {
 		when(repository.read(any(Integer.class))).thenReturn(Optional.of(new Country<Integer>()));
 		
-		Country<Integer> country = new Country<>(1, "213");
+		Country<Integer> country = new Country<>(1, "213", null, null);
 		assertThat(service.read(country.getId()), is(notNullValue()));
 	}
 	
 	
 	@Test
 	public void testUpdate () {
-		Country<Integer> newCountry = new Country<>(1, "Belarus freedom");
+		Country<Integer> newCountry = new Country<>(1, "Belarus freedom", null, null);
 		service.update(newCountry);
 		
 		verify(repository, times(1)).update(newCountry);
@@ -39,7 +39,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCreate() {
-		Country<Integer> newCountry = new Country<>(6, "Belarus freedom");
+		Country<Integer> newCountry = new Country<>(6, "Belarus freedom", null, null);
 		service.create(newCountry);
 		
 		verify(repository, times(1)).create(newCountry);
@@ -47,7 +47,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testDelete() {
-		Country<Integer> deleteCountry = new Country<>(1, "Belarus");
+		Country<Integer> deleteCountry = new Country<>(1, "Belarus", null, null);
 		service.delete(deleteCountry);
 		
 		verify(repository, times(1)).delete(deleteCountry);

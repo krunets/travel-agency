@@ -1,5 +1,6 @@
 package by.runets.travelagency.service;
 
+import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.repository.IRepository;
 import by.runets.travelagency.repository.impl.HotelRepository;
@@ -35,7 +36,7 @@ public class HotelServiceTest {
 	
 	@Test
 	public void testUpdate () {
-		Hotel<Integer> hotel = new Hotel<Integer>(1, "Marriot1", "123 24 23", 5);
+		Hotel<Integer> hotel = new Hotel<Integer>(1, "Marriot1", "123 24 23", 5, new Country<Integer>());
 		
 		service.update(hotel);
 		
@@ -44,7 +45,7 @@ public class HotelServiceTest {
 	
 	@Test
 	public void testDelete () {
-		Hotel<Integer> hotel = new Hotel<Integer>(1, "Marriot1", "123 24 23", 5);
+		Hotel<Integer> hotel = new Hotel<Integer>(1, "Marriot1", "123 24 23", 5, new Country<Integer>());
 		
 		service.delete(hotel);
 		
@@ -53,7 +54,7 @@ public class HotelServiceTest {
 	
 	@Test
 	public void testCreate () {
-		Hotel<Integer> hotel = new Hotel<Integer>(7, "Marriot2", "123 24 23", 5);
+		Hotel<Integer> hotel = new Hotel<Integer>(7, "Marriot2", "123 24 23", 5, new Country<Integer>());
 		
 		service.create(hotel);
 		

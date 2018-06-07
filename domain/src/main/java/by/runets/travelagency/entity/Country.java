@@ -1,12 +1,8 @@
 package by.runets.travelagency.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -21,7 +17,6 @@ public class Country<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a Country name.
 	 */
-	@NonNull
 	private String name;
 	/**
 	 * This is a field which represents a list of hotels.

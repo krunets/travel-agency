@@ -17,10 +17,10 @@ public class CountryRepositoryTest {
 	public void testReadAll() {
 		List<Optional<Country>> expected = repository.readAll();
 		List<Optional<Country>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new Country<Integer>(1, "Belarus")),
-				Optional.of(new Country<Integer>(2, "USA")),
-				Optional.of(new Country<Integer>(3, "France")),
-				Optional.of(new Country<Integer>(4, "Italy"))
+				Optional.of(new Country<Integer>(1, "Belarus", null, null)),
+				Optional.of(new Country<Integer>(2, "USA", null, null)),
+				Optional.of(new Country<Integer>(3, "France", null, null)),
+				Optional.of(new Country<Integer>(4, "Italy", null, null))
 		));
 		
 		Assert.assertEquals(actual, expected);
@@ -30,7 +30,7 @@ public class CountryRepositoryTest {
 	@Test
 	public void testReadById() {
 		Optional<Country> expected = repository.read(1);
-		Optional<Country> actual = Optional.of(new Country<Integer>(1, "Belarus"));
+		Optional<Country> actual = Optional.of(new Country<Integer>(1, "Belarus", null, null));
 		
 		Assert.assertEquals(actual, expected);
 	}
@@ -38,11 +38,11 @@ public class CountryRepositoryTest {
 	@Test
 	public void testUpdate() {
 		List<Optional<Country>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new Country<Integer>(1, "Belarus1")),
-				Optional.of(new Country<Integer>(2, "USA")),
-				Optional.of(new Country<Integer>(3, "France"))
+				Optional.of(new Country<Integer>(1, "Belarus1", null, null)),
+				Optional.of(new Country<Integer>(2, "USA", null, null)),
+				Optional.of(new Country<Integer>(3, "France", null, null))
 		));
-		Country countryToUpdate = new Country<Integer>(1, "Belarus1");
+		Country countryToUpdate = new Country<Integer>(1, "Belarus1", null, null);
 		repository.update(countryToUpdate);
 		
 		List<Optional<Country>> expected = repository.readAll();
@@ -53,12 +53,12 @@ public class CountryRepositoryTest {
 	@Test
 	public void testDelete() {
 		List<Optional<Country>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new Country<Integer>(1, "Belarus")),
-				Optional.of(new Country<Integer>(2, "USA")),
-				Optional.of(new Country<Integer>(3, "France"))
+				Optional.of(new Country<Integer>(1, "Belarus", null, null)),
+				Optional.of(new Country<Integer>(2, "USA", null, null)),
+				Optional.of(new Country<Integer>(3, "France", null, null))
 		));
 		
-		Country countryToDelete = new Country<Integer>(4, "Italy");
+		Country countryToDelete = new Country<Integer>(4, "Italy", null, null);
 		repository.delete(countryToDelete);
 		
 		List<Optional<Country>> expected = repository.readAll();
