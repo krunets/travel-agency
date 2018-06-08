@@ -13,10 +13,10 @@
                 <value>classpath:properties/database-config.properties</value>
             </list>
         </property>
-        <property name="ignoreResourceNotFound" value="true" />
+        <property name="ignoreResourceNotFound" value="true"/>
         <property name="systemPropertiesMode">
             <util:constant
-                    static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+                    static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
         </property>
     </bean>
 
@@ -36,8 +36,8 @@
     </bean>
 
     <jdbc:embedded-database id="testDataSource" type="H2">
-        <jdbc:script location="classpath:db/schema.sql" />
-        <jdbc:script location="classpath:db/init-data.sql" />
+        <jdbc:script location="classpath:db/schema.sql"/>
+        <jdbc:script location="classpath:db/init-data.sql"/>
     </jdbc:embedded-database>
 
 </beans>

@@ -1,6 +1,5 @@
 package by.runets.travelagency.mapper;
 
-
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.entity.Tour;
@@ -11,10 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Duration;
 
-public class CountryRowMapper implements RowMapper<Country<Integer>> {
+public class CountryRowMapper implements RowMapper<Country> {
 	@Override
-	public Country<Integer> mapRow (ResultSet resultSet, int i) throws SQLException {
-		Country<Integer> country = new Country<Integer>();
+	public Country mapRow (ResultSet resultSet, int i) throws SQLException {
+		Country<Integer> country = new Country<>();
 		
 		country.setId(resultSet.getInt("c_id"));
 		country.setName(resultSet.getString("c_name"));
@@ -37,7 +36,6 @@ public class CountryRowMapper implements RowMapper<Country<Integer>> {
 			hotel.setCountry(country);
 			
 			country.getHotels().add(hotel);
-			
 		}
 		
 		return country;
