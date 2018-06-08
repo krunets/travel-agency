@@ -29,4 +29,13 @@ public enum TourType {
 	public String getType () {
 		return type;
 	}
+	
+	public static TourType getTypeByValue(String value) {
+		for (TourType tourType : TourType.values()) {
+			if (tourType.getType().equals(value)) {
+				return tourType;
+			}
+		}
+		return null;
+	}
 }
