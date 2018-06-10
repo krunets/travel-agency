@@ -10,9 +10,10 @@ import java.util.List;
  *
  * @param <K> is a generic param which represents a key param.
  */
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = {"hotels", "tours"}, callSuper = true)
 @Data
 @NoArgsConstructor
+@ToString(exclude = {"hotels", "tours"}, callSuper = true)
 public class Country<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a Country name.

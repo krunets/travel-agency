@@ -23,7 +23,7 @@ public class HotelRowMapper implements RowMapper<Hotel> {
     country.setId(resultSet.getInt("c_id"));
     country.setName(resultSet.getString("c_name"));
 
-
+    hotel.setCountry(country);
 	return hotel;
   }
 }

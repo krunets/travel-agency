@@ -36,7 +36,7 @@
             <artifactId>slf4j-api</artifactId>
             <version>${sl4j.version}</version>
         </dependency>
-        <!-- database to testing -->
+        <!-- database for testing -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

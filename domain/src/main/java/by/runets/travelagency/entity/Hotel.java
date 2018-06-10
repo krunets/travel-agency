@@ -3,6 +3,7 @@ package by.runets.travelagency.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * Class that represents the entity of the hotel.
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
+@ToString(exclude = "country", callSuper = true)
 public class Hotel<K> extends Entity<K> {
 	/**
 	 * This is a field which represents hotel name.
@@ -28,6 +30,7 @@ public class Hotel<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a country.
 	 */
+
 	private Country<K> country;
 	
 	/**

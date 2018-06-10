@@ -35,9 +35,26 @@
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 
+    <bean id="hotelRepository" class="by.runets.travelagency.repository.impl.HotelRepository">
+        <constructor-arg ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="reviewRepository" class="by.runets.travelagency.repository.impl.ReviewRepository">
+        <constructor-arg ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="tourRepository" class="by.runets.travelagency.repository.impl.TourRepository">
+        <constructor-arg ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="userRepository" class="by.runets.travelagency.repository.impl.UserRepository">
+        <constructor-arg ref="jdbcTemplate" />
+    </bean>
+
     <jdbc:embedded-database id="testDataSource" type="H2">
         <jdbc:script location="classpath:db/schema.sql"/>
         <jdbc:script location="classpath:db/init-data.sql"/>
     </jdbc:embedded-database>
+
 
 </beans>

@@ -3,6 +3,7 @@ package by.runets.travelagency.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -17,6 +18,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
+@ToString(exclude = {"users", "countries"}, callSuper = true)
 public class Tour<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a tour photo.
