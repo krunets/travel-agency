@@ -34,6 +34,15 @@ public class CountryRepositoryTest {
   }
 
   @Test
+  public void testCreate() {
+    Country<Integer> expected = new Country<>(10, "testCountryName", null, null);
+    repository.create(expected);
+    Country actual = repository.read(10).get();
+    
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
   public void testReadById() {
     Country actual = repository.read(1).get();
 
@@ -43,7 +52,6 @@ public class CountryRepositoryTest {
     Assert.assertEquals(2, actual.getTours().size());
   }
 
-  @Test
   public void testReadAll() {
     List<Optional<Country>> actual = repository.readAll();
 
@@ -60,13 +68,10 @@ public class CountryRepositoryTest {
 
   @Test
   public void deleteById() {
-    List<Optional<Country>> expectedList = repository.readAll();
     Country<Integer> expected = new Country<>(1, "", null, null);
     repository.delete(expected);
-    List<Optional<Country>> actualList = repository.readAll();
-
-
-    Assert.assertTrue(expectedList.size() > actualList.size());
+    
+    Assert.assertEquals(Optional.empty(), repository.read(1));
   }
 
   @Test

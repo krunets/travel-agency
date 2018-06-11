@@ -3,15 +3,17 @@ package by.runets.travelagency.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * Class that represents the entity of the review.
  *
  * @param <K> is a generic param which represents a key param.
  */
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = "user", callSuper = true)
 @Data
 @NoArgsConstructor
+@ToString(exclude = "user", callSuper = true)
 public class Review<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a content of review.

@@ -26,7 +26,7 @@ INSERT INTO travel_agency.tour_type(t_type) VALUES('Geo tourism');
 INSERT INTO travel_agency.tour_type(t_type) VALUES('Industrial tourism');
 
 
-INSERT INTO travel_agency.tour(photo, date, duration, description, cost, tour_type) VALUES('photo/img1.png', '2018-07-17', 10, 'description1', 100, 2);
+INSERT INTO travel_agency.tour(photo, date, duration, description, cost, tour_type) VALUES('photo/img1.png', '2018-07-17', 10, 'description1', 100, 1);
 INSERT INTO travel_agency.tour(photo, date, duration, description, cost, tour_type) VALUES('photo/img2.png', '2018-07-20', 20, 'description2', 200, 2);
 INSERT INTO travel_agency.tour(photo, date, duration, description, cost, tour_type) VALUES('photo/img3.png', '2018-07-25', 30, 'description3', 300, 3);
 INSERT INTO travel_agency.tour(photo, date, duration, description, cost, tour_type) VALUES('photo/img4.png', '2018-07-30', 40, 'description4', 400, 4);

@@ -10,7 +10,7 @@ import lombok.ToString;
  *
  * @param <K> is a generic param which represents a key param.
  */
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = "country", callSuper = true)
 @Data
 @NoArgsConstructor
 @ToString(exclude = "country", callSuper = true)

@@ -3,6 +3,7 @@ package by.runets.travelagency.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.swing.text.html.Option;
 import java.util.List;
@@ -13,9 +14,10 @@ import java.util.Optional;
  *
  * @param <K> is a generic param which represents a key param.
  */
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = {"reviews", "tours"}, callSuper = true)
 @Data
 @NoArgsConstructor
+@ToString(exclude = {"reviews", "tours"}, callSuper = true)
 public class User<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a user login.
