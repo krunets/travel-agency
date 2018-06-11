@@ -20,8 +20,7 @@ public class UserRepository implements IRepository<User, Integer> {
 
   @Override
   public void create(User entity) {
-    jdbcTemplate.update(UserQuery.INSERT_INTO_USER, entity.getLogin(), entity.getPassword());
-
+    jdbcTemplate.update(UserQuery.INSERT_INTO_USER, entity.getId(), entity.getLogin(), entity.getPassword());
   }
 
   @Override
@@ -55,6 +54,7 @@ public class UserRepository implements IRepository<User, Integer> {
 
   @Override
   public void delete(User entity) {
+    jdbcTemplate.update(UserQuery.DELETE_USER_CONSTRAINT, entity.getId());
     jdbcTemplate.update(UserQuery.DELETE_USER_BY_ID, entity.getId());
   }
 }

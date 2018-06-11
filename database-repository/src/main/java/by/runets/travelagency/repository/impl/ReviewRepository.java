@@ -20,7 +20,7 @@ public class ReviewRepository implements IRepository<Review, Integer> {
 
   @Override
   public void create(final Review entity) {
-    jdbcTemplate.update(ReviewQuery.INSERT_INTO_REVIEW, entity.getContent(), entity.getUser().getId());
+    jdbcTemplate.update(ReviewQuery.INSERT_INTO_REVIEW, entity.getId(), entity.getContent(), entity.getUser().getId());
   }
 
   @Override
@@ -49,7 +49,7 @@ public class ReviewRepository implements IRepository<Review, Integer> {
 
   @Override
   public void update(final Review entity) {
-    jdbcTemplate.update(ReviewQuery.UPDATE_REVIEW_BY_ID, entity.getContent(), entity.getUser(), entity.getId());
+    jdbcTemplate.update(ReviewQuery.UPDATE_REVIEW_BY_ID, entity.getContent(), entity.getUser().getId(), entity.getId());
   }
 
   @Override

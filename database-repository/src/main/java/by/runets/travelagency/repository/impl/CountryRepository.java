@@ -19,7 +19,7 @@ public class CountryRepository implements IRepository<Country, Integer> {
 
   @Override
   public void create(final Country entity) {
-    jdbcTemplate.update(CountryQuery.INSERT_INTO_COUNTRY, entity.getName());
+    jdbcTemplate.update(CountryQuery.INSERT_INTO_COUNTRY, entity.getId(), entity.getName());
   }
 
   @Override
@@ -54,6 +54,7 @@ public class CountryRepository implements IRepository<Country, Integer> {
   @Override
   public void delete(final Country entity) {
     jdbcTemplate.update(CountryQuery.DELETE_M2M_COUNTRY, entity.getId());
+    jdbcTemplate.update(CountryQuery.DELETE_HOTEL_CONSTRAINT, entity.getId());
     jdbcTemplate.update(CountryQuery.DELETE_COUNTRY_BY_ID, entity.getId());
   }
 }
