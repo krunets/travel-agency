@@ -1,4 +1,7 @@
 package by.runets.travelagency.joiner;
 
-public interface Joiner {
+import java.util.List;
+
+public interface Joiner <T> {
+	List<T> join(List<T> entities);
 }
