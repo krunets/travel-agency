@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
 @AllArgsConstructor
 public class TourRepository implements IRepository<Tour, Integer> {
   private final JdbcTemplate jdbcTemplate;

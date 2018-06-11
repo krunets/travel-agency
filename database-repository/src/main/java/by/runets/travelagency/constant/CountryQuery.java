@@ -23,6 +23,4 @@ public class CountryQuery {
       "DELETE FROM travel_agency.country WHERE c_id = ?";
   public static final String UPDATE_COUNTRY_BY_ID =
       "UPDATE travel_agency.country SET c_name=? WHERE c_id=?";
-
-
 }
