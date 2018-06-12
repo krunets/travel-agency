@@ -1,9 +1,10 @@
 package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Country;
-import by.runets.travelagency.repository.impl.CountryRepository;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,12 +12,21 @@ import java.util.List;
 import java.util.Optional;
 
 public class CountryRepositoryTest {
-	private final IRepository<Country, Integer> repository = new CountryRepository();
+	private IRepository<Country, Integer> repository;
+
+	@Before
+	public void setUp() {
+	  GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+	  ctx.getEnvironment().setActiveProfiles("collection-repository");
+	  ctx.load("collection-bean-config.xml");
+	  ctx.refresh();
+	  repository = (IRepository<Country, Integer>) ctx.getBean("countryRepository");
+	}
 	
 	@Test
 	public void testReadAll() {
-		List<Optional<Country>> expected = repository.readAll();
-		List<Optional<Country>> actual = new ArrayList<>(Arrays.asList(
+		List<Optional<Country>> actual = repository.readAll();
+		List<Optional<Country>> expected = new ArrayList<>(Arrays.asList(
 				Optional.of(new Country<Integer>(1, "Belarus", null, null)),
 				Optional.of(new Country<Integer>(2, "USA", null, null)),
 				Optional.of(new Country<Integer>(3, "France", null, null)),

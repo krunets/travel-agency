@@ -32,15 +32,4 @@
     <bean id="reviewRepository" class="by.runets.travelagency.repository.impl.ReviewRepository"/>
     <bean id="tourRepository" class="by.runets.travelagency.repository.impl.TourRepository"/>
     <bean id="userRepository" class="by.runets.travelagency.repository.impl.UserRepository" />
-    <!--<bean id="abstractRepository" class="by.runets.travelagency.repository.impl.AbstractRepository">
-        <constructor-arg>
-            <list>
-              &lt;!&ndash;  <ref bean="countryRepository" />
-                <ref bean="reviewRepository" />
-                <ref bean="tourRepository" />
-                <ref bean="userRepository" />&ndash;&gt;
-            </list>
-        </constructor-arg>
-    </bean>-->
-
 </beans>
