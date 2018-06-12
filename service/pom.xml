@@ -21,10 +21,14 @@
     <dependencies>
         <dependency>
             <groupId>by.runets</groupId>
-            <artifactId>repository</artifactId>
+            <artifactId>collection-repository</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
+        <dependency>
+            <groupId>by.runets</groupId>
+            <artifactId>database-repository</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -32,7 +36,6 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Sl4j -->
         <dependency>
             <groupId>org.slf4j</groupId>

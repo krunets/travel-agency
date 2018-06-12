@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans profile="collection-repository" xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+ 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       xmlns:util="http://www.springframework.org/schema/util">
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:properties/data.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="systemPropertiesMode">
+            <util:constant
+                    static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        </property>
+    </bean>
+    <bean id="firstCountry" class="by.runets.travelagency.entity.Country">
+        <constructor-arg value="${first-country-id}"/>
+        <constructor-arg value="${first-country-name}"/>
+        <constructor-arg value="${first-country-hotels}"/>
+        <constructor-arg value="${first-country-tours}"/>
+    </bean>
+    <bean id="secondCountry" class="by.runets.travelagency.entity.Country">
+        <constructor-arg value="${second-country-id}"/>
+        <constructor-arg value="${second-country-name}"/>
+        <constructor-arg value="${second-country-hotels}"/>
+        <constructor-arg value="${second-country-tours}"/>
+    </bean>
+    <bean id="thirdCountry" class="by.runets.travelagency.entity.Country">
+        <constructor-arg value="${third-country-id}"/>
+        <constructor-arg value="${third-country-name}"/>
+        <constructor-arg value="${third-country-hotels}"/>
+        <constructor-arg value="${third-country-tours}"/>
+    </bean>
+    <bean id="fourthCountry" class="by.runets.travelagency.entity.Country">
+        <constructor-arg value="${fourth-country-id}"/>
+        <constructor-arg value="${fourth-country-name}"/>
+        <constructor-arg value="${fourth-country-hotels}"/>
+        <constructor-arg value="${fourth-country-tours}"/>
+    </bean>
+</beans>

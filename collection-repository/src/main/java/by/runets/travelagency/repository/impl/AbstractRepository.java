@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class AbstractRepository<T extends Entity, K> implements IRepository<T, K> {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRepository.class);
 	private List<T> data;
-	
 	/**
 	 * This is a method which add entity to common collection.
 	 *

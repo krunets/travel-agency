@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <import resource="country-bean-config.xml"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:properties/data.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="systemPropertiesMode">
+            <util:constant
+                    static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        </property>
+    </bean>
+    <bean id="countryRepository" class="by.runets.travelagency.repository.impl.CountryRepository">
+        <constructor-arg>
+            <list>
+                <ref bean="firstCountry"/>
+                <ref bean="secondCountry"/>
+                <ref bean="thirdCountry"/>
+                <ref bean="fourthCountry"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="hotelRepository" class="by.runets.travelagency.repository.impl.HotelRepository"/>
+    <bean id="reviewRepository" class="by.runets.travelagency.repository.impl.ReviewRepository"/>
+    <bean id="tourRepository" class="by.runets.travelagency.repository.impl.TourRepository"/>
+    <bean id="userRepository" class="by.runets.travelagency.repository.impl.UserRepository" />
+    <!--<bean id="abstractRepository" class="by.runets.travelagency.repository.impl.AbstractRepository">
+        <constructor-arg>
+            <list>
+              &lt;!&ndash;  <ref bean="countryRepository" />
+                <ref bean="reviewRepository" />
+                <ref bean="tourRepository" />
+                <ref bean="userRepository" />&ndash;&gt;
+            </list>
+        </constructor-arg>
+    </bean>-->
+
+</beans>
