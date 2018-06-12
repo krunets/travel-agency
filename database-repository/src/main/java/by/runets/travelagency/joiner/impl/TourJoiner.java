@@ -5,33 +5,29 @@ import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.joiner.Joiner;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TourJoiner implements Joiner<Tour> {
 	@Override
 	public List<Tour> join (List<Tour> tours) {
-		List<Tour> result = new ArrayList<>();
+		Set<Tour> result = new LinkedHashSet<>();
 		for (int i = 0; i < tours.size(); i++) {
-			if (i + 1 < tours.size() && tours.get(i).getId() == tours.get(i + 1).getId()) {
-				Set<Country> countries = new HashSet<>();
-				Set<User> users = new HashSet<>();
-				
-				countries.add((Country) tours.get(i).getCountries().get(0));
-				countries.add((Country) tours.get(i + 1).getCountries().get(0));
-				
-				users.add((User) tours.get(i).getUsers().get(0));
-				users.add((User) tours.get(i + 1).getUsers().get(0));
-				
-				tours.get(i).setCountries(new ArrayList<>(countries));
-				tours.get(i).setUsers(new ArrayList<>(users));
-				
-				tours.remove(i + 1);
+			Set<Country> countries = new HashSet<>();
+			Set<User> users = new HashSet<>();
+			
+			countries.add((Country) tours.get(i).getCountries().get(0));
+			users.add((User) tours.get(i).getUsers().get(0));
+			for (int j = i + 1; j < tours.size(); j++) {
+				if (tours.get(i).getId() == tours.get(j).getId()) {
+					countries.add((Country) tours.get(j).getCountries().get(0));
+					users.add((User) tours.get(j).getUsers().get(0));
+					tours.remove(j);
+				}
 			}
+			tours.get(i).setCountries(new ArrayList<>(countries));
+			tours.get(i).setUsers(new ArrayList<>(users));
 			result.add(tours.get(i));
 		}
-		return result;
+		return new ArrayList<>(result);
 	}
 }

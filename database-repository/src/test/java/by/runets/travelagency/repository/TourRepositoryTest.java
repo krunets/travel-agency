@@ -69,6 +69,7 @@ public class TourRepositoryTest {
 		);
 		
 		List<Optional<Tour>> actual = repository.readAll();
+		System.out.println(actual);
 		Assert.assertEquals(expected.size(), actual.size());
 		Assert.assertEquals(expected, actual);
 	}

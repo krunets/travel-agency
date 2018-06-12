@@ -1,6 +1,7 @@
 package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.User;
+import by.runets.travelagency.joiner.impl.UserJoiner;
 import by.runets.travelagency.repository.impl.UserRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,7 +31,7 @@ public class UserRepositoryTest {
 						.addScript("db/schema.sql")
 						.addScript("db/init-data.sql")
 						.build();
-		repository = new UserRepository(new JdbcTemplate(db));
+		repository = new UserRepository(new JdbcTemplate(db), new UserJoiner());
 	}
 	
 	@Test
