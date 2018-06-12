@@ -4,7 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
-    <import resource="development-profile.xml"/>
     <import resource="production-profile.xml"/>
 
     <bean id="tourJoiner" class="by.runets.travelagency.joiner.impl.TourJoiner"/>

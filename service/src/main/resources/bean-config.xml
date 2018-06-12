@@ -4,8 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
-    <import resource="database-bean-config.xml"/>
-    <import resource="collection-bean-config.xml"/>
+    <import resource="classpath*:database-bean-config.xml"/>
+    <import resource="classpath*:collection-bean-config.xml"/>
 
     <bean id="countryService" class="by.runets.travelagency.service.impl.CountryService">
         <constructor-arg ref="countryRepository"/>
