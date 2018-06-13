@@ -3,8 +3,7 @@ package by.runets.travelagency.repository.impl;
 import by.runets.travelagency.entity.Entity;
 import by.runets.travelagency.repository.IRepository;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +15,8 @@ import java.util.stream.Collectors;
  * @param <K> is a generic param which represents a key param.
  */
 @AllArgsConstructor
+@Slf4j
 public class AbstractRepository<T extends Entity, K> implements IRepository<T, K> {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRepository.class);
 	private List<T> data;
 	/**
 	 * This is a method which add entity to common collection.
@@ -27,7 +26,7 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	@Override
 	public void create(final T entity) {
 		if (data.add(entity)) {
-			LOGGER.info("The entity " + entity + " added to collection.");
+			log.info("The entity " + entity + " added to collection.");
 		}
 	}
 	
@@ -38,7 +37,7 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 */
 	@Override
 	public List<Optional<T>> readAll() {
-		LOGGER.info("Read all method invoke");
+		log.info("Read all method invoke");
 		return data.stream().map(Optional::ofNullable).collect(Collectors.toList());
 	}
 	
@@ -50,11 +49,11 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 */
 	@Override
 	public Optional<T> read(final K id) {
-		LOGGER.info("Read entity by id from collection method invoke");
+		log.info("Read entity by id from collection method invoke");
 		return data.stream().filter(entity -> {
 			boolean state = entity.getId() == id;
 			if (state) {
-				LOGGER.info("Find entity " + entity + " by id " + id);
+				log.info("Find entity " + entity + " by id " + id);
 			}
 			return state;
 		}).findFirst();
@@ -66,14 +65,14 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 */
 	@Override
 	public void update(final T entity) {
-		LOGGER.info("Update entity in collection method invoke");
+		log.info("Update entity in collection method invoke");
 		Optional<T> optional = Optional.ofNullable(entity);
 		int[] index = {0};
 		optional.ifPresent(
 				checkedEntity -> data.forEach(
 						e -> {
 							if (e.getId() == checkedEntity.getId()) {
-								LOGGER.info("Object " + e + " is updating to " + checkedEntity);
+								log.info("Object " + e + " is updating to " + checkedEntity);
 								data.set(index[0], checkedEntity);
 							}
 							index[0]++;
@@ -86,13 +85,13 @@ public class AbstractRepository<T extends Entity, K> implements IRepository<T, K
 	 */
 	@Override
 	public void delete(final T entity) {
-		LOGGER.info("Delete entity from collection method invoke");
+		log.info("Delete entity from collection method invoke");
 		Optional<T> optional = Optional.ofNullable(entity);
 		optional.ifPresent(
 				checkedEntity -> data.removeIf(e -> {
 					boolean state = e.getId() == entity.getId();
 					if (state) {
-						LOGGER.info("The entity " + entity + " removed from collection.");
+						log.info("The entity " + entity + " removed from collection.");
 					}
 					return state;
 				}));

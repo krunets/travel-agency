@@ -11,11 +11,11 @@ import java.util.List;
  */
 public class ReviewRepository extends AbstractRepository<Review, Integer> {
 	private static List<Review> reviews = new ArrayList<>(Arrays.asList(
-			new Review<Integer>(1, "Content 1", null),
-			new Review<Integer>(2, "Content2", null),
-			new Review<Integer>(3, "Content3", null),
-			new Review<Integer>(4, "Content4", null),
-			new Review<Integer>(5, "Content5", null)));
+			new Review<>(1, "Content 1", null),
+			new Review<>(2, "Content2", null),
+			new Review<>(3, "Content3", null),
+			new Review<>(4, "Content4", null),
+			new Review<>(5, "Content5", null)));
 	
 	public ReviewRepository () {
 		super(reviews);

@@ -4,16 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
     <import resource="country-bean-config.xml"/>
-    <bean id="countryRepository" class="by.runets.travelagency.repository.impl.CountryRepository">
-        <constructor-arg>
-            <list>
-                <ref bean="firstCountry"/>
-                <ref bean="secondCountry"/>
-                <ref bean="thirdCountry"/>
-                <ref bean="fourthCountry"/>
-            </list>
-        </constructor-arg>
-    </bean>
+    <bean id="countryRepository" class="by.runets.travelagency.repository.impl.CountryRepository"/>
     <bean id="hotelRepository" class="by.runets.travelagency.repository.impl.HotelRepository"/>
     <bean id="reviewRepository" class="by.runets.travelagency.repository.impl.ReviewRepository"/>
     <bean id="tourRepository" class="by.runets.travelagency.repository.impl.TourRepository"/>

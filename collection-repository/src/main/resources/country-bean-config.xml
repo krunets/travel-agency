@@ -5,7 +5,7 @@
  		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
  		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
        xmlns:util="http://www.springframework.org/schema/util">
-    <bean id="myProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean id="country-properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:properties/data.properties</value>
@@ -18,25 +18,25 @@
         </property>
     </bean>
     <bean id="firstCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
-        <constructor-arg value="#{new Integer(1)}"/>
+        <constructor-arg value="#{new Integer(country-properties['first-country-id'])}"/>
         <constructor-arg value="${first-country-name}"/>
         <constructor-arg value="#{null}"/>
         <constructor-arg value="#{null}"/>
     </bean>
     <bean id="secondCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
-        <constructor-arg value="#{new Integer(2)}"/>
+        <constructor-arg value="#{new Integer(country-properties['second-country-name'])}"/>
         <constructor-arg value="${second-country-name}"/>
         <constructor-arg value="#{null}"/>
         <constructor-arg value="#{null}"/>
     </bean>
     <bean id="thirdCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
-        <constructor-arg value="#{new Integer(3)}"/>
+        <constructor-arg value="#{new Integer(country-properties['third-country-id'])}"/>
         <constructor-arg value="${third-country-name}"/>
         <constructor-arg value="#{null}"/>
         <constructor-arg value="#{null}"/>
     </bean>
     <bean id="fourthCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
-        <constructor-arg value="#{new Integer(4)}"/>
+        <constructor-arg value="#{new Integer(country-properties['fourth-country-id'])}"/>
         <constructor-arg value="${fourth-country-name}"/>
         <constructor-arg value="#{null}"/>
         <constructor-arg value="#{null}"/>

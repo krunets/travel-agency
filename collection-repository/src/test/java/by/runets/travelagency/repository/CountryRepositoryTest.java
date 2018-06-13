@@ -40,7 +40,7 @@ public class CountryRepositoryTest {
 	
 	@Test
 	public void testReadById() {
-		Optional<Country> expected = repository.read(2);
+		Optional<Country> expected = repository.read(1);
 		Optional<Country> actual = Optional.of(new Country<>(1, "Belarus", null, null));
 		
 		Assert.assertEquals(actual, expected);
@@ -51,8 +51,7 @@ public class CountryRepositoryTest {
 		List<Optional<Country>> actual = new ArrayList<>(Arrays.asList(
 				Optional.of(new Country<>(1, "Belarus1", null, null)),
 				Optional.of(new Country<>(2, "USA", null, null)),
-				Optional.of(new Country<>(3, "France", null, null)),
-				Optional.of(new Country<>(4, "Italy", null, null))
+				Optional.of(new Country<>(3, "France", null, null))
 		));
 		Country countryToUpdate = new Country<>(1, "Belarus1", null, null);
 		repository.update(countryToUpdate);
