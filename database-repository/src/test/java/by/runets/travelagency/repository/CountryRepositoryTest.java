@@ -1,25 +1,16 @@
 package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Country;
-import by.runets.travelagency.joiner.impl.CountryJoiner;
-import by.runets.travelagency.repository.impl.CountryRepository;
-import org.junit.*;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.H2;
 
 public class CountryRepositoryTest {
   private GenericXmlApplicationContext ctx;

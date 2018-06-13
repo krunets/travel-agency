@@ -2,7 +2,6 @@ package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
-import by.runets.travelagency.repository.impl.TourRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

@@ -4,16 +4,7 @@ import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.repository.IRepository;
 import by.runets.travelagency.repository.impl.CountryRepository;
 import by.runets.travelagency.service.impl.CountryService;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
 
 import java.util.ArrayList;
 import java.util.Optional;

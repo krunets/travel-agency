@@ -1,9 +1,7 @@
 package by.runets.travelagency.repository.impl;
 
 import by.runets.travelagency.constant.TourQuery;
-import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Tour;
-import by.runets.travelagency.entity.User;
 import by.runets.travelagency.joiner.Joiner;
 import by.runets.travelagency.mapper.TourRowMapper;
 import by.runets.travelagency.repository.IRepository;
@@ -11,7 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor

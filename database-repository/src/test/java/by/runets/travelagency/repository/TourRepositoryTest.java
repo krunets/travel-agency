@@ -2,16 +2,11 @@ package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
-import by.runets.travelagency.joiner.impl.TourJoiner;
-import by.runets.travelagency.repository.impl.TourRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -20,8 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.H2;
 
 public class TourRepositoryTest {
   private IRepository<Tour, Integer> repository;

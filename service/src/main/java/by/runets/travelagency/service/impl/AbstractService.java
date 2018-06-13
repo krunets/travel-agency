@@ -5,8 +5,7 @@ import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.repository.IRepository;
 import by.runets.travelagency.service.IService;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +17,8 @@ import java.util.stream.Collectors;
  * @param <K>  is a generic param which represents a key param.
  */
 @AllArgsConstructor
+@Slf4j
 public class AbstractService<T extends Entity, K> implements IService<T, K> {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractService.class);
 	private final IRepository<T, K> repository;
 	
 	/**
@@ -28,7 +27,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 */
 	@Override
 	public void create(final T entity) {
-		LOGGER.info("Create method in service layer is invoked.");
+		log.info("Create method in service layer is invoked.");
 		repository.create(entity);
 	}
 	
@@ -38,7 +37,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 */
 	@Override
 	public List<T> readAll() {
-		LOGGER.info("Read all method in service layer is invoked.");
+		log.info("Read all method in service layer is invoked.");
 		return repository
 				.readAll()
 				.stream()
@@ -54,7 +53,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 */
 	@Override
 	public T read(final K id) {
-		LOGGER.info("Read entity by id method in service layer is invoked.");
+		log.info("Read entity by id method in service layer is invoked.");
 		return repository
 				.read(id)
 				.orElseThrow(() -> new ResourceNotFoundException("The entity by id " + id + " does not exist."));
@@ -66,7 +65,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 */
 	@Override
 	public void update(final T entity) {
-		LOGGER.info("Update entity method in service layer is invoked.");
+		log.info("Update entity method in service layer is invoked.");
 		repository.update(entity);
 	}
 	
@@ -76,7 +75,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 */
 	@Override
 	public void delete(final T entity) {
-		LOGGER.info("Delete entity method in service layer is invoked.");
+		log.info("Delete entity method in service layer is invoked.");
 		repository.delete(entity);
 	}
 }

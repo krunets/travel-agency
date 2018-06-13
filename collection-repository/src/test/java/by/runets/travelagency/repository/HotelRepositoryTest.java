@@ -2,7 +2,6 @@ package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
-import by.runets.travelagency.repository.impl.HotelRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

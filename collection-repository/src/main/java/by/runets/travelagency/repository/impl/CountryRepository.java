@@ -1,12 +1,10 @@
 package by.runets.travelagency.repository.impl;
 
 import by.runets.travelagency.entity.Country;
-import by.runets.travelagency.entity.Hotel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Is inherited from common class and provides list of countries.

@@ -1,7 +1,6 @@
 package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Review;
-import by.runets.travelagency.repository.impl.ReviewRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

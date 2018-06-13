@@ -2,7 +2,6 @@ package by.runets.travelagency.repository.impl;
 
 import by.runets.travelagency.constant.CountryQuery;
 import by.runets.travelagency.entity.Country;
-import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.joiner.Joiner;
 import by.runets.travelagency.mapper.CountryRowMapper;
 import by.runets.travelagency.repository.IRepository;

@@ -5,9 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.swing.text.html.Option;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Class that represents the entity of the user.
