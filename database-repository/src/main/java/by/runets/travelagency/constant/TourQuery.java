@@ -1,6 +1,7 @@
 package by.runets.travelagency.constant;
 
 public class TourQuery {
+	private TourQuery(){}
 	public static final String INSERT_INTO_TOUR = "INSERT INTO travel_agency.tour(t_id, photo, date, description, cost, tour_type, duration) VALUES(?, ?, ?, ?, ?, ?, ?);";
 	public static final String READ_ALL_TOUR = "SELECT * FROM travel_agency.tour AS t " +
 			"LEFT JOIN travel_agency.tour_m2m_user AS tm2mu ON tm2mu.t_id = t.t_id " +

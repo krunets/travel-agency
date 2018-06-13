@@ -29,7 +29,7 @@ public class CountryServiceTest {
 	private IService<Country, Integer> service = new CountryService(repository);
 	
 	@Test
-	public void testRead() {
+	public void testRead () {
 		when(repository.read(any(Integer.class))).thenReturn(Optional.of(new Country<Integer>()));
 		
 		Country<Integer> country = new Country<>(1, "213", null, null);
@@ -46,7 +46,7 @@ public class CountryServiceTest {
 	}
 	
 	@Test
-	public void testCreate() {
+	public void testCreate () {
 		Country<Integer> newCountry = new Country<>(6, "Belarus freedom", null, null);
 		service.create(newCountry);
 		
@@ -54,7 +54,7 @@ public class CountryServiceTest {
 	}
 	
 	@Test
-	public void testDelete() {
+	public void testDelete () {
 		Country<Integer> deleteCountry = new Country<>(1, "Belarus", null, null);
 		service.delete(deleteCountry);
 		
@@ -62,7 +62,7 @@ public class CountryServiceTest {
 	}
 	
 	@Test
-	public void testReadAll() {
+	public void testReadAll () {
 		when(repository.readAll()).thenReturn(new ArrayList<Optional<Country>>());
 		
 		assertThat(service.readAll(), is(notNullValue()));

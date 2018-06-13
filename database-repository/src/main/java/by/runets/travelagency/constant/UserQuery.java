@@ -1,6 +1,7 @@
 package by.runets.travelagency.constant;
 
 public class UserQuery {
+	private UserQuery(){}
 	public static final String INSERT_INTO_USER = "INSERT INTO travel_agency.\"user\"(u_id, login, password) VALUES (?, ?, ?)";
 	public static final String READ_ALL_USER = "SELECT * FROM travel_agency.\"user\"AS u " +
 			"LEFT JOIN travel_agency.review AS r ON r.\"user\" = u.u_id " +

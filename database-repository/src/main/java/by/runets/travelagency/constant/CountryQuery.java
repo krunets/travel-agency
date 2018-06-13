@@ -2,6 +2,7 @@ package by.runets.travelagency.constant;
 
 
 public class CountryQuery {
+	private CountryQuery(){}
 	public static final String READ_ALL_COUNTRY =
 			"SELECT * FROM travel_agency.country AS c "
 					+ "LEFT JOIN travel_agency.hotel AS h ON h.country = c.c_id "

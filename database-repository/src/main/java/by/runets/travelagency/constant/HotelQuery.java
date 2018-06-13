@@ -1,6 +1,7 @@
 package by.runets.travelagency.constant;
 
 public class HotelQuery {
+	private HotelQuery(){}
 	public static final String INSERT_INTO_HOTEL = "INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, country) VALUES(?,?,?,?,?)";
 	public static final String READ_ALL_HOTEL = "SELECT * FROM travel_agency.hotel AS h JOIN travel_agency.country AS c ON c.c_id = h.country";
 	public static final String READ_HOTEL_BY_ID = "SELECT * FROM travel_agency.hotel AS h JOIN travel_agency.country AS c ON c.c_id = h.country WHERE h.h_id=?";
