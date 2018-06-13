@@ -3,8 +3,11 @@ package by.runets.travelagency.repository;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.repository.impl.TourRepository;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -15,7 +18,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class TourRepositoryTest {
-	private final IRepository<Tour, Integer> repository = new TourRepository();
+	private GenericXmlApplicationContext ctx;
+	private IRepository<Tour, Integer> repository;
+	
+	@Before
+	public void setUp() {
+		ctx = new GenericXmlApplicationContext();
+		ctx.getEnvironment().setActiveProfiles("collection");
+		ctx.load("collection-bean-config.xml");
+		ctx.refresh();
+		repository = (IRepository<Tour, Integer>) ctx.getBean("tourRepository");
+	}
 	
 	@Test
 	public void readAllTest () {
@@ -70,5 +83,10 @@ public class TourRepositoryTest {
 		
 		List<Optional<Tour>> expected = repository.readAll();
 		Assert.assertEquals(actual, expected);
+	}
+	
+	@After
+	public void tearDown() {
+		ctx.close();
 	}
 }

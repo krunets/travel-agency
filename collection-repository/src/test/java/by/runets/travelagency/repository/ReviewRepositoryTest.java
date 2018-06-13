@@ -2,8 +2,11 @@ package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.repository.impl.ReviewRepository;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +14,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class ReviewRepositoryTest {
-	private final IRepository<Review, Integer> repository = new ReviewRepository();
+	private GenericXmlApplicationContext ctx;
+	private IRepository<Review, Integer> repository;
+	
+	@Before
+	public void setUp() {
+		ctx = new GenericXmlApplicationContext();
+		ctx.getEnvironment().setActiveProfiles("collection");
+		ctx.load("collection-bean-config.xml");
+		ctx.refresh();
+		repository = (IRepository<Review, Integer>) ctx.getBean("reviewRepository");
+	}
 	
 	@Test
 	public void readAllTest () {
@@ -61,5 +74,10 @@ public class ReviewRepositoryTest {
 		
 		List<Optional<Review>> expected = repository.readAll();
 		Assert.assertEquals(actual, expected);
+	}
+	
+	@After
+	public void tearDown() {
+		ctx.close();
 	}
 }

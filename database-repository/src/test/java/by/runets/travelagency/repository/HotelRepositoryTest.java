@@ -21,13 +21,13 @@ import java.util.Optional;
 import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.H2;
 
 public class HotelRepositoryTest {
-  private GenericXmlApplicationContext ctx;
   private IRepository<Hotel, Integer> repository;
+  private GenericXmlApplicationContext ctx;
 
   @Before
   public void setup() {
     ctx = new GenericXmlApplicationContext();
-    ctx.getEnvironment().setActiveProfiles("development");
+    ctx.getEnvironment().setActiveProfiles("database", "development");
     ctx.load("database-bean-config.xml");
     ctx.refresh();
     repository = (IRepository<Hotel, Integer>) ctx.getBean("hotelRepository");

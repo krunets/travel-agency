@@ -4,10 +4,15 @@ import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.repository.IRepository;
 import by.runets.travelagency.repository.impl.CountryRepository;
 import by.runets.travelagency.service.impl.CountryService;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 
 import java.util.ArrayList;
@@ -20,18 +25,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class CountryServiceTest {
-	private final IRepository<Country, Integer> repository = mock(CountryRepository.class);
-	private IService<Country, Integer> service;
-
-	@Before
-	public void setUp() {
-	  GenericApplicationContext ctx = new GenericApplicationContext();
-	  XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(ctx);
-	  xmlReader.loadBeanDefinitions(new ClassPathResource("bean-config.xml"));
-	  ctx.refresh();
-	  service = (IService<Country, Integer>) ctx.getBean("countryService");
-	}
-
+	private IRepository<Country, Integer> repository = mock(CountryRepository.class);
+	private IService<Country, Integer> service = new CountryService(repository);
+	
 	@Test
 	public void testRead() {
 		when(repository.read(any(Integer.class))).thenReturn(Optional.of(new Country<Integer>()));
@@ -71,4 +67,9 @@ public class CountryServiceTest {
 		
 		assertThat(service.readAll(), is(notNullValue()));
 	}
+/*
+	@After
+	public void tearDown() {
+		ctx.close();
+	}*/
 }

@@ -60,4 +60,5 @@ public class HotelServiceTest {
 		
 		verify(repository, times(1)).create(hotel);
 	}
+	
 }

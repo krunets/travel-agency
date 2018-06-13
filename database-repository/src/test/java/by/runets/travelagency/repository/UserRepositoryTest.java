@@ -27,7 +27,7 @@ public class UserRepositoryTest {
   @Before
   public void setUp() {
     ctx = new GenericXmlApplicationContext();
-    ctx.getEnvironment().setActiveProfiles("development");
+    ctx.getEnvironment().setActiveProfiles("database", "development");
     ctx.load("database-bean-config.xml");
     ctx.refresh();
     repository = (IRepository<User, Integer>) ctx.getBean("userRepository");

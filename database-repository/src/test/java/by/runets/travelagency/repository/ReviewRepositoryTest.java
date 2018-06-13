@@ -20,7 +20,7 @@ public class ReviewRepositoryTest {
   @Before
   public void setup() {
     ctx = new GenericXmlApplicationContext();
-    ctx.getEnvironment().setActiveProfiles("development");
+    ctx.getEnvironment().setActiveProfiles("database", "development");
     ctx.load("database-bean-config.xml");
     ctx.refresh();
     repository = (IRepository<Review, Integer>) ctx.getBean("reviewRepository");

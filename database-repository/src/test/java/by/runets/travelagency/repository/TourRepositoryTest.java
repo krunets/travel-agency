@@ -30,7 +30,7 @@ public class TourRepositoryTest {
   @Before
   public void setUp() {
     ctx = new GenericXmlApplicationContext();
-    ctx.getEnvironment().setActiveProfiles("development");
+    ctx.getEnvironment().setActiveProfiles("database", "development");
     ctx.load("database-bean-config.xml");
     ctx.refresh();
     repository = (IRepository<Tour, Integer>) ctx.getBean("tourRepository");

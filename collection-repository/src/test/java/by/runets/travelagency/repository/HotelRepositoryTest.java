@@ -3,8 +3,11 @@ package by.runets.travelagency.repository;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.repository.impl.HotelRepository;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +15,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class HotelRepositoryTest {
-	private final IRepository<Hotel, Integer> repository = new HotelRepository();
+	private GenericXmlApplicationContext ctx;
+	private IRepository<Hotel, Integer> repository;
+	
+	@Before
+	public void setUp() {
+		ctx = new GenericXmlApplicationContext();
+		ctx.getEnvironment().setActiveProfiles("collection");
+		ctx.load("collection-bean-config.xml");
+		ctx.refresh();
+		repository = (IRepository<Hotel, Integer>) ctx.getBean("hotelRepository");
+	}
 	
 	@Test
 	public void readAllTest () {
@@ -62,5 +75,10 @@ public class HotelRepositoryTest {
 		
 		List<Optional<Hotel>> expected = repository.readAll();
 		Assert.assertEquals(actual, expected);
+	}
+	
+	@After
+	public void tearDown() {
+		ctx.close();
 	}
 }

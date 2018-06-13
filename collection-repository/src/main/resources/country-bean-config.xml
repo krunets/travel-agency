@@ -5,7 +5,7 @@
  		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
  		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
        xmlns:util="http://www.springframework.org/schema/util">
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean id="myProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:properties/data.properties</value>
@@ -17,28 +17,29 @@
                     static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
         </property>
     </bean>
-    <bean id="firstCountry" class="by.runets.travelagency.entity.Country">
-        <constructor-arg value="${first-country-id}"/>
+    <bean id="firstCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
+        <constructor-arg value="#{new Integer(1)}"/>
         <constructor-arg value="${first-country-name}"/>
         <constructor-arg value="#{null}"/>
         <constructor-arg value="#{null}"/>
     </bean>
-    <bean id="secondCountry" class="by.runets.travelagency.entity.Country">
-        <constructor-arg value="${second-country-id}"/>
+    <bean id="secondCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
+        <constructor-arg value="#{new Integer(2)}"/>
         <constructor-arg value="${second-country-name}"/>
         <constructor-arg value="#{null}"/>
         <constructor-arg value="#{null}"/>
     </bean>
-    <bean id="thirdCountry" class="by.runets.travelagency.entity.Country">
-        <constructor-arg value="${third-country-id}"/>
+    <bean id="thirdCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
+        <constructor-arg value="#{new Integer(3)}"/>
         <constructor-arg value="${third-country-name}"/>
         <constructor-arg value="#{null}"/>
         <constructor-arg value="#{null}"/>
     </bean>
-    <bean id="fourthCountry" class="by.runets.travelagency.entity.Country">
-        <constructor-arg value="${fourth-country-id}"/>
+    <bean id="fourthCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
+        <constructor-arg value="#{new Integer(4)}"/>
         <constructor-arg value="${fourth-country-name}"/>
         <constructor-arg value="#{null}"/>
         <constructor-arg value="#{null}"/>
     </bean>
+
 </beans>

@@ -23,7 +23,6 @@
         <jacoco.version>0.8.1</jacoco.version>
         <checkstyle.version>3.0.0</checkstyle.version>
         <findbugs.version>3.0.5</findbugs.version>
-
     </properties>
     <modules>
         <module>domain</module>
@@ -59,7 +58,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <!-- Checkstyle-plugin -->
