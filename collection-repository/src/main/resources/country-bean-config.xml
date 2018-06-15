@@ -24,7 +24,7 @@
         <constructor-arg value="#{null}"/>
     </bean>
     <bean id="secondCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
-        <constructor-arg value="#{new Integer(country-properties['second-country-name'])}"/>
+        <constructor-arg value="#{new Integer(country-properties['second-country-id'])}"/>
         <constructor-arg value="${second-country-name}"/>
         <constructor-arg value="#{null}"/>
         <constructor-arg value="#{null}"/>
