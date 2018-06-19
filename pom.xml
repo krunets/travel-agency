@@ -31,7 +31,6 @@
         <module>database-repository</module>
         <module>service</module>
     </modules>
-
     <dependencyManagement>
         <dependencies>
             <!-- Spring Context-->
@@ -129,7 +128,6 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <!-- Checkstyle-plugin -->
