@@ -11,25 +11,25 @@
     <bean id="countryJoiner" class="by.runets.travelagency.joiner.impl.CountryJoiner"/>
     <bean id="userJoiner" class="by.runets.travelagency.joiner.impl.UserJoiner"/>
 
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg ref="dataSource"/>
     </bean>
     <bean id="countryRepository" class="by.runets.travelagency.repository.impl.CountryRepository">
-        <constructor-arg ref="jdbcTemplate"/>
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
         <constructor-arg ref="countryJoiner"/>
     </bean>
     <bean id="hotelRepository" class="by.runets.travelagency.repository.impl.HotelRepository">
-        <constructor-arg ref="jdbcTemplate" />
+        <constructor-arg ref="namedParameterJdbcTemplate" />
     </bean>
     <bean id="reviewRepository" class="by.runets.travelagency.repository.impl.ReviewRepository">
-        <constructor-arg ref="jdbcTemplate" />
+        <constructor-arg ref="namedParameterJdbcTemplate" />
     </bean>
     <bean id="tourRepository" class="by.runets.travelagency.repository.impl.TourRepository">
-        <constructor-arg ref="jdbcTemplate" />
+        <constructor-arg ref="namedParameterJdbcTemplate" />
         <constructor-arg ref="tourJoiner" />
     </bean>
     <bean id="userRepository" class="by.runets.travelagency.repository.impl.UserRepository">
-        <constructor-arg ref="jdbcTemplate" />
+        <constructor-arg ref="namedParameterJdbcTemplate" />
         <constructor-arg ref="userJoiner" />
     </bean>
 </beans>

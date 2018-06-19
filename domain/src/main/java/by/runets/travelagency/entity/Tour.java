@@ -79,4 +79,6 @@ public class Tour<K> extends Entity<K> {
 		this.users = users;
 		this.countries = countries;
 	}
+	
+	
 }

@@ -1,35 +1,29 @@
 package by.runets.travelagency.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * Class that represents the enum of the tour type.
  */
+@Getter
+@AllArgsConstructor
 public enum TourType {
-	ADVENTURE("Adventure tourism"),
-	ATOMIC("Atomic tourism"),
-	BICYCLE("Bicycle tourism"),
-	CULTURAL("Cultural tourism"),
-	ECO("Eco tourism"),
-	GEO("Geo tourism"),
-	INDUSTRIAL("Industrial tourism");
+	ADVENTURE(1, "Adventure tourism"),
+	ATOMIC(2, "Atomic tourism"),
+	BICYCLE(3, "Bicycle tourism"),
+	CULTURAL(4, "Cultural tourism"),
+	ECO(5, "Eco tourism"),
+	GEO(6, "Geo tourism"),
+	INDUSTRIAL(7, "Industrial tourism");
+	/**
+	 * This is a field which represents a tour type id.
+	 */	private final int id;
 	/**
 	 * This is a field which represents a tour type.
 	 */
 	private final String type;
-	
-	/**
-	 * @param type constructor argument which initializes tourtype type field.
-	 */
-	TourType (final String type) {
-		this.type = type;
-	}
-	
-	/**
-	 * @return type of tour.
-	 */
-	public String getType () {
-		return type;
-	}
-	
+
 	public static TourType getTypeByValue(String value) {
 		for (TourType tourType : TourType.values()) {
 			if (tourType.getType().equals(value)) {

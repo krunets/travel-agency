@@ -1,32 +1,34 @@
 package by.runets.travelagency.repository.impl;
 
 import by.runets.travelagency.constant.HotelQuery;
+import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
-import by.runets.travelagency.mapper.HotelRowMapper;
 import by.runets.travelagency.repository.IRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class HotelRepository implements IRepository<Hotel, Integer> {
-	private final JdbcTemplate jdbcTemplate;
-	
+	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
 	@Override
 	public void create (final Hotel entity) {
-		jdbcTemplate.update(HotelQuery.INSERT_INTO_HOTEL, entity.getId(), entity.getName(), entity.getPhone(), entity.getStars(), entity.getCountry().getId());
+		namedParameterJdbcTemplate.update(HotelQuery.INSERT_INTO_HOTEL, new BeanPropertySqlParameterSource(entity));
 	}
 	
 	@Override
 	public List<Optional<Hotel>> readAll () {
 		try {
-			List<Hotel> hotels = jdbcTemplate.query(HotelQuery.READ_ALL_HOTEL, new HotelRowMapper());
+			List<Hotel> hotels = namedParameterJdbcTemplate.query(HotelQuery.READ_ALL_HOTEL, new HotelRowMapper());
 			return hotels.stream()
 					.map(Optional::ofNullable)
 					.collect(Collectors.toList());
@@ -39,8 +41,8 @@ public class HotelRepository implements IRepository<Hotel, Integer> {
 	public Optional<Hotel> read (final Integer id) {
 		try {
 			Hotel country =
-					jdbcTemplate.queryForObject(
-							HotelQuery.READ_HOTEL_BY_ID, new Object[]{id}, new HotelRowMapper());
+					namedParameterJdbcTemplate.queryForObject(
+							HotelQuery.READ_HOTEL_BY_ID, new MapSqlParameterSource("id", id), new HotelRowMapper());
 			return Optional.ofNullable(country);
 		} catch (EmptyResultDataAccessException e) {
 			return Optional.empty();
@@ -49,12 +51,32 @@ public class HotelRepository implements IRepository<Hotel, Integer> {
 	
 	@Override
 	public void update (final Hotel entity) {
-		jdbcTemplate.update(HotelQuery.UPDATE_HOTEL_BY_ID, entity.getName(), entity.getPhone(), entity.getStars(), entity.getCountry().getId(), entity.getId());
+		namedParameterJdbcTemplate.update(HotelQuery.UPDATE_HOTEL_BY_ID, new BeanPropertySqlParameterSource(entity));
 		
 	}
 	
 	@Override
 	public void delete (final Hotel entity) {
-		jdbcTemplate.update(HotelQuery.DELETE_HOTEL_BY_ID, entity.getId());
+		namedParameterJdbcTemplate.update(HotelQuery.DELETE_HOTEL_BY_ID, new BeanPropertySqlParameterSource(entity));
+	}
+	
+	private final static class HotelRowMapper implements RowMapper<Hotel> {
+		@Override
+		public Hotel<Integer> mapRow (ResultSet resultSet, int i) throws SQLException {
+			Hotel<Integer> hotel = new Hotel<>();
+			Country<Integer> country = new Country<>();
+			
+			
+			hotel.setId(resultSet.getInt("h_id"));
+			hotel.setName(resultSet.getString("h_name"));
+			hotel.setPhone(resultSet.getString("h_phone"));
+			hotel.setStars(resultSet.getInt("h_stars"));
+			
+			country.setId(resultSet.getInt("c_id"));
+			country.setName(resultSet.getString("c_name"));
+			
+			hotel.setCountry(country);
+			return hotel;
+		}
 	}
 }

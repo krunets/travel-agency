@@ -2,12 +2,17 @@ package by.runets.travelagency.repository.impl;
 
 import by.runets.travelagency.constant.ReviewQuery;
 import by.runets.travelagency.entity.Review;
-import by.runets.travelagency.mapper.ReviewRowMapper;
+import by.runets.travelagency.entity.User;
 import by.runets.travelagency.repository.IRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -15,18 +20,17 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class ReviewRepository implements IRepository<Review, Integer> {
-
-  private final JdbcTemplate jdbcTemplate;
+  private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
   @Override
   public void create(final Review entity) {
-    jdbcTemplate.update(ReviewQuery.INSERT_INTO_REVIEW, entity.getId(), entity.getContent(), entity.getUser().getId());
+    namedParameterJdbcTemplate.update(ReviewQuery.INSERT_INTO_REVIEW, new BeanPropertySqlParameterSource(entity));
   }
 
   @Override
   public List<Optional<Review>> readAll() {
     try {
-      List<Review> reviews = jdbcTemplate.query(ReviewQuery.READ_ALL_REVIEW, new ReviewRowMapper());
+      List<Review> reviews = namedParameterJdbcTemplate.query(ReviewQuery.READ_ALL_REVIEW, new ReviewRowMapper());
       return reviews.stream()
           .map(Optional::ofNullable)
           .collect(Collectors.toList());
@@ -39,8 +43,8 @@ public class ReviewRepository implements IRepository<Review, Integer> {
   public Optional<Review> read(final Integer id) {
     try {
       Review review =
-          jdbcTemplate.queryForObject(
-              ReviewQuery.READ_REVIEW_BY_ID, new Object[] {id}, new ReviewRowMapper());
+          namedParameterJdbcTemplate.queryForObject(
+              ReviewQuery.READ_REVIEW_BY_ID, new MapSqlParameterSource("id", id), new ReviewRowMapper());
       return Optional.ofNullable(review);
     } catch (EmptyResultDataAccessException e) {
       return Optional.empty();
@@ -49,11 +53,30 @@ public class ReviewRepository implements IRepository<Review, Integer> {
 
   @Override
   public void update(final Review entity) {
-    jdbcTemplate.update(ReviewQuery.UPDATE_REVIEW_BY_ID, entity.getContent(), entity.getUser().getId(), entity.getId());
+    namedParameterJdbcTemplate.update(ReviewQuery.UPDATE_REVIEW_BY_ID, new BeanPropertySqlParameterSource(entity));
   }
 
   @Override
   public void delete(final Review entity) {
-    jdbcTemplate.update(ReviewQuery.DELETE_REVIEW_BY_ID, entity.getId());
+    namedParameterJdbcTemplate.update(ReviewQuery.DELETE_REVIEW_BY_ID, new BeanPropertySqlParameterSource(entity));
+  }
+  
+  private final static class ReviewRowMapper implements RowMapper<Review> {
+    @Override
+    public Review mapRow (ResultSet resultSet, int i) throws SQLException {
+      Review<Integer> review = new Review<>();
+      User<Integer> user = new User<>();
+  
+      review.setId(resultSet.getInt("r_id"));
+      review.setContent(resultSet.getString("content"));
+  
+      user.setId(resultSet.getInt("u_id"));
+      user.setLogin(resultSet.getString("login"));
+      user.setPassword(resultSet.getString("password"));
+  
+      review.setUser(user);
+  
+      return review;
+    }
   }
 }
