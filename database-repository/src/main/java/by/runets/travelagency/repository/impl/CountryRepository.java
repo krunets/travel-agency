@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 public class CountryRepository implements IRepository<Country, Integer> {
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	private final Joiner<Country> joiner;
-	
 	@Override
 	public void create (final Country entity) {
 		namedParameterJdbcTemplate.update(CountryQuery.INSERT_INTO_COUNTRY, new BeanPropertySqlParameterSource(entity));
@@ -67,7 +66,7 @@ public class CountryRepository implements IRepository<Country, Integer> {
 		namedParameterJdbcTemplate.update(CountryQuery.DELETE_COUNTRY_BY_ID, new BeanPropertySqlParameterSource(entity));
 	}
 	
-	private final static class CountryRowMapper implements RowMapper<Country> {
+	private static final class CountryRowMapper implements RowMapper<Country> {
 		@Override
 		public Country mapRow (ResultSet resultSet, int i) throws SQLException {
 			Country<Integer> country = new Country<>();

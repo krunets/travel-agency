@@ -18,28 +18,28 @@
         </property>
     </bean>
     <bean id="firstCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
-        <constructor-arg value="#{new Integer(country-properties['first-country-id'])}"/>
-        <constructor-arg value="${first-country-name}"/>
-        <constructor-arg value="#{null}"/>
-        <constructor-arg value="#{null}"/>
+        <property name="id" value="#{new Integer(country-properties['first-country-id'])}"/>
+        <property name="name" value="${first-country-name}"/>
+        <property name="hotels"  value="#{null}"/>
+        <property name="tours" value="#{null}" />
     </bean>
     <bean id="secondCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
-        <constructor-arg value="#{new Integer(country-properties['second-country-id'])}"/>
-        <constructor-arg value="${second-country-name}"/>
-        <constructor-arg value="#{null}"/>
-        <constructor-arg value="#{null}"/>
+        <property name="id" value="#{new Integer(country-properties['second-country-id'])}"/>
+        <property name="name" value="${second-country-name}"/>
+        <property name="hotels"  value="#{null}"/>
+        <property name="tours" value="#{null}" />
     </bean>
     <bean id="thirdCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
-        <constructor-arg value="#{new Integer(country-properties['third-country-id'])}"/>
-        <constructor-arg value="${third-country-name}"/>
-        <constructor-arg value="#{null}"/>
-        <constructor-arg value="#{null}"/>
+        <property name="id" value="#{new Integer(country-properties['third-country-id'])}"/>
+        <property name="name" value="${third-country-name}"/>
+        <property name="hotels"  value="#{null}"/>
+        <property name="tours" value="#{null}" />
     </bean>
     <bean id="fourthCountry" class="by.runets.travelagency.entity.Country" scope="prototype">
-        <constructor-arg value="#{new Integer(country-properties['fourth-country-id'])}"/>
-        <constructor-arg value="${fourth-country-name}"/>
-        <constructor-arg value="#{null}"/>
-        <constructor-arg value="#{null}"/>
+        <property name="id" value="#{new Integer(country-properties['fourth-country-id'])}"/>
+        <property name="name" value="${fourth-country-name}"/>
+        <property name="hotels"  value="#{null}"/>
+        <property name="tours" value="#{null}" />
     </bean>
 
 </beans>

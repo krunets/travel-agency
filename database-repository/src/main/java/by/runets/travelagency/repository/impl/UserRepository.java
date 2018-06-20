@@ -71,7 +71,7 @@ public class UserRepository implements IRepository<User, Integer> {
 		namedParameterJdbcTemplate.update(UserQuery.DELETE_USER_BY_ID, new BeanPropertySqlParameterSource(entity));
 	}
 	
-	private final static class UserRowMapper implements RowMapper<User> {
+	private static final class UserRowMapper implements RowMapper<User> {
 		@Override
 		public User mapRow (ResultSet resultSet, int i) throws SQLException {
 			User<Integer> user = new User<>();

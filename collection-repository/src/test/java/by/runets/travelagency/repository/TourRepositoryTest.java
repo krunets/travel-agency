@@ -33,10 +33,10 @@ public class TourRepositoryTest {
 	public void readAllTest () {
 		List<Optional<Tour>> actual = new ArrayList<>(Arrays.asList(
 				Optional.of(new Tour<Integer>(1, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(2, "Photo2", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description1", new BigDecimal(200), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(3, "Photo3", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description1", new BigDecimal(300), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(4, "Photo4", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description1", new BigDecimal(400), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(5, "Photo5", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description1", new BigDecimal(500), TourType.ADVENTURE, null, null)))
+				Optional.of(new Tour<Integer>(2, "Photo2", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description2", new BigDecimal(200), TourType.ADVENTURE, null, null)),
+				Optional.of(new Tour<Integer>(3, "Photo3", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description3", new BigDecimal(300), TourType.ADVENTURE, null, null)),
+				Optional.of(new Tour<Integer>(4, "Photo4", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.ADVENTURE, null, null)),
+				Optional.of(new Tour<Integer>(5, "Photo5", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ADVENTURE, null, null)))
 		);
 		
 		List<Optional<Tour>> expected = repository.readAll();
@@ -54,10 +54,10 @@ public class TourRepositoryTest {
 	@Test
 	public void testDelete() {
 		List<Optional<Tour>> actual = new ArrayList<>(Arrays.asList(
-				Optional.of(new Tour<Integer>(2, "Photo2", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description1", new BigDecimal(200), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(3, "Photo3", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description1", new BigDecimal(300), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(4, "Photo4", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description1", new BigDecimal(400), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(5, "Photo5", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description1", new BigDecimal(500), TourType.ADVENTURE, null, null)))
+				Optional.of(new Tour<Integer>(2, "Photo2", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description2", new BigDecimal(200), TourType.ADVENTURE, null, null)),
+				Optional.of(new Tour<Integer>(3, "Photo3", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description3", new BigDecimal(300), TourType.ADVENTURE, null, null)),
+				Optional.of(new Tour<Integer>(4, "Photo4", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.ADVENTURE, null, null)),
+				Optional.of(new Tour<Integer>(5, "Photo5", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ADVENTURE, null, null)))
 		);
 		
 		Tour entityToDelete = new Tour<Integer>(1, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null);
@@ -72,9 +72,9 @@ public class TourRepositoryTest {
 	public void testUpdate() {
 		List<Optional<Tour>> actual = new ArrayList<>(Arrays.asList(
 				Optional.of(new Tour<Integer>(2, "Photo23", LocalDate.parse("2018-08-20"), Duration.ofDays(20), "description12", new BigDecimal(200), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(3, "Photo3", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description1", new BigDecimal(300), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(4, "Photo4", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description1", new BigDecimal(400), TourType.ADVENTURE, null, null)),
-				Optional.of(new Tour<Integer>(5, "Photo5", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description1", new BigDecimal(500), TourType.ADVENTURE, null, null)))
+				Optional.of(new Tour<Integer>(3, "Photo3", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description3", new BigDecimal(300), TourType.ADVENTURE, null, null)),
+				Optional.of(new Tour<Integer>(4, "Photo4", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.ADVENTURE, null, null)),
+				Optional.of(new Tour<Integer>(5, "Photo5", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ADVENTURE, null, null)))
 		);
 		
 		Tour<Integer> entityToUpdate = new Tour<Integer>(2, "Photo23", LocalDate.parse("2018-08-20"), Duration.ofDays(20), "description12", new BigDecimal(200), TourType.ADVENTURE, null, null);

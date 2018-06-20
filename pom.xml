@@ -24,6 +24,7 @@
         <jacoco.version>0.8.1</jacoco.version>
         <checkstyle.version>3.0.0</checkstyle.version>
         <findbugs.version>3.0.5</findbugs.version>
+        <sonarqube.version>3.4.0.905</sonarqube.version>
     </properties>
     <modules>
         <module>domain</module>
@@ -202,6 +203,12 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- SonarQube -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonarqube.version}</version>
             </plugin>
         </plugins>
     </build>

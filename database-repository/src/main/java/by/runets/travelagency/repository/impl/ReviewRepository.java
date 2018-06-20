@@ -61,7 +61,7 @@ public class ReviewRepository implements IRepository<Review, Integer> {
     namedParameterJdbcTemplate.update(ReviewQuery.DELETE_REVIEW_BY_ID, new BeanPropertySqlParameterSource(entity));
   }
   
-  private final static class ReviewRowMapper implements RowMapper<Review> {
+  private static final class ReviewRowMapper implements RowMapper<Review> {
     @Override
     public Review mapRow (ResultSet resultSet, int i) throws SQLException {
       Review<Integer> review = new Review<>();

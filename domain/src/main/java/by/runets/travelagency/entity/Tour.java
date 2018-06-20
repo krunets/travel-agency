@@ -68,7 +68,8 @@ public class Tour<K> extends Entity<K> {
 	 */
 	public Tour (final K id, final String photo, final LocalDate date,
 							 final Duration duration, final String description,
-							 final BigDecimal cost, final TourType tourType, final List<User<K>> users, final List<Country<K>> countries) {
+							 final BigDecimal cost, final TourType tourType,
+							 final List<User<K>> users, final List<Country<K>> countries) {
 		super(id);
 		this.photo = photo;
 		this.date = date;

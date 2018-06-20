@@ -62,7 +62,7 @@ public class HotelRepository implements IRepository<Hotel, Integer> {
 		namedParameterJdbcTemplate.update(HotelQuery.DELETE_HOTEL_BY_ID, new BeanPropertySqlParameterSource(entity));
 	}
 	
-	private final static class HotelRowMapper implements RowMapper<Hotel> {
+	private static final class HotelRowMapper implements RowMapper<Hotel> {
 		@Override
 		public Hotel<Integer> mapRow (ResultSet resultSet, int i) throws SQLException {
 			Hotel<Integer> hotel = new Hotel<>();

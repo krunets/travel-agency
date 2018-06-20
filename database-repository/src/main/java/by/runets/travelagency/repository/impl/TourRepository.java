@@ -67,7 +67,7 @@ public class TourRepository implements IRepository<Tour, Integer> {
 		namedParameterJdbcTemplate.update(TourQuery.DELETE_TOUR_BY_ID, new BeanPropertySqlParameterSource(entity));
 	}
 	
-	private final static class TourRowMapper implements RowMapper<Tour> {
+	private static final class TourRowMapper implements RowMapper<Tour> {
 		@Override
 		public Tour mapRow (ResultSet resultSet, int i) throws SQLException {
 			Tour<Integer> tour = new Tour<>();
@@ -105,7 +105,9 @@ public class TourRepository implements IRepository<Tour, Integer> {
 		}
 	}
 
-	private final static class NamedQueryFieldProvider {
+	private static final class NamedQueryFieldProvider {
+		private NamedQueryFieldProvider () {}
+		
 		static Map<String, Object> provide(Tour entity) {
 			Map<String, Object> parameters = new HashMap<>();
 			
