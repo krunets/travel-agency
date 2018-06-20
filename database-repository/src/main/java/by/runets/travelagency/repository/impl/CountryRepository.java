@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -86,7 +85,7 @@ public class CountryRepository implements IRepository<Country, Integer> {
 			tour.setPhoto(resultSet.getString("photo"));
 			java.sql.Date date = resultSet.getDate("date");
 			if (date != null) {
-				tour.setDate(resultSet.getDate("date").toLocalDate());
+				tour.setDate(date.toLocalDate());
 			}
 			tour.setDescription(resultSet.getString("description"));
 			tour.setDuration(Duration.ofDays(resultSet.getLong("duration")));

@@ -14,8 +14,8 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.sql.Date;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -68,7 +68,6 @@ public class TourRepository implements IRepository<Tour, Integer> {
 	}
 	
 	private final static class TourRowMapper implements RowMapper<Tour> {
-		
 		@Override
 		public Tour mapRow (ResultSet resultSet, int i) throws SQLException {
 			Tour<Integer> tour = new Tour<>();
@@ -77,8 +76,10 @@ public class TourRepository implements IRepository<Tour, Integer> {
 			
 			tour.setId(resultSet.getInt("t_id"));
 			tour.setPhoto(resultSet.getString("photo"));
-			tour.setDate(resultSet.getDate("date").toLocalDate());
-			tour.setDescription(resultSet.getString("description"));
+			Date date = resultSet.getDate("date");
+			if (date != null) {
+				tour.setDate(date.toLocalDate());
+			}				tour.setDescription(resultSet.getString("description"));
 			tour.setDuration(Duration.ofDays(resultSet.getLong("duration")));
 			tour.setCost(resultSet.getBigDecimal("cost"));
 			tour.setTourType(TourType.getTypeByValue(resultSet.getString("t_type")));

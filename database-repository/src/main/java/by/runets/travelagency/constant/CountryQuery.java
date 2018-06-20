@@ -1,17 +1,17 @@
 package by.runets.travelagency.constant;
 
-
 public class CountryQuery {
 	private CountryQuery(){}
 	public static final String READ_ALL_COUNTRY =
-			"SELECT * FROM travel_agency.country AS c "
+			"SELECT c.c_id, c_name, t.t_id, photo, date, description, duration, cost, tt.t_id, t_type, h_id, h_name, h_phone, h_stars, country " +
+					"FROM travel_agency.country AS c "
 					+ "LEFT JOIN travel_agency.hotel AS h ON h.country = c.c_id "
 					+ "LEFT JOIN travel_agency.tour_m2m_country AS tm2mc ON tm2mc.c_id = c.c_id "
 					+ "LEFT JOIN travel_agency.tour AS t ON t.t_id = tm2mc.t_id "
 					+ "LEFT JOIN travel_agency.tour_type AS tt ON tt.t_id = t.t_id " +
 					"ORDER BY c.c_id";
 	public static final String READ_COUNTRY_BY_ID =
-			"SELECT * FROM travel_agency.country AS c "
+			"SELECT c.c_id, c_name, t.t_id, photo, date, description, duration, cost, tt.t_id, t_type, h_id, h_name, h_phone, h_stars, country FROM travel_agency.country AS c "
 					+ "LEFT JOIN travel_agency.hotel AS h ON h.country = c.c_id "
 					+ "LEFT JOIN travel_agency.tour_m2m_country AS tm2mc ON tm2mc.c_id = c.c_id "
 					+ "LEFT JOIN travel_agency.tour AS t ON t.t_id = tm2mc.t_id "

@@ -89,8 +89,9 @@ public class UserRepository implements IRepository<User, Integer> {
 			tour.setPhoto(resultSet.getString("photo"));
 			Date date = resultSet.getDate("date");
 			if (date != null) {
-				tour.setDate(resultSet.getDate("date").toLocalDate());
-			}		tour.setDescription(resultSet.getString("description"));
+				tour.setDate(date.toLocalDate());
+			}
+			tour.setDescription(resultSet.getString("description"));
 			tour.setDuration(Duration.ofDays(resultSet.getLong("duration")));
 			tour.setCost(resultSet.getBigDecimal("cost"));
 			tour.setTourType(TourType.getTypeByValue(resultSet.getString("t_type")));
