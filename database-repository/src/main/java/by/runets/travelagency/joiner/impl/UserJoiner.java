@@ -4,9 +4,10 @@ import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.joiner.Joiner;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
-
+@Component
 public class UserJoiner implements Joiner<User> {
 	@Override
 	public List<User> join (List<User> users) {

@@ -1,4 +1,4 @@
-package by.runets.travelagency.constant;
+package by.runets.travelagency.repository.query;
 
 public class HotelQuery {
 	private HotelQuery(){}

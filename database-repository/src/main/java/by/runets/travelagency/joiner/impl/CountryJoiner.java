@@ -4,9 +4,11 @@ import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.joiner.Joiner;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class CountryJoiner implements Joiner<Country> {
 	@Override
 	public List<Country> join (List<Country> countries) {

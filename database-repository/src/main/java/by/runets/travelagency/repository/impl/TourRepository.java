@@ -1,6 +1,6 @@
 package by.runets.travelagency.repository.impl;
 
-import by.runets.travelagency.constant.TourQuery;
+import by.runets.travelagency.repository.query.TourQuery;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
@@ -8,21 +8,25 @@ import by.runets.travelagency.entity.User;
 import by.runets.travelagency.joiner.Joiner;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.sql.Date;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
-
+@Repository
 @AllArgsConstructor
 public class TourRepository implements IDatabaseRepository<Tour, Integer> {
+	@Autowired
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	@Autowired
 	private final Joiner<Tour> joiner;
 	
 	@Override
