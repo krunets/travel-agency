@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 @Configuration
-@ComponentScan(basePackages = "by.runets.travelagency")
+@ComponentScan(basePackages = "by.runets.travelagency.*")
 @AllArgsConstructor
 public class ProductionDatabaseBeanConfig {
 	@Autowired
