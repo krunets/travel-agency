@@ -3,7 +3,7 @@ package by.runets.travelagency.repository.impl;
 import by.runets.travelagency.constant.ReviewQuery;
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.User;
-import by.runets.travelagency.repository.IRepository;
+import by.runets.travelagency.repository.IDatabaseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class ReviewRepository implements IRepository<Review, Integer> {
+public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
   private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
   @Override

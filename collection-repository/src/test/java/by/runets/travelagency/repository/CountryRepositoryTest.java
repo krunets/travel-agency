@@ -12,8 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
 public class CountryRepositoryTest {
-	private IRepository<Country, Integer> repository;
+	private ICollectionRepository<Country, Integer> repository;
 	private GenericXmlApplicationContext ctx;
 
 	@Before
@@ -22,7 +23,7 @@ public class CountryRepositoryTest {
 	  ctx.getEnvironment().setActiveProfiles("collection");
 	  ctx.load("collection-bean-config.xml");
 	  ctx.refresh();
-	  repository = (IRepository<Country, Integer>) ctx.getBean("countryRepository");
+	  repository = (ICollectionRepository<Country, Integer>) ctx.getBean("countryRepository");
 	}
 	
 	@Test

@@ -1,7 +1,7 @@
 package by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.User;
-import by.runets.travelagency.repository.IRepository;
+import by.runets.travelagency.repository.ICollectionRepository;
 import by.runets.travelagency.repository.impl.UserRepository;
 import by.runets.travelagency.service.impl.UserService;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
-	private final IRepository<User, Integer> repository = mock(UserRepository.class);
+	private final ICollectionRepository<User, Integer> repository = mock(UserRepository.class);
 	private final IService<User, Integer> service = new UserService(repository);
 	
 	@Test

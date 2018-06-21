@@ -16,9 +16,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
 public class TourRepositoryTest {
 	private GenericXmlApplicationContext ctx;
-	private IRepository<Tour, Integer> repository;
+	private ICollectionRepository<Tour, Integer> repository;
 	
 	@Before
 	public void setUp() {
@@ -26,7 +27,7 @@ public class TourRepositoryTest {
 		ctx.getEnvironment().setActiveProfiles("collection");
 		ctx.load("collection-bean-config.xml");
 		ctx.refresh();
-		repository = (IRepository<Tour, Integer>) ctx.getBean("tourRepository");
+		repository = (ICollectionRepository<Tour, Integer>) ctx.getBean("tourRepository");
 	}
 	
 	@Test

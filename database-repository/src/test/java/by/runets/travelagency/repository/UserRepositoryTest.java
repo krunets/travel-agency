@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class UserRepositoryTest {
   private GenericXmlApplicationContext ctx;
-  private IRepository<User, Integer> repository;
+  private IDatabaseRepository<User, Integer> repository;
 
   @Before
   public void setUp() {
@@ -22,7 +22,7 @@ public class UserRepositoryTest {
     ctx.getEnvironment().setActiveProfiles("database", "development");
     ctx.load("database-bean-config.xml");
     ctx.refresh();
-    repository = (IRepository<User, Integer>) ctx.getBean("userRepository");
+    repository = (IDatabaseRepository<User, Integer>) ctx.getBean("userRepository");
   }
 
   @Test

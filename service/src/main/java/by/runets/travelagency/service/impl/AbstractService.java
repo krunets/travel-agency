@@ -2,7 +2,8 @@ package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.entity.Entity;
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.repository.IRepository;
+import by.runets.travelagency.repository.ICollectionRepository;
+import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.service.IService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Slf4j
 public class AbstractService<T extends Entity, K> implements IService<T, K> {
-	private final IRepository<T, K> repository;
+	private final IDatabaseRepository<T, K> repository;
 	
 	/**
 	 * This is a method which call create method from repository layer.

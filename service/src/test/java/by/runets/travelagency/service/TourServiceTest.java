@@ -2,7 +2,7 @@ package by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
-import by.runets.travelagency.repository.IRepository;
+import by.runets.travelagency.repository.ICollectionRepository;
 import by.runets.travelagency.repository.impl.TourRepository;
 import by.runets.travelagency.service.impl.TourService;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class TourServiceTest {
-	private final IRepository<Tour, Integer> repository = mock(TourRepository.class);
+	private final ICollectionRepository<Tour, Integer> repository = mock(TourRepository.class);
 	private final IService<Tour, Integer> service = new TourService(repository);
 	
 	@Test

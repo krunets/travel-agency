@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Is inherited from common class and provides list of hotels.
  */
+@Deprecated
 public class HotelRepository extends AbstractRepository<Hotel, Integer> {
 	private static List<Hotel> hotels = new ArrayList<>(Arrays.asList(
 			new Hotel<>(1, "Marriot", "123 23 23", 5, new Country<Integer>()),
@@ -17,7 +18,7 @@ public class HotelRepository extends AbstractRepository<Hotel, Integer> {
 			new Hotel<>(3, "Prezident-Otel", "111 11 11" , 4, new Country<Integer>()),
 			new Hotel<>(4, "Aqua-Minsk", "123 11 11", 2, new Country<Integer>()),
 			new Hotel<>(5, "Trump International Hotel Washington DC", "101 10 01", 5, new Country<Integer>())));
-	
+	@Deprecated
 	public HotelRepository () {
 		super(hotels);
 	}

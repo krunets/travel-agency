@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class CountryRepositoryTest {
   private GenericXmlApplicationContext ctx;
-  private IRepository<Country, Integer> repository;
+  private IDatabaseRepository<Country, Integer> repository;
 
   @Before
   public void setup() {
@@ -22,7 +22,7 @@ public class CountryRepositoryTest {
     ctx.getEnvironment().setActiveProfiles("database", "development");
     ctx.load("database-bean-config.xml");
     ctx.refresh();
-    repository = (IRepository<Country, Integer>) ctx.getBean("countryRepository");
+    repository = (IDatabaseRepository<Country, Integer>) ctx.getBean("countryRepository");
   }
 
   @Test

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class ReviewRepositoryTest {
   private GenericXmlApplicationContext ctx;
-  private IRepository<Review, Integer> repository;
+  private IDatabaseRepository<Review, Integer> repository;
 
   @Before
   public void setup() {
@@ -23,7 +23,7 @@ public class ReviewRepositoryTest {
     ctx.getEnvironment().setActiveProfiles("database", "development");
     ctx.load("database-bean-config.xml");
     ctx.refresh();
-    repository = (IRepository<Review, Integer>) ctx.getBean("reviewRepository");
+    repository = (IDatabaseRepository<Review, Integer>) ctx.getBean("reviewRepository");
   }
 
   @Test

@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Is inherited from common class and provides list of countries.
  */
+@Deprecated
 public class CountryRepository extends AbstractRepository<Country, Integer> {
 	private static List<Country> countries = new ArrayList<>(Arrays.asList(
 			new Country<>(1, "Belarus", null, null),
@@ -16,6 +17,7 @@ public class CountryRepository extends AbstractRepository<Country, Integer> {
 			new Country<>(3, "France", null, null),
 			new Country<>(4, "Italy", null, null)
 	));
+
 	public CountryRepository () {
 		super(countries);
 	}

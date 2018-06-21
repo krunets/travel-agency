@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class HotelRepositoryTest {
-  private IRepository<Hotel, Integer> repository;
+  private IDatabaseRepository<Hotel, Integer> repository;
   private GenericXmlApplicationContext ctx;
 
   @Before
@@ -23,7 +23,7 @@ public class HotelRepositoryTest {
     ctx.getEnvironment().setActiveProfiles("database", "development");
     ctx.load("database-bean-config.xml");
     ctx.refresh();
-    repository = (IRepository<Hotel, Integer>) ctx.getBean("hotelRepository");
+    repository = (IDatabaseRepository<Hotel, Integer>) ctx.getBean("hotelRepository");
   }
 
   @Test

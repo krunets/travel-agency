@@ -13,9 +13,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
 public class UserRepositoryTest {
 	private GenericXmlApplicationContext ctx;
-	private IRepository<User, Integer> repository = new UserRepository();
+	private ICollectionRepository<User, Integer> repository = new UserRepository();
 	
 	@Before
 	public void setUp() {
@@ -23,7 +24,7 @@ public class UserRepositoryTest {
 		ctx.getEnvironment().setActiveProfiles("collection");
 		ctx.load("collection-bean-config.xml");
 		ctx.refresh();
-		repository = (IRepository<User, Integer>) ctx.getBean("userRepository");
+		repository = (ICollectionRepository<User, Integer>) ctx.getBean("userRepository");
 	}
 	
 	@Test

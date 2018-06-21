@@ -1,7 +1,7 @@
 package by.runets.travelagency.repository.impl;
 
 import by.runets.travelagency.entity.Entity;
-import by.runets.travelagency.repository.IRepository;
+import by.runets.travelagency.repository.ICollectionRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
  */
 @AllArgsConstructor
 @Slf4j
-public class AbstractRepository<T extends Entity, K> implements IRepository<T, K> {
+@Deprecated
+public class AbstractRepository<T extends Entity, K> implements ICollectionRepository<T, K> {
 	private List<T> data;
 	/**
 	 * This is a method which add entity to common collection.

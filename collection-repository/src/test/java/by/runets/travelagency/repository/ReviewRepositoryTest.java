@@ -12,9 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
 public class ReviewRepositoryTest {
 	private GenericXmlApplicationContext ctx;
-	private IRepository<Review, Integer> repository;
+	private ICollectionRepository<Review, Integer> repository;
 	
 	@Before
 	public void setUp() {
@@ -22,7 +23,7 @@ public class ReviewRepositoryTest {
 		ctx.getEnvironment().setActiveProfiles("collection");
 		ctx.load("collection-bean-config.xml");
 		ctx.refresh();
-		repository = (IRepository<Review, Integer>) ctx.getBean("reviewRepository");
+		repository = (ICollectionRepository<Review, Integer>) ctx.getBean("reviewRepository");
 	}
 	
 	@Test

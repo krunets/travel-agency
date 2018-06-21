@@ -9,12 +9,13 @@ import java.util.List;
 /**
  * Is inherited from common class and provides list of users.
  */
+@Deprecated
 public class UserRepository extends AbstractRepository<User, Integer> {
 	private static List<User> users = new ArrayList<>(Arrays.asList(
 			new User<>(1, "root", "root", null, null),
 			new User<>(2, "admin", "admin", null, null),
 			new User<>(3, "traveler1", "traveler1", null, null)));
-	
+	@Deprecated
 	public UserRepository () {
 		super(users);
 	}

@@ -9,7 +9,7 @@ import java.util.Optional;
  * @param <T> is a generic param which must be inherited from Entity class.
  * @param <K> is a generic param which represents a key param.
  */
-public interface IRepository<T extends Entity, K> {
+public interface IDatabaseRepository<T extends Entity, K> {
 	void create(final T entity);
 	List<Optional<T>> readAll();
 	Optional<T> read(final K id);

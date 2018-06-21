@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+@Deprecated
 public class HotelRepositoryTest {
 	private GenericXmlApplicationContext ctx;
-	private IRepository<Hotel, Integer> repository;
+	private ICollectionRepository<Hotel, Integer> repository;
 	
 	@Before
 	public void setUp() {
@@ -23,7 +23,7 @@ public class HotelRepositoryTest {
 		ctx.getEnvironment().setActiveProfiles("collection");
 		ctx.load("collection-bean-config.xml");
 		ctx.refresh();
-		repository = (IRepository<Hotel, Integer>) ctx.getBean("hotelRepository");
+		repository = (ICollectionRepository<Hotel, Integer>) ctx.getBean("hotelRepository");
 	}
 	
 	@Test

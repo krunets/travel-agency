@@ -3,7 +3,7 @@ package by.runets.travelagency.repository.impl;
 import by.runets.travelagency.constant.HotelQuery;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
-import by.runets.travelagency.repository.IRepository;
+import by.runets.travelagency.repository.IDatabaseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class HotelRepository implements IRepository<Hotel, Integer> {
+public class HotelRepository implements IDatabaseRepository<Hotel, Integer> {
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
 	@Override

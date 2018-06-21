@@ -6,7 +6,7 @@ import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.joiner.Joiner;
-import by.runets.travelagency.repository.IRepository;
+import by.runets.travelagency.repository.IDatabaseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,7 +21,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class TourRepository implements IRepository<Tour, Integer> {
+public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	private final Joiner<Tour> joiner;
 	

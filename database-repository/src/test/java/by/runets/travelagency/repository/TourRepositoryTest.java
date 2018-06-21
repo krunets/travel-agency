@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class TourRepositoryTest {
-	private IRepository<Tour, Integer> repository;
+	private IDatabaseRepository<Tour, Integer> repository;
 	private GenericXmlApplicationContext ctx;
 	
 	@Before
@@ -26,7 +26,7 @@ public class TourRepositoryTest {
 		ctx.getEnvironment().setActiveProfiles("database", "development");
 		ctx.load("database-bean-config.xml");
 		ctx.refresh();
-		repository = (IRepository<Tour, Integer>) ctx.getBean("tourRepository");
+		repository = (IDatabaseRepository<Tour, Integer>) ctx.getBean("tourRepository");
 	}
 	
 	@Test
