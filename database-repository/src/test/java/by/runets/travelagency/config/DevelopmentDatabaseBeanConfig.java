@@ -4,7 +4,6 @@ import by.runets.travelagency.joiner.impl.CountryJoiner;
 import by.runets.travelagency.joiner.impl.TourJoiner;
 import by.runets.travelagency.joiner.impl.UserJoiner;
 import by.runets.travelagency.repository.impl.*;
-import com.codahale.metrics.MetricRegistry;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -59,10 +58,6 @@ public class DevelopmentDatabaseBeanConfig {
 		return new UserRepository(namedParameterJdbcTemplate(), userJoiner());
 	}
 	
-	@Bean
-	public MetricRegistry metricRegistry() {
-		return new MetricRegistry();
-	}
 	
 	@Bean
 	public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {

@@ -8,12 +8,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @Configuration
 @Production
 @PropertySource("classpath:properties/production-database-config.properties")
 @AllArgsConstructor
+@EnableTransactionManagement
 public class ProductionDataSourceConfig {
 	
 	private static final String URL = "jdbc.url";

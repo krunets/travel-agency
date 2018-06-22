@@ -1,10 +1,14 @@
 package by.runets.travelagency.service;
 
+import by.runets.travelagency.config.ServiceBeanConfig;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.impl.CountryRepository;
 import by.runets.travelagency.service.impl.CountryService;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -14,7 +18,8 @@ import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = ServiceBeanConfig.class)
 public class CountryServiceTest {
 	private IDatabaseRepository<Country, Integer> repository = mock(CountryRepository.class);
 	private IService<Country, Integer> service = new CountryService(repository);

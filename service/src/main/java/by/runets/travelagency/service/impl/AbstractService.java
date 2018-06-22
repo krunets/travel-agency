@@ -6,6 +6,8 @@ import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.service.IService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +18,11 @@ import java.util.stream.Collectors;
  * @param <T> is a generic param which must be inherited from Entity class.
  * @param <K>  is a generic param which represents a key param.
  */
+@Service
 @AllArgsConstructor
 @Slf4j
 public class AbstractService<T extends Entity, K> implements IService<T, K> {
+	@Autowired
 	private final IDatabaseRepository<T, K> repository;
 	
 	/**

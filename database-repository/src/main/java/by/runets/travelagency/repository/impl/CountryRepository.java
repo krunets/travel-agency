@@ -28,6 +28,7 @@ public class CountryRepository implements IDatabaseRepository<Country, Integer> 
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	@Autowired
 	private final Joiner<Country> joiner;
+	
 	@Override
 	public void create (final Country entity) {
 		namedParameterJdbcTemplate.update(CountryQuery.INSERT_INTO_COUNTRY, new BeanPropertySqlParameterSource(entity));
