@@ -8,29 +8,30 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlGroup;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
+@ActiveProfiles(profiles = "development")
+@SqlGroup({
+    @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/schema.sql", "classpath:db/init-data.sql"}),
+    @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:db/drop.sql")
+})
 public class UserRepositoryTest {
   @Autowired
-  private AnnotationConfigApplicationContext context;
-  @Autowired
-  private IDatabaseRepository<User, Integer> repository;
-
-  @Before
-  public void setUp() {
-    context = new AnnotationConfigApplicationContext();
-    context.getEnvironment().setActiveProfiles("development");
-    context.register(DevelopmentDatabaseBeanConfig.class);
-    context.refresh();
-    repository = context.getBean(UserRepository.class);
-  }
+  private UserRepository repository;
 
   @Test
   public void testCreate() {
@@ -85,8 +86,4 @@ public class UserRepositoryTest {
     Assert.assertEquals(expected, actual);
   }
 
-  @After
-  public void tearDown() {
-    context.close();
-  }
 }

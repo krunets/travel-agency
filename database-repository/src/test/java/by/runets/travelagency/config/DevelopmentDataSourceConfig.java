@@ -23,8 +23,8 @@ public class DevelopmentDataSourceConfig {
 		DataSource ds = new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.H2)
 				.generateUniqueName(true)
-				.addScript("db/schema.sql")
-				.addScript("db/init-data.sql")
+/*				.addScript("db/schema.sql")
+				.addScript("db/init-data.sql")*/
 				.build();
 		dataSource.setDataSource(ds);
 		return dataSource;

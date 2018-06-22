@@ -3,38 +3,38 @@ package by.runets.travelagency.repository;
 import by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.repository.impl.CountryRepository;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlGroup;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
+@ActiveProfiles(profiles = "development")
+@SqlGroup({
+    @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/schema.sql", "classpath:db/init-data.sql"}),
+    @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:db/drop.sql")
+})
 public class CountryRepositoryTest {
   @Autowired
-  private AnnotationConfigApplicationContext context;
-  @Autowired
-  private IDatabaseRepository<Country, Integer> repository;
-
-  @Before
-  public void setup() {
-    context = new AnnotationConfigApplicationContext();
-    context.getEnvironment().setActiveProfiles("development");
-    context.register(DevelopmentDatabaseBeanConfig.class);
-    context.refresh();
-    repository = context.getBean(CountryRepository.class);
-  }
-
+  private CountryRepository countryRepository;
+  
   @Test
   public void testCreate() {
     Country<Integer> expected = new Country<>(10, "testCountryName", null, null);
-    repository.create(expected);
-    Country actual = repository.read(10).get();
+    countryRepository.create(expected);
+    Country actual = countryRepository.read(10).get();
 
     Assert.assertEquals(expected, actual);
   }
@@ -42,14 +42,14 @@ public class CountryRepositoryTest {
   @Test
   public void testReadById() {
     Country<Integer> expected = new Country<Integer>(1, "Belarus", null, null);
-    Country actual = repository.read(1).get();
+    Country actual = countryRepository.read(1).get();
 
     Assert.assertEquals(expected, actual);
   }
 
   @Test
   public void testReadAll() {
-    List<Optional<Country>> actual = repository.readAll();
+    List<Optional<Country>> actual = countryRepository.readAll();
 
     List<Optional<Country>> expected =
         new ArrayList<>(
@@ -65,22 +65,17 @@ public class CountryRepositoryTest {
   @Test
   public void deleteById() {
     Country<Integer> expected = new Country<>(1, "", null, null);
-    repository.delete(expected);
+    countryRepository.delete(expected);
 
-    Assert.assertEquals(Optional.empty(), repository.read(1));
+    Assert.assertEquals(Optional.empty(), countryRepository.read(1));
   }
 
   @Test
   public void updateTest() {
     Country expected = new Country<>(1, "newName", null, null);
-    repository.update(expected);
-    Country actual = repository.read(1).get();
+    countryRepository.update(expected);
+    Country actual = countryRepository.read(1).get();
 
     Assert.assertEquals(expected, actual);
-  }
-
-  @After
-  public void tearDown() {
-    context.close();
   }
 }
