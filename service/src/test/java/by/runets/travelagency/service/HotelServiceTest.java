@@ -2,7 +2,7 @@ package by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
-import by.runets.travelagency.repository.ICollectionRepository;
+import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.impl.HotelRepository;
 import by.runets.travelagency.service.impl.HotelService;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class HotelServiceTest {
-	private final ICollectionRepository<Hotel, Integer> repository = mock(HotelRepository.class);
+	private final IDatabaseRepository<Hotel, Integer> repository = mock(HotelRepository.class);
 	private final IService<Hotel, Integer> service = new HotelService(repository);
 	
 	@Test

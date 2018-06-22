@@ -1,11 +1,15 @@
 package by.runets.travelagency.repository;
 
+import by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.User;
+import by.runets.travelagency.repository.impl.HotelRepository;
+import by.runets.travelagency.repository.impl.ReviewRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.ArrayList;
@@ -14,16 +18,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class ReviewRepositoryTest {
-  private GenericXmlApplicationContext ctx;
+  private AnnotationConfigApplicationContext context;
   private IDatabaseRepository<Review, Integer> repository;
 
   @Before
   public void setup() {
-    ctx = new GenericXmlApplicationContext();
-    ctx.getEnvironment().setActiveProfiles("database", "development");
-    ctx.load("database-bean-config.xml");
-    ctx.refresh();
-    repository = (IDatabaseRepository<Review, Integer>) ctx.getBean("reviewRepository");
+    context = new AnnotationConfigApplicationContext();
+    context.getEnvironment().setActiveProfiles("development");
+    context.register(DevelopmentDatabaseBeanConfig.class);
+    context.refresh();
+    repository = context.getBean(ReviewRepository.class);
   }
 
   @Test
@@ -82,6 +86,6 @@ public class ReviewRepositoryTest {
 
   @After
   public void tearDown() {
-    ctx.close();
+    context.close();
   }
 }

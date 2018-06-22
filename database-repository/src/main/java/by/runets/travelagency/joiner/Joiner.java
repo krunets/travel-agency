@@ -1,7 +1,5 @@
 package by.runets.travelagency.joiner;
 
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 /**

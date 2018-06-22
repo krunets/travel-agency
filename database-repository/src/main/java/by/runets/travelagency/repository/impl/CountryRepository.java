@@ -1,12 +1,12 @@
 package by.runets.travelagency.repository.impl;
 
-import by.runets.travelagency.repository.query.CountryQuery;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.joiner.Joiner;
 import by.runets.travelagency.repository.IDatabaseRepository;
+import by.runets.travelagency.repository.query.CountryQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,7 +21,6 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
-
 @Repository
 @AllArgsConstructor
 public class CountryRepository implements IDatabaseRepository<Country, Integer> {

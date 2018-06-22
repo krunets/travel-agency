@@ -1,11 +1,16 @@
 package by.runets.travelagency.repository;
 
+import by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
+import by.runets.travelagency.repository.impl.HotelRepository;
+import by.runets.travelagency.repository.impl.TourRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.math.BigDecimal;
@@ -17,16 +22,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class TourRepositoryTest {
+	@Autowired
+	private AnnotationConfigApplicationContext context;
+	@Autowired
 	private IDatabaseRepository<Tour, Integer> repository;
-	private GenericXmlApplicationContext ctx;
 	
 	@Before
 	public void setUp () {
-		ctx = new GenericXmlApplicationContext();
-		ctx.getEnvironment().setActiveProfiles("database", "development");
-		ctx.load("database-bean-config.xml");
-		ctx.refresh();
-		repository = (IDatabaseRepository<Tour, Integer>) ctx.getBean("tourRepository");
+		context = new AnnotationConfigApplicationContext();
+		context.getEnvironment().setActiveProfiles("development");
+		context.register(DevelopmentDatabaseBeanConfig.class);
+		context.refresh();
+		repository = context.getBean(TourRepository.class);
 	}
 	
 	@Test
@@ -112,6 +119,6 @@ public class TourRepositoryTest {
 	
 	@After
 	public void tearDown () {
-		ctx.close();
+		context.close();
 	}
 }

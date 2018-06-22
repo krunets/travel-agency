@@ -1,15 +1,18 @@
 package by.runets.travelagency.config;
 
+import by.runets.travelagency.config.annotation.Production;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-@Profile("production")
+
 @Configuration
-@ComponentScan(basePackages = "by.runets.travelagency.*")
-@PropertySource("classpath:properties/database-config.properties")
+@Production
+@PropertySource("classpath:properties/production-database-config.properties")
 @AllArgsConstructor
 public class ProductionDataSourceConfig {
 	
@@ -22,11 +25,10 @@ public class ProductionDataSourceConfig {
 	private static final String MAX_POOL_SIZE = "jdbc.maximumPoolSize";
 	
 	@Autowired
-	private final Environment environment;
-
+	private Environment environment;
 	
 	@Bean
-	public HikariDataSource hikariDataSource () {
+	public HikariDataSource hikariProductionDataSource () {
 		HikariDataSource dataSource = new HikariDataSource();
 		
 		dataSource.setJdbcUrl(environment.getProperty(URL));

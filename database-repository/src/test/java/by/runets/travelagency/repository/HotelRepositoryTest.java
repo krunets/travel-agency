@@ -1,11 +1,16 @@
 package by.runets.travelagency.repository;
 
+import by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
+import by.runets.travelagency.repository.impl.CountryRepository;
+import by.runets.travelagency.repository.impl.HotelRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.ArrayList;
@@ -14,16 +19,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class HotelRepositoryTest {
+  @Autowired
+  private AnnotationConfigApplicationContext context;
+  @Autowired
   private IDatabaseRepository<Hotel, Integer> repository;
-  private GenericXmlApplicationContext ctx;
-
+  
   @Before
   public void setup() {
-    ctx = new GenericXmlApplicationContext();
-    ctx.getEnvironment().setActiveProfiles("database", "development");
-    ctx.load("database-bean-config.xml");
-    ctx.refresh();
-    repository = (IDatabaseRepository<Hotel, Integer>) ctx.getBean("hotelRepository");
+    context = new AnnotationConfigApplicationContext();
+    context.getEnvironment().setActiveProfiles("development");
+    context.register(DevelopmentDatabaseBeanConfig.class);
+    context.refresh();
+    repository = context.getBean(HotelRepository.class);
   }
 
   @Test
@@ -98,6 +105,6 @@ public class HotelRepositoryTest {
 
   @After
   public void tearDown() {
-    ctx.close();
+    context.close();
   }
 }

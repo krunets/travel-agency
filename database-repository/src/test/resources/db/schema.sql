@@ -1,4 +1,4 @@
-CREATE SCHEMA travel_agency;
+CREATE SCHEMA IF NOT EXISTS travel_agency;
 
 CREATE TABLE travel_agency.country
 (

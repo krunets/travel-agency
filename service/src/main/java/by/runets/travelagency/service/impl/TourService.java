@@ -1,10 +1,10 @@
 package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.entity.Tour;
-import by.runets.travelagency.repository.ICollectionRepository;
+import by.runets.travelagency.repository.IDatabaseRepository;
 
 public class TourService extends AbstractService<Tour, Integer> {
-	public TourService (ICollectionRepository<Tour, Integer> repository) {
+	public TourService (IDatabaseRepository<Tour, Integer> repository) {
 		super(repository);
 	}
 }

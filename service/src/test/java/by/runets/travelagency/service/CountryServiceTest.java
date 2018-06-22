@@ -1,7 +1,7 @@
 package by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Country;
-import by.runets.travelagency.repository.ICollectionRepository;
+import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.impl.CountryRepository;
 import by.runets.travelagency.service.impl.CountryService;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class CountryServiceTest {
-	private ICollectionRepository<Country, Integer> repository = mock(CountryRepository.class);
+	private IDatabaseRepository<Country, Integer> repository = mock(CountryRepository.class);
 	private IService<Country, Integer> service = new CountryService(repository);
 	
 	@Test
@@ -54,13 +54,8 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testReadAll () {
-		when(repository.readAll()).thenReturn(new ArrayList<Optional<Country>>());
+		when(repository.readAll()).thenReturn(new ArrayList<>());
 		
 		assertThat(service.readAll(), is(notNullValue()));
 	}
-/*
-	@After
-	public void tearDown() {
-		ctx.close();
-	}*/
 }

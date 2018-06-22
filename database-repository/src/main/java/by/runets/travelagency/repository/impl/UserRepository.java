@@ -1,12 +1,12 @@
 package by.runets.travelagency.repository.impl;
 
-import by.runets.travelagency.repository.query.UserQuery;
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.joiner.Joiner;
 import by.runets.travelagency.repository.IDatabaseRepository;
+import by.runets.travelagency.repository.query.UserQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

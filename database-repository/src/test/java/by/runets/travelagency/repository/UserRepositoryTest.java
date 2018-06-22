@@ -1,10 +1,15 @@
 package by.runets.travelagency.repository;
 
+import by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import by.runets.travelagency.entity.User;
+import by.runets.travelagency.repository.impl.TourRepository;
+import by.runets.travelagency.repository.impl.UserRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.util.ArrayList;
@@ -13,16 +18,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserRepositoryTest {
-  private GenericXmlApplicationContext ctx;
+  @Autowired
+  private AnnotationConfigApplicationContext context;
+  @Autowired
   private IDatabaseRepository<User, Integer> repository;
 
   @Before
   public void setUp() {
-    ctx = new GenericXmlApplicationContext();
-    ctx.getEnvironment().setActiveProfiles("database", "development");
-    ctx.load("database-bean-config.xml");
-    ctx.refresh();
-    repository = (IDatabaseRepository<User, Integer>) ctx.getBean("userRepository");
+    context = new AnnotationConfigApplicationContext();
+    context.getEnvironment().setActiveProfiles("development");
+    context.register(DevelopmentDatabaseBeanConfig.class);
+    context.refresh();
+    repository = context.getBean(UserRepository.class);
   }
 
   @Test
@@ -80,6 +87,6 @@ public class UserRepositoryTest {
 
   @After
   public void tearDown() {
-    ctx.close();
+    context.close();
   }
 }

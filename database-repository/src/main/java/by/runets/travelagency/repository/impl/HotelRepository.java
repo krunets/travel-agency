@@ -1,9 +1,9 @@
 package by.runets.travelagency.repository.impl;
 
-import by.runets.travelagency.repository.query.HotelQuery;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.repository.IDatabaseRepository;
+import by.runets.travelagency.repository.query.HotelQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

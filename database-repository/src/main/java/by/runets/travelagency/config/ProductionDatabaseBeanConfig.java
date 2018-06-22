@@ -4,20 +4,17 @@ import by.runets.travelagency.joiner.impl.CountryJoiner;
 import by.runets.travelagency.joiner.impl.TourJoiner;
 import by.runets.travelagency.joiner.impl.UserJoiner;
 import by.runets.travelagency.repository.impl.*;
-import com.codahale.metrics.MetricRegistry;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 @Configuration
-@ComponentScan(basePackages = "by.runets.travelagency.*")
+@Import(ProductionDataSourceConfig.class)
 @AllArgsConstructor
 public class ProductionDatabaseBeanConfig {
-	@Autowired
-	private final ProductionDataSourceConfig dataSourceConfig;
+	private ProductionDataSourceConfig dataSourceConfig;
 	
 	@Bean
 	public CountryJoiner countryJoiner() {
@@ -60,12 +57,7 @@ public class ProductionDatabaseBeanConfig {
 	}
 	
 	@Bean
-	public MetricRegistry metricRegistry() {
-		return new MetricRegistry();
-	}
-	
-	@Bean
 	public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
-		return new NamedParameterJdbcTemplate(dataSourceConfig.hikariDataSource());
+		return new NamedParameterJdbcTemplate(dataSourceConfig.hikariProductionDataSource());
 	}
 }

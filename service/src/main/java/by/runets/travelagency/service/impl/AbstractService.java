@@ -2,7 +2,6 @@ package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.entity.Entity;
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.repository.ICollectionRepository;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.service.IService;
 import lombok.AllArgsConstructor;

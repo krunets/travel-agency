@@ -1,10 +1,10 @@
 package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.entity.Country;
-import by.runets.travelagency.repository.ICollectionRepository;
+import by.runets.travelagency.repository.IDatabaseRepository;
 
 public class CountryService extends AbstractService<Country, Integer> {
-	public CountryService (ICollectionRepository<Country, Integer> repository) {
+	public CountryService (IDatabaseRepository<Country, Integer> repository) {
 		super(repository);
 	}
 }
