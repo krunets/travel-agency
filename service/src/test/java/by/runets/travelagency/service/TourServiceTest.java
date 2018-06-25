@@ -3,7 +3,6 @@ package by.runets.travelagency.service;
 import by.runets.travelagency.config.ServiceTestConfig;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
-import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.impl.TourRepository;
 import by.runets.travelagency.service.impl.TourService;
 import org.junit.Test;

@@ -2,7 +2,6 @@ package by.runets.travelagency.service;
 
 import by.runets.travelagency.config.ServiceTestConfig;
 import by.runets.travelagency.entity.Review;
-import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.impl.ReviewRepository;
 import by.runets.travelagency.service.impl.ReviewService;
 import org.junit.Test;

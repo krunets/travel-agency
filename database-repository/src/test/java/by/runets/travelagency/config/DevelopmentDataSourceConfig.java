@@ -15,9 +15,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @Developement
-@PropertySource("classpath:properties/development-datasource-config.properties")
 @AllArgsConstructor
-@EnableTransactionManagement
 public class DevelopmentDataSourceConfig {
 	
 	@Bean
