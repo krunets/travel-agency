@@ -1,11 +1,17 @@
 package by.runets.travelagency.service;
 
+import by.runets.travelagency.config.ServiceTestConfig;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.impl.TourRepository;
 import by.runets.travelagency.service.impl.TourService;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -17,10 +23,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
-
+@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(classes = ServiceTestConfig.class)
 public class TourServiceTest {
-	private final IDatabaseRepository<Tour, Integer> repository = mock(TourRepository.class);
-	private final IService<Tour, Integer> service = new TourService(repository);
+	@Mock
+	private TourRepository repository;
+	@InjectMocks
+	private TourService service;
 	
 	@Test
 	public void testRead() {

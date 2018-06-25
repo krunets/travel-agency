@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
   public void create(final Review entity) {
     namedParameterJdbcTemplate.update(ReviewQuery.INSERT_INTO_REVIEW, new BeanPropertySqlParameterSource(entity));
   }
-
+  
   @Override
   public List<Optional<Review>> readAll() {
     try {

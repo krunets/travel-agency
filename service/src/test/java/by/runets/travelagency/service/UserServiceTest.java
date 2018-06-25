@@ -1,10 +1,16 @@
 package by.runets.travelagency.service;
 
+import by.runets.travelagency.config.ServiceTestConfig;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.impl.UserRepository;
 import by.runets.travelagency.service.impl.UserService;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -13,10 +19,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
-
+@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(classes = ServiceTestConfig.class)
 public class UserServiceTest {
-	private final IDatabaseRepository<User, Integer> repository = mock(UserRepository.class);
-	private final IService<User, Integer> service = new UserService(repository);
+	@Mock
+	private UserRepository repository;
+	@InjectMocks
+	private UserService service;
 	
 	@Test
 	public void testRead() {

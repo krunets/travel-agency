@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +22,8 @@ import java.util.stream.Collectors;
  * @param <K>  is a generic param which represents a key param.
  */
 @Service
-@AllArgsConstructor
 @Slf4j
+@AllArgsConstructor
 public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	@Autowired
 	private final IDatabaseRepository<T, K> repository;
@@ -29,6 +32,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * This is a method which call create method from repository layer.
 	 * @param entity  generic exemplar.
 	 */
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
 	public void create(final T entity) {
 		log.info("Create method in service layer is invoked.");
@@ -39,6 +43,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * This is a method which returns list of entities.
 	 * @return list of entities.
 	 */
+	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	@Override
 	public List<T> readAll() {
 		log.info("Read all method in service layer is invoked.");
@@ -55,6 +60,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * @param id is a generic param which represents a key param.
 	 * @return entity.
 	 */
+	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	@Override
 	public T read(final K id) {
 		log.info("Read entity by id method in service layer is invoked.");
@@ -67,6 +73,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * This is a method which call update method from repository.
 	 * @param entity generic exemplar.
 	 */
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
 	public void update(final T entity) {
 		log.info("Update entity method in service layer is invoked.");
@@ -77,6 +84,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * This is a method which call update method from repository.
 	 * @param entity generic exemplar.
 	 */
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
 	public void delete(final T entity) {
 		log.info("Delete entity method in service layer is invoked.");

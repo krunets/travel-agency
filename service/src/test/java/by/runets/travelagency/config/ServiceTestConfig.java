@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @Configuration
 @AllArgsConstructor
 @EnableTransactionManagement
-public class ServiceBeanConfig implements TransactionManagementConfigurer {
+public class ServiceTestConfig implements TransactionManagementConfigurer {
 	@Autowired
 	private final ProductionDatabaseBeanConfig config;
 	
