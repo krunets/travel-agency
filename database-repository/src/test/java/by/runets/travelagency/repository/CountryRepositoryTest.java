@@ -1,8 +1,8 @@
 package by.runets.travelagency.repository;
 
-import by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.repository.impl.CountryRepository;
+import by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,10 +52,10 @@ public class CountryRepositoryTest {
     List<Optional<Country>> expected =
         new ArrayList<>(
             Arrays.asList(
-                Optional.of(new Country<Integer>(1, "Belarus", null, null)),
-                Optional.of(new Country<Integer>(2, "Usa", null, null)),
-                Optional.of(new Country<Integer>(3, "France", null, null)),
-                Optional.of(new Country<Integer>(4, "Italy", null, null))));
+                Optional.of(new Country<>(1, "Belarus", null, null)),
+                Optional.of(new Country<>(2, "Usa", null, null)),
+                Optional.of(new Country<>(3, "France", null, null)),
+                Optional.of(new Country<>(4, "Italy", null, null))));
 
     Assert.assertEquals(expected, actual);
   }

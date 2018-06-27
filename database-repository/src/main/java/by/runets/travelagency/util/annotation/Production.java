@@ -1,4 +1,4 @@
-package by.runets.travelagency.config.annotation;
+package by.runets.travelagency.util.annotation;
 
 import org.springframework.context.annotation.Profile;
 
@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Profile("development")
-public @interface Developement {
+@Profile("production")
+public @interface Production {
 }

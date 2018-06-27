@@ -4,6 +4,7 @@ import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.query.HotelQuery;
+import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,7 +12,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
+@Loggable
 @AllArgsConstructor
 public class HotelRepository implements IDatabaseRepository<Hotel, Integer> {
 	@Autowired

@@ -1,7 +1,7 @@
 package by.runets.travelagency.service;
 
-import by.runets.travelagency.config.ServiceTestConfig;
 import by.runets.travelagency.entity.Country;
+import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.repository.impl.CountryRepository;
 import by.runets.travelagency.service.impl.CountryService;
 import org.junit.Test;
@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -21,7 +20,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(classes = ServiceTestConfig.class)
 public class CountryServiceTest {
 	@Mock
 	private CountryRepository repository;
@@ -36,6 +34,12 @@ public class CountryServiceTest {
 		assertThat(service.read(country.getId()), is(notNullValue()));
 	}
 	
+	@Test(expected = ResourceNotFoundException.class)
+	public void testReadThrowingException() {
+		when(repository.read(anyInt())).thenThrow(ResourceNotFoundException.class);
+		
+		service.read(1111);
+	}
 	
 	@Test
 	public void testUpdate () {
@@ -58,7 +62,7 @@ public class CountryServiceTest {
 		Country<Integer> deleteCountry = new Country<>(1, "Belarus", null, null);
 		service.delete(deleteCountry);
 		
-		verify(repository, times(1)).delete(deleteCountry);
+ 		verify(repository, times(1)).delete(deleteCountry);
 	}
 	
 	@Test

@@ -22,8 +22,7 @@
         <log4j.version>1.2.17</log4j.version>
         <postgres.version>42.1.4</postgres.version>
         <hikaricp.version>3.2.0</hikaricp.version>
-        <dropwizard.metrics.version>4.0.2</dropwizard.metrics.version>
-
+        <aspectj.version>1.9.1</aspectj.version>
 
         <jacoco.version>0.8.1</jacoco.version>
         <checkstyle.version>3.0.0</checkstyle.version>
@@ -62,6 +61,12 @@
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <!-- Spring Ascpects-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.version}</version>
             </dependency>
             <!-- Lombok -->
             <dependency>
@@ -120,11 +125,11 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
-            <!-- Dropwizard Metrics -->
+            <!-- Aspectj -->
             <dependency>
-                <groupId>io.dropwizard.metrics</groupId>
-                <artifactId>metrics-core</artifactId>
-                <version>${dropwizard.metrics.version}</version>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

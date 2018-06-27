@@ -1,4 +1,4 @@
-package by.runets.travelagency.config;
+package by.runets.travelagency.util.config;
 
 import by.runets.travelagency.joiner.impl.CountryJoiner;
 import by.runets.travelagency.joiner.impl.TourJoiner;
@@ -8,63 +8,60 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-@Import(ProductionDataSourceConfig.class)
+@Import(DevelopmentDataSourceConfig.class)
 @Configuration
 @AllArgsConstructor
-public class ProductionDatabaseBeanConfig {
-	
+@EnableAspectJAutoProxy
+public class DevelopmentDatabaseBeanConfig {
 	@Autowired
-	private ProductionDataSourceConfig dataSourceConfig;
-	
-	public ProductionDataSourceConfig getDataSourceConfig () {
-		return dataSourceConfig;
-	}
+	private final DevelopmentDataSourceConfig dataSourceConfig;
 	
 	@Bean
-	public CountryJoiner countryJoiner () {
+	public CountryJoiner countryJoiner() {
 		return new CountryJoiner();
 	}
 	
 	@Bean
-	public TourJoiner tourJoiner () {
+	public TourJoiner tourJoiner() {
 		return new TourJoiner();
 	}
 	
 	@Bean
-	public UserJoiner userJoiner () {
+	public UserJoiner userJoiner() {
 		return new UserJoiner();
 	}
 	
 	@Bean
-	public CountryRepository countryRepository () {
+	public CountryRepository countryRepository() {
 		return new CountryRepository(namedParameterJdbcTemplate(), countryJoiner());
 	}
 	
 	@Bean
-	public HotelRepository hotelRepository () {
+	public HotelRepository hotelRepository() {
 		return new HotelRepository(namedParameterJdbcTemplate());
 	}
 	
 	@Bean
-	public ReviewRepository reviewRepository () {
+	public ReviewRepository reviewRepository() {
 		return new ReviewRepository(namedParameterJdbcTemplate());
 	}
 	
 	@Bean
-	public TourRepository tourRepository () {
+	public TourRepository tourRepository() {
 		return new TourRepository(namedParameterJdbcTemplate(), tourJoiner());
 	}
 	
 	@Bean
-	public UserRepository userRepository () {
+	public UserRepository userRepository() {
 		return new UserRepository(namedParameterJdbcTemplate(), userJoiner());
 	}
-	
+		
 	@Bean
-	public NamedParameterJdbcTemplate namedParameterJdbcTemplate () {
-		return new NamedParameterJdbcTemplate(dataSourceConfig.hikariProductionDataSource());
+	public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
+		return new NamedParameterJdbcTemplate(dataSourceConfig.hikariDevelopmentDataSource());
 	}
 }

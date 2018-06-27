@@ -7,6 +7,7 @@ import by.runets.travelagency.entity.User;
 import by.runets.travelagency.joiner.Joiner;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.query.TourQuery;
+import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,7 +15,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
-@Repository
+@Loggable
 @AllArgsConstructor
 public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 	@Autowired

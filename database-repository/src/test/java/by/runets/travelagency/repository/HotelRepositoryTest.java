@@ -1,9 +1,9 @@
 package by.runets.travelagency.repository;
 
-import by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.repository.impl.HotelRepository;
+import by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

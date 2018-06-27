@@ -1,14 +1,11 @@
-package by.runets.travelagency.config.annotation;
-
-import org.springframework.context.annotation.Profile;
+package by.runets.travelagency.util.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.TYPE)
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Profile("production")
-public @interface Production {
+public @interface Loggable {
 }
