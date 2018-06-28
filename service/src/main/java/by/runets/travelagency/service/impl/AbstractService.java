@@ -41,6 +41,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * This is a method which returns list of entities.
 	 * @return list of entities.
 	 */
+	@Loggable
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	@Override
 	public List<T> readAll() {

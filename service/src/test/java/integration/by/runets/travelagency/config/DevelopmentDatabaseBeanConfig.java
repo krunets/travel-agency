@@ -4,6 +4,7 @@ import by.runets.travelagency.joiner.impl.CountryJoiner;
 import by.runets.travelagency.joiner.impl.TourJoiner;
 import by.runets.travelagency.joiner.impl.UserJoiner;
 import by.runets.travelagency.repository.impl.*;
+import by.runets.travelagency.util.LoggingAspect;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 @Configuration
 @AllArgsConstructor
-@Import(DevelopmentDataSourceConfig.class)
+@Import({DevelopmentDataSourceConfig.class, LoggingAspect.class})
 public class DevelopmentDatabaseBeanConfig {
 	@Autowired
 	private final DevelopmentDataSourceConfig dataSourceConfig;
