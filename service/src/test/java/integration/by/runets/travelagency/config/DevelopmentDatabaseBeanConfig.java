@@ -1,4 +1,4 @@
-package by.runets.travelagency.util.config;
+package integration.by.runets.travelagency.config;
 
 import by.runets.travelagency.joiner.impl.CountryJoiner;
 import by.runets.travelagency.joiner.impl.TourJoiner;
@@ -8,17 +8,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-@Import(DevelopmentDataSourceConfig.class)
 @Configuration
 @AllArgsConstructor
-@EnableAspectJAutoProxy(proxyTargetClass = true)
+@Import(DevelopmentDataSourceConfig.class)
 public class DevelopmentDatabaseBeanConfig {
 	@Autowired
 	private final DevelopmentDataSourceConfig dataSourceConfig;
+	
+	public DevelopmentDataSourceConfig getDataSourceConfig () {
+		return dataSourceConfig;
+	}
 	
 	@Bean
 	public CountryJoiner countryJoiner() {
@@ -60,6 +62,7 @@ public class DevelopmentDatabaseBeanConfig {
 		return new UserRepository(namedParameterJdbcTemplate(), userJoiner());
 	}
 		
+
 	@Bean
 	public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
 		return new NamedParameterJdbcTemplate(dataSourceConfig.hikariDevelopmentDataSource());

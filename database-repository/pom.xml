@@ -16,7 +16,6 @@
 
     <properties>
         <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
-        <h2.version>1.4.197</h2.version>
     </properties>
 
     <dependencies>

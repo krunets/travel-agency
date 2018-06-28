@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @ActiveProfiles(profiles = "development")
+@ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @SqlGroup({
     @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/schema.sql", "classpath:db/init-data.sql"}),
     @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:db/drop.sql")

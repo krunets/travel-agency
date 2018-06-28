@@ -1,4 +1,4 @@
-package by.runets.travelagency.service;
+package mock.by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.repository.impl.UserRepository;
