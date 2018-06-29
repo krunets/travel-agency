@@ -31,6 +31,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * This is a method which call create method from repository layer.
 	 * @param entity  generic exemplar.
 	 */
+	@Loggable
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
 	public void create(final T entity) {
@@ -58,6 +59,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * @param id is a generic param which represents a key param.
 	 * @return entity.
 	 */
+	@Loggable
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	@Override
 	public T read(final K id) {
@@ -70,6 +72,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * This is a method which call update method from repository.
 	 * @param entity generic exemplar.
 	 */
+	@Loggable
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
 	public void update(final T entity) {
@@ -80,6 +83,7 @@ public class AbstractService<T extends Entity, K> implements IService<T, K> {
 	 * This is a method which call update method from repository.
 	 * @param entity generic exemplar.
 	 */
+	@Loggable
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
 	public void delete(final T entity) {

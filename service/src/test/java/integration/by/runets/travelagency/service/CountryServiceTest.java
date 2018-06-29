@@ -69,7 +69,7 @@ public class CountryServiceTest {
 		Assert.assertEquals(expected, actual);
 	}
 	
-	@Test(expected = RuntimeException.class)
+	@Test
 	public void testDelete() {
 		Country<Integer> expected = new Country<>(1, "", null, null);
 		countryService.delete(expected);

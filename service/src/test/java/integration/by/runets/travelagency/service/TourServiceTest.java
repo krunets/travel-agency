@@ -2,7 +2,6 @@ package integration.by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
-import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.service.impl.TourService;
 import integration.by.runets.travelagency.config.IntegrationServiceTestConfig;
 import org.junit.Assert;
@@ -85,7 +84,7 @@ public class TourServiceTest {
 		Assert.assertEquals(expected, actual);
 	}
 	
-	@Test(expected = ResourceNotFoundException.class)
+	@Test
 	public void testDelete() {
 		Tour entityToDelete = service.read(1);
 		Assert.assertNotNull(entityToDelete);
@@ -93,7 +92,7 @@ public class TourServiceTest {
 		service.delete(entityToDelete);
 		
 		Tour actual = service.read(1);
-		Assert.assertNotNull(actual);
+		Assert.assertNull(actual);
 	}
 	
 	@Test

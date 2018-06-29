@@ -20,17 +20,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Loggable
+
 @AllArgsConstructor
 public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
   @Autowired
   private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
+  
+  @Loggable
   @Override
   public void create(final Review entity) {
     namedParameterJdbcTemplate.update(ReviewQuery.INSERT_INTO_REVIEW, new BeanPropertySqlParameterSource(entity));
   }
   
+  @Loggable
   @Override
   public List<Optional<Review>> readAll() {
     try {
@@ -42,7 +44,8 @@ public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
       return Collections.emptyList();
     }
   }
-
+  
+  @Loggable
   @Override
   public Optional<Review> read(final Integer id) {
     try {
@@ -54,12 +57,14 @@ public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
       return Optional.empty();
     }
   }
-
+  
+  @Loggable
   @Override
   public void update(final Review entity) {
     namedParameterJdbcTemplate.update(ReviewQuery.UPDATE_REVIEW_BY_ID, new BeanPropertySqlParameterSource(entity));
   }
-
+  
+  @Loggable
   @Override
   public void delete(final Review entity) {
     namedParameterJdbcTemplate.update(ReviewQuery.DELETE_REVIEW_BY_ID, new BeanPropertySqlParameterSource(entity));

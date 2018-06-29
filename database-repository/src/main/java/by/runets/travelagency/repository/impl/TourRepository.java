@@ -22,7 +22,6 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
-@Loggable
 @AllArgsConstructor
 public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 	@Autowired
@@ -30,11 +29,13 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 	@Autowired
 	private final Joiner<Tour> joiner;
 	
+	@Loggable
 	@Override
 	public void create (Tour entity) {
 		namedParameterJdbcTemplate.update(TourQuery.INSERT_INTO_TOUR, NamedQueryFieldProvider.provide(entity));
 	}
 	
+	@Loggable
 	@Override
 	public List<Optional<Tour>> readAll () {
 		try {
@@ -47,6 +48,7 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 		}
 	}
 	
+	@Loggable
 	@Override
 	public Optional<Tour> read (Integer id) {
 		try {
@@ -60,11 +62,13 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 		}
 	}
 	
+	@Loggable
 	@Override
 	public void update (Tour entity) {
 		namedParameterJdbcTemplate.update(TourQuery.UPDATE_TOUR_BY_ID, NamedQueryFieldProvider.provide(entity));
 	}
 	
+	@Loggable
 	@Override
 	public void delete (Tour entity) {
 		namedParameterJdbcTemplate.update(TourQuery.DELETE_TOUR_M2M_COUNTRY, new BeanPropertySqlParameterSource(entity));

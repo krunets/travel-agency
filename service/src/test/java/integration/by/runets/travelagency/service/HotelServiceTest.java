@@ -2,7 +2,6 @@ package integration.by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
-import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.service.impl.HotelService;
 import integration.by.runets.travelagency.config.IntegrationServiceTestConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -77,7 +76,7 @@ public class HotelServiceTest {
 		Assert.assertEquals(expected, actual);
 	}
 	
-	@Test(expected = ResourceNotFoundException.class)
+	@Test
 	public void testDelete() {
 		Hotel expected = service.read(1);
 		Assert.assertNotNull(expected);

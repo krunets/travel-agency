@@ -2,11 +2,15 @@ package by.runets.travelagency.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
 
 @Slf4j
 @Aspect
@@ -19,13 +23,33 @@ public class LoggingAspect {
 	public void allAnnotatedMethods () {
 	}
 	
-	@Before("allAnnotatedMethods()")
-	public void beforeMethodInvoke (JoinPoint joinPoint) {
-		log.info("The method " + joinPoint.getSignature().getName() + " has been invoked.");
+	@Around(value = "allAnnotatedMethods()")
+	public Object around(final ProceedingJoinPoint joinPoint) {
+		final Method method = MethodSignature.class.cast(joinPoint.getSignature()).getMethod();
+		
+		String methodName = method.getName();
+		String className = method.getDeclaringClass().getName();
+		
+		log.info("Entering to " + methodName + " from class " + className);
+	
+		Object object = null;
+		try {
+			object = joinPoint.proceed();
+		} catch (Throwable throwable) {
+			logException(joinPoint, throwable);
+		}
+		log.info("Exciting from " + methodName + " from class " + className);
+		
+		return object;
 	}
 	
-	@After("allAnnotatedMethods()")
-	public void afterMethodInvoke (JoinPoint joinPoint) {
-		log.info("The method " + joinPoint.getSignature().getName() + " has been ended.");
+	private void logException(final JoinPoint joinPoint, final Throwable exception) {
+		final Method method = MethodSignature.class.cast(joinPoint.getSignature()).getMethod();
+		
+		String methodName = method.getName();
+		String className = method.getDeclaringClass().getName();
+		Object args = joinPoint.getArgs();
+		
+		log.error("Method " + methodName + " from class " + className + " method args " + args + " threw " + exception);
 	}
 }

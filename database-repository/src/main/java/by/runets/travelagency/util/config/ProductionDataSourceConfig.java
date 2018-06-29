@@ -11,11 +11,11 @@ import org.springframework.core.env.Environment;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
-@Configuration
 @Production
-@PropertySource("classpath:properties/production-database-config.properties")
+@Configuration
 @AllArgsConstructor
 @EnableTransactionManagement
+@PropertySource("classpath:properties/production-database-config.properties")
 public class ProductionDataSourceConfig {
 	
 	private static final String URL = "jdbc.url";

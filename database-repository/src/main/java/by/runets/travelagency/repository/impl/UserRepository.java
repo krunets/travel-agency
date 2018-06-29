@@ -34,11 +34,13 @@ public class UserRepository implements IDatabaseRepository<User, Integer> {
 	@Autowired
 	private final Joiner<User> joiner;
 	
+	@Loggable
 	@Override
 	public void create (User entity) {
 		namedParameterJdbcTemplate.update(UserQuery.INSERT_INTO_USER, new BeanPropertySqlParameterSource(entity));
 	}
 	
+	@Loggable
 	@Override
 	public List<Optional<User>> readAll () {
 		try {
@@ -51,6 +53,7 @@ public class UserRepository implements IDatabaseRepository<User, Integer> {
 		}
 	}
 	
+	@Loggable
 	@Override
 	public Optional<User> read (Integer id) {
 		try {
@@ -64,11 +67,13 @@ public class UserRepository implements IDatabaseRepository<User, Integer> {
 		}
 	}
 	
+	@Loggable
 	@Override
 	public void update (User entity) {
 		namedParameterJdbcTemplate.update(UserQuery.UPDATE_USER_BY_ID, new BeanPropertySqlParameterSource(entity));
 	}
 	
+	@Loggable
 	@Override
 	public void delete (User entity) {
 		namedParameterJdbcTemplate.update(UserQuery.DELETE_USER_CONSTRAINT, new BeanPropertySqlParameterSource(entity));

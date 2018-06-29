@@ -2,7 +2,6 @@ package integration.by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.User;
-import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.service.impl.ReviewService;
 import integration.by.runets.travelagency.config.IntegrationServiceTestConfig;
 import org.junit.Assert;
@@ -72,7 +71,7 @@ public class ReviewServiceTest {
 		Assert.assertEquals(actual, expected);
 	}
 	
-	@Test(expected = ResourceNotFoundException.class)
+	@Test
 	public void testDelete() {
 		Review expected = service.read(1);
 		Assert.assertNotNull(expected);
