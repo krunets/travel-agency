@@ -47,8 +47,7 @@ public class LoggingAspect {
 		
 		String methodName = method.getName();
 		String className = method.getDeclaringClass().getName();
-		Object args = joinPoint.getArgs();
 		
-		log.error("Method " + methodName + " from class " + className + " method args " + args + " threw " + exception);
+		log.error("Method " + methodName + " from class " + className  + " threw " + exception);
 	}
 }
