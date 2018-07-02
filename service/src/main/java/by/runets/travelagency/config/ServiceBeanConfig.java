@@ -14,10 +14,8 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @Import(ProductionDatabaseBeanConfig.class)
 @Configuration
 @AllArgsConstructor
-/*
 @EnableTransactionManagement
-*/
-public class ServiceBeanConfig /*implements TransactionManagementConfigurer */{
+public class ServiceBeanConfig implements TransactionManagementConfigurer {
 	@Autowired
 	private final ProductionDatabaseBeanConfig config;
 	
@@ -45,10 +43,9 @@ public class ServiceBeanConfig /*implements TransactionManagementConfigurer */{
 	public UserService userService() {
 		return new UserService(config.userRepository());
 	}
-/*
 	@Bean
 	@Override
 	public PlatformTransactionManager annotationDrivenTransactionManager () {
 		return new DataSourceTransactionManager(config.getDataSourceConfig().hikariProductionDataSource());
-	}*/
+	}
 }
