@@ -15,10 +15,10 @@ import java.util.List;
  *
  * @param <K> is a generic param which represents a key param.
  */
-@EqualsAndHashCode(exclude = {"users", "countries"}, callSuper = true)
 @Data
 @NoArgsConstructor
 @ToString(exclude = {"users", "countries"}, callSuper = true)
+@EqualsAndHashCode(exclude = {"users", "countries"}, callSuper = true)
 public class Tour<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a tour photo.

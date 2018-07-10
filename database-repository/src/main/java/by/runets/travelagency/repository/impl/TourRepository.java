@@ -91,7 +91,7 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 			if (date != null) {
 				tour.setDate(date.toLocalDate());
 			}				tour.setDescription(resultSet.getString("description"));
-			tour.setDuration(Duration.ofDays(resultSet.getLong("duration")));
+			tour.setDuration(Duration.ofDays(resultSet.getInt("duration")));
 			tour.setCost(resultSet.getBigDecimal("cost"));
 			tour.setTourType(TourType.getTypeByValue(resultSet.getString("t_type")));
 			

@@ -2,6 +2,7 @@ package by.runets.travelagency.repository.query;
 
 public class UserQuery {
 	private UserQuery(){}
+
 	public static final String INSERT_INTO_USER = "INSERT INTO travel_agency.\"user\"(u_id, login, password) VALUES (:id, :login, :password)";
 	public static final String READ_ALL_USER = "SELECT u.u_id, login, password, t.t_id, photo, date, description, duration, cost, t_type, r_id, content " +
 			"FROM travel_agency.\"user\"AS u " +

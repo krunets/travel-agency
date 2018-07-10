@@ -10,10 +10,10 @@ import lombok.ToString;
  *
  * @param <K> is a generic param which represents a key param.
  */
-@EqualsAndHashCode(exclude = "country", callSuper = true)
 @Data
 @NoArgsConstructor
 @ToString(exclude = "country", callSuper = true)
+@EqualsAndHashCode(exclude = "country", callSuper = true)
 public class Hotel<K> extends Entity<K> {
 	/**
 	 * This is a field which represents hotel name.
