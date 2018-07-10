@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Is inherited from common class and provides list of tours.
+ * @deprecated this code will remove in the next version of project, also you can use database-repository
  */
 @Deprecated
 public class TourRepository extends AbstractRepository<Tour, Integer> {

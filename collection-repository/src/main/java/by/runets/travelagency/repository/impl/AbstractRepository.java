@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  * Common class which implements common CRUD interface and provides default methods implementing.
  * @param <T> is a generic param which must be inherited from Entity class.
  * @param <K> is a generic param which represents a key param.
+ * @deprecated this code will remove in the next version of project, also you can use database-repository
  */
 @AllArgsConstructor
 @Slf4j

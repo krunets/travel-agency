@@ -1,9 +1,9 @@
 package by.runets.travelagency.repository;
 
-import by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.repository.impl.HotelRepository;
+import by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @ActiveProfiles(profiles = "development")
+@ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @SqlGroup({
     @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/schema.sql", "classpath:db/init-data.sql"}),
     @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:db/drop.sql")

@@ -10,17 +10,13 @@ import java.util.Optional;
  *
  * @param <T> is a generic param which must be inherited from Entity class.
  * @param <K> is a generic param which represents a key param.
+ * @deprecated this code will remove in the next version of project, also you can use database-repository
  */
 @Deprecated
 public interface ICollectionRepository<T extends Entity, K> {
-	@Deprecated
 	void create (final T entity);
-	@Deprecated
 	List<Optional<T>> readAll ();
-	@Deprecated
 	Optional<T> read (final K id);
-	@Deprecated
 	void update (final T entity);
-	@Deprecated
 	void delete (final T entity);
 }

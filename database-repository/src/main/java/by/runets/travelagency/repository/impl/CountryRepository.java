@@ -7,6 +7,7 @@ import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.joiner.Joiner;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.query.CountryQuery;
+import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -29,11 +30,13 @@ public class CountryRepository implements IDatabaseRepository<Country, Integer> 
 	@Autowired
 	private final Joiner<Country> joiner;
 	
+	@Loggable
 	@Override
 	public void create (final Country entity) {
 		namedParameterJdbcTemplate.update(CountryQuery.INSERT_INTO_COUNTRY, new BeanPropertySqlParameterSource(entity));
 	}
 	
+	@Loggable
 	@Override
 	public List<Optional<Country>> readAll () {
 		try {
@@ -46,6 +49,7 @@ public class CountryRepository implements IDatabaseRepository<Country, Integer> 
 		}
 	}
 	
+	@Loggable
 	@Override
 	public Optional<Country> read (final Integer id) {
 		try {
@@ -59,11 +63,13 @@ public class CountryRepository implements IDatabaseRepository<Country, Integer> 
 		}
 	}
 	
+	@Loggable
 	@Override
 	public void update (final Country entity) {
 		namedParameterJdbcTemplate.update(CountryQuery.UPDATE_COUNTRY_BY_ID, new BeanPropertySqlParameterSource(entity));
 	}
 	
+	@Loggable
 	@Override
 	public void delete (final Country entity) {
 		namedParameterJdbcTemplate.update(CountryQuery.DELETE_M2M_COUNTRY, new BeanPropertySqlParameterSource(entity));
