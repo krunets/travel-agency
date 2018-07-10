@@ -32,7 +32,6 @@
     </properties>
     <modules>
         <module>domain</module>
-        <module>collection-repository</module>
         <module>database-repository</module>
         <module>service</module>
     </modules>
