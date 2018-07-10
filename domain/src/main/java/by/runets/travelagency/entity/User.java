@@ -12,10 +12,12 @@ import java.util.List;
  *
  * @param <K> is a generic param which represents a key param.
  */
-@EqualsAndHashCode(exclude = {"reviews", "tours"}, callSuper = true)
+
 @Data
+
 @NoArgsConstructor
 @ToString(exclude = {"reviews", "tours"}, callSuper = true)
+@EqualsAndHashCode(exclude = {"reviews", "tours"}, callSuper = true)
 public class User<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a user login.
