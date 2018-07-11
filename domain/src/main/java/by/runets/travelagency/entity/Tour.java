@@ -1,25 +1,33 @@
 package by.runets.travelagency.entity;
 
+import by.runets.travelagency.converter.DurationConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class that represents the entity of the tour.
  *
- * @param <K> is a generic param which represents a key param.
  */
 @Data
+@Entity
+@Table(name = "tour")
 @NoArgsConstructor
-@ToString(exclude = {"users", "countries"}, callSuper = true)
-@EqualsAndHashCode(exclude = {"users", "countries"}, callSuper = true)
-public class Tour<K> extends Entity<K> {
+@ToString(exclude = {"users", "countries"})
+@EqualsAndHashCode(exclude = {"users", "countries"})
+public class Tour {
+	@Id
+	@Column(name = "t_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long id;
 	/**
 	 * This is a field which represents a tour photo.
 	 */
@@ -27,10 +35,12 @@ public class Tour<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a tour date.
 	 */
+	@Temporal(TemporalType.DATE)
 	private LocalDate date;
 	/**
 	 * This is a field which represents a tour duration.
 	 */
+	@Convert(converter = DurationConverter.class)
 	private Duration duration;
 	/**
 	 * This is a field which represents a tour description.
@@ -43,43 +53,28 @@ public class Tour<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a tour type.
 	 */
+	@Column(name = "tour_type")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "t_id")
 	private TourType tourType;
 	/**
 	 * This is a field which represents a tour user list.
 	 */
-	private List<User<K>> users;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "tour_m2m_user",
+			joinColumns = {@JoinColumn(name = "t_id")},
+			inverseJoinColumns = {@JoinColumn(name = "u_id")}
+	)
+	private List<User> users = new ArrayList<>();
 	/**
 	 * This is a field which represents a tour country list.
 	 */
-	private List<Country<K>> countries;
-	
-	/**
-	 * Constructor with arguments.
-	 *
-	 * @param id          constructor argument which initializes tour id field.
-	 * @param photo       constructor argument which initializes tour photo field.
-	 * @param date        constructor argument which initializes tour date field.
-	 * @param duration    constructor argument which initializes tour duration field.
-	 * @param description constructor argument which initializes tour description field.
-	 * @param cost        constructor argument which initializes tour cost field.
-	 * @param tourType    constructor argument which initializes tour type field.
-	 * @param users    constructor argument which initializes tour user list field.
-	 * @param countries    constructor argument which initializes tour country list field.
-	 */
-	public Tour (final K id, final String photo, final LocalDate date,
-							 final Duration duration, final String description,
-							 final BigDecimal cost, final TourType tourType,
-							 final List<User<K>> users, final List<Country<K>> countries) {
-		super(id);
-		this.photo = photo;
-		this.date = date;
-		this.duration = duration;
-		this.description = description;
-		this.cost = cost;
-		this.tourType = tourType;
-		this.users = users;
-		this.countries = countries;
-	}
-	
-	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "tour_m2m_country",
+			joinColumns = {@JoinColumn(name = "t_id")},
+			inverseJoinColumns = {@JoinColumn(name = "c_id")}
+	)
+	private List<Country> countries = new ArrayList<>();
 }

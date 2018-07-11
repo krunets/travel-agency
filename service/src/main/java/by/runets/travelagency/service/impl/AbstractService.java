@@ -1,6 +1,5 @@
 package by.runets.travelagency.service.impl;
 
-import by.runets.travelagency.entity.Entity;
 import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.service.IService;
@@ -16,11 +15,11 @@ import java.util.stream.Collectors;
 
 /**
  * This is a common class which implements common CRUD interface and provides default method implementing.
- * @param <T> is a generic param which must be inherited from Entity class.
+ * @param <T> is a generic param which must be inherited from PrimaryKeyEntity class.
  * @param <K>  is a generic param which represents a key param.
  */
 @AllArgsConstructor
-public class AbstractService<T extends Entity, K> implements IService<T, K> {
+public class AbstractService<T extends PrimaryKeyEntity, K> implements IService<T, K> {
 	@Autowired
 	private final IDatabaseRepository<T, K> repository;
 	

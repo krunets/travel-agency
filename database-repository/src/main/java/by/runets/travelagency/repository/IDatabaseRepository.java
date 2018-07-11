@@ -1,15 +1,13 @@
 package by.runets.travelagency.repository;
 
-import by.runets.travelagency.entity.Entity;
-
 import java.util.List;
 import java.util.Optional;
 
 /** Common interface which provides CRUD methods in repository layer.
- * @param <T> is a generic param which must be inherited from Entity class.
+ * @param <T> is a generic param which must be inherited from PrimaryKeyEntity class.
  * @param <K> is a generic param which represents a key param.
  */
-public interface IDatabaseRepository<T extends Entity, K> {
+public interface IDatabaseRepository<T extends PrimaryKeyEntity, K> {
 	void create(final T entity);
 	List<Optional<T>> readAll();
 	Optional<T> read(final K id);

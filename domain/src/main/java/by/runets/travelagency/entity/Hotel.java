@@ -5,47 +5,42 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.*;
+
 /**
  * Class that represents the entity of the hotel.
  *
- * @param <K> is a generic param which represents a key param.
  */
 @Data
+@Entity
+@Table(name = "hotel")
 @NoArgsConstructor
-@ToString(exclude = "country", callSuper = true)
-@EqualsAndHashCode(exclude = "country", callSuper = true)
-public class Hotel<K> extends Entity<K> {
+@ToString(exclude = "country")
+@EqualsAndHashCode(exclude = "country")
+public class Hotel {
+	@Id
+	@Column(name = "h_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long id;
 	/**
 	 * This is a field which represents hotel name.
 	 */
+	@Column(name = "h_name")
 	private String name;
 	/**
 	 * This is a field which represents a hotel phone.
 	 */
+	@Column(name = "h_phone")
 	private String phone;
 	/**
 	 * This is a field which represents a hotel stars rating.
 	 */
+	@Column(name = "h_stars")
 	private int stars;
 	/**
 	 * This is a field which represents a country.
 	 */
-
-	private Country<K> country;
-	
-	/**
-	 * Constructor with arguments.
-	 *
-	 * @param id    constructor argument which initializes hotel id field.
-	 * @param name  constructor argument which initializes hotel name field.
-	 * @param phone constructor argument which initializes hotel phone field.
-	 * @param stars constructor argument which initializes hotel stars field.
-	 */
-	public Hotel (final K id, final String name, final String phone, final int stars, final Country<K> country) {
-		super(id);
-		this.name = name;
-		this.phone = phone;
-		this.stars = stars;
-		this.country = country;
-	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "c_id")
+	private Country country;
 }

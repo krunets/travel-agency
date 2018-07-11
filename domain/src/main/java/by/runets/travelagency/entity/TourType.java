@@ -3,9 +3,13 @@ package by.runets.travelagency.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import javax.persistence.*;
+
 /**
  * Class that represents the enum of the tour type.
  */
+@Entity
+@Table(name = "tour_type")
 @Getter
 @AllArgsConstructor
 public enum TourType {
@@ -18,10 +22,15 @@ public enum TourType {
 	INDUSTRIAL(7, "Industrial tourism");
 	/**
 	 * This is a field which represents a tour type id.
-	 */	private final int id;
+	 */
+	@Id
+	@Column(name = "t_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private final int id;
 	/**
 	 * This is a field which represents a tour type.
 	 */
+	@Column(name = "t_type")
 	private final String type;
 
 	public static TourType getTypeByValue(String value) {

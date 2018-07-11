@@ -5,16 +5,23 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.*;
+
 /**
  * Class that represents the entity of the review.
  *
- * @param <K> is a generic param which represents a key param.
  */
 @Data
+@Entity
+@Table(name = "review")
 @NoArgsConstructor
-@ToString(exclude = "user", callSuper = true)
-@EqualsAndHashCode(exclude = "user", callSuper = true)
-public class Review<K> extends Entity<K> {
+@ToString(exclude = "user")
+@EqualsAndHashCode(exclude = "user")
+public class Review {
+	@Id
+	@Column(name = "r_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long id;
 	/**
 	 * This is a field which represents a content of review.
 	 */
@@ -22,18 +29,7 @@ public class Review<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a user who left feedback about tour.
 	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "u_id")
 	private User user;
-	
-	/**
-	 * Constructor with arguments.
-	 *
-	 * @param id      constructor argument which initializes review id field.
-	 * @param content constructor argument which initializes review content field.
-	 * @param user constructor argument which initializes review user field.
-	 */
-	public Review (final K id, final String content, final User user) {
-		super(id);
-		this.content = content;
-		this.user = user;
-	}
 }
