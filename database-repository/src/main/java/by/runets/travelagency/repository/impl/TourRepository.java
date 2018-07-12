@@ -24,6 +24,7 @@ import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 @Repository
+@Deprecated
 @AllArgsConstructor
 public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 	@Autowired
@@ -81,9 +82,9 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 	private static final class TourRowMapper implements RowMapper<Tour> {
 		@Override
 		public Tour mapRow (ResultSet resultSet, int i) throws SQLException {
-			Tour<Integer> tour = new Tour<>();
-			List<User<Integer>> users = new ArrayList<>();
-			List<Country<Integer>> countries = new ArrayList<>();
+			Tour tour = new Tour();
+			List<User> users = new ArrayList<>();
+			List<Country> countries = new ArrayList<>();
 			
 			tour.setId(resultSet.getInt("t_id"));
 			tour.setPhoto(resultSet.getString("photo"));
@@ -96,8 +97,8 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 			tour.setTourType(TourType.getTypeByValue(resultSet.getString("t_type")));
 			
 			
-			User<Integer> user = new User<>();
-			Country<Integer> country = new Country<>();
+			User user = new User();
+			Country country = new Country();
 			
 			user.setId(resultSet.getInt("u_id"));
 			user.setLogin(resultSet.getString("login"));

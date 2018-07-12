@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
+@Deprecated
 @AllArgsConstructor
 public class HotelRepository implements IDatabaseRepository<Hotel, Integer> {
 	@Autowired
@@ -73,9 +74,9 @@ public class HotelRepository implements IDatabaseRepository<Hotel, Integer> {
 	
 	private static final class HotelRowMapper implements RowMapper<Hotel> {
 		@Override
-		public Hotel<Integer> mapRow (ResultSet resultSet, int i) throws SQLException {
-			Hotel<Integer> hotel = new Hotel<>();
-			Country<Integer> country = new Country<>();
+		public Hotel mapRow (ResultSet resultSet, int i) throws SQLException {
+			Hotel hotel = new Hotel();
+			Country country = new Country();
 			
 			
 			hotel.setId(resultSet.getInt("h_id"));

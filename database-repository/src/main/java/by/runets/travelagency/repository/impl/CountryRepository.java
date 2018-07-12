@@ -24,6 +24,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
+@Deprecated
 @AllArgsConstructor
 public class CountryRepository implements IDatabaseRepository<Country, Integer> {
 	@Autowired
@@ -81,16 +82,16 @@ public class CountryRepository implements IDatabaseRepository<Country, Integer> 
 	private static final class CountryRowMapper implements RowMapper<Country> {
 		@Override
 		public Country mapRow (ResultSet resultSet, int i) throws SQLException {
-			Country<Integer> country = new Country<>();
+			Country country = new Country();
 			
-			Set<Hotel<Integer>> hotelSet = new HashSet<>();
-			Set<Tour<Integer>> tourSet = new HashSet<>();
+			Set<Hotel> hotelSet = new HashSet<>();
+			Set<Tour> tourSet = new HashSet<>();
 			
 			country.setId(resultSet.getInt("c_id"));
 			country.setName(resultSet.getString("c_name"));
 			
-			Hotel<Integer> hotel = new Hotel<>();
-			Tour<Integer> tour = new Tour<>();
+			Hotel hotel = new Hotel();
+			Tour tour = new Tour();
 			
 			tour.setId(resultSet.getInt("t_id"));
 			tour.setPhoto(resultSet.getString("photo"));

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
@@ -14,13 +15,14 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @AllArgsConstructor
 @EnableTransactionManagement
 @ComponentScan(basePackages = "by.runets.travelagency")
-public class ServiceBeanConfig implements TransactionManagementConfigurer {
+public class ServiceBeanConfig {
 	@Autowired
 	private final ProductionDatabaseBeanConfig config;
 		
 	@Bean
-	@Override
-	public PlatformTransactionManager annotationDrivenTransactionManager () {
-		return new DataSourceTransactionManager(config.getDataSourceConfig().hikariProductionDataSource());
+	public HibernateTransactionManager hibernateTransactionManager() {
+		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
+		hibernateTransactionManager.setSessionFactory(config.getDataSourceConfig().localSessionFactoryBean().getObject());
+		return hibernateTransactionManager;
 	}
 }

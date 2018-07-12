@@ -7,6 +7,8 @@ import by.runets.travelagency.joiner.Joiner;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+
+@Deprecated
 @Component
 public class UserJoiner implements Joiner<User> {
 	@Override

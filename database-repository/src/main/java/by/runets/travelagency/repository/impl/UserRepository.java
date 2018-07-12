@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
+@Deprecated
 public class UserRepository implements IDatabaseRepository<User, Integer> {
 	@Autowired
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -84,16 +85,16 @@ public class UserRepository implements IDatabaseRepository<User, Integer> {
 	private static final class UserRowMapper implements RowMapper<User> {
 		@Override
 		public User mapRow (ResultSet resultSet, int i) throws SQLException {
-			User<Integer> user = new User<>();
-			List<Tour<Integer>> tours = new ArrayList<>();
-			List<Review<Integer>> reviews = new ArrayList<>();
+			User user = new User();
+			List<Tour> tours = new ArrayList<>();
+			List<Review> reviews = new ArrayList<>();
 			
 			user.setId(resultSet.getInt("u_id"));
 			user.setLogin(resultSet.getString("login"));
 			user.setPassword(resultSet.getString("password"));
 			
-			Tour<Integer> tour = new Tour<>();
-			Review<Integer> review = new Review<>();
+			Tour tour = new Tour();
+			Review review = new Review();
 			
 			tour.setId(resultSet.getInt("t_id"));
 			tour.setPhoto(resultSet.getString("photo"));

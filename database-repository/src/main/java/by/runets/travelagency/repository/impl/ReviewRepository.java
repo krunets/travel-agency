@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
+@Deprecated
 @AllArgsConstructor
 public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
   @Autowired
@@ -74,8 +75,8 @@ public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
   private static final class ReviewRowMapper implements RowMapper<Review> {
     @Override
     public Review mapRow (ResultSet resultSet, int i) throws SQLException {
-      Review<Integer> review = new Review<>();
-      User<Integer> user = new User<>();
+      Review review = new Review();
+      User user = new User();
   
       review.setId(resultSet.getInt("r_id"));
       review.setContent(resultSet.getString("content"));
