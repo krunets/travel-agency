@@ -1,5 +1,6 @@
 package by.runets.travelagency.repository.query;
 
+@Deprecated
 public class UserQuery {
 	private UserQuery(){}
 

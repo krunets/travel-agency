@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @param <K>  is a generic param which represents a key param.
  */
 @AllArgsConstructor
-public class AbstractService<T extends PrimaryKeyEntity, K> implements IService<T, K> {
+public class AbstractService<T, K> implements IService<T, K> {
 	@Autowired
 	private final IDatabaseRepository<T, K> repository;
 	

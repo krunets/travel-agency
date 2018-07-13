@@ -4,7 +4,6 @@ import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.query.HotelQuery;
-import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,9 +20,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
-@Deprecated
 @AllArgsConstructor
+@Repository("HotelRepository")
 public class HotelRepository implements IDatabaseRepository<Hotel, Integer> {
 	@Autowired
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -33,7 +31,6 @@ public class HotelRepository implements IDatabaseRepository<Hotel, Integer> {
 		namedParameterJdbcTemplate.update(HotelQuery.INSERT_INTO_HOTEL, new BeanPropertySqlParameterSource(entity));
 	}
 	
-	@Loggable
 	@Override
 	public List<Optional<Hotel>> readAll () {
 		try {
@@ -46,7 +43,6 @@ public class HotelRepository implements IDatabaseRepository<Hotel, Integer> {
 		}
 	}
 	
-	@Loggable
 	@Override
 	public Optional<Hotel> read (final Integer id) {
 		try {
@@ -59,14 +55,12 @@ public class HotelRepository implements IDatabaseRepository<Hotel, Integer> {
 		}
 	}
 	
-	@Loggable
 	@Override
 	public void update (final Hotel entity) {
 		namedParameterJdbcTemplate.update(HotelQuery.UPDATE_HOTEL_BY_ID, new BeanPropertySqlParameterSource(entity));
 		
 	}
 	
-	@Loggable
 	@Override
 	public void delete (final Hotel entity) {
 		namedParameterJdbcTemplate.update(HotelQuery.DELETE_HOTEL_BY_ID, new BeanPropertySqlParameterSource(entity));

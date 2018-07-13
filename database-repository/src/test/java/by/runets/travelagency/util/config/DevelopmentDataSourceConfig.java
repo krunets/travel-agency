@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 @AllArgsConstructor
 public class DevelopmentDataSourceConfig {
 	@Bean
-	public HikariDataSource hikariDevelopmentDataSource () {
+	public HikariDataSource dataSource () {
 		HikariDataSource dataSource = new HikariDataSource();
 		DataSource ds = new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.H2)

@@ -1,9 +1,6 @@
 package by.runets.travelagency.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -15,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "hotel")
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = "country")
 @EqualsAndHashCode(exclude = "country")
 public class Hotel {

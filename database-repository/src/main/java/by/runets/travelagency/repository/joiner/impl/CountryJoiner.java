@@ -1,13 +1,12 @@
-package by.runets.travelagency.joiner.impl;
+package by.runets.travelagency.repository.joiner.impl;
 
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.entity.Tour;
-import by.runets.travelagency.joiner.Joiner;
+import by.runets.travelagency.repository.joiner.Joiner;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-@Deprecated
 @Component
 public class CountryJoiner implements Joiner<Country> {
 	@Override

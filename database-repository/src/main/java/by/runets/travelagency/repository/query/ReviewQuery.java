@@ -1,5 +1,6 @@
 package by.runets.travelagency.repository.query;
 
+@Deprecated
 public class ReviewQuery {
 	private ReviewQuery(){}
 	public static final String INSERT_INTO_REVIEW = "INSERT INTO travel_agency.review(r_id, content, \"user\") VALUES(:id, :content, :user.id)";

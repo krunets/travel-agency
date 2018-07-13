@@ -22,7 +22,7 @@ public class ServiceBeanConfig {
 	@Bean
 	public HibernateTransactionManager hibernateTransactionManager() {
 		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
-		hibernateTransactionManager.setSessionFactory(config.getDataSourceConfig().localSessionFactoryBean().getObject());
+		hibernateTransactionManager.setSessionFactory(config.getDataSourceConfig().sessionFactory().getObject());
 		return hibernateTransactionManager;
 	}
 }

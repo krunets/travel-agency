@@ -4,7 +4,6 @@ import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.repository.IDatabaseRepository;
 import by.runets.travelagency.repository.query.ReviewQuery;
-import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,20 +20,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
-@Deprecated
 @AllArgsConstructor
+@Repository("ReviewRepository")
 public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
   @Autowired
   private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
   
-  @Loggable
   @Override
   public void create(final Review entity) {
     namedParameterJdbcTemplate.update(ReviewQuery.INSERT_INTO_REVIEW, new BeanPropertySqlParameterSource(entity));
   }
   
-  @Loggable
   @Override
   public List<Optional<Review>> readAll() {
     try {
@@ -47,7 +43,6 @@ public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
     }
   }
   
-  @Loggable
   @Override
   public Optional<Review> read(final Integer id) {
     try {
@@ -60,13 +55,11 @@ public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
     }
   }
   
-  @Loggable
   @Override
   public void update(final Review entity) {
     namedParameterJdbcTemplate.update(ReviewQuery.UPDATE_REVIEW_BY_ID, new BeanPropertySqlParameterSource(entity));
   }
   
-  @Loggable
   @Override
   public void delete(final Review entity) {
     namedParameterJdbcTemplate.update(ReviewQuery.DELETE_REVIEW_BY_ID, new BeanPropertySqlParameterSource(entity));

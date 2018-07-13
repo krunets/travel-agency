@@ -1,9 +1,6 @@
 package by.runets.travelagency.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,8 +12,9 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "'user'")
+@Table(name = "user")
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = {"reviews", "tours"})
 @EqualsAndHashCode(exclude = {"reviews", "tours"})
 public class User {
@@ -35,7 +33,7 @@ public class User {
 	/**
 	 * This is a field which represents a user review of tour.
 	 */
-	@OneToMany(mappedBy = "'user'")
+	@OneToMany(mappedBy = "user")
 	private List<Review> reviews;
 	@ManyToMany(mappedBy = "users")
 	private List<Tour> tours;

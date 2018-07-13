@@ -7,17 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Repository
 @AllArgsConstructor
 public class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
 	private static final String READ_ALL_QUERY = "SELECT * FROM ";
 	
 	@Autowired
-	protected final SessionFactory sessionFactory;
+	private final SessionFactory sessionFactory;
 	
 	@Loggable
 	@Override
@@ -38,7 +40,8 @@ public class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
 	@Loggable
 	@Override
 	public Optional<T> read (final Class<T> classType, final Long id) {
-		return Optional.of(sessionFactory.getCurrentSession().get(classType, id));
+		Session session = sessionFactory.getCurrentSession();
+		return Optional.of(session.get(classType, id));
 	}
 	
 	@Loggable

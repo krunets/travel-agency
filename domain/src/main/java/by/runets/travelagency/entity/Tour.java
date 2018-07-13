@@ -1,10 +1,7 @@
 package by.runets.travelagency.entity;
 
 import by.runets.travelagency.converter.DurationConverter;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -21,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "tour")
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = {"users", "countries"})
 @EqualsAndHashCode(exclude = {"users", "countries"})
 public class Tour {
@@ -35,7 +33,6 @@ public class Tour {
 	/**
 	 * This is a field which represents a tour date.
 	 */
-	@Temporal(TemporalType.DATE)
 	private LocalDate date;
 	/**
 	 * This is a field which represents a tour duration.
@@ -53,9 +50,11 @@ public class Tour {
 	/**
 	 * This is a field which represents a tour type.
 	 */
-	@Column(name = "tour_type")
+/*	@Column(name = "tour_type")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "t_id")
+	@JoinColumn(name = "t_id")*/
+	@Enumerated
+	@Column(name = "tour_type")
 	private TourType tourType;
 	/**
 	 * This is a field which represents a tour user list.
