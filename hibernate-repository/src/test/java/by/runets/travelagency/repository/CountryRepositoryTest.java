@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ public class CountryRepositoryTest {
 	private IDatabaseRepository<Country, Long> countryRepository;
 	
 	@Test
+	@Transactional
 	public void testReadAll () {
 		List<Optional<Country>> expected =
 				new ArrayList(
@@ -39,17 +41,27 @@ public class CountryRepositoryTest {
 								Optional.of(new Country(2, "Usa", null, null)),
 								Optional.of(new Country(3, "France", null, null)),
 								Optional.of(new Country(4, "Italy", null, null))));
-		List<Optional<Country>> actual = countryRepository.readAll(Country.class);
+		List<Optional<Country>> actual = countryRepository.readAll("c", "travel_agency.country",  Country.class);
 		Assert.assertEquals(actual, expected);
 	}
 	
 	@Test
-	public void testCreate() {
-		final long id = 10;
-		final Country expected = new Country(10, "testCountryName", null, null);
-		countryRepository.create(expected);
+	public void testReadById () {
+		final long id = 1;
+		final Country expected = new Country(id, "Belarus", null, null);
 		final Country actual = countryRepository.read(Country.class, id).get();
 		
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	@Transactional
+	public void testCreate () {
+		final long id = 10;
+		final Country expected = new Country(id, "testCountryName", null, null);
+		countryRepository.create(expected);
+		Optional<Country> optional = countryRepository.read(Country.class, id);
+		final Country actual = optional.get();
 		Assert.assertEquals(expected, actual);
 	}
 }

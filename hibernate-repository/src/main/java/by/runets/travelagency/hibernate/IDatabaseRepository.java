@@ -9,7 +9,7 @@ import java.util.Optional;
  */
 public interface IDatabaseRepository<T, K> {
 	void create (final T entity);
-	List<Optional<T>> readAll (final Class<T> classType);
+	List<Optional<T>> readAll (final String predicateName, final String tableName, final Class<T> classType);
 	Optional<T> read (final Class<T> classType, final K id);
 	void update (final T entity);
 	void delete (final T entity);

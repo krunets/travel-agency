@@ -18,7 +18,6 @@ import java.util.Properties;
 @AllArgsConstructor
 @PropertySource("classpath:properties/production-database-config.properties")
 public class DevelopmentHibernateBeanConfig {
-	
 	private static final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 	private static final String HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
 	private static final String HIBERNATE_USE_SQL_COMMENTS = "hibernate.use_sql_comments";

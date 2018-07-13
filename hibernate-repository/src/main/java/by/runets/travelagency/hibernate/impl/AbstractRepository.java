@@ -28,9 +28,9 @@ public class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
 	}
 	
 	@Override
-	public List<Optional<T>> readAll (Class<T> classType) {
+	public List<Optional<T>> readAll (final String predicateName, final String tableName, final Class<T> classType) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = currentSession.createNativeQuery(READ_ALL_QUERY + classType, classType);
+		Query query = currentSession.createNativeQuery("SELECT " + predicateName + " FROM " + tableName + " " + predicateName, classType);
 		List<T> queryResultList = query.getResultList();
 		return queryResultList.stream()
 				.map(Optional::ofNullable)
@@ -41,7 +41,7 @@ public class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
 	@Override
 	public Optional<T> read (final Class<T> classType, final Long id) {
 		Session session = sessionFactory.getCurrentSession();
-		return Optional.of(session.get(classType, id));
+		return Optional.ofNullable(session.get(classType, id));
 	}
 	
 	@Loggable
