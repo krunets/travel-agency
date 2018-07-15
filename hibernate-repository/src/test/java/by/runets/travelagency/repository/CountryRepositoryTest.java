@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "development")
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
@@ -29,13 +29,12 @@ import java.util.Optional;
   @Sql(
     executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD,
     scripts = {"classpath:db/init-data.sql"}
-  ),
+  )
 })
 public class CountryRepositoryTest {
   @Autowired private IDatabaseRepository<Country, Long> countryRepository;
 
   @Test
-  @Transactional
   public void testReadAll() {
     List<Optional<Country>> expected =
         new ArrayList(
@@ -49,7 +48,6 @@ public class CountryRepositoryTest {
   }
 
   @Test
-  @Transactional
   public void testReadById() {
     final long id = 1;
     final Country expected = new Country(id, "Belarus", null, null);
@@ -58,8 +56,6 @@ public class CountryRepositoryTest {
   }
 
   @Test
-  @Commit
-  @Transactional
   public void testCreate() {
     Country first = new Country();
     first.setName("firstName");
@@ -70,7 +66,6 @@ public class CountryRepositoryTest {
   }
 
   @Test
-  @Transactional
   public void testUpdate() {
     final long id = 1;
     final Country expected = new Country(id, "newName", null, null);
@@ -78,10 +73,11 @@ public class CountryRepositoryTest {
     final Country actual = countryRepository.read(Country.class, id).get();
 
     Assert.assertEquals(expected, actual);
+
+    System.out.println(actual);
   }
 
   @Test
-  @Transactional
   public void testDelete() {
     final long id = 1;
     final Country expected = new Country(id, "", null, null);

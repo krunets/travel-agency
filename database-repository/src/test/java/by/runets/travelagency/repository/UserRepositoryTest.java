@@ -29,20 +29,20 @@ import java.util.Optional;
 public class UserRepositoryTest {
 	@Autowired
 	@Qualifier("UserRepository")
-	private UserRepository repository;
+	private UserRepository userRepository;
 	
 	@Test
 	public void testCreate () {
 		Optional<User> expected = Optional.of(new User(10, "testLogin", "testPassword", null, null));
-		repository.create(expected.get());
-		Optional<User> actual = repository.read(10);
+		userRepository.create(expected.get());
+		Optional<User> actual = userRepository.read(10);
 		Assert.assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void testReadById () {
 		Optional<User> expected = Optional.of(new User(1, "root", "root", null, null));
-		Optional<User> actual = repository.read(1);
+		Optional<User> actual = userRepository.read(1);
 		
 		Assert.assertEquals(expected, actual);
 	}
@@ -55,31 +55,31 @@ public class UserRepositoryTest {
 								Optional.of(new User(1, "root", "root", null, null)),
 								Optional.of(new User(2, "admin", "admin", null, null)),
 								Optional.of(new User(3, "traveler1", "traveler1", null, null))));
-		List<Optional<User>> actual = repository.readAll();
+		List<Optional<User>> actual = userRepository.readAll();
 		
 		Assert.assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void testDelete () {
-		Optional<User> expected = repository.read(1);
+		Optional<User> expected = userRepository.read(1);
 		Assert.assertNotNull(expected);
-		repository.delete(expected.get());
-		Optional<User> actual = repository.read(1);
+		userRepository.delete(expected.get());
+		Optional<User> actual = userRepository.read(1);
 		
 		Assert.assertEquals(Optional.empty(), actual);
 	}
 	
 	@Test
 	public void testUpdate () {
-		User expected = repository.read(1).get();
+		User expected = userRepository.read(1).get();
 		
 		expected.setLogin("newTestLogin");
 		expected.setPassword("newTestPassword");
 		
-		repository.update(expected);
+		userRepository.update(expected);
 		
-		User actual = repository.read(1).get();
+		User actual = userRepository.read(1).get();
 		
 		Assert.assertEquals(expected, actual);
 	}

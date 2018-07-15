@@ -53,7 +53,8 @@ public class Tour {
 /*	@Column(name = "tour_type")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "t_id")*/
-	@Enumerated
+	@Enumerated(EnumType.ORDINAL)
+	@JoinTable(name = "tour_type", joinColumns = @JoinColumn(name = "t_id"))
 	@Column(name = "tour_type")
 	private TourType tourType;
 	/**
