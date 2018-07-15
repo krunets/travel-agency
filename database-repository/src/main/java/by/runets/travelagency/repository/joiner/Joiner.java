@@ -1,4 +1,4 @@
-package by.runets.travelagency.joiner;
+package by.runets.travelagency.repository.joiner;
 
 import java.util.List;
 

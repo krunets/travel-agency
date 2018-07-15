@@ -1,24 +1,27 @@
 package by.runets.travelagency.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Class that represents the entity of the user.
  *
- * @param <K> is a generic param which represents a key param.
  */
 
 @Data
-
+@Entity
+@Table(name = "user")
 @NoArgsConstructor
-@ToString(exclude = {"reviews", "tours"}, callSuper = true)
-@EqualsAndHashCode(exclude = {"reviews", "tours"}, callSuper = true)
-public class User<K> extends Entity<K> {
+@AllArgsConstructor
+@ToString(exclude = {"reviews", "tours"})
+@EqualsAndHashCode(exclude = {"reviews", "tours"})
+public class User {
+	@Id
+	@Column(name = "u_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private long id;
 	/**
 	 * This is a field which represents a user login.
 	 */
@@ -30,24 +33,8 @@ public class User<K> extends Entity<K> {
 	/**
 	 * This is a field which represents a user review of tour.
 	 */
-	private List<Review<K>> reviews;
-	
-	private List<Tour<K>> tours;
-	
-	/**
-	 * Constructor with arguments.
-	 *
-	 * @param id       constructor argument which initializes user id field.
-	 * @param login    constructor argument which initializes user login field.
-	 * @param password constructor argument which initializes user password field.
-	 * @param reviews   constructor argument which initializes user reviews field.
-	 * @param tours   constructor argument which initializes user tours field.
-	 */
-	public User (final K id, final String login, final String password, final List<Review<K>> reviews, final List<Tour<K>>  tours) {
-		super(id);
-		this.login = login;
-		this.password = password;
-		this.reviews = reviews;
-		this.tours = tours;
-	}
+	@OneToMany(mappedBy = "user")
+	private List<Review> reviews;
+	@ManyToMany(mappedBy = "users")
+	private List<Tour> tours;
 }

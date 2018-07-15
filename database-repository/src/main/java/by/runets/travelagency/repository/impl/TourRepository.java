@@ -4,10 +4,9 @@ import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.entity.User;
-import by.runets.travelagency.joiner.Joiner;
 import by.runets.travelagency.repository.IDatabaseRepository;
+import by.runets.travelagency.repository.joiner.Joiner;
 import by.runets.travelagency.repository.query.TourQuery;
-import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -23,21 +22,19 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
-@Repository
 @AllArgsConstructor
+@Repository("TourRepository")
 public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 	@Autowired
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	@Autowired
 	private final Joiner<Tour> joiner;
 	
-	@Loggable
 	@Override
 	public void create (Tour entity) {
 		namedParameterJdbcTemplate.update(TourQuery.INSERT_INTO_TOUR, NamedQueryFieldProvider.provide(entity));
 	}
 	
-	@Loggable
 	@Override
 	public List<Optional<Tour>> readAll () {
 		try {
@@ -50,7 +47,6 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 		}
 	}
 	
-	@Loggable
 	@Override
 	public Optional<Tour> read (Integer id) {
 		try {
@@ -64,13 +60,11 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 		}
 	}
 	
-	@Loggable
 	@Override
 	public void update (Tour entity) {
 		namedParameterJdbcTemplate.update(TourQuery.UPDATE_TOUR_BY_ID, NamedQueryFieldProvider.provide(entity));
 	}
 	
-	@Loggable
 	@Override
 	public void delete (Tour entity) {
 		namedParameterJdbcTemplate.update(TourQuery.DELETE_TOUR_M2M_COUNTRY, new BeanPropertySqlParameterSource(entity));
@@ -81,9 +75,9 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 	private static final class TourRowMapper implements RowMapper<Tour> {
 		@Override
 		public Tour mapRow (ResultSet resultSet, int i) throws SQLException {
-			Tour<Integer> tour = new Tour<>();
-			List<User<Integer>> users = new ArrayList<>();
-			List<Country<Integer>> countries = new ArrayList<>();
+			Tour tour = new Tour();
+			List<User> users = new ArrayList<>();
+			List<Country> countries = new ArrayList<>();
 			
 			tour.setId(resultSet.getInt("t_id"));
 			tour.setPhoto(resultSet.getString("photo"));
@@ -96,8 +90,8 @@ public class TourRepository implements IDatabaseRepository<Tour, Integer> {
 			tour.setTourType(TourType.getTypeByValue(resultSet.getString("t_type")));
 			
 			
-			User<Integer> user = new User<>();
-			Country<Integer> country = new Country<>();
+			User user = new User();
+			Country country = new Country();
 			
 			user.setId(resultSet.getInt("u_id"));
 			user.setLogin(resultSet.getString("login"));

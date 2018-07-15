@@ -1,5 +1,5 @@
 package by.runets.travelagency.repository.query;
-
+@Deprecated
 public class CountryQuery {
 	private CountryQuery(){}
 	public static final String READ_ALL_COUNTRY =

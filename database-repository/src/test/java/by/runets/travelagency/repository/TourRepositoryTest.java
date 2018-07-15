@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -30,12 +31,13 @@ import java.util.Optional;
 })
 public class TourRepositoryTest {
 	@Autowired
+	@Qualifier("TourRepository")
 	private TourRepository repository;
 	
 	@Test
 	public void testCreate () {
 		Tour expected =
-				new Tour<>(
+				new Tour(
 						12,
 						"Photo1",
 						LocalDate.parse("2018-07-17"),
@@ -55,7 +57,7 @@ public class TourRepositoryTest {
 	public void testReadById () {
 		Optional<Tour> expected =
 				Optional.of(
-						new Tour<Integer>(
+						new Tour(
 								1,
 								"photo/img1.png",
 								LocalDate.parse("2018-07-17"),
@@ -73,14 +75,14 @@ public class TourRepositoryTest {
 	@Test
 	public void testReadAll () {
 		List<Optional<Tour>> expected =
-				new ArrayList<>(
+				new ArrayList(
 						Arrays.asList(
 								Optional.of(
-										new Tour<>(1, "photo/img1.png", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null)),
-								Optional.of(new Tour<>(2, "photo/img2.png", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description2", new BigDecimal(200), TourType.ATOMIC, null, null)),
-								Optional.of(new Tour<>(3, "photo/img3.png", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description3", new BigDecimal(300), TourType.BICYCLE, null, null)),
-								Optional.of(new Tour<>(4, "photo/img4.png", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.CULTURAL, null, null)),
-								Optional.of(new Tour<>(5, "photo/img5.png", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ECO, null, null))));
+										new Tour(1, "photo/img1.png", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null)),
+								Optional.of(new Tour(2, "photo/img2.png", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description2", new BigDecimal(200), TourType.ATOMIC, null, null)),
+								Optional.of(new Tour(3, "photo/img3.png", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description3", new BigDecimal(300), TourType.BICYCLE, null, null)),
+								Optional.of(new Tour(4, "photo/img4.png", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.CULTURAL, null, null)),
+								Optional.of(new Tour(5, "photo/img5.png", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ECO, null, null))));
 		
 		List<Optional<Tour>> actual = repository.readAll();
 		System.out.println(actual);
@@ -101,14 +103,14 @@ public class TourRepositoryTest {
 	
 	@Test
 	public void testUpdate () {
-		Tour<Integer> expected = repository.read(1).get();
+		Tour expected = repository.read(1).get();
 		
 		expected.setPhoto("newPhoto");
 		expected.setDate(LocalDate.now());
 		
 		repository.update(expected);
 		
-		Tour<Integer> actual = repository.read(1).get();
+		Tour actual = repository.read(1).get();
 		
 		Assert.assertEquals(expected, actual);
 	}

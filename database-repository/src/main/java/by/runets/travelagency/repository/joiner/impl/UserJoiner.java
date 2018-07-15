@@ -1,12 +1,14 @@
-package by.runets.travelagency.joiner.impl;
+package by.runets.travelagency.repository.joiner.impl;
 
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.User;
-import by.runets.travelagency.joiner.Joiner;
+import by.runets.travelagency.repository.joiner.Joiner;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+
+@Deprecated
 @Component
 public class UserJoiner implements Joiner<User> {
 	@Override
