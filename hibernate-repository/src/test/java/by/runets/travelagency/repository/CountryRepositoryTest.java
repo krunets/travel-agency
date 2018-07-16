@@ -35,7 +35,7 @@ public class CountryRepositoryTest {
   @Test
   public void testReadAll() {
     List<Optional<Country>> expected =
-        new ArrayList(
+        new ArrayList<>(
             Arrays.asList(
                 Optional.of(new Country(1, "Belarus", null, null)),
                 Optional.of(new Country(2, "Usa", null, null)),

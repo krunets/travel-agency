@@ -1,6 +1,8 @@
 package by.runets.travelagency.repository.query;
+/**
+ *  see hibernate-module
+ */
 
-@Deprecated
 public class TourQuery {
 	private TourQuery(){}
 	public static final String INSERT_INTO_TOUR = "INSERT INTO travel_agency.tour(t_id, photo, date, description, cost, tour_type, duration) VALUES(:id, :photo, :date, :description, :cost, :tourType.id, :duration);";

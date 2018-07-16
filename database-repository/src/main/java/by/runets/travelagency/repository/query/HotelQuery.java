@@ -1,5 +1,8 @@
 package by.runets.travelagency.repository.query;
-@Deprecated
+/**
+ *  see hibernate-module
+ */
+
 public class HotelQuery {
 	private HotelQuery(){}
 	public static final String INSERT_INTO_HOTEL = "INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, country) VALUES(:id, :name, :phone, :stars, :country.id)";

@@ -1,6 +1,7 @@
 package by.runets.travelagency.converter;
 
 import by.runets.travelagency.entity.TourType;
+import by.runets.travelagency.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
@@ -15,8 +16,8 @@ public class TourTypeConverter implements AttributeConverter<TourType, Integer> 
 	}
 	
 	@Override
-	public TourType convertToEntityAttribute (Integer integer) {
-		switch (integer) {
+	public TourType convertToEntityAttribute (Integer id) {
+		switch (id) {
 			case 1:
 				return TourType.ADVENTURE;
 			case 2:
@@ -31,7 +32,8 @@ public class TourTypeConverter implements AttributeConverter<TourType, Integer> 
 				return TourType.GEO;
 			case 7:
 				return TourType.INDUSTRIAL;
+			default:
+				throw new ResourceNotFoundException("The tour type by id: " +  id	+ " does not exist");
 		}
-		return null;
 	}
 }

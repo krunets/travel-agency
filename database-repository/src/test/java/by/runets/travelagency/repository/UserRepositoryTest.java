@@ -50,7 +50,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testReadAll () {
 		List<Optional<User>> expected =
-				new ArrayList(
+				new ArrayList<>(
 						Arrays.asList(
 								Optional.of(new User(1, "root", "root", null, null)),
 								Optional.of(new User(2, "admin", "admin", null, null)),
@@ -75,8 +75,6 @@ public class UserRepositoryTest {
 		User expected = userRepository.read(1).get();
 		
 		expected.setLogin("newTestLogin");
-		expected.setPassword("newTestPassword");
-		
 		userRepository.update(expected);
 		
 		User actual = userRepository.read(1).get();

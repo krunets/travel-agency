@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@Deprecated
 @Component
 public class CountryJoiner implements Joiner<Country> {
 	@Override
@@ -19,12 +18,12 @@ public class CountryJoiner implements Joiner<Country> {
 			Set<Tour> tours = new HashSet<>();
 			Set<Hotel> hotels = new HashSet<>();
 			
-			tours.add((Tour) countries.get(i).getTours().get(0));
-			hotels.add((Hotel) countries.get(i).getHotels().get(0));
+			tours.add(countries.get(i).getTours().get(0));
+			hotels.add(countries.get(i).getHotels().get(0));
 			for (int j = i + 1; j < countries.size(); j++) {
 				if (countries.get(i).getId() == countries.get(j).getId()) {
-					tours.add((Tour) countries.get(j).getTours().get(0));
-					hotels.add((Hotel) countries.get(j).getHotels().get(0));
+					tours.add(countries.get(j).getTours().get(0));
+					hotels.add(countries.get(j).getHotels().get(0));
 					countries.remove(j);
 				}
 			}

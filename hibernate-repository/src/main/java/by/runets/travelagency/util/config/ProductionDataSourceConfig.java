@@ -36,7 +36,7 @@ public class ProductionDataSourceConfig {
 	private Environment environment;
 	
 	@Bean
-	public HikariDataSource hikariProductionDataSource () {
+	public HikariDataSource productionDataSource () {
 		try (HikariDataSource dataSource = new HikariDataSource()) {
 			dataSource.setJdbcUrl(environment.getProperty(URL));
 			dataSource.setUsername(environment.getProperty(USER_NAME));
@@ -52,7 +52,7 @@ public class ProductionDataSourceConfig {
 	@Bean
 	public LocalSessionFactoryBean sessionFactory () {
 		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-		localSessionFactoryBean.setDataSource(hikariProductionDataSource());
+		localSessionFactoryBean.setDataSource(productionDataSource());
 		
 		Properties properties = new Properties();
 		properties.put(HIBERNATE_SHOW_SQL, environment.getProperty(HIBERNATE_SHOW_SQL));

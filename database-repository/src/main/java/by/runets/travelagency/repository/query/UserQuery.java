@@ -1,6 +1,5 @@
 package by.runets.travelagency.repository.query;
 
-@Deprecated
 public class UserQuery {
 	private UserQuery(){}
 
@@ -20,7 +19,7 @@ public class UserQuery {
 			"LEFT JOIN travel_agency.tour_type AS tt ON tt.t_id = t.t_id " +
 			"WHERE u.u_id = :id " +
 			"ORDER BY u.u_id";
-	public static final String UPDATE_USER_BY_ID = "UPDATE travel_agency.\"user\" SET login=:login, password=:password WHERE u_id = :id";
+	public static final String UPDATE_USER_BY_ID = "UPDATE travel_agency.\"user\" SET login=:login WHERE u_id = :id";
 	public static final String DELETE_USER_BY_ID = "DELETE FROM travel_agency.\"user\" WHERE u_id = :id";
 	public static final String DELETE_USER_CONSTRAINT = "DELETE FROM travel_agency.review WHERE \"user\" = :id";
 }

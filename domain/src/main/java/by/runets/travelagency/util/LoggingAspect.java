@@ -15,11 +15,15 @@ import java.lang.reflect.Method;
 @Aspect
 @Component
 public class LoggingAspect {
-	/*
-		This is method which scan all annotated classes or methods and add to pointcut.
-	 */
+	private static final String ENTERING_TO = "Entering to ";
+	private static final String EXCITING_FROM = "Exciting from ";
+	private static final String FROM_CLASS = " from class ";
+	private static final String METHOD = "Method ";
+	private static final String THREW = " threw ";
+	
 	@Pointcut("@annotation(by.runets.travelagency.util.annotation.Loggable)")
 	public void allAnnotatedMethods () {
+		//		This is method which scan all annotated classes or methods and add to pointcut.
 	}
 	
 	@Around(value = "allAnnotatedMethods()")
@@ -29,7 +33,7 @@ public class LoggingAspect {
 		String methodName = method.getName();
 		String className = method.getDeclaringClass().getName();
 		
-		log.info("Entering to " + methodName + " from class " + className);
+		log.info(ENTERING_TO + methodName + FROM_CLASS + className);
 	
 		Object object = null;
 		try {
@@ -37,7 +41,7 @@ public class LoggingAspect {
 		} catch (Throwable throwable) {
 			logException(joinPoint, throwable);
 		}
-		log.info("Exciting from " + methodName + " from class " + className);
+		log.info(EXCITING_FROM + methodName + FROM_CLASS + className);
 		
 		return object;
 	}
@@ -48,6 +52,6 @@ public class LoggingAspect {
 		String methodName = method.getName();
 		String className = method.getDeclaringClass().getName();
 		
-		log.error("Method " + methodName + " from class " + className  + " threw " + exception);
+		log.error(METHOD + methodName + FROM_CLASS + className  + THREW + exception);
 	}
 }

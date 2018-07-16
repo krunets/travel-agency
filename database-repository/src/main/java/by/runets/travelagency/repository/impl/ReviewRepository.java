@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-@Deprecated
+
 @AllArgsConstructor
 @Repository("ReviewRepository")
 public class ReviewRepository implements IDatabaseRepository<Review, Integer> {
