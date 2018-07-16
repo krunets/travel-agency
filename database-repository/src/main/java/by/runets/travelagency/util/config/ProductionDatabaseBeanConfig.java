@@ -17,10 +17,6 @@ public class ProductionDatabaseBeanConfig {
 	@Autowired
 	private ProductionDataSourceConfig dataSourceConfig;
 	
-	public ProductionDataSourceConfig getDataSourceConfig () {
-		return dataSourceConfig;
-	}
-	
 	@Bean
 	public NamedParameterJdbcTemplate namedParameterJdbcTemplate () {
 		return new NamedParameterJdbcTemplate(dataSourceConfig.hikariProductionDataSource());

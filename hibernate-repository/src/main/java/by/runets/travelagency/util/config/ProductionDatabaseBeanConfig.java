@@ -11,11 +11,4 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = "by.runets.travelagency")
 public class ProductionDatabaseBeanConfig {
-	
-	@Autowired
-	private ProductionDataSourceConfig dataSourceConfig;
-	
-	public ProductionDataSourceConfig getDataSourceConfig () {
-		return dataSourceConfig;
-	}
 }

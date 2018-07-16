@@ -16,13 +16,4 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @EnableTransactionManagement
 @ComponentScan(basePackages = "by.runets.travelagency")
 public class ServiceBeanConfig {
-	@Autowired
-	private final ProductionDatabaseBeanConfig config;
-		
-	@Bean
-	public HibernateTransactionManager hibernateTransactionManager() {
-		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
-		hibernateTransactionManager.setSessionFactory(config.getDataSourceConfig().sessionFactory().getObject());
-		return hibernateTransactionManager;
-	}
 }
