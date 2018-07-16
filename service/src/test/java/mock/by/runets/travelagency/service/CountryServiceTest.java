@@ -2,7 +2,7 @@ package mock.by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.repository.impl.CountryRepository;
+import by.runets.travelagency.hibernate.impl.CountryRepository;
 import by.runets.travelagency.service.impl.CountryService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,39 +11,30 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class CountryServiceTest {
 	@Mock
 	private CountryRepository repository;
 	@InjectMocks
 	private CountryService service;
 	
-	@Test
-	public void testRead () {
-		when(repository.read(any(Integer.class))).thenReturn(Optional.of(new Country<Integer>()));
-		
-		Country<Integer> country = new Country<>(1, "213", null, null);
-		assertThat(service.read(country.getId()), is(notNullValue()));
-	}
-	
 	@Test(expected = ResourceNotFoundException.class)
-	public void testReadThrowingException() {
-		when(repository.read(anyInt())).thenThrow(ResourceNotFoundException.class);
+	public void testReadThrowingException () {
+		final long id = 1111;
+		when(repository.read(eq(Country.class), anyLong())).thenThrow(ResourceNotFoundException.class);
 		
-		service.read(1111);
+		service.read(id);
 	}
 	
 	@Test
 	public void testUpdate () {
-		Country<Integer> newCountry = new Country<>(1, "Belarus freedom", null, null);
+		Country newCountry = new Country(1, "Belarus freedom", null, null);
 		service.update(newCountry);
 		
 		verify(repository, times(1)).update(newCountry);
@@ -51,7 +42,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCreate () {
-		Country<Integer> newCountry = new Country<>(6, "Belarus freedom", null, null);
+		Country newCountry = new Country(6, "Belarus freedom", null, null);
 		service.create(newCountry);
 		
 		verify(repository, times(1)).create(newCountry);
@@ -59,16 +50,15 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testDelete () {
-		Country<Integer> deleteCountry = new Country<>(1, "Belarus", null, null);
+		Country deleteCountry = new Country(1, "Belarus", null, null);
 		service.delete(deleteCountry);
 		
- 		verify(repository, times(1)).delete(deleteCountry);
+		verify(repository, times(1)).delete(deleteCountry);
 	}
 	
 	@Test
 	public void testReadAll () {
-		when(repository.readAll()).thenReturn(new ArrayList<>());
-		
+		when(repository.readAll(Country.class)).thenReturn(new ArrayList<>());
 		assertThat(service.readAll(), is(notNullValue()));
 	}
 }

@@ -10,4 +10,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan(basePackages = "by.runets.travelagency")
 public class ServiceBeanConfig {
+	
 }
