@@ -3,6 +3,7 @@ package by.runets.travelagency.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Class that represents the entity of the review.
@@ -23,6 +24,7 @@ public class Review {
 	/**
 	 * This is a field which represents a content of review.
 	 */
+	@NotNull
 	private String content;
 	/**
 	 * This is a field which represents a user who left feedback about tour.

@@ -3,6 +3,7 @@ package by.runets.travelagency.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class Country {
   )
   private long id;
   /** This is a field which represents a Country name. */
+  @NotNull
   @Column(name = "c_name")
   private String name;
   /** This is a field which represents a list of hotels. */

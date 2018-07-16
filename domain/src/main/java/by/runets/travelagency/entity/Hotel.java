@@ -3,6 +3,7 @@ package by.runets.travelagency.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Class that represents the entity of the hotel.
@@ -23,16 +24,19 @@ public class Hotel {
 	/**
 	 * This is a field which represents hotel name.
 	 */
+	@NotNull
 	@Column(name = "h_name")
 	private String name;
 	/**
 	 * This is a field which represents a hotel phone.
 	 */
+	@NotNull
 	@Column(name = "h_phone")
 	private String phone;
 	/**
 	 * This is a field which represents a hotel stars rating.
 	 */
+	@NotNull
 	@Column(name = "h_stars")
 	private int stars;
 	/**

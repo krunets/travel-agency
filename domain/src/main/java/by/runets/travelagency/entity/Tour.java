@@ -1,9 +1,12 @@
 package by.runets.travelagency.entity;
 
 import by.runets.travelagency.converter.DurationConverter;
+import by.runets.travelagency.converter.TourTypeConverter;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -29,33 +32,35 @@ public class Tour {
 	/**
 	 * This is a field which represents a tour photo.
 	 */
+	@NotNull
 	private String photo;
 	/**
 	 * This is a field which represents a tour date.
 	 */
+	@NotNull
 	private LocalDate date;
 	/**
 	 * This is a field which represents a tour duration.
 	 */
+	@NotNull
 	@Convert(converter = DurationConverter.class)
 	private Duration duration;
 	/**
 	 * This is a field which represents a tour description.
 	 */
+	@NotNull
 	private String description;
 	/**
 	 * This is a field which represents a tour cost.
 	 */
+	@NotNull
+	@Column(precision = 5)
 	private BigDecimal cost;
 	/**
 	 * This is a field which represents a tour type.
 	 */
-/*	@Column(name = "tour_type")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "t_id")*/
-	@Enumerated(EnumType.ORDINAL)
-	@JoinTable(name = "tour_type", joinColumns = @JoinColumn(name = "t_id"))
 	@Column(name = "tour_type")
+	@Convert(converter = TourTypeConverter.class)
 	private TourType tourType;
 	/**
 	 * This is a field which represents a tour user list.

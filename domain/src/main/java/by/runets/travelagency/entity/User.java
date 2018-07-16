@@ -3,6 +3,8 @@ package by.runets.travelagency.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 /**
@@ -25,10 +27,12 @@ public class User {
 	/**
 	 * This is a field which represents a user login.
 	 */
+	@NotNull
 	private String login;
 	/**
 	 * This is a field which represents a user password.
 	 */
+	@NotNull
 	private String password;
 	/**
 	 * This is a field which represents a user review of tour.
