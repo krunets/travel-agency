@@ -1,11 +1,12 @@
 package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.hibernate.IDatabaseRepository;
+import by.runets.travelagency.hibernate.impl.AbstractRepository;
 import by.runets.travelagency.service.IService;
 import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,23 +17,23 @@ import java.util.stream.Collectors;
 /**
  * This is a common class which implements common CRUD interface and provides default method implementing.
  * @param <T> is a generic param which must be inherited from PrimaryKeyEntity class.
- * @param <K>  is a generic param which represents a key param.
  */
+@Service
 @AllArgsConstructor
-public class AbstractService<T, K> implements IService<T, K> {
+public class AbstractService<T> implements IService<T, Long> {
 	@Autowired
-	private final IDatabaseRepository<T, K> repository;
+	private final AbstractRepository<T> abstractRepository;
 	private final Class<T> classType;
 	
 	/**
-	 * This is a method which call create method from repository layer.
+	 * This is a method which call create method from abstractRepository layer.
 	 * @param entity  generic exemplar.
 	 */
 	@Loggable
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
-	public void create(final T entity) {
-		repository.create(entity);
+	public Long create(final T entity) {
+		return abstractRepository.create(entity);
 	}
 	
 	/**
@@ -43,7 +44,7 @@ public class AbstractService<T, K> implements IService<T, K> {
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	@Override
 	public List<T> readAll() {
-		return repository
+		return abstractRepository
 				.readAll(classType)
 				.stream()
 				.filter(Optional::isPresent)
@@ -59,31 +60,31 @@ public class AbstractService<T, K> implements IService<T, K> {
 	@Loggable
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	@Override
-	public T read(final K id) {
-		return repository
+	public T read(final Long id) {
+		return abstractRepository
 				.read(classType, id)
 				.orElseThrow(() -> new ResourceNotFoundException("The entity by id " + id + " does not exist."));
 	}
 	
 	/**
-	 * This is a method which call update method from repository.
+	 * This is a method which call update method from abstractRepository.
 	 * @param entity generic exemplar.
 	 */
 	@Loggable
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
 	public void update(final T entity) {
-		repository.update(entity);
+		abstractRepository.update(entity);
 	}
 	
 	/**
-	 * This is a method which call update method from repository.
+	 * This is a method which call update method from abstractRepository.
 	 * @param entity generic exemplar.
 	 */
 	@Loggable
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
 	public void delete(final T entity) {
-		repository.delete(entity);
+		abstractRepository.delete(entity);
 	}
 }
