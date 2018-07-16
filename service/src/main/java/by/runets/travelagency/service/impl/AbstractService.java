@@ -1,7 +1,7 @@
 package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.repository.IDatabaseRepository;
+import by.runets.travelagency.hibernate.IDatabaseRepository;
 import by.runets.travelagency.service.IService;
 import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Table;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class AbstractService<T, K> implements IService<T, K> {
 	@Autowired
 	private final IDatabaseRepository<T, K> repository;
+	private final Class<T> classType;
 	
 	/**
 	 * This is a method which call create method from repository layer.
@@ -43,7 +45,7 @@ public class AbstractService<T, K> implements IService<T, K> {
 	@Override
 	public List<T> readAll() {
 		return repository
-				.readAll()
+				.readAll(classType)
 				.stream()
 				.filter(Optional::isPresent)
 				.map(Optional::get)
@@ -60,7 +62,7 @@ public class AbstractService<T, K> implements IService<T, K> {
 	@Override
 	public T read(final K id) {
 		return repository
-				.read(id)
+				.read(classType, id)
 				.orElseThrow(() -> new ResourceNotFoundException("The entity by id " + id + " does not exist."));
 	}
 	

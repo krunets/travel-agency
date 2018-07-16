@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Table;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,9 +29,10 @@ public class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
 	}
 	
 	@Override
-	public List<Optional<T>> readAll (final String tableName, final Class<T> classType) {
+	public List<Optional<T>> readAll (final Class<T> classType) {
+		Table table = classType.getAnnotation(Table.class);
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = currentSession.createNativeQuery(READ_ALL_QUERY + tableName, classType);
+		Query query = currentSession.createNativeQuery(READ_ALL_QUERY + table.name(), classType);
 		List<T> queryResultList = query.getResultList();
 		return queryResultList.stream()
 				.map(Optional::ofNullable)
