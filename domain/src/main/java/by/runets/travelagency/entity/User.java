@@ -1,6 +1,9 @@
 package by.runets.travelagency.entity;
 
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,6 +16,8 @@ import java.util.List;
 
 @Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,7 +42,9 @@ public class User {
 	 * This is a field which represents a user review of tour.
 	 */
 	@OneToMany(mappedBy = "user")
+	@BatchSize(size = 5)
 	private List<Review> reviews;
 	@ManyToMany(mappedBy = "users")
+	@BatchSize(size = 5)
 	private List<Tour> tours;
 }

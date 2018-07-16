@@ -3,6 +3,9 @@ package by.runets.travelagency.entity;
 import by.runets.travelagency.converter.DurationConverter;
 import by.runets.travelagency.converter.TourTypeConverter;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,6 +21,8 @@ import java.util.List;
  */
 @Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "tour")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -70,6 +75,7 @@ public class Tour {
 			joinColumns = {@JoinColumn(name = "t_id")},
 			inverseJoinColumns = {@JoinColumn(name = "u_id")}
 	)
+	@BatchSize(size = 5)
 	private List<User> users = new ArrayList<>();
 	/**
 	 * This is a field which represents a tour country list.
@@ -80,5 +86,6 @@ public class Tour {
 			joinColumns = {@JoinColumn(name = "t_id")},
 			inverseJoinColumns = {@JoinColumn(name = "c_id")}
 	)
+	@BatchSize(size = 5)
 	private List<Country> countries = new ArrayList<>();
 }

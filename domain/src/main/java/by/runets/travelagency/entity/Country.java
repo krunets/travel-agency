@@ -1,8 +1,11 @@
 package by.runets.travelagency.entity;
 
 import lombok.*;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,8 @@ import java.util.List;
 /** Class that represents the entity of the country. */
 @Data
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "country")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +26,7 @@ public class Country {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_generator")
   @SequenceGenerator(
     name = "country_generator",
-    sequenceName = "country_sequence",
+    sequenceName = "country_SEQUENCE",
     allocationSize = 4
   )
   private long id;
@@ -31,6 +36,7 @@ public class Country {
   private String name;
   /** This is a field which represents a list of hotels. */
   @OneToMany(mappedBy = "country")
+  @BatchSize(size = 5)
   private List<Hotel> hotels = new ArrayList<>();
   /** This is a field which represents a list of tours in exist country. */
   @ManyToMany(mappedBy = "countries")
