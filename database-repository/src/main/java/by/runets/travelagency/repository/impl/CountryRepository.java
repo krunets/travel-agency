@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
-
+@Deprecated
 @AllArgsConstructor
 @Repository
 public class CountryRepository implements IDatabaseRepository<Country, Integer> {

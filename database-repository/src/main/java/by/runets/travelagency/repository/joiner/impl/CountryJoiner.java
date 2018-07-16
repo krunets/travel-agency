@@ -7,6 +7,8 @@ import by.runets.travelagency.repository.joiner.Joiner;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+
+@Deprecated
 @Component
 public class CountryJoiner implements Joiner<Country> {
 	@Override

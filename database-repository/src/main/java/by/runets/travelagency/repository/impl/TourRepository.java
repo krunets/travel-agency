@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
+@Deprecated
 @AllArgsConstructor
 @Repository("TourRepository")
 public class TourRepository implements IDatabaseRepository<Tour, Integer> {
