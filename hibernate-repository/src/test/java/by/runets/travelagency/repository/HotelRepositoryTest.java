@@ -44,7 +44,7 @@ public class HotelRepositoryTest {
   @Test
   public void testReadAll () {
     final List<Optional<Hotel>> expected =
-        new ArrayList(
+        new ArrayList<> (
             Arrays.asList(
                 Optional.of(
                     new Hotel(1, "Marriot", "123 23 23", 5, new Country())),
