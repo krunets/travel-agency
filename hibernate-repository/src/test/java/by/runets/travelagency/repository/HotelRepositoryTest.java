@@ -63,7 +63,7 @@ public class HotelRepositoryTest {
                         "101 10 01",
                         5,
                         new Country()))));
-    final List<Optional<Hotel>> actual = hotelRepository.readAll("hotel", Hotel.class);
+    final List<Optional<Hotel>> actual = hotelRepository.readAll(Hotel.class);
 
     Assert.assertEquals(expected, actual);
   }

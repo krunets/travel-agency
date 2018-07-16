@@ -43,7 +43,7 @@ public class CountryRepositoryTest {
                 Optional.of(new Country(2, "Usa", null, null)),
                 Optional.of(new Country(3, "France", null, null)),
                 Optional.of(new Country(4, "Italy", null, null))));
-    List<Optional<Country>> actual = countryRepository.readAll("country", Country.class);
+    List<Optional<Country>> actual = countryRepository.readAll(Country.class);
     Assert.assertEquals(actual, expected);
   }
 

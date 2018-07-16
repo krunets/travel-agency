@@ -58,7 +58,7 @@ public class UserRepositoryTest {
 				Optional.of(new User(1, "root", "root", null, null)),
 				Optional.of(new User(2, "admin", "admin", null, null)),
 				Optional.of(new User(3, "traveler1", "traveler1", null, null))));
-	final List<Optional<User>> actual = userRepository.readAll("user", User.class);
+	final List<Optional<User>> actual = userRepository.readAll(User.class);
 
 	Assert.assertEquals(expected, actual);
   }

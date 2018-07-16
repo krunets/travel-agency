@@ -48,7 +48,7 @@ public class ReviewRepositoryTest {
                 Optional.of(new Review(1, "Content 1", null)),
                 Optional.of(new Review(2, "Content 2", null)),
                 Optional.of(new Review(3, "Content 3", null))));
-    final List<Optional<Review>> actual = reviewRepository.readAll("review", Review.class);
+    final List<Optional<Review>> actual = reviewRepository.readAll(Review.class);
 
     Assert.assertEquals(expected, actual);
   }
