@@ -16,7 +16,6 @@ import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
