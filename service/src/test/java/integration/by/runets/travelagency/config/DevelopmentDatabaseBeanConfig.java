@@ -1,29 +1,17 @@
 package integration.by.runets.travelagency.config;
 
-import by.runets.travelagency.util.LoggingAspect;
-import by.runets.travelagency.util.config.ProductionDatabaseBeanConfig;
 import by.runets.travelagency.util.config.ServiceBeanConfig;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.FilterType;
 
 @Configuration
 @AllArgsConstructor
-@Import({DevelopmentDataSourceConfig.class, LoggingAspect.class})
+@EnableAspectJAutoProxy
 @ComponentScan(basePackages = "by.runets.travelagency", excludeFilters = {
-		@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {ServiceBeanConfig.class, ProductionDatabaseBeanConfig.class})
+		@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {ServiceBeanConfig.class/*, ProductionDatabaseBeanConfig.class, ProductionDataSourceConfig.class*/})
 })
 public class DevelopmentDatabaseBeanConfig {
-	@Autowired
-	private final DevelopmentDataSourceConfig dataSourceConfig;
-	
-	public DevelopmentDataSourceConfig getDataSourceConfig () {
-		return dataSourceConfig;
-	}
-	
-	@Bean
-	public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
-		return new NamedParameterJdbcTemplate(dataSourceConfig.hikariDevelopmentDataSource());
-	}
 }
