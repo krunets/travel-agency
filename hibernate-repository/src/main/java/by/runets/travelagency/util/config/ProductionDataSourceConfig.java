@@ -60,7 +60,7 @@ public class ProductionDataSourceConfig {
 		properties.put(HIBERNATE_HBMDD1_AUTO, environment.getProperty(HIBERNATE_HBMDD1_AUTO));
 		properties.put(HIBERNATE_USE_SQL_COMMENTS, environment.getProperty(HIBERNATE_USE_SQL_COMMENTS));
 		properties.put(HIBERNATE_GENERATE_STATISTICS, environment.getProperty(HIBERNATE_GENERATE_STATISTICS));
-		
+
 		localSessionFactoryBean.setHibernateProperties(properties);
 		localSessionFactoryBean.setPackagesToScan(SCAN);
 		

@@ -44,7 +44,7 @@ public class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
 	@Override
 	public Optional<T> read (final Class<T> classType, final Long id) {
 		Session session = sessionFactory.getCurrentSession();
-		return Optional.ofNullable(session.load(classType, id));
+		return Optional.ofNullable(session.get(classType, id));
 	}
 	
 	@Loggable

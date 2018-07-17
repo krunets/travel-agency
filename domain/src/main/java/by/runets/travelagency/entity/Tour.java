@@ -71,6 +71,7 @@ public class Tour {
 	 */
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
+			schema = "travel_agency",
 			name = "tour_m2m_user",
 			joinColumns = {@JoinColumn(name = "t_id")},
 			inverseJoinColumns = {@JoinColumn(name = "u_id")}
@@ -82,6 +83,7 @@ public class Tour {
 	 */
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
+			schema = "travel_agency",
 			name = "tour_m2m_country",
 			joinColumns = {@JoinColumn(name = "t_id")},
 			inverseJoinColumns = {@JoinColumn(name = "c_id")}

@@ -1,6 +1,7 @@
 package integration.by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Country;
+import by.runets.travelagency.hibernate.IDatabaseRepository;
 import by.runets.travelagency.service.IService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import lombok.extern.slf4j.Slf4j;
