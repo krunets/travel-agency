@@ -37,10 +37,10 @@ public class CountryRepositoryTest {
     List<Optional<Country>> expected =
         new ArrayList<>(
             Arrays.asList(
-                Optional.of(new Country(1, "Belarus", null, null)),
-                Optional.of(new Country(2, "Usa", null, null)),
-                Optional.of(new Country(3, "France", null, null)),
-                Optional.of(new Country(4, "Italy", null, null))));
+                Optional.of(new Country(1, "BY", null, null)),
+                Optional.of(new Country(2, "US", null, null)),
+                Optional.of(new Country(3, "FR", null, null)),
+                Optional.of(new Country(4, "IT", null, null))));
     List<Optional<Country>> actual = countryRepository.readAll(Country.class);
     Assert.assertEquals(actual, expected);
   }
@@ -48,7 +48,7 @@ public class CountryRepositoryTest {
   @Test
   public void testReadById() {
     final long id = 1;
-    final Country expected = new Country(id, "Belarus", null, null);
+    final Country expected = new Country(id, "BY", null, null);
     final Country actual = countryRepository.read(Country.class, id).get();
     Assert.assertEquals(expected, actual);
   }

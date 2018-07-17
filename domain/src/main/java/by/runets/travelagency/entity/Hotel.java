@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -22,6 +23,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(exclude = "country")
 public class Hotel {
 	@Id
+	@Min(value = 0)
 	@Column(name = "h_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;

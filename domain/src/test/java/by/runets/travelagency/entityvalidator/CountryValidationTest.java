@@ -13,7 +13,7 @@ import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 
-public class CountryTest {
+public class CountryValidationTest {
 	private static Validator validator;
 	
 	@Before

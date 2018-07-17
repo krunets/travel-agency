@@ -28,6 +28,8 @@
         <p6spy.version>3.7.0</p6spy.version>
         <hibernate.version>5.2.17.Final</hibernate.version>
         <hibernate.validator.version>6.0.10.Final</hibernate.validator.version>
+        <javax.el.api.version>3.0.0</javax.el.api.version>
+        <javax.el.version>2.2.6</javax.el.version>
 
         <jacoco.version>0.8.1</jacoco.version>
         <checkstyle.version>3.0.0</checkstyle.version>
@@ -158,6 +160,16 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate.validator.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${javax.el.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${javax.el.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -273,8 +285,8 @@
                     <output>file</output>
                     <append>true</append>
                     <excludes>
-                        <exclude>domain/src/main/java/by/runets/travelagency/entity/*.java</exclude>
-                        <exclude>service/src/main/java/by/runets/travelagency/exception/*.java</exclude>
+                        <exclude>domain/src/main/java/by/runets/travelagency/*.class</exclude>
+                        <exclude>service/src/main/java/by/runets/travelagency/*.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>

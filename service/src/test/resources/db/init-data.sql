@@ -1,7 +1,7 @@
-INSERT INTO country(c_id, c_name) VALUES(1, 'Belarus');
-INSERT INTO country(c_id, c_name) VALUES(2, 'Usa');
-INSERT INTO country(c_id, c_name) VALUES(3, 'France');
-INSERT INTO country(c_id, c_name) VALUES(4, 'Italy');
+INSERT INTO country(c_id, c_name) VALUES(1, 'BY');
+INSERT INTO country(c_id, c_name) VALUES(2, 'US');
+INSERT INTO country(c_id, c_name) VALUES(3, 'FR');
+INSERT INTO country(c_id, c_name) VALUES(4, 'IT');
 
 INSERT INTO hotel(h_id, h_name, h_phone, h_stars, country) VALUES(1,'Marriot', '123 23 23', 5, 1);
 INSERT INTO hotel(h_id, h_name, h_phone, h_stars, country) VALUES(2,'DoubleTree by Hilton', '232 12 12', 5, 3);

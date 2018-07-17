@@ -6,7 +6,9 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import java.util.List;
 public class Country {
   @Id
   @Column(name = "c_id")
+  @Min(value = 0)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_generator")
   @SequenceGenerator(
     name = "country_generator",
@@ -32,6 +35,7 @@ public class Country {
   private long id;
   /** This is a field which represents a Country name. */
   @NotNull
+  @Size(min = 2, max = 2)
   @Column(name = "c_name")
   private String name;
   /** This is a field which represents a list of hotels. */
