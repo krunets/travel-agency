@@ -3,13 +3,14 @@ package by.runets.travelagency.util.config;
 import by.runets.travelagency.util.annotation.Production;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
+import javax.annotation.Resource;
 import java.util.Properties;
 
 
@@ -32,21 +33,20 @@ public class ProductionDataSourceConfig {
 	private static final String HIBERNATE_GENERATE_STATISTICS = "hibernate.generate_statistics";
 	private static final String SCAN = "by.runets.travelagency.entity";
 	
-	@Autowired
+	@Resource
 	private Environment environment;
 	
 	@Bean
 	public HikariDataSource productionDataSource () {
-		try (HikariDataSource dataSource = new HikariDataSource()) {
-			dataSource.setJdbcUrl(environment.getProperty(URL));
-			dataSource.setUsername(environment.getProperty(USER_NAME));
-			dataSource.setPassword(environment.getProperty(PASS));
-			dataSource.setDriverClassName(environment.getProperty(DRIVER_CLASS_NAME));
-			dataSource.setMaxLifetime(Long.parseLong(environment.getProperty(MAX_LIFE_TIME)));
-			dataSource.setMaximumPoolSize(Integer.parseInt(environment.getProperty(MAX_POOL_SIZE)));
-			dataSource.setConnectionTimeout(Long.parseLong(environment.getProperty(CONNECTION_TIME_OUT)));
-			return dataSource;
-		}
+		HikariDataSource dataSource = new HikariDataSource();
+		dataSource.setJdbcUrl(environment.getProperty(URL));
+		dataSource.setUsername(environment.getProperty(USER_NAME));
+		dataSource.setPassword(environment.getProperty(PASS));
+		dataSource.setDriverClassName(environment.getProperty(DRIVER_CLASS_NAME));
+		dataSource.setMaxLifetime(Long.parseLong(environment.getProperty(MAX_LIFE_TIME)));
+		dataSource.setMaximumPoolSize(Integer.parseInt(environment.getProperty(MAX_POOL_SIZE)));
+		dataSource.setConnectionTimeout(Long.parseLong(environment.getProperty(CONNECTION_TIME_OUT)));
+		return dataSource;
 	}
 	
 	@Bean
@@ -65,5 +65,13 @@ public class ProductionDataSourceConfig {
 		localSessionFactoryBean.setPackagesToScan(SCAN);
 		
 		return localSessionFactoryBean;
+	}
+	
+	
+	@Bean
+	public HibernateTransactionManager hibernateTransactionManager() {
+		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
+		hibernateTransactionManager.setSessionFactory(sessionFactory().getObject());
+		return hibernateTransactionManager;
 	}
 }

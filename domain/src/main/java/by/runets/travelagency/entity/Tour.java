@@ -23,7 +23,7 @@ import java.util.List;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "tour")
+@Table(schema = "travel_agency", name = "tour")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"users", "countries"})

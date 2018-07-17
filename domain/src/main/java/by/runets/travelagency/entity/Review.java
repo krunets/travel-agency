@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "review")
+@Table(schema = "travel_agency", name = "review")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "user")

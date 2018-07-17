@@ -31,8 +31,9 @@ public class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
 	@Override
 	public List<Optional<T>> readAll (final Class<T> classType) {
 		Table table = classType.getAnnotation(Table.class);
+		String fullTableNameWithSchema = table.schema() + "." + table.name();
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = currentSession.createNativeQuery(READ_ALL_QUERY + table.name(), classType);
+		Query query = currentSession.createNativeQuery(READ_ALL_QUERY + fullTableNameWithSchema, classType);
 		List<T> queryResultList = query.getResultList();
 		return queryResultList.stream()
 				.map(Optional::ofNullable)

@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Class that represents the enum of the tour type.
  */
 @Entity
-@Table(name = "tour_type")
+@Table(schema = "travel_agency", name = "tour_type")
 @Getter
 @AllArgsConstructor
 public enum TourType {
