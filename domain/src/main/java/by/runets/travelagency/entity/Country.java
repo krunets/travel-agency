@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(schema = "travel_agency", name = "country")
+@Table(schema = "TRAVEL_AGENCY", name = "country")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"hotels", "tours"})
@@ -29,7 +29,7 @@ public class Country {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_generator")
   @SequenceGenerator(
     name = "country_generator",
-    sequenceName = "country_SEQUENCE",
+    sequenceName = "country_sequence",
     allocationSize = 4
   )
   private long id;
