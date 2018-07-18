@@ -1,7 +1,7 @@
 package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.hibernate.impl.AbstractRepository;
+import by.runets.travelagency.hibernate.IDatabaseRepository;
 import by.runets.travelagency.service.IService;
 import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
@@ -20,10 +20,11 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public class AbstractService<T> implements IService<T, Long> {
+public abstract class AbstractService<T, K> implements IService<T, K> {
 	@Autowired
-	private final AbstractRepository<T> abstractRepository;
 	private final Class<T> classType;
+	@Autowired
+	private final IDatabaseRepository<T, K> abstractRepository;
 	
 	/**
 	 * This is a method which call create method from abstractRepository layer.
@@ -32,7 +33,7 @@ public class AbstractService<T> implements IService<T, Long> {
 	@Loggable
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
-	public Long create(final T entity) {
+	public K create(final T entity) {
 		return abstractRepository.create(entity);
 	}
 	
@@ -60,7 +61,7 @@ public class AbstractService<T> implements IService<T, Long> {
 	@Loggable
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	@Override
-	public T read(final Long id) {
+	public T read(final K id) {
 		return abstractRepository
 				.read(classType, id)
 				.orElseThrow(() -> new ResourceNotFoundException("The entity by id " + id + " does not exist."));

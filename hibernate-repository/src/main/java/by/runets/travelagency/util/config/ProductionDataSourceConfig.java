@@ -1,6 +1,7 @@
 package by.runets.travelagency.util.config;
 
 import by.runets.travelagency.util.annotation.Production;
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -32,21 +33,24 @@ public class ProductionDataSourceConfig {
 	private static final String HIBERNATE_HBMDD1_AUTO = "hibernate.hbm2ddl.auto";
 	private static final String HIBERNATE_GENERATE_STATISTICS = "hibernate.generate_statistics";
 	private static final String SCAN = "by.runets.travelagency.entity";
+	private static final String DIALECT = "hibernate.dialect";
 	
 	@Resource
 	private Environment environment;
 	
 	@Bean
 	public HikariDataSource productionDataSource () {
-		HikariDataSource dataSource = new HikariDataSource();
-		dataSource.setJdbcUrl(environment.getProperty(URL));
-		dataSource.setUsername(environment.getProperty(USER_NAME));
-		dataSource.setPassword(environment.getProperty(PASS));
-		dataSource.setDriverClassName(environment.getProperty(DRIVER_CLASS_NAME));
-		dataSource.setMaxLifetime(Long.parseLong(environment.getProperty(MAX_LIFE_TIME)));
-		dataSource.setMaximumPoolSize(Integer.parseInt(environment.getProperty(MAX_POOL_SIZE)));
-		dataSource.setConnectionTimeout(Long.parseLong(environment.getProperty(CONNECTION_TIME_OUT)));
-		return dataSource;
+		HikariConfig hikariConfig = new HikariConfig();
+		
+		hikariConfig.setJdbcUrl(environment.getProperty(URL));
+		hikariConfig.setUsername(environment.getProperty(USER_NAME));
+		hikariConfig.setPassword(environment.getProperty(PASS));
+		hikariConfig.setDriverClassName(environment.getProperty(DRIVER_CLASS_NAME));
+		hikariConfig.setMaxLifetime(Long.parseLong(environment.getProperty(MAX_LIFE_TIME)));
+		hikariConfig.setMaximumPoolSize(Integer.parseInt(environment.getProperty(MAX_POOL_SIZE)));
+		hikariConfig.setConnectionTimeout(Long.parseLong(environment.getProperty(CONNECTION_TIME_OUT)));
+		
+		return new HikariDataSource(hikariConfig);
 	}
 	
 	@Bean
@@ -60,7 +64,8 @@ public class ProductionDataSourceConfig {
 		properties.put(HIBERNATE_HBMDD1_AUTO, environment.getProperty(HIBERNATE_HBMDD1_AUTO));
 		properties.put(HIBERNATE_USE_SQL_COMMENTS, environment.getProperty(HIBERNATE_USE_SQL_COMMENTS));
 		properties.put(HIBERNATE_GENERATE_STATISTICS, environment.getProperty(HIBERNATE_GENERATE_STATISTICS));
-
+		properties.put(DIALECT, environment.getProperty(DIALECT));
+		
 		localSessionFactoryBean.setHibernateProperties(properties);
 		localSessionFactoryBean.setPackagesToScan(SCAN);
 		
@@ -69,7 +74,7 @@ public class ProductionDataSourceConfig {
 	
 	
 	@Bean
-	public HibernateTransactionManager hibernateTransactionManager() {
+	public HibernateTransactionManager hibernateTransactionManager () {
 		HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
 		hibernateTransactionManager.setSessionFactory(sessionFactory().getObject());
 		return hibernateTransactionManager;

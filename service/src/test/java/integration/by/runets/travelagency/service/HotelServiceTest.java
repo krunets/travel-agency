@@ -2,7 +2,8 @@ package integration.by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
-import by.runets.travelagency.service.impl.HotelService;
+import by.runets.travelagency.exception.ResourceNotFoundException;
+import by.runets.travelagency.service.IService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -14,12 +15,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
+@Transactional
 @RunWith(SpringRunner.class)
 @ActiveProfiles(profiles = "development")
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
@@ -28,14 +31,14 @@ import java.util.List;
 })
 public class HotelServiceTest {
 	@Autowired
-	private HotelService service;
+	private IService<Hotel, Long> hotelService;
 	
 	@Test
 	public void testCreate () {
 		Hotel expected =
 				new Hotel(10, "testName", "+375 29 123 123 123", 5, new Country(1, null, null, null));
-		final long id = service.create(expected);
-		Hotel actual = service.read(id);
+		final long id = hotelService.create(expected);
+		Hotel actual = hotelService.read(id);
 		
 		Assert.assertEquals(expected, actual);
 	}
@@ -45,7 +48,7 @@ public class HotelServiceTest {
 		final long id = 1;
 		Hotel expected =
 				new Hotel(1, "Marriot", "123 23 23", 5, new Country(1, null, null, null));
-		Hotel actual = service.read(id);
+		Hotel actual = hotelService.read(id);
 		Assert.assertEquals(actual, expected);
 	}
 	
@@ -71,34 +74,34 @@ public class HotelServiceTest {
 										"101 10 01",
 										5,
 										new Country())));
-		List<Hotel> actual = service.readAll();
+		List<Hotel> actual = hotelService.readAll();
 		
 		Assert.assertEquals(expected, actual);
 	}
 	
-	@Test
+	@Test(expected = ResourceNotFoundException.class)
 	public void testDelete () {
 		final long id = 1;
-		Hotel expected = service.read(id);
+		Hotel expected = hotelService.read(id);
 		Assert.assertNotNull(expected);
-		service.delete(expected);
+		hotelService.delete(expected);
 		
-		Hotel actual = service.read(id);
+		Hotel actual = hotelService.read(id);
 		Assert.assertNull(actual);
 	}
 	
 	@Test
 	public void testUpdate () {
 		final long id = 1;
-		Hotel expected = service.read(id);
+		Hotel expected = hotelService.read(id);
 		
 		expected.setName("newName");
 		expected.setStars(10);
 		expected.setPhone("111 111 11");
 		
-		service.update(expected);
+		hotelService.update(expected);
 		
-		Hotel actual = service.read(id);
+		Hotel actual = hotelService.read(id);
 		
 		Assert.assertEquals(expected, actual);
 	}

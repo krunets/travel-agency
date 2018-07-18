@@ -1,12 +1,13 @@
 package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.entity.Hotel;
-import by.runets.travelagency.hibernate.impl.HotelRepository;
+import by.runets.travelagency.hibernate.IDatabaseRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HotelService extends AbstractService<Hotel> {
-	public HotelService (HotelRepository hotelRepository, Class<Hotel> classType) {
-		super(hotelRepository, classType);
+public class HotelService extends AbstractService<Hotel, Long> {
+	
+	public HotelService (Class<Hotel> classType, IDatabaseRepository<Hotel, Long> abstractRepository) {
+		super(classType, abstractRepository);
 	}
 }

@@ -33,7 +33,7 @@ public class Country {
     allocationSize = 4
   )
   private long id;
-  /** This is a field which represents a Country name. */
+  /** This is a field which represents a Country short name by ISO_3166. */
   @NotNull
   @Size(min = 2, max = 2)
   @Column(name = "c_name")

@@ -27,9 +27,9 @@ public class DevelopmentHibernateBeanConfig {
 	private static final String HIBERNATE_DIALECT = "hibernate.dialect";
 	private static final String HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
 	private static final String HIBERNATE_USE_SQL_COMMENTS = "hibernate.use_sql_comments";
-	private static final String HIBERNATE_HBMDD1_AUTO = "hibernate.hbm2ddl.auto";
+	private static final String HIBERNATE_HBM2DD1_AUTO = "hibernate.hbm2ddl.auto";
 	private static final String HIBERNATE_GENERATE_STATISTICS = "hibernate.generate_statistics";
-	private static final String SCAN = "by.runets.travelagency.entity.*";
+	private static final String SCAN = "by.runets.travelagency.entity";
 	
 	private Environment environment;
 	
@@ -44,8 +44,7 @@ public class DevelopmentHibernateBeanConfig {
 		
 		return dataSource;
 	}
-	
-	
+
 	@Bean
 	public LocalSessionFactoryBean sessionFactory () {
 		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
@@ -55,7 +54,7 @@ public class DevelopmentHibernateBeanConfig {
 		properties.put(HIBERNATE_SHOW_SQL, environment.getProperty(HIBERNATE_SHOW_SQL));
 		properties.put(HIBERNATE_DIALECT, environment.getProperty(HIBERNATE_DIALECT));
 		properties.put(HIBERNATE_FORMAT_SQL, environment.getProperty(HIBERNATE_FORMAT_SQL));
-		properties.put(HIBERNATE_HBMDD1_AUTO, environment.getProperty(HIBERNATE_HBMDD1_AUTO));
+		properties.put(HIBERNATE_HBM2DD1_AUTO, environment.getProperty(HIBERNATE_HBM2DD1_AUTO));
 		properties.put(HIBERNATE_USE_SQL_COMMENTS, environment.getProperty(HIBERNATE_USE_SQL_COMMENTS));
 		properties.put(HIBERNATE_GENERATE_STATISTICS, environment.getProperty(HIBERNATE_GENERATE_STATISTICS));
 		

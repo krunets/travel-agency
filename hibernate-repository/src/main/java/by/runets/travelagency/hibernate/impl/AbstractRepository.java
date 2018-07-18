@@ -13,10 +13,9 @@ import javax.persistence.Table;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 @Repository
 @AllArgsConstructor
-public class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
+public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
 	private static final String READ_ALL_QUERY = "SELECT * FROM ";
 	
 	@Autowired

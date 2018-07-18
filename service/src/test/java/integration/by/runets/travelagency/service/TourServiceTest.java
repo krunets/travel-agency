@@ -2,7 +2,8 @@ package integration.by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
-import by.runets.travelagency.service.impl.TourService;
+import by.runets.travelagency.exception.ResourceNotFoundException;
+import by.runets.travelagency.service.IService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -20,6 +22,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+@Transactional
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
@@ -29,7 +32,7 @@ import java.util.List;
 })
 public class TourServiceTest {
 	@Autowired
-	private TourService service;
+	private IService<Tour, Long> tourService;
 	
 	@Test
 	public void testCreate () {
@@ -44,8 +47,8 @@ public class TourServiceTest {
 						TourType.ADVENTURE,
 						null,
 						null);
-		final long id = service.create(expected);
-		Tour actual = service.read(id);
+		final long id = tourService.create(expected);
+		Tour actual = tourService.read(id);
 		
 		Assert.assertEquals(expected, actual);
 	}
@@ -61,7 +64,7 @@ public class TourServiceTest {
 								new Tour(4, "photo/img4.png", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.CULTURAL, null, null),
 								new Tour(5, "photo/img5.png", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ECO, null, null)));
 		
-		List<Tour> actual = service.readAll();
+		List<Tour> actual = tourService.readAll();
 		Assert.assertEquals(expected, actual);
 	}
 	
@@ -79,34 +82,34 @@ public class TourServiceTest {
 						TourType.ADVENTURE,
 						null,
 						null);
-		Tour actual = service.read(id);
+		Tour actual = tourService.read(id);
 		
 		Assert.assertEquals(expected, actual);
 	}
 	
-	@Test
+	@Test(expected = ResourceNotFoundException.class)
 	public void testDelete () {
 		final long id = 1;
-		Tour entityToDelete = service.read(id);
+		Tour entityToDelete = tourService.read(id);
 		Assert.assertNotNull(entityToDelete);
 		
-		service.delete(entityToDelete);
+		tourService.delete(entityToDelete);
 		
-		Tour actual = service.read(id);
+		Tour actual = tourService.read(id);
 		Assert.assertNull(actual);
 	}
 	
 	@Test
 	public void testUpdate () {
 		final long id = 1;
-		Tour expected = service.read(id);
+		Tour expected = tourService.read(id);
 		
 		expected.setPhoto("newPhoto");
 		expected.setDate(LocalDate.now());
 		
-		service.update(expected);
+		tourService.update(expected);
 		
-		Tour actual = service.read(id);
+		Tour actual = tourService.read(id);
 		
 		Assert.assertEquals(expected, actual);
 	}
