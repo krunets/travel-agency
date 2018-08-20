@@ -31,12 +31,14 @@
         <hibernate.validator.version>6.0.10.Final</hibernate.validator.version>
         <javax.el.api.version>3.0.0</javax.el.api.version>
         <javax.el.version>2.2.6</javax.el.version>
+        <freemarker.version>2.3.23</freemarker.version>
+        <servlet.version>3.0.1</servlet.version>
 
         <jacoco.version>0.8.1</jacoco.version>
         <checkstyle.version>3.0.0</checkstyle.version>
         <findbugs.version>3.0.5</findbugs.version>
         <sonarqube.version>3.4.0.905</sonarqube.version>
-        <tomcat7.plugin.version>2.3-SNAPSHOT</tomcat7.plugin.version>
+        <maven.war.plugin.version>2.4</maven.war.plugin.version>
     </properties>
     <modules>
         <module>application</module>
@@ -51,6 +53,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- Spring Context Support-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <!-- Spring Core-->
@@ -184,6 +192,19 @@
                 <groupId>org.glassfish.web</groupId>
                 <artifactId>javax.el</artifactId>
                 <version>${javax.el.version}</version>
+            </dependency>
+            <!-- Freemarker -->
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+            <!-- Servlet -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
