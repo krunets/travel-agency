@@ -36,6 +36,7 @@
         <checkstyle.version>3.0.0</checkstyle.version>
         <findbugs.version>3.0.5</findbugs.version>
         <sonarqube.version>3.4.0.905</sonarqube.version>
+        <tomcat7.plugin.version>2.3-SNAPSHOT</tomcat7.plugin.version>
     </properties>
     <modules>
         <module>application</module>
