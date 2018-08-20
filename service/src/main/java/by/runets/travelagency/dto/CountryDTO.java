@@ -26,4 +26,5 @@ public class CountryDTO {
 	@Pattern(regexp = COUNTRY_ISO_3166_REGEXP)
 	@Size(min = 2, max = 2)
 	private String name;
+	
 }

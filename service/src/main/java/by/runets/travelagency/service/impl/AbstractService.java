@@ -42,8 +42,8 @@ public abstract class AbstractService<T, K> implements IService<T, K> {
 	 * @return list of entities.
 	 */
 	@Loggable
-	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	@Override
+	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	public List<T> readAll() {
 		return abstractRepository
 				.readAll(classType)
@@ -59,8 +59,8 @@ public abstract class AbstractService<T, K> implements IService<T, K> {
 	 * @return entity.
 	 */
 	@Loggable
-	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	@Override
+	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 	public T read(final K id) {
 		return abstractRepository
 				.read(classType, id)
@@ -72,8 +72,8 @@ public abstract class AbstractService<T, K> implements IService<T, K> {
 	 * @param entity generic exemplar.
 	 */
 	@Loggable
-	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public void update(final T entity) {
 		abstractRepository.update(entity);
 	}
@@ -83,8 +83,8 @@ public abstract class AbstractService<T, K> implements IService<T, K> {
 	 * @param entity generic exemplar.
 	 */
 	@Loggable
-	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
+	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public void delete(final T entity) {
 		abstractRepository.delete(entity);
 	}

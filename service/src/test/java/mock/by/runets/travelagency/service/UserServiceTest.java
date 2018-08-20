@@ -3,11 +3,17 @@ package mock.by.runets.travelagency.service;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.hibernate.impl.UserRepository;
 import by.runets.travelagency.service.impl.UserService;
+import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -18,11 +24,19 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
+@ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
+@ActiveProfiles(profiles = "development")
+
 public class UserServiceTest {
 	@Mock
 	private UserRepository repository;
-	@InjectMocks
 	private UserService service;
+	
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+		service = new UserService(User.class, repository);
+	}
 	
 	@Test
 	public void testReadAll () {

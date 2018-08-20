@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * Class that represents the entity of the user.
- *
  */
 
 @Data
@@ -44,6 +43,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@BatchSize(size = 5)
 	private List<Review> reviews;
+	
 	@ManyToMany(mappedBy = "users")
 	@BatchSize(size = 5)
 	private List<Tour> tours;

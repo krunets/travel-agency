@@ -26,7 +26,7 @@ import java.util.List;
 @ActiveProfiles(profiles = "development")
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @SqlGroup({
-		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"}),
+		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
 })
 public class CountryServiceTest {
 	@Autowired

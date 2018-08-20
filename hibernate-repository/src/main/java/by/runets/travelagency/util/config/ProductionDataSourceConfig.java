@@ -30,7 +30,7 @@ public class ProductionDataSourceConfig {
 	private static final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 	private static final String HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
 	private static final String HIBERNATE_USE_SQL_COMMENTS = "hibernate.use_sql_comments";
-	private static final String HIBERNATE_HBMDD1_AUTO = "hibernate.hbm2ddl.auto";
+	private static final String HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 	private static final String HIBERNATE_GENERATE_STATISTICS = "hibernate.generate_statistics";
 	private static final String SCAN = "by.runets.travelagency.entity";
 	private static final String DIALECT = "hibernate.dialect";
@@ -61,7 +61,7 @@ public class ProductionDataSourceConfig {
 		Properties properties = new Properties();
 		properties.put(HIBERNATE_SHOW_SQL, environment.getProperty(HIBERNATE_SHOW_SQL));
 		properties.put(HIBERNATE_FORMAT_SQL, environment.getProperty(HIBERNATE_FORMAT_SQL));
-		properties.put(HIBERNATE_HBMDD1_AUTO, environment.getProperty(HIBERNATE_HBMDD1_AUTO));
+		properties.put(HIBERNATE_HBM2DDL_AUTO, environment.getProperty(HIBERNATE_HBM2DDL_AUTO));
 		properties.put(HIBERNATE_USE_SQL_COMMENTS, environment.getProperty(HIBERNATE_USE_SQL_COMMENTS));
 		properties.put(HIBERNATE_GENERATE_STATISTICS, environment.getProperty(HIBERNATE_GENERATE_STATISTICS));
 		properties.put(DIALECT, environment.getProperty(DIALECT));

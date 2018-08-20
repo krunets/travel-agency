@@ -23,7 +23,7 @@ public class LoggingAspect {
 	
 	@Pointcut("@annotation(by.runets.travelagency.util.annotation.Loggable)")
 	public void allAnnotatedMethods () {
-		//		This is method which scan all annotated classes or methods and add to pointcut.
+		//This is method scans all annotated classes or methods and add to pointcut.
 	}
 	
 	@Around(value = "allAnnotatedMethods()")

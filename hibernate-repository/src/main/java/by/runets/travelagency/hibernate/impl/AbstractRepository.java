@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @Repository
 @AllArgsConstructor
 public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
