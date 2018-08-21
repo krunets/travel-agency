@@ -11,9 +11,8 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = "by.runets.travelagency")
+@ComponentScan(basePackages = "by.runets.travelagency.*")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
-	
 	
 	@Bean
 	public FreeMarkerViewResolver freeMarkerViewResolver() {

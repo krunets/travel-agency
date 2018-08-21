@@ -10,6 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
 import java.util.Properties;
@@ -18,6 +19,7 @@ import java.util.Properties;
 @Production
 @Configuration
 @AllArgsConstructor
+@EnableTransactionManagement
 @PropertySource("classpath:properties/production-database-config.properties")
 public class ProductionDataSourceConfig {
 	private static final String URL = "jdbc.url";
