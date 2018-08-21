@@ -44,7 +44,7 @@ public class ReviewRepositoryTest {
 	@Test
 	public void testReadAll () {
 		final List<Optional<Review>> expected =
-				new ArrayList(
+				new ArrayList<>(
 						Arrays.asList(
 								Optional.of(new Review(1, "Content 1", null)),
 								Optional.of(new Review(2, "Content 2", null)),

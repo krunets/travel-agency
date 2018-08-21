@@ -47,4 +47,7 @@ public class User {
 	@ManyToMany(mappedBy = "users")
 	@BatchSize(size = 5)
 	private List<Tour> tours;
+	
+	@Enumerated(EnumType.STRING)
+	private Role role;
 }

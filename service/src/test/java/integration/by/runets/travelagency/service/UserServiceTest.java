@@ -1,9 +1,11 @@
 package integration.by.runets.travelagency.service;
 
+import by.runets.travelagency.entity.Role;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.service.IService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 @Transactional
-
+@Slf4j
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @ActiveProfiles(profiles = "development")
@@ -32,7 +34,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testCreate () {
-		User expected = new User(10, "testLogin", "testPassword", null, null);
+		User expected = new User(10, "testLogin", "testPassword", null, null, Role.ADMIN);
 		final long id = userService.create(expected);
 		User actual = userService.read(id);
 		Assert.assertEquals(expected, actual);
@@ -41,7 +43,7 @@ public class UserServiceTest {
 	@Test
 	public void testReadById () {
 		final long id = 1;
-		User expected = new User(1, "root", "root", null, null);
+		User expected = new User(1, "root", "root", null, null, Role.ADMIN);
 		User actual = userService.read(id);
 		
 		Assert.assertEquals(expected, actual);
@@ -52,11 +54,11 @@ public class UserServiceTest {
 		List<User> expected =
 				new ArrayList<>(
 						Arrays.asList(
-								new User(1, "root", "root", null, null),
-								new User(2, "admin", "admin", null, null),
-								new User(3, "traveler1", "traveler1", null, null)));
+								new User(1, "root", "root", null, null, Role.ADMIN),
+								new User(2, "admin", "admin", null, null, Role.ADMIN),
+								new User(3, "traveler1", "traveler1", null, null, Role.MEMBER)));
 		List<User> actual = userService.readAll();
-		
+		log.error(actual + "");
 		Assert.assertEquals(expected, actual);
 	}
 	

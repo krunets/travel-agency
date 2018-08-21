@@ -1,6 +1,7 @@
 package by.runets.travelagency.repository;
 
 
+import by.runets.travelagency.entity.Role;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.hibernate.IDatabaseRepository;
 import by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig;
@@ -33,7 +34,7 @@ public class UserRepositoryTest {
 	
 	@Test
 	public void testCreate () {
-		final Optional<User> expected = Optional.of(new User(10, "testLogin", "testPassword", null, null));
+		final Optional<User> expected = Optional.of(new User(10, "testLogin", "testPassword", null, null, Role.MEMBER));
 		final long id = userRepository.create(expected.get());
 		final Optional<User> actual = userRepository.read(User.class, id);
 		Assert.assertEquals(expected, actual);
@@ -42,7 +43,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testReadById () {
 		final long id = 1;
-		final Optional<User> expected = Optional.of(new User(id, "root", "root", null, null));
+		final Optional<User> expected = Optional.of(new User(id, "root", "root", null, null, Role.ADMIN));
 		final Optional<User> actual = userRepository.read(User.class, id);
 		
 		Assert.assertEquals(expected, actual);
@@ -51,11 +52,11 @@ public class UserRepositoryTest {
 	@Test
 	public void testReadAll () {
 		final List<Optional<User>> expected =
-				new ArrayList(
+				new ArrayList<>(
 						Arrays.asList(
-								Optional.of(new User(1, "root", "root", null, null)),
-								Optional.of(new User(2, "admin", "admin", null, null)),
-								Optional.of(new User(3, "traveler1", "traveler1", null, null))));
+								Optional.of(new User(1, "root", "root", null, null, Role.ADMIN)),
+								Optional.of(new User(2, "admin", "admin", null, null, Role.ADMIN)),
+								Optional.of(new User(3, "traveler1", "traveler1", null, null, Role.MEMBER))));
 		final List<Optional<User>> actual = userRepository.readAll(User.class);
 		
 		Assert.assertEquals(expected, actual);

@@ -9,9 +9,9 @@ INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, country) VALUES(
 INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, country) VALUES(4,'Aqua-Minsk', '123 11 11', 2, 1);
 INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, country) VALUES(5,'Trump International Hotel Washington DC', '101 10 01', 5, 2);
 
-INSERT INTO travel_agency.user(u_id, login, password) VALUES(1, 'root', 'root');
-INSERT INTO travel_agency.user(u_id, login, password) VALUES(2, 'admin', 'admin');
-INSERT INTO travel_agency.user(u_id, login, password) VALUES(3, 'traveler1', 'traveler1');
+INSERT INTO travel_agency.user(u_id, login, password, role) VALUES(1, 'root', 'root', 'ADMIN');
+INSERT INTO travel_agency.user(u_id, login, password, role) VALUES(2, 'admin', 'admin', 'ADMIN');
+INSERT INTO travel_agency.user(u_id, login, password, role) VALUES(3, 'traveler1', 'traveler1', 'MEMBER');
 
 INSERT INTO travel_agency.review(r_id, content, user) VALUES(1, 'Content 1', 1);
 INSERT INTO travel_agency.review(r_id, content, user) VALUES(2, 'Content 2', 2);

@@ -6,9 +6,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+	private static final String SPRING_PROFILES_ACTIVE = "spring.profiles.active";
+	private static final String ACTIVE_PROFILE = "production";
+	
 	@Override
 	protected Class<?>[] getRootConfigClasses () {
-		return new Class<?>[]{AppConfig.class};
+		return new Class<?>[]{WebAppConfig.class};
 	}
 	
 	@Override
@@ -24,6 +27,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	@Override
 	public void onStartup (ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
-		servletContext.setInitParameter("spring.profiles.active", "production");
+		servletContext.setInitParameter(SPRING_PROFILES_ACTIVE, ACTIVE_PROFILE);
 	}
 }

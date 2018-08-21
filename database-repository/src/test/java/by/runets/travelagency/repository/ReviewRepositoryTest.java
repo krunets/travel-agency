@@ -35,7 +35,7 @@ public class ReviewRepositoryTest {
   @Test
   public void testCreate() {
     Review expected =
-        new Review(10, "testContent", new User(1, null, null, null, null));
+        new Review(10, "testContent", new User(1, null, null, null, null, null));
     repository.create(expected);
     Review actual = repository.read((int) expected.getId()).get();
     Assert.assertEquals(expected, actual);

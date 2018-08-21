@@ -80,7 +80,7 @@ public class TourRepositoryTest {
 	@Test
 	public void testReadAll () {
 		List<Optional<Tour>> expected =
-				new ArrayList(
+				new ArrayList<>(
 						Arrays.asList(
 								Optional.of(
 										new Tour(

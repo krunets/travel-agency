@@ -56,7 +56,7 @@ public class ReviewServiceTest {
 	@Test
 	public void testCreate () {
 		Review expected =
-				new Review(10, "testContent", new User(1, null, null, null, null));
+				new Review(10, "testContent", new User(1, null, null, null, null, null));
 		final long id = reviewService.create(expected);
 		Review actual = reviewService.read(id);
 		Assert.assertEquals(expected, actual);

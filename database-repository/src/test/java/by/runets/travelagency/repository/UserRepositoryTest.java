@@ -1,8 +1,10 @@
 package by.runets.travelagency.repository;
 
+import by.runets.travelagency.entity.Role;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.repository.impl.UserRepository;
 import by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @ActiveProfiles(profiles = "development")
@@ -33,7 +35,7 @@ public class UserRepositoryTest {
 	
 	@Test
 	public void testCreate () {
-		Optional<User> expected = Optional.of(new User(10, "testLogin", "testPassword", null, null));
+		Optional<User> expected = Optional.of(new User(10, "testLogin", "testPassword", null, null, null));
 		userRepository.create(expected.get());
 		Optional<User> actual = userRepository.read(10);
 		Assert.assertEquals(expected, actual);
@@ -41,7 +43,7 @@ public class UserRepositoryTest {
 	
 	@Test
 	public void testReadById () {
-		Optional<User> expected = Optional.of(new User(1, "root", "root", null, null));
+		Optional<User> expected = Optional.of(new User(1, "root", "root", null, null, null));
 		Optional<User> actual = userRepository.read(1);
 		
 		Assert.assertEquals(expected, actual);
@@ -52,11 +54,11 @@ public class UserRepositoryTest {
 		List<Optional<User>> expected =
 				new ArrayList<>(
 						Arrays.asList(
-								Optional.of(new User(1, "root", "root", null, null)),
-								Optional.of(new User(2, "admin", "admin", null, null)),
-								Optional.of(new User(3, "traveler1", "traveler1", null, null))));
+								Optional.of(new User(1, "root", "root", null, null, null)),
+								Optional.of(new User(2, "admin", "admin", null, null, null)),
+								Optional.of(new User(3, "traveler1", "traveler1", null, null, null))));
 		List<Optional<User>> actual = userRepository.readAll();
-		
+		log.error(actual +  "");
 		Assert.assertEquals(expected, actual);
 	}
 	

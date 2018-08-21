@@ -51,7 +51,8 @@ CREATE TABLE travel_agency.user
 (
   u_id BIGINT  PRIMARY KEY auto_increment NOT NULL,
   login varchar(255) NOT NULL,
-  password varchar(255) NOT NULL
+  password varchar(255) NOT NULL,
+  role  varchar(255) NOT NULL
 );
 ALTER TABLE travel_agency.hotel ADD FOREIGN KEY (country) REFERENCES travel_agency.country (c_id);
 ALTER TABLE travel_agency.review ADD FOREIGN KEY (user) REFERENCES travel_agency.user (u_id);
