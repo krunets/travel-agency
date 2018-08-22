@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class UserController {
-	@PostMapping("/login")
-	public void checkLogin(@RequestBody UserDTO userDTO) {
+	/*@PostMapping(value = "/login", produces = "application/json")
+	public String checkLogin(@RequestBody UserDTO userDTO) {
 		log.error(userDTO + "");
-	}
+		return "homepage";
+	}*/
 }

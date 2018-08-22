@@ -7,12 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @Slf4j
 public class PageController {
-	@GetMapping({"/login", "/"})
+	@GetMapping("/")
+	public String start () {
+		return "redirect:login";
+	}
+	
+	
+	@GetMapping("/login")
 	public String loginPage () {
 		return "login";
 	}
 	
-	@GetMapping("/home")
+	@GetMapping("/homepage")
 	public String homePage () {
 		return "homepage";
 	}

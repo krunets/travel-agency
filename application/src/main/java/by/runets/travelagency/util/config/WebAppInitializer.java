@@ -1,5 +1,6 @@
 package by.runets.travelagency.util.config;
 
+import by.runets.travelagency.util.security.WebSecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
@@ -11,7 +12,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	
 	@Override
 	protected Class<?>[] getRootConfigClasses () {
-		return new Class<?>[]{WebAppConfig.class};
+		return new Class<?>[]{WebAppConfig.class, WebSecurityConfig.class};
 	}
 	
 	@Override

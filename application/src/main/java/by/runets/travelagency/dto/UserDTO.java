@@ -13,8 +13,6 @@ public class UserDTO {
 	private static final String PASS_REGEXP = "^(?=.*?[A-Z])(?=(.*[a-z])+)(?=(.*[\\d]){4,}).{6,20}$";
 	
 	@NotNull
-	private long id;
-	@NotNull
 	@Pattern(regexp = LOGIN_REGEXP, message = "The login must contain at least 1 uppercase character.")
 	private String login;
 	
