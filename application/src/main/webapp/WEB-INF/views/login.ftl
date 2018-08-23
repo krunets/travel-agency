@@ -6,20 +6,29 @@
 <body>
 <#include "include/header.ftl">
 <h1>Login</h1>
-<form action="/login" method="post">
-    <div>
-        <label for="login">Login</label>
-        <input type="text" name="login" id="login" required autofocus/>
+<form method="post">
+    <#if error>
+        <p>Login or Password is incorrect!</p>
+    </#if>
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"><div>
+        <label for="username">Login</label>
+        <input type="text" name="username" id="username" required autofocus/>
     </div>
     <div>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required/>
     </div>
+<#--
     <button type="button" onclick="logIn()">Sign in</button>
+-->
     <button type="submit">Submit</button>
 </form>
 <#include "include/footer.ftl">
+<#--
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+-->
+<#--
 <script src="/resources/js/controller.js" type="text/javascript"></script>
+-->
 </body>
 </html>
