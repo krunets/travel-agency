@@ -36,14 +36,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure (HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/", "/homepage")
+				.antMatchers("/homepage")
 				.authenticated()
+				.antMatchers("/").permitAll()
 				.and()
 				.formLogin()
 				.loginPage("/login")
+				.defaultSuccessUrl("/homepage")
 				.and()
 				.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/")
 				.permitAll();
 	}
 }

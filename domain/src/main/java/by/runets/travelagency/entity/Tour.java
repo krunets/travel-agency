@@ -28,6 +28,12 @@ import java.util.List;
 @AllArgsConstructor
 @ToString(exclude = {"users", "countries"})
 @EqualsAndHashCode(exclude = {"users", "countries"})
+@NamedQueries(
+		@NamedQuery(
+				name = "FIND_TOUR_BY_COUNTRY_AND_DURATION",
+				query = "from Tour t WHERE t.countries.c_id = :countryId AND t.date = :startDate AND t.duration = :duration"
+		)
+)
 public class Tour {
 	@Id
 	@Column(name = "t_id")

@@ -1,0 +1,16 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.padding-top-fourth {
+    padding-top: 25%;
+}
+
+.booking-color {
+    color:#003580;
+}
