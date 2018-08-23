@@ -1,11 +1,13 @@
 package by.runets.travelagency.entity;
 
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -22,6 +24,9 @@ import java.util.List;
 @AllArgsConstructor
 @ToString(exclude = {"reviews", "tours"})
 @EqualsAndHashCode(exclude = {"reviews", "tours"})
+@NamedQueries(@NamedQuery(
+		name = "FIND_BY_LOGIN", query = "from User u WHERE u.login=:login"
+))
 public class User {
 	@Id
 	@Column(name = "u_id")

@@ -17,8 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @ActiveProfiles(profiles = "production")
 @ContextConfiguration(classes = WebAppConfig.class)*/
 public class Test {
-	@Autowired
-	private IService<Country, Long> countryService;
 	
 /*	@org.junit.Test
 	public void testReadAll() {

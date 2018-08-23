@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -31,7 +32,7 @@ import java.util.Optional;
 public class UserRepositoryTest {
 	@Autowired
 	private IDatabaseRepository<User, Long> userRepository;
-	
+
 	@Test
 	public void testCreate () {
 		final Optional<User> expected = Optional.of(new User(10, "testLogin", "testPassword", null, null, Role.MEMBER));
@@ -84,6 +85,13 @@ public class UserRepositoryTest {
 		
 		final User actual = userRepository.read(User.class, id).get();
 		
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void readByNameQuery() {
+		final Optional<User> expected = Optional.of(new User(2, "admin", "admin", null, null, Role.ADMIN));
+		final Optional<User> actual = userRepository.readByNameQuery("FIND_BY_LOGIN", "login", "admin").get(0);
 		Assert.assertEquals(expected, actual);
 	}
 }

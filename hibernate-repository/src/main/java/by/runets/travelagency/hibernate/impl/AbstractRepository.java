@@ -58,4 +58,16 @@ public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Lo
 	public void delete (final T entity) {
 		sessionFactory.getCurrentSession().delete(entity);
 	}
+	
+	@Loggable
+	@Override
+	public List<Optional<T>> readByNameQuery (String namedQuery, final String field, final String value) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.getNamedQuery(namedQuery);
+		query.setParameter(field, value);
+		List<T> queryResultList = query.getResultList();
+		return queryResultList.stream()
+				.map(Optional::ofNullable)
+				.collect(Collectors.toList());
+	}
 }

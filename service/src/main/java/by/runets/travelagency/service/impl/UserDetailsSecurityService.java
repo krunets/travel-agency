@@ -2,23 +2,32 @@ package by.runets.travelagency.service.impl;
 
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.hibernate.IUserRepository;
+import by.runets.travelagency.hibernate.IDatabaseRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.security.core.userdetails.User.withUsername;
 
 @Service
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+@AllArgsConstructor
+public class UserDetailsSecurityService implements UserDetailsService {
+	
+	private static final String NAMED_QUERY = "FIND_BY_LOGIN";
+	private static final String FIELD = "login";
 	
 	@Autowired
-	private IUserRepository<User, String> userRepository;
+	private IDatabaseRepository<User, Long> userRepository;
 	
+	@Transactional
 	@Override
 	public UserDetails loadUserByUsername (String login) throws UsernameNotFoundException {
-		return userRepository.findUserByLogin(login)
+		return userRepository.readByNameQuery(NAMED_QUERY, FIELD, login)
+				.get(0)
 				.map(user -> withUsername(login)
 						.password(user.getPassword())
 						.roles(user.getRole().name())

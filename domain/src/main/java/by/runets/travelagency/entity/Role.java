@@ -1,6 +1,13 @@
 package by.runets.travelagency.entity;
 
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority{
 	ADMIN,
-	MEMBER
+	MEMBER;
+	
+	@Override
+	public String getAuthority () {
+		return this.name();
+	}
 }
