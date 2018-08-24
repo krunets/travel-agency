@@ -2,7 +2,7 @@ package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
-import by.runets.travelagency.hibernate.IDatabaseRepository;
+import by.runets.travelagency.hibernate.ITourRepository;
 import by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -35,8 +35,11 @@ import java.util.Optional;
 				scripts = {"classpath:db/init-data.sql"}
 		))
 public class TourRepositoryTest {
+	/*@Autowired
+	private IDatabaseRepository<Tour, Long> tourRepository;*/
+	
 	@Autowired
-	private IDatabaseRepository<Tour, Long> tourRepository;
+	private ITourRepository<Tour, Long> tourRepository;
 	
 	@Test
 	public void testCreate () {
@@ -164,6 +167,23 @@ public class TourRepositoryTest {
 		
 		Tour actual = tourRepository.read(Tour.class, id).get();
 		
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testReadTourByDateAndDuration () {
+		List<Optional<Tour>> expected = new ArrayList<>(Arrays.asList(Optional.of(new Tour(
+				1,
+				"photo/img1.png",
+				LocalDate.parse("2018-07-17"),
+				Duration.ofDays(10),
+				"description1",
+				new BigDecimal(100),
+				TourType.ADVENTURE,
+				null,
+				null))));
+		List<Optional<Tour>> actual = tourRepository.findTourByCountryAndDateAndDuration("FR", LocalDate.of(2018, 7, 17), Duration.ofDays(10));
+			
 		Assert.assertEquals(expected, actual);
 	}
 }

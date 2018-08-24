@@ -34,6 +34,7 @@
         <freemarker.version>2.3.23</freemarker.version>
         <servlet.version>3.1.0</servlet.version>
         <jackson.version>2.9.6</jackson.version>
+        <modelmapper.version>0.7.5</modelmapper.version>
 
         <jacoco.version>0.8.1</jacoco.version>
         <checkstyle.version>3.0.0</checkstyle.version>
@@ -221,6 +222,12 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
+            </dependency>
+            <!-- ModelMapper -->
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

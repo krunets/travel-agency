@@ -33,7 +33,7 @@
     </#if>
     <#if springMacroRequestContext.requestUri?contains("/") && !springMacroRequestContext.requestUri?contains("/login") && !springMacroRequestContext.requestUri?contains("/homepage")>
         <form action="/login">
-            <button type="submit" class="btn btn-outline-danger">Sign In</button>
+            <button type="submit" class="btn btn-warning">Sign In</button>
         </form>
     </#if>
     </div>

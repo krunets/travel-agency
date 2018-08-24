@@ -1,5 +1,6 @@
 package by.runets.travelagency.controller;
 
+import by.runets.travelagency.dto.SearchTourDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ public class PageController {
 	public String start () {
 		return "index";
 	}
-		
+	
 	@GetMapping("/login")
 	public String loginPage (@RequestParam(value = "error", required = false) String error,
 													 @RequestParam(value = "logout", required = false) String logout,

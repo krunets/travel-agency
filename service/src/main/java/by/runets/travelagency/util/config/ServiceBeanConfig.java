@@ -1,6 +1,7 @@
 package by.runets.travelagency.util.config;
 
 import by.runets.travelagency.entity.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -32,5 +33,10 @@ public class ServiceBeanConfig {
 	@Bean
 	public Class<User> userClass() {
 		return User.class;
+	}
+	
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
 	}
 }

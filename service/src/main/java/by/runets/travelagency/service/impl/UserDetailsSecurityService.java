@@ -23,8 +23,8 @@ public class UserDetailsSecurityService implements UserDetailsService {
 	@Autowired
 	private IDatabaseRepository<User, Long> userRepository;
 	
-	@Transactional
 	@Override
+	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername (String login) throws UsernameNotFoundException {
 		return userRepository.readByNameQuery(NAMED_QUERY, FIELD, login)
 				.get(0)

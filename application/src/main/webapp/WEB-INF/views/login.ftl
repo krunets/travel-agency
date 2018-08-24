@@ -55,13 +55,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <#--<script src="/resources/uui/jquery/jquery-2.2.4.min.js"></script>
-&lt;#&ndash;
 <script src="/resources/uui/jquery/jquery-3.3.1.min.js"></script>
-&ndash;&gt;
 <script src="/resources/uui/jquery-ui/jquery-ui.min.js"></script>
-<script src="/resources/uui/bootstrap/js/bootstrap.min.js"></script>-->
-<#--
-<script src="/resources/js/controller.js" type="text/javascript"></script>
--->
+<script src="/resources/uui/bootstrap/js/bootstrap.min.js"></script>&ndash;&gt;
+<script src="/resources/js/controller.js" type="text/javascript"></script>-->
 </body>
 </html>

@@ -14,7 +14,7 @@ public class UserDTO {
 	
 	@NotNull
 	@Pattern(regexp = LOGIN_REGEXP, message = "The login must contain at least 1 uppercase character.")
-	private String login;
+	private String username;
 	
 	@NotNull
 	@Pattern(

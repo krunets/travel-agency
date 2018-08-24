@@ -17,7 +17,6 @@ import java.util.List;
 
 /**
  * Class that represents the entity of the tour.
- *
  */
 @Data
 @Entity
@@ -30,8 +29,12 @@ import java.util.List;
 @EqualsAndHashCode(exclude = {"users", "countries"})
 @NamedQueries(
 		@NamedQuery(
-				name = "FIND_TOUR_BY_COUNTRY_AND_DURATION",
-				query = "from Tour t WHERE t.countries.c_id = :countryId AND t.date = :startDate AND t.duration = :duration"
+				name = "FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION",
+				query = "FROM Tour t " +
+						"JOIN FETCH t.countries country " +
+						"WHERE country.name=:countryName " +
+						"AND t.date = :date " +
+						"AND t.duration = :duration"
 		)
 )
 public class Tour {

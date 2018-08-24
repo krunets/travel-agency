@@ -1,18 +1,26 @@
-var userDTO = {
-    login: "",
-    password: ""
+var searchTourDTO = {
+    countryName: "",
+    startTourDate: "",
+    tourDuration: ""
 };
 
-var logIn = function () {
-    userDTO.login = $('#login').val();
-    userDTO.password = $('#password').val();
+var registration = function () {
+
+};
+
+var searchTour = function () {
+    searchTourDTO.countryName = $('#countryName').val();
+    searchTourDTO.startTourDate = $('#startTourDate').val();
+    searchTourDTO.tourDuration = $('#tourDuration').val();
+    var token = $("meta[name='_csrf']").attr("content");
     $.ajax({
         type: 'POST',
-        url: '/login',
+        url: '/tour/search',
         accept: "application/json",
         contentType: "application/json",
-        data: JSON.stringify(userDTO),
+        data: JSON.stringify(searchTourDTO),
         dataType: "json",
+        headers: {'X-CSRF-Token': token},
         success: function (data) {
             console.log(data);
         },
@@ -20,9 +28,9 @@ var logIn = function () {
             console.log(error);
         }
     });
-
 };
 
-var registration = function () {
-
-};
+$("input[placeholder]").each(function () {
+    $(this).attr('size', $(this).attr('placeholder').length);
+});
+$('#datepicker').uui_datepicker({todayHighlight: true});

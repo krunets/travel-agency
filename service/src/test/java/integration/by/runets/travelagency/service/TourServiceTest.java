@@ -1,9 +1,10 @@
 package integration.by.runets.travelagency.service;
 
+import by.runets.travelagency.dto.TourDTO;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.service.IService;
+import by.runets.travelagency.service.ITourService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,6 +23,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 @Transactional
 
 @RunWith(SpringRunner.class)
@@ -32,7 +34,7 @@ import java.util.List;
 })
 public class TourServiceTest {
 	@Autowired
-	private IService<Tour, Long> tourService;
+	private ITourService<Tour, Long> tourService;
 	
 	@Test
 	public void testCreate () {
@@ -110,6 +112,27 @@ public class TourServiceTest {
 		tourService.update(expected);
 		
 		Tour actual = tourService.read(id);
+		
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testFindTourByCountryAndDateAndDuration () {
+		final String country = "FR";
+		final LocalDate startTourDate = LocalDate.of(2018, 7, 17);
+		final Duration tourDuration = Duration.ofDays(10);
+		
+		
+		List<TourDTO> expected = new ArrayList<>(Arrays.asList(new TourDTO(
+				1,
+				"photo/img1.png",
+				LocalDate.parse("2018-07-17"),
+				Duration.ofDays(10),
+				"description1",
+				new BigDecimal(100),
+				TourType.ADVENTURE,
+				null)));
+		List<TourDTO> actual = tourService.findTourByCountryAndDateAndDuration(country, startTourDate, tourDuration);
 		
 		Assert.assertEquals(expected, actual);
 	}

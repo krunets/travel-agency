@@ -1,6 +1,7 @@
 package by.runets.travelagency.util.config;
 
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -35,4 +36,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/views/");
 		return freeMarkerConfigurer;
 	}
+	
+
 }

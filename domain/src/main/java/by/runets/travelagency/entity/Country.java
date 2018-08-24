@@ -22,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString(exclude = {"hotels", "tours"})
 @EqualsAndHashCode(exclude = {"hotels", "tours"})
+@NamedQueries(@NamedQuery(name = "FIND_COUNTRY_BY_NAME", query = "from Country c WHERE c.name=:countryName"))
 public class Country {
   @Id
   @Column(name = "c_id")
