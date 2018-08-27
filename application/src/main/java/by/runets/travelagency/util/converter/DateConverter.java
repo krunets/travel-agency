@@ -1,7 +1,10 @@
 package by.runets.travelagency.util.converter;
 
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 
+@Service
 public class DateConverter {
 	public static LocalDate convert (String date) {
 		String[] splittedDate = date.split("/");
@@ -9,6 +12,6 @@ public class DateConverter {
 		String day = splittedDate[1];
 		String year = splittedDate[2];
 		
-		return LocalDate.of(new Integer(year), new Integer(month), new Integer(day));
+		return LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
 	}
 }

@@ -4,6 +4,10 @@ var searchTourDTO = {
     tourDuration: ""
 };
 
+var tourDTO = {
+
+};
+
 var registration = function () {
 
 };
@@ -23,6 +27,7 @@ var searchTour = function () {
         headers: {'X-CSRF-Token': token},
         success: function (data) {
             console.log(data);
+
         },
         error: function (error) {
             console.log(error);

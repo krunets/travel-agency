@@ -1,6 +1,5 @@
 package integration.by.runets.travelagency.service;
 
-import by.runets.travelagency.dto.TourDTO;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.exception.ResourceNotFoundException;
@@ -123,7 +122,7 @@ public class TourServiceTest {
 		final Duration tourDuration = Duration.ofDays(10);
 		
 		
-		List<TourDTO> expected = new ArrayList<>(Arrays.asList(new TourDTO(
+		List<Tour> expected = new ArrayList<>(Arrays.asList(new Tour(
 				1,
 				"photo/img1.png",
 				LocalDate.parse("2018-07-17"),
@@ -131,8 +130,9 @@ public class TourServiceTest {
 				"description1",
 				new BigDecimal(100),
 				TourType.ADVENTURE,
+				null,
 				null)));
-		List<TourDTO> actual = tourService.findTourByCountryAndDateAndDuration(country, startTourDate, tourDuration);
+		List<Tour> actual = tourService.findTourByCountryAndDateAndDuration(country, startTourDate, tourDuration);
 		
 		Assert.assertEquals(expected, actual);
 	}
