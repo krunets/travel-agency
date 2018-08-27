@@ -1,6 +1,5 @@
 package by.runets.travelagency.dto;
 
-import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.TourType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +23,7 @@ public class TourDTO {
 	@NotNull
 	private LocalDate date;
 	@NotNull
-	private Duration duration;
+	private long duration;
 	@NotNull
 	@Size(min = 10, max = 256)
 	private String description;
@@ -32,8 +31,4 @@ public class TourDTO {
 	private BigDecimal cost;
 	@NotNull
 	private TourType tourType;
-	@NotNull
-	private List<Country> countries;
-	
-
 }

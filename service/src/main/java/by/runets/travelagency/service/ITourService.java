@@ -8,5 +8,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface ITourService<T, K> extends IService<T, K> {
-	List<TourDTO> findTourByCountryAndDateAndDuration(final String countryName, final LocalDate startTourDate, final Duration tourDuration);
+	List<Tour> findTourByCountryAndDateAndDuration(final String countryName, final LocalDate startTourDate, final Duration tourDuration);
 }

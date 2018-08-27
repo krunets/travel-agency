@@ -1,17 +1,13 @@
 package by.runets.travelagency.service.impl;
 
-import by.runets.travelagency.dto.SearchTourDTO;
-import by.runets.travelagency.dto.TourDTO;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.hibernate.IDatabaseRepository;
 import by.runets.travelagency.hibernate.ITourRepository;
 import by.runets.travelagency.service.ITourService;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Type;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
@@ -22,8 +18,6 @@ import java.util.stream.Collectors;
 public class TourService extends AbstractService<Tour, Long> implements ITourService<Tour, Long> {
 	@Autowired
 	private ITourRepository<Tour, Long> tourRepository;
-	@Autowired
-	private ModelMapper modelMapper;
 	
 	public TourService (Class<Tour> classType, IDatabaseRepository<Tour, Long> abstractRepository) {
 		super(classType, abstractRepository);
@@ -32,9 +26,13 @@ public class TourService extends AbstractService<Tour, Long> implements ITourSer
 	
 	
 	@Override
-	public List<TourDTO> findTourByCountryAndDateAndDuration (String countryName, LocalDate startTourDate, Duration tourDuration) {
-		Type listType = new TypeToken<List<TourDTO>>(){}.getType();
-		List<Optional<Tour>> tours = tourRepository.findTourByCountryAndDateAndDuration(countryName, startTourDate, tourDuration);
-		return 	modelMapper.map(tours, listType);
+	@Transactional(readOnly = true)
+	public List<Tour> findTourByCountryAndDateAndDuration (String countryName, LocalDate startTourDate, Duration tourDuration) {
+		List<Optional<Tour>> tours = tourRepository
+				.findTourByCountryAndDateAndDuration(countryName, startTourDate, tourDuration);
+		return tours.stream()
+				.filter(Optional::isPresent)
+				.map(Optional::get)
+				.collect(Collectors.toList());
 	}
 }

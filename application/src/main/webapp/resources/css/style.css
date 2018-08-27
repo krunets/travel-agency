@@ -15,7 +15,7 @@
     color: #003580;
 }
 
-input {
+input, select {
     display: block;
     width: 100%;
     height: calc(2.25rem + 2px);
@@ -38,5 +38,10 @@ input {
 .search-form-background {
     background-color: #ededed;
 
+}
+
+.image-size {
+    width: 100px;
+    height: 100px;
 }
 

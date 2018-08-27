@@ -25,7 +25,7 @@ import java.util.List;
 @Table(schema = "travel_agency", name = "tour")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"users", "countries"})
+@ToString(exclude = {"users"/*, "countries"*/})
 @EqualsAndHashCode(exclude = {"users", "countries"})
 @NamedQueries(
 		@NamedQuery(

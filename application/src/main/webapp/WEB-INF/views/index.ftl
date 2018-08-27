@@ -1,3 +1,4 @@
+<#import "/spring.ftl" as spring />
 <html>
 <head>
     <title>Login page</title>
@@ -19,20 +20,30 @@
                         <h1>Find Deals for Any Season</h1>
                         <p>From cozy country homes to funky city apartments</p>
                     </div>
-                    <form action="/tour/search" class="form-inline" method="post">
+                    <form name="searchFormDTO" action="/tour/search" class="form-inline" method="post">
+                        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
                         <div class="form-group group mx-sm-3 mb-2">
-                            <input type="text" name="countryName" id="countryName" class="form-control" placeholder="Where are you going?">
+                        <#--<input type="text" name="countryName" id="countryName" class="form-control"
+                               placeholder="Where are you going?">-->
+                            <select name="countryName">
+                                <option disabled selected>Where are you going?</option>
+                            <#list countriesDTO as country>
+                                <option value="${country.code}">${country.name}</option>
+                            </#list>
+                            </select>
                         </div>
                         <div class="form-group mx-sm-3 mb-2">
                             <div id="datepicker" class="date uui-datepicker date-button">
-                                <input type="text" id="startTourDate" name="startTourDate" class="uui-form-element" placeholder="When are going to start tour?"/>
+                                <input autocomplete="off" type="text" id="startTourDate" name="startTourDate"
+                                       class="uui-form-element" placeholder="When are going to start tour?"/>
                                 <span class="input-group-addon uui-button">
                             <i class="fa fa-calendar white"></i>
                          </span>
                             </div>
                         </div>
                         <div class="form-group mb-2 group mx-sm-3">
-                            <input class="form-control" type="number" placeholder="How many days are going?" name="tourDuration" id="tourDuration" min="1">
+                            <input class="form-control" type="number" placeholder="How many days are going?"
+                                   name="tourDuration" id="tourDuration" min="1">
                         </div>
                         <button type="submit" class="btn btn-primary mb-2">Search</button>
                     </form>
@@ -41,13 +52,109 @@
         </div>
     </div>
 </div>
+
+<#-- <div class="card" style="width: 18rem; height: 200px; padding: 60px">
+       <img class="card-img-top" src="${tour.photo}" alt="Card image cap">
+       <div class="card-body">
+           <h5 class="card-title">${tour.description}</h5>
+           <p class="card-text">Cost: ${tour.cost}$</p>
+           <p class="card-text">Date: ${tour.date}</p>
+           <p class="card-text">Duration: ${tour.duration}</p>
+       &lt;#&ndash;  <#list tour.countries as country>
+             <p class="card-text">Country: ${country.name}</p>
+         </#list>&ndash;&gt;
+       </div>
+   </div>-->
+<div class="container">
+    <div class="row">
+    <#if !checkTours>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Photo</th>
+                <th scope="col">Date</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Description</th>
+                <th scope="col">Duration/Days</th>
+                <th scope="col">Tourtype</th>
+            </tr>
+            </thead>
+            <tbody>
+                <#list tours as tour>
+                <tr>
+                    <td><img class="image-size" src="${tour.photo}"></td>
+                    <td>${tour.date}</td>
+                    <td>${tour.cost}$</td>
+                    <td>${tour.description}</td>
+                    <td>${tour.duration.toDays()}</td>
+                    <td>${tour.tourType}</td>
+                <#-- <td>
+                     <#list tour.countries as country>
+                         <p>Country: ${country.name}</p>
+                     </#list>
+                 </td>-->
+                </tr>
+                </#list>
+            </tbody>
+        </table>
+    </#if>
+    </div>
+</div>
+<#if checkTours>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Date</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Description</th>
+        <th scope="col">Duration/Days</th>
+        <th scope="col">Tourtype</th>
+    </tr>
+    </thead>
+    <tbody>
+        <#list criteriaTour as tour>
+        <tr>
+            <td><img class="image-size" src="${tour.photo}"></td>
+            <td>${tour.date}</td>
+            <td>${tour.cost}$</td>
+            <td>${tour.description}</td>
+            <td>${tour.duration.toDays()}</td>
+            <td>${tour.tourType}</td>
+        <#-- <td>
+             <#list tour.countries as country>
+                 <p>Country: ${country.name}</p>
+             </#list>
+         </td>-->
+        </tr>
+        </#list>
+    </tbody>
+</table>
+</#if>
 <#include "include/footer.ftl">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 <script src="/resources/uui/js/lib/components/bootstrap-datepicker.js"></script>
 <script src="/resources/uui/js/uui-datepicker.min.js"></script>
-<script src="/resources/js/controller.js" type="text/javascript"></script>
+<script>
+    $("input[placeholder]").each(function () {
+        $(this).attr('size', $(this).attr('placeholder').length);
+    });
+    $('#datepicker').uui_datepicker({todayHighlight: true});
+
+</script>
+<script>
+    $('.uui-carousel').carousel({
+        interval: 2000
+    });
+</script>
 </body>
 </html>
