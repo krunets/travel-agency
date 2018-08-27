@@ -19,7 +19,7 @@
                         <h1>Find Deals for Any Season</h1>
                         <p>From cozy country homes to funky city apartments</p>
                     </div>
-                    <form class="form-inline">
+                    <form action="/tour/search" class="form-inline" method="post">
                         <div class="form-group group mx-sm-3 mb-2">
                             <input type="text" name="countryName" id="countryName" class="form-control" placeholder="Where are you going?">
                         </div>
@@ -34,7 +34,7 @@
                         <div class="form-group mb-2 group mx-sm-3">
                             <input class="form-control" type="number" placeholder="How many days are going?" name="tourDuration" id="tourDuration" min="1">
                         </div>
-                        <button type="button" onclick="searchTour()" class="btn btn-primary mb-2">Search</button>
+                        <button type="submit" class="btn btn-primary mb-2">Search</button>
                     </form>
                 </div>
             </div>

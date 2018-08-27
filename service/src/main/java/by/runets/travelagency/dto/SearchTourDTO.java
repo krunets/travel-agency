@@ -6,6 +6,7 @@ import lombok.NonNull;
 import javax.validation.constraints.Pattern;
 
 @Data
+
 public class SearchTourDTO {
 	private static final String REGEX = "[0-9]+";
 	

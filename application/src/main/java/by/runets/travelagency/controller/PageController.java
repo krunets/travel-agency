@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PageController {
 	@GetMapping("/")
-	public String start () {
+	public String start (Model model) {
+		model.addAttribute("searchTourDTO", new SearchTourDTO());
 		return "index";
 	}
 	
