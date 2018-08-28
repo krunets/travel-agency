@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Slf4j
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -43,7 +45,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void  testReadAll () {
-		List<Country> actual = countryService.readAll();
+		List<Country> actual = countryService.readAll(DEFAULT_PAGINATION_SIZE);
 		
 		List<Country> expected =
 				new ArrayList<>(

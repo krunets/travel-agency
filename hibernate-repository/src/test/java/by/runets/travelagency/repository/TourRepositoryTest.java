@@ -24,6 +24,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Slf4j
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -141,7 +143,7 @@ public class TourRepositoryTest {
 												null,
 												null))));
 		
-		List<Optional<Tour>> actual = tourRepository.readAll(Tour.class);
+		List<Optional<Tour>> actual = tourRepository.readAll(Tour.class, DEFAULT_PAGINATION_SIZE);
 		Assert.assertEquals(expected, actual);
 	}
 	

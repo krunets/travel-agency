@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Slf4j
 @Transactional
 @RunWith(SpringRunner.class)
@@ -74,7 +76,7 @@ public class HotelServiceTest {
 										"101 10 01",
 										5,
 										new Country())));
-		List<Hotel> actual = hotelService.readAll();
+		List<Hotel> actual = hotelService.readAll(DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);
 	}

@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -39,9 +40,9 @@ public class UserServiceTest {
 	
 	@Test
 	public void testReadAll () {
-		when(repository.readAll(User.class)).thenReturn(new ArrayList<Optional<User>>());
+		when(repository.readAll(User.class, DEFAULT_PAGINATION_SIZE)).thenReturn(new ArrayList<Optional<User>>());
 		
-		assertThat(service.readAll(), is(notNullValue()));
+		assertThat(service.readAll(DEFAULT_PAGINATION_SIZE), is(notNullValue()));
 	}
 	
 	@Test

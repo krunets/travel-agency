@@ -20,6 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Transactional
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -57,7 +60,7 @@ public class UserServiceTest {
 								new User(1, "root", "root", null, null, Role.ADMIN),
 								new User(2, "admin", "admin", null, null, Role.ADMIN),
 								new User(3, "traveler1", "traveler1", null, null, Role.MEMBER)));
-		List<User> actual = userService.readAll();
+		List<User> actual = userService.readAll(DEFAULT_PAGINATION_SIZE);
 		log.error(actual + "");
 		Assert.assertEquals(expected, actual);
 	}

@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "development")
@@ -49,7 +51,7 @@ public class ReviewRepositoryTest {
 								Optional.of(new Review(1, "Content 1", null)),
 								Optional.of(new Review(2, "Content 2", null)),
 								Optional.of(new Review(3, "Content 3", null))));
-		final List<Optional<Review>> actual = reviewRepository.readAll(Review.class);
+		final List<Optional<Review>> actual = reviewRepository.readAll(Review.class, DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);
 	}

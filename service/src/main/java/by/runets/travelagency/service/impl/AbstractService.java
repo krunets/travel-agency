@@ -47,9 +47,9 @@ public abstract class AbstractService<T, K> implements IService<T, K> {
 	@Loggable
 	@Override
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-	public List<T> readAll () {
+	public List<T> readAll (final int paginationSize) {
 		return abstractRepository
-				.readAll(classType)
+				.readAll(classType, paginationSize)
 				.stream()
 				.filter(Optional::isPresent)
 				.map(Optional::get)
@@ -98,9 +98,9 @@ public abstract class AbstractService<T, K> implements IService<T, K> {
 	@Loggable
 	@Override
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-	public List<T> readAllByField (final String namedQuery, final String field, final String value) {
+	public List<T> readAllByField (final String namedQuery, final String field, final String value, final int paginationSize) {
 		return abstractRepository
-				.readByNameQuery(namedQuery, field, value)
+				.readByNameQuery(namedQuery, field, value, paginationSize)
 				.stream()
 				.filter(Optional::isPresent)
 				.map(Optional::get)

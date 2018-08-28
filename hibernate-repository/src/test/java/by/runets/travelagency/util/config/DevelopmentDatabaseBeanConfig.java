@@ -11,4 +11,5 @@ import org.springframework.context.annotation.FilterType;
 		@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = ProductionDatabaseBeanConfig.class),
 })
 public class DevelopmentDatabaseBeanConfig {
+	public static final int DEFAULT_PAGINATION_SIZE = 10;
 }

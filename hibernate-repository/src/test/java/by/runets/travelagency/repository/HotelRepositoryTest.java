@@ -20,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "development")
@@ -63,7 +65,7 @@ public class HotelRepositoryTest {
 												"101 10 01",
 												5,
 												new Country()))));
-		final List<Optional<Hotel>> actual = hotelRepository.readAll(Hotel.class);
+		final List<Optional<Hotel>> actual = hotelRepository.readAll(Hotel.class, DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);
 	}

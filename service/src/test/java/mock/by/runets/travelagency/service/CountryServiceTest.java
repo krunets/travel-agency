@@ -12,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
+import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -58,7 +59,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testReadAll () {
-		when(repository.readAll(Country.class)).thenReturn(new ArrayList<>());
-		assertThat(service.readAll(), is(notNullValue()));
+		when(repository.readAll(Country.class, DEFAULT_PAGINATION_SIZE)).thenReturn(new ArrayList<>());
+		assertThat(service.readAll(DEFAULT_PAGINATION_SIZE), is(notNullValue()));
 	}
 }

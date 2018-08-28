@@ -19,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Transactional
 
 @RunWith(SpringRunner.class)
@@ -48,7 +51,7 @@ public class ReviewServiceTest {
 								new Review(1, "Content 1", null),
 								new Review(2, "Content 2", null),
 								new Review(3, "Content 3", null)));
-		List<Review> actual = reviewService.readAll();
+		List<Review> actual = reviewService.readAll(DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);
 	}

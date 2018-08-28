@@ -26,6 +26,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.runets.travelagency.util.config.WebAppConfig.DEFAULT_PAGINATION_SIZE;
+
 @Slf4j
 @Controller
 public class PageController {
@@ -36,7 +38,7 @@ public class PageController {
 
 	@GetMapping("/")
 	public String start (Model model) {
-		List<Tour> tours = tourService.readAll();
+		List<Tour> tours = tourService.readAll(DEFAULT_PAGINATION_SIZE);
 		
 		model.addAttribute("checkTours", false);
 		model.addAttribute("criteriaTour", "");

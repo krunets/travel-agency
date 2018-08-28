@@ -45,3 +45,11 @@ input, select {
     height: 100px;
 }
 
+
+.margin-bottom {
+    margin-bottom: 25px;
+}
+
+.custom-margin {
+    margin: 20px;
+}

@@ -22,6 +22,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "development")
@@ -58,7 +60,7 @@ public class UserRepositoryTest {
 								Optional.of(new User(1, "root", "root", null, null, Role.ADMIN)),
 								Optional.of(new User(2, "admin", "admin", null, null, Role.ADMIN)),
 								Optional.of(new User(3, "traveler1", "traveler1", null, null, Role.MEMBER))));
-		final List<Optional<User>> actual = userRepository.readAll(User.class);
+		final List<Optional<User>> actual = userRepository.readAll(User.class, DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);
 	}
@@ -91,7 +93,7 @@ public class UserRepositoryTest {
 	@Test
 	public void readByNameQuery() {
 		final Optional<User> expected = Optional.of(new User(2, "admin", "admin", null, null, Role.ADMIN));
-		final Optional<User> actual = userRepository.readByNameQuery("FIND_BY_LOGIN", "login", "admin").get(0);
+		final Optional<User> actual = userRepository.readByNameQuery("FIND_BY_LOGIN", "login", "admin", DEFAULT_PAGINATION_SIZE).get(0);
 		Assert.assertEquals(expected, actual);
 	}
 }

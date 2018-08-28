@@ -10,6 +10,8 @@ import org.springframework.context.annotation.*;
 		excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {ProductionDatabaseBeanConfig.class, ProductionDataSourceConfig.class})
 )
 public class DevelopmentDatabaseBeanConfig {
+	public static final int DEFAULT_PAGINATION_SIZE = 10;
+	
 	@Bean
 	public Class<Country> countryClass() {
 		return Country.class;

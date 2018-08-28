@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "development")
@@ -39,7 +41,7 @@ public class CountryRepositoryTest {
 								Optional.of(new Country(2, "US", null, null)),
 								Optional.of(new Country(3, "FR", null, null)),
 								Optional.of(new Country(4, "IT", null, null))));
-		List<Optional<Country>> actual = countryRepository.readAll(Country.class);
+		List<Optional<Country>> actual = countryRepository.readAll(Country.class, DEFAULT_PAGINATION_SIZE);
 		Assert.assertEquals(actual, expected);
 	}
 	

@@ -11,7 +11,7 @@ import java.util.List;
 public interface IService<T, K extends Object> {
 	K create (final T entity);
 	
-	List<T> readAll ();
+	List<T> readAll (final int paginationSize);
 	
 	T read (final K id);
 	
@@ -19,5 +19,5 @@ public interface IService<T, K extends Object> {
 	
 	void delete (final T entity);
 	
-	List<T> readAllByField (final String namedQuery, final String field, final String value);
+	List<T> readAllByField (final String namedQuery, final String field, final String value, final int paginationSize);
 }

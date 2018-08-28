@@ -52,23 +52,17 @@
         </div>
     </div>
 </div>
-
-<#-- <div class="card" style="width: 18rem; height: 200px; padding: 60px">
-       <img class="card-img-top" src="${tour.photo}" alt="Card image cap">
-       <div class="card-body">
-           <h5 class="card-title">${tour.description}</h5>
-           <p class="card-text">Cost: ${tour.cost}$</p>
-           <p class="card-text">Date: ${tour.date}</p>
-           <p class="card-text">Duration: ${tour.duration}</p>
-       &lt;#&ndash;  <#list tour.countries as country>
-             <p class="card-text">Country: ${country.name}</p>
-         </#list>&ndash;&gt;
-       </div>
-   </div>-->
 <div class="container">
-    <div class="row">
+    <div class="margin-bottom">
     <#if !checkTours>
-        <table class="table table-striped">
+        <table id="example" class="table table-striped">
+            <div class="custom-margin">
+                <form action="/tour/pagination" name="pagination" method="post">
+                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+                    <input name="size" type="hidden" value="">
+                    <button type="button" name="pagination_button" class="btn btn-primary float-right">Paginate</button>
+                </form>
+            </div>
             <thead>
             <tr>
                 <th scope="col">Photo</th>
@@ -131,6 +125,7 @@
     </tbody>
 </table>
 </#if>
+
 <#include "include/footer.ftl">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -144,16 +139,25 @@
         crossorigin="anonymous"></script>
 <script src="/resources/uui/js/lib/components/bootstrap-datepicker.js"></script>
 <script src="/resources/uui/js/uui-datepicker.min.js"></script>
+<script src="/resources/uui/bootstrap/js/jquery.dataTables.min.js"></script>
+<script src="/resources/uui/bootstrap/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $("input[placeholder]").each(function () {
         $(this).attr('size', $(this).attr('placeholder').length);
     });
     $('#datepicker').uui_datepicker({todayHighlight: true});
-
-</script>
-<script>
     $('.uui-carousel').carousel({
         interval: 2000
+    });
+    $(document).ready(function () {
+        $('#example').DataTable();
+        $('#example_filter').hide();
+        $('#example_length').css("width", "100px");
+        $('example_length').css("width", "100px");
+        $("button[name = 'pagination_button']").click(function () {
+            $("input[name='size']").val( $("select[name='example_length']").val());
+            $( "form[name='pagination']" ).submit();
+        })
     });
 </script>
 </body>

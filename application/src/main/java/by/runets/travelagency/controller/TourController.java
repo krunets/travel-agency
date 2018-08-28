@@ -1,6 +1,7 @@
 package by.runets.travelagency.controller;
 
 import by.runets.travelagency.dto.CountryDTO;
+import by.runets.travelagency.dto.PaginationDTO;
 import by.runets.travelagency.dto.SearchTourDTO;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.service.ITourService;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
@@ -27,7 +29,7 @@ public class TourController {
 	private List<CountryDTO> countryDTOs;
 	
 	@PostMapping(value = "/tour/search")
-	public String seacrhTour (@ModelAttribute("searchTourDTO") SearchTourDTO searchTourDTO, Model model) {
+	public String seacrhTour (@Valid @ModelAttribute("searchTourDTO") SearchTourDTO searchTourDTO, Model model) {
 		List<Tour> tours = tourService.findTourByCountryAndDateAndDuration(
 				searchTourDTO.getCountryName(),
 				dateConverter.convert(searchTourDTO.getStartTourDate()),
@@ -37,6 +39,17 @@ public class TourController {
 		model.addAttribute("criteriaTour", tours);
 		model.addAttribute("countriesDTO", countryDTOs);
 		
+		return "index";
+	}
+	
+	@PostMapping(value = "/tour/pagination")
+	public String paginateTour (@ModelAttribute("pagination") PaginationDTO paginationDTO, Model model) {
+		log.error(paginationDTO.toString());
+		List<Tour> tours = tourService.readAll(paginationDTO.getSize());
+		model.addAttribute("checkTours", false);
+		model.addAttribute("criteriaTour", "");
+		model.addAttribute("tours", tours);
+		model.addAttribute("countriesDTO", countryDTOs);
 		return "index";
 	}
 }

@@ -29,11 +29,12 @@ public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Lo
 	}
 	
 	@Override
-	public List<Optional<T>> readAll (final Class<T> classType) {
+	public List<Optional<T>> readAll (final Class<T> classType, final int paginationSize) {
 		Table table = classType.getAnnotation(Table.class);
 		String fullTableNameWithSchema = table.schema() + "." + table.name();
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query query = currentSession.createNativeQuery(READ_ALL_QUERY + fullTableNameWithSchema, classType);
+		query.setMaxResults(paginationSize);
 		List<T> queryResultList = query.getResultList();
 		return queryResultList.stream()
 				.map(Optional::ofNullable)
@@ -61,10 +62,11 @@ public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Lo
 	
 	@Loggable
 	@Override
-	public List<Optional<T>> readByNameQuery (String namedQuery, final String field, final String value) {
+	public List<Optional<T>> readByNameQuery (String namedQuery, final String field, final String value, final int paginationSize) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.getNamedQuery(namedQuery);
 		query.setParameter(field, value);
+		query.setMaxResults(paginationSize);
 		List<T> queryResultList = query.getResultList();
 		return queryResultList.stream()
 				.map(Optional::ofNullable)

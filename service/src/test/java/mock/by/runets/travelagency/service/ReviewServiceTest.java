@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
+import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -25,9 +26,9 @@ public class ReviewServiceTest {
 	
 	@Test
 	public void testReadAll () {
-		when(repository.readAll(Review.class)).thenReturn(new ArrayList<>());
+		when(repository.readAll(Review.class, DEFAULT_PAGINATION_SIZE)).thenReturn(new ArrayList<>());
 		
-		assertThat(service.readAll(), is(notNullValue()));
+		assertThat(service.readAll(DEFAULT_PAGINATION_SIZE), is(notNullValue()));
 	}
 	
 	@Test

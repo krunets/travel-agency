@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+
 @Transactional
 
 @RunWith(SpringRunner.class)
@@ -65,7 +67,7 @@ public class TourServiceTest {
 								new Tour(4, "photo/img4.png", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.CULTURAL, null, null),
 								new Tour(5, "photo/img5.png", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ECO, null, null)));
 		
-		List<Tour> actual = tourService.readAll();
+		List<Tour> actual = tourService.readAll(DEFAULT_PAGINATION_SIZE);
 		Assert.assertEquals(expected, actual);
 	}
 	

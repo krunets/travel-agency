@@ -16,7 +16,7 @@ import static org.springframework.security.core.userdetails.User.withUsername;
 @Service
 @AllArgsConstructor
 public class UserDetailsSecurityService implements UserDetailsService {
-	
+	private static final int DEFAULT_USER_PAGINATION = 1;
 	private static final String NAMED_QUERY = "FIND_BY_LOGIN";
 	private static final String FIELD = "login";
 	
@@ -26,7 +26,7 @@ public class UserDetailsSecurityService implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername (String login) throws UsernameNotFoundException {
-		return userRepository.readByNameQuery(NAMED_QUERY, FIELD, login)
+		return userRepository.readByNameQuery(NAMED_QUERY, FIELD, login, DEFAULT_USER_PAGINATION)
 				.get(0)
 				.map(user -> withUsername(login)
 						.password(user.getPassword())

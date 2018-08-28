@@ -9,9 +9,9 @@ import java.util.Optional;
  */
 public interface IDatabaseRepository<T, K extends Object> {
 	K create (final T entity);
-	List<Optional<T>> readAll (final Class<T> classType);
+	List<Optional<T>> readAll (final Class<T> classType, final int paginationSize);
 	Optional<T> read (final Class<T> classType, final K id);
 	void update (final T entity);
 	void delete (final T entity);
-	List<Optional<T>> readByNameQuery(final String namedQuery, final String field, final String value);
+	List<Optional<T>> readByNameQuery(final String namedQuery, final String field, final String value, final int paginationSize);
 }

@@ -21,6 +21,8 @@ import java.util.List;
 @Configuration
 @ComponentScan(basePackages = "by.runets.travelagency.*")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
+	public static final int DEFAULT_PAGINATION_SIZE = 10;
+	public static final int DEFAULT_COUNTRY_PAGINATION_SIZE = 500;
 	@Autowired
 	private IService<Country, Long> countryService;
 	@Autowired
@@ -49,7 +51,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public List<CountryDTO> countryDTOs () {
-		List<Country> countries = countryService.readAll();
+		List<Country> countries = countryService.readAll(DEFAULT_COUNTRY_PAGINATION_SIZE);
 		return countryConverter.convert(countries);
 	}
 }
