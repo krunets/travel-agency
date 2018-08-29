@@ -25,12 +25,15 @@
                 </div>
             </li>
         </ul>
-    <#if springMacroRequestContext.requestUri?contains("/homepage")>
+    <#if springMacroRequestContext.requestUri?contains("/admin/home") || springMacroRequestContext.requestUri?contains("/user/home")>
         <form action="/logout">
-            <button type="submit" class="btn btn-outline-success">Logout</button>
+            <button type="submit" class="btn btn-success">Logout</button>
         </form>
     </#if>
-    <#if springMacroRequestContext.requestUri?contains("/") && !springMacroRequestContext.requestUri?contains("/login") && !springMacroRequestContext.requestUri?contains("/homepage")>
+    <#if springMacroRequestContext.requestUri?contains("/")
+    && !springMacroRequestContext.requestUri?contains("/login")
+    && !springMacroRequestContext.requestUri?contains("/admin/home")
+    && !springMacroRequestContext.requestUri?contains("/user/home")>
         <form action="/login">
             <button type="submit" class="btn btn-warning">Sign In</button>
         </form>

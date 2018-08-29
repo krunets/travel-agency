@@ -1,10 +1,12 @@
 package by.runets.travelagency.util.security;
 
+import by.runets.travelagency.util.handler.SuccessUrlHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,9 +18,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Slf4j
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
+	@Autowired
+	private SuccessUrlHandler successUrlHandler;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder () {
@@ -36,16 +41,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure (HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/homepage").authenticated()
+				.antMatchers("/admin_home", "user_home").authenticated()
 				.antMatchers("/", "/tour*").permitAll()
 				.and()
 				.formLogin()
 				.loginPage("/login")
+				.successHandler(successUrlHandler)
+/*
 				.defaultSuccessUrl("/homepage")
+*/
 				.and()
-				.logout()
+				.logout().deleteCookies("JSESSIONID")
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/")
-				.permitAll();
+				.permitAll()
+				.and()
+				.rememberMe().key("uniqueAndSecret");
 	}
 }

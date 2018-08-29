@@ -53,3 +53,16 @@ input, select {
 .custom-margin {
     margin: 20px;
 }
+
+input[type=checkbox] {
+    transform: scale(0.5);
+}
+
+.margin-left-label {
+    margin-left: 25px;
+}
+
+.margin-left-checkbox{
+    margin-top: -1.9rem;
+    margin-left: -34.15rem;
+}

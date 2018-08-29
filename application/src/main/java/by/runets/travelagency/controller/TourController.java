@@ -44,7 +44,6 @@ public class TourController {
 	
 	@PostMapping(value = "/tour/pagination")
 	public String paginateTour (@ModelAttribute("pagination") PaginationDTO paginationDTO, Model model) {
-		log.error(paginationDTO.toString());
 		List<Tour> tours = tourService.readAll(paginationDTO.getSize());
 		model.addAttribute("checkTours", false);
 		model.addAttribute("criteriaTour", "");

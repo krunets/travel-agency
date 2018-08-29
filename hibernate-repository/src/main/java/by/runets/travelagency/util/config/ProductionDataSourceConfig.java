@@ -39,7 +39,7 @@ public class ProductionDataSourceConfig {
 	
 	@Resource
 	private Environment environment;
-	
+		
 	@Bean
 	public HikariDataSource productionDataSource () {
 		HikariConfig hikariConfig = new HikariConfig();

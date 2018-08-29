@@ -7,7 +7,7 @@
 </head>
 <body>
 <#include "include/header.ftl">
-<p>Homepage</p>
+<p>UserHomePage</p>
 
 <#include "include/footer.ftl">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

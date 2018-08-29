@@ -4,6 +4,7 @@ import by.runets.travelagency.entity.Role;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.exception.ResourceNotFoundException;
 import by.runets.travelagency.service.IService;
+import by.runets.travelagency.service.IUserService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -32,8 +33,11 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
 })
 public class UserServiceTest {
+	private static final String NAMED_QUERY = "FIND_BY_LOGIN";
+	private static final String FIELD = "login";
+	
 	@Autowired
-	private IService<User, Long> userService;
+	private IUserService<User, Long> userService;
 	
 	@Test
 	public void testCreate () {
@@ -89,5 +93,23 @@ public class UserServiceTest {
 		User actual = userService.read(id);
 		
 		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void registerExistUser() {
+		User user = new User();
+		user.setLogin("admin");
+		
+		Assert.assertFalse(userService.registerUserAccount(user));
+	}
+	
+	
+	@Test
+	public void registerNotExistUser() {
+		User expected = new User(10, "testLogin", "testPassword", null, null, Role.MEMBER);
+		Assert.assertTrue(userService.registerUserAccount(expected));
+		
+		User actual = userService.readAllByField(NAMED_QUERY, FIELD, "testLogin", DEFAULT_PAGINATION_SIZE).get(0);
+		Assert.assertEquals(actual, expected);
 	}
 }

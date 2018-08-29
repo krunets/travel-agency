@@ -30,7 +30,7 @@ import java.util.List;
 public class User {
 	@Id
 	@Column(name = "u_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	/**
 	 * This is a field which represents a user login.

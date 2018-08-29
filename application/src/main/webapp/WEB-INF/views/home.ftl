@@ -1,4 +1,4 @@
-<#import "/spring.ftl" as spring />
+<#import "/spring.ftl" as spring/>
 <html>
 <head>
     <title>Login page</title>
@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/uui/css/lib/components/datepicker3.css"/>
-    <meta name="_csrf" content="${_csrf.token}"/>
-    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
 <#include "include/header.ftl">
+<a href="?lang=en_US">EN</a>
+<a href="?lang=ru_RU">RU</a>
 <div class="search-form-background ">
     <div class="container">
         <div class="row">
@@ -65,7 +65,7 @@
             </div>
             <thead>
             <tr>
-                <th scope="col">Photo</th>
+                <th scope="col"><@spring.message "photo.message"/></th>
                 <th scope="col">Date</th>
                 <th scope="col">Cost</th>
                 <th scope="col">Description</th>
@@ -155,8 +155,8 @@
         $('#example_length').css("width", "100px");
         $('example_length').css("width", "100px");
         $("button[name = 'pagination_button']").click(function () {
-            $("input[name='size']").val( $("select[name='example_length']").val());
-            $( "form[name='pagination']" ).submit();
+            $("input[name='size']").val($("select[name='example_length']").val());
+            $("form[name='pagination']").submit();
         })
     });
 </script>
