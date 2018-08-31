@@ -55,7 +55,9 @@ public class PageController {
 	
 	@GetMapping("/admin/home")
 	@PreAuthorize("hasRole('ADMIN')")
-	public String adminHomePage () {
+	public String adminHomePage (Model model) {
+		model.addAttribute("getUsers", false);
+		model.addAttribute("users", "");
 		return "admin_homepage";
 	}
 	
