@@ -4,10 +4,11 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/resources/uui/css/sb-admin.min.css"/>
 </head>
 <body>
 <#include "include/header.ftl">
-<p>Admin homepage</p>
+<#include "include/admin_sidebar.ftl">
 
 <#include "include/footer.ftl">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -19,5 +20,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<script src="/resources/uui/js/sb-admin.min.js"></script>
+<script src="/resources/js/controller.js"></script>
 </body>
 </html>

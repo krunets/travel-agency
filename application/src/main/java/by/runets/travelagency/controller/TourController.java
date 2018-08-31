@@ -39,7 +39,7 @@ public class TourController {
 		model.addAttribute("criteriaTour", tours);
 		model.addAttribute("countriesDTO", countryDTOs);
 		
-		return "index";
+		return "home";
 	}
 	
 	@PostMapping(value = "/tour/pagination")
@@ -49,6 +49,6 @@ public class TourController {
 		model.addAttribute("criteriaTour", "");
 		model.addAttribute("tours", tours);
 		model.addAttribute("countriesDTO", countryDTOs);
-		return "index";
+		return "home";
 	}
 }

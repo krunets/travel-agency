@@ -41,15 +41,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure (HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/admin_home", "user_home").authenticated()
+				.antMatchers("/admin/home", "/user/home").authenticated()
 				.antMatchers("/", "/tour*").permitAll()
 				.and()
 				.formLogin()
 				.loginPage("/login")
 				.successHandler(successUrlHandler)
-/*
-				.defaultSuccessUrl("/homepage")
-*/
 				.and()
 				.logout().deleteCookies("JSESSIONID")
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
