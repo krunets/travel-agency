@@ -25,5 +25,4 @@ public class CountryDTO {
 	
 	@NotNull
 	private String name;
-	
 }

@@ -25,12 +25,12 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import java.util.List;
 import java.util.Locale;
 
+import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_COUNTRY_PAGINATION_SIZE;
+
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = "by.runets.travelagency.*")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
-	public static final int DEFAULT_PAGINATION_SIZE = 10;
-	public static final int DEFAULT_COUNTRY_PAGINATION_SIZE = 500;
 	@Autowired
 	private IService<Country, Long> countryService;
 	@Autowired

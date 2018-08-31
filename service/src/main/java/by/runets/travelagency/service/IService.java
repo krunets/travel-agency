@@ -8,7 +8,7 @@ import java.util.List;
  * @param <T> is a generic param which must be inherited from PrimaryKeyEntity class.
  * @param <K> is a generic param which represents a key param.
  */
-public interface IService<T, K extends Object> {
+public interface IService<T, K> {
 	K create (final T entity);
 	
 	List<T> readAll (final int paginationSize);
@@ -19,5 +19,5 @@ public interface IService<T, K extends Object> {
 	
 	void delete (final T entity);
 	
-	List<T> readAllByField (final String namedQuery, final String field, final String value, final int paginationSize);
+	<V> List<T> readAllByField (final String namedQuery, final String field, final V value, final int paginationSize);
 }

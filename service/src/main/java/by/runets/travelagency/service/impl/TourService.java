@@ -24,7 +24,6 @@ public class TourService extends AbstractService<Tour, Long> implements ITourSer
 		this.tourRepository = (ITourRepository<Tour, Long>) abstractRepository;
 	}
 	
-	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Tour> findTourByCountryAndDateAndDuration (String countryName, LocalDate startTourDate, Duration tourDuration) {

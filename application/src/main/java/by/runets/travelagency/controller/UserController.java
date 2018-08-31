@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.List;
 
-import static by.runets.travelagency.util.config.WebAppConfig.DEFAULT_PAGINATION_SIZE;
-
 @Slf4j
 @Controller
 public class UserController {
@@ -45,8 +43,7 @@ public class UserController {
 	@PostMapping("/user/all")
 	@PreAuthorize("hasRole('ADMIN')")
 	public String getAllUsers (Model model) {
-		List<User> users = userService.readAll(DEFAULT_PAGINATION_SIZE);
-		log.error(users.toString());
+		List<User> users = userService.readUserByRole();
 		model.addAttribute("getUsers", true);
 		model.addAttribute("users", users);
 		return "admin_homepage";

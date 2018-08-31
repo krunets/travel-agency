@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Locale;
 
-import static by.runets.travelagency.util.config.WebAppConfig.DEFAULT_PAGINATION_SIZE;
+import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_PAGINATION_SIZE;
 
 @Slf4j
 @Controller

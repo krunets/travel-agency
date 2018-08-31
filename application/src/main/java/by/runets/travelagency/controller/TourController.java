@@ -29,7 +29,7 @@ public class TourController {
 	private List<CountryDTO> countryDTOs;
 	
 	@PostMapping(value = "/tour/search")
-	public String seacrhTour (@Valid @ModelAttribute("searchTourDTO") SearchTourDTO searchTourDTO, Model model) {
+	public String seacrhTour (@Valid @ModelAttribute SearchTourDTO searchTourDTO, Model model) {
 		List<Tour> tours = tourService.findTourByCountryAndDateAndDuration(
 				searchTourDTO.getCountryName(),
 				dateConverter.convert(searchTourDTO.getStartTourDate()),

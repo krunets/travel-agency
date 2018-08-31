@@ -1,14 +1,26 @@
 <ul class="sidebar bg-dark navbar-nav">
-    <li onClick="getUsers()" class="nav-item">
+    <form id="getAllUser" action="/user/all" method="post">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+    </form>
+    <li onclick="getAllUser.submit();" class="nav-item">
         <a class="nav-link"><span class="text-white">Users</span></a>
     </li>
-    <li onClick="" class="nav-item">
+    <form id="getAllTours" method="post">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+    </form>
+    <li onClick="getAllTours.submit();" class="nav-item">
         <a class="nav-link"><span class="text-white">Tours</span></a>
     </li>
-    <li onClick="" class="nav-item">
+    <form id="getAllReviews" method="post">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+    </form>
+    <li onClick="getAllReviews.submit();" class="nav-item">
         <a class="nav-link"><span class="text-white">Reviews</span></a>
     </li>
-    <li onClick="" class="nav-item ">
+    <form id="getAllHotels" method="post">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+    </form>
+    <li onClick="getAllHotels.submit();" class="nav-item ">
         <a class="nav-link"><span class="text-white">Hotels</span></a>
     </li>
 </ul>

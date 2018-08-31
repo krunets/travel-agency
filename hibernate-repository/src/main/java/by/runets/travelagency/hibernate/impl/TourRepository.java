@@ -14,14 +14,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
+
 @Repository
 public class TourRepository extends AbstractRepository<Tour> implements ITourRepository<Tour, Long> {
-	
-	private static final String FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION = "FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION";
-	private static final String COUNTRY_NAME = "countryName";
-	private static final String DATE = "date";
-	private static final String DURATION = "duration";
-	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -35,10 +31,10 @@ public class TourRepository extends AbstractRepository<Tour> implements ITourRep
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.getNamedQuery(FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION);
 		
-		query.setParameter(COUNTRY_NAME, countryName);
-		query.setParameter(DATE, startTourDate);
-		query.setParameter(DURATION, tourDuration);
-
+		query.setParameter(COUNTRY_NAME_FIELD, countryName);
+		query.setParameter(DATE_FIELD, startTourDate);
+		query.setParameter(DURATION_FIELD, tourDuration);
+		
 		List<Tour> queryResultList = query.getResultList();
 		return queryResultList.stream()
 				.map(Optional::ofNullable)

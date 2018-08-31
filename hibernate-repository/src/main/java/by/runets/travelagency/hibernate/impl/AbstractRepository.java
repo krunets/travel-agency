@@ -62,7 +62,7 @@ public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Lo
 	
 	@Loggable
 	@Override
-	public List<Optional<T>> readByNameQuery (String namedQuery, final String field, final String value, final int paginationSize) {
+	public <V> List<Optional<T>> readByNameQuery (String namedQuery, final String field, final V value, final int paginationSize) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.getNamedQuery(namedQuery);
 		query.setParameter(field, value);

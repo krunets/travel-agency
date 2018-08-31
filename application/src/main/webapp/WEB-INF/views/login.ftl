@@ -21,7 +21,7 @@
                 </div>
             </#if>
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label for="email">Login:</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter login" name="username">
                 </div>
                 <div class="form-group">

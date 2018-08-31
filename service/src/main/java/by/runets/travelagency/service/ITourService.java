@@ -1,6 +1,5 @@
 package by.runets.travelagency.service;
 
-import by.runets.travelagency.dto.TourDTO;
 import by.runets.travelagency.entity.Tour;
 
 import java.time.Duration;

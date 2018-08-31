@@ -96,7 +96,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void registerExistUser() {
+	public void testRegisterExistUser() {
 		User user = new User();
 		user.setLogin("admin");
 		
@@ -105,11 +105,21 @@ public class UserServiceTest {
 	
 	
 	@Test
-	public void registerNotExistUser() {
+	public void testRegisterNotExistUser() {
 		User expected = new User(10, "testLogin", "testPassword", null, null, Role.MEMBER);
 		Assert.assertTrue(userService.registerUserAccount(expected));
 		
 		User actual = userService.readAllByField(NAMED_QUERY, FIELD, "testLogin", DEFAULT_PAGINATION_SIZE).get(0);
+		Assert.assertEquals(actual, expected);
+	}
+	
+	@Test
+	public void testReadUserByRole() {
+		List<User> expected =
+				new ArrayList<>(
+						Arrays.asList(
+								new User(3, "traveler1", "traveler1", null, null, Role.MEMBER)));
+		List<User> actual = userService.readUserByRole();
 		Assert.assertEquals(actual, expected);
 	}
 }
