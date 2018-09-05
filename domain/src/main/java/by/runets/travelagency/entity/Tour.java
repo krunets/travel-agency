@@ -15,8 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION;
-import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION_NAMED_QUERY;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 
 /**
  * Class that represents the entity of the tour.
@@ -28,14 +27,21 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_TOUR_
 @Table(schema = "travel_agency", name = "tour")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"users"/*, "countries"*/})
-@EqualsAndHashCode(exclude = {"users", "countries"})
-@NamedQueries(
+@ToString(exclude = {"users", "countries", "hotels", "reviews"})
+@EqualsAndHashCode(exclude = {"users", "countries", "hotels"})
+@NamedQueries({@NamedQuery(
+		name = FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION,
+		query = FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION_NAMED_QUERY
+),
 		@NamedQuery(
-				name = FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION,
-				query = FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION_NAMED_QUERY
+				name = FIND_TOUR_ALL_TOUR,
+				query = FIND_TOUR_ALL_TOUR_NAMED_QUERY
+		),
+		@NamedQuery(
+				name = FIND_TOUR_BY_ID_WITH_USER_REVIEWS,
+				query = FIND_TOUR_BY_ID_WITH_USER_REVIEWS_NAMED_QUERY
 		)
-)
+})
 public class Tour {
 	@Id
 	@Column(name = "t_id")
@@ -98,4 +104,16 @@ public class Tour {
 	)
 	@BatchSize(size = 5)
 	private List<Country> countries = new ArrayList<>();
+	/**
+	 * This is a field which represents a list of hotels.
+	 */
+	@OneToMany(mappedBy = "tour")
+	@BatchSize(size = 5)
+	private List<Hotel> hotels = new ArrayList<>();
+	/**
+	 * This is a field which represents a list of reviews.
+	 */
+	@OneToMany(mappedBy = "tour")
+	@BatchSize(size = 5)
+	private List<Review> reviews = new ArrayList<>();
 }

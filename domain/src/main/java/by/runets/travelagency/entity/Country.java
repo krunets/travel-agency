@@ -25,8 +25,8 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_COUNT
 @Table(schema = "TRAVEL_AGENCY", name = "country")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"hotels", "tours"})
-@EqualsAndHashCode(exclude = {"hotels", "tours"})
+@ToString(exclude = { "tours"})
+@EqualsAndHashCode(exclude = {"tours"})
 @NamedQueries(@NamedQuery(name = FIND_COUNTRY_BY_NAME, query = FIND_COUNTRY_BY_NAME_NAMED_QUERY))
 public class Country {
 	@Id
@@ -46,12 +46,7 @@ public class Country {
 	@Size(min = 2, max = 2)
 	@Column(name = "c_name")
 	private String name;
-	/**
-	 * This is a field which represents a list of hotels.
-	 */
-	@OneToMany(mappedBy = "country")
-	@BatchSize(size = 5)
-	private List<Hotel> hotels = new ArrayList<>();
+
 	/**
 	 * This is a field which represents a list of tours in exist country.
 	 */

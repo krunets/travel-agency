@@ -37,7 +37,7 @@ public class TourServiceTest {
 	
 	@Test
 	public void testCreate () {
-		Tour tour = new Tour(123, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null);
+		Tour tour = new Tour(123, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null);
 		
 		service.create(tour);
 		verify(repository, times(1)).create(tour);
@@ -45,7 +45,7 @@ public class TourServiceTest {
 	
 	@Test
 	public void testUpdate () {
-		Tour tour = new Tour(1, "Photo12", LocalDate.parse("2018-07-13"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null);
+		Tour tour = new Tour(1, "Photo12", LocalDate.parse("2018-07-13"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null);
 		
 		service.update(tour);
 		verify(repository, times(1)).update(tour);
@@ -53,7 +53,7 @@ public class TourServiceTest {
 	
 	@Test
 	public void testDelete () {
-		Tour tour = new Tour(1, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null);
+		Tour tour = new Tour(1, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null);
 		
 		service.delete(tour);
 		verify(repository, times(1)).delete(tour);

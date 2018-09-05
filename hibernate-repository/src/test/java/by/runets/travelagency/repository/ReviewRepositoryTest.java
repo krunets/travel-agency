@@ -37,7 +37,7 @@ public class ReviewRepositoryTest {
 	@Test
 	public void testReadById () {
 		final long id = 1;
-		final Optional<Review> expected = Optional.of(new Review(id, "Content 1", null));
+		final Optional<Review> expected = Optional.of(new Review(id, "Content 1", null, null));
 		final Optional<Review> actual = reviewRepository.read(Review.class, id);
 		
 		Assert.assertEquals(expected, actual);
@@ -48,9 +48,9 @@ public class ReviewRepositoryTest {
 		final List<Optional<Review>> expected =
 				new ArrayList<>(
 						Arrays.asList(
-								Optional.of(new Review(1, "Content 1", null)),
-								Optional.of(new Review(2, "Content 2", null)),
-								Optional.of(new Review(3, "Content 3", null))));
+								Optional.of(new Review(1, "Content 1", null, null)),
+								Optional.of(new Review(2, "Content 2", null, null)),
+								Optional.of(new Review(3, "Content 3", null, null))));
 		final List<Optional<Review>> actual = reviewRepository.readAll(Review.class, DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);

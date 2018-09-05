@@ -65,7 +65,9 @@ public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Lo
 	public <V> List<Optional<T>> readByNameQuery (String namedQuery, final String field, final V value, final int paginationSize) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.getNamedQuery(namedQuery);
-		query.setParameter(field, value);
+		if (!field.isEmpty()) {
+			query.setParameter(field, value);
+		}
 		query.setMaxResults(paginationSize);
 		List<T> queryResultList = query.getResultList();
 		return queryResultList.stream()

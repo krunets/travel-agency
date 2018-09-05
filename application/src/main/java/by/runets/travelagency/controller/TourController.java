@@ -10,13 +10,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
+
+import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_TOUR_BY_ID_WITH_USER_REVIEWS;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.ID;
+import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_PAGINATION_SIZE;
 
 @Slf4j
 @Controller
@@ -50,5 +56,13 @@ public class TourController {
 		model.addAttribute("tours", tours);
 		model.addAttribute("countriesDTO", countryDTOs);
 		return "home";
+	}
+	
+	@GetMapping(value = "/tour/{tourId}/info")
+	public String getTourInfo (@PathVariable String tourId, Model model) {
+		Tour tour = tourService.readAllByField(FIND_TOUR_BY_ID_WITH_USER_REVIEWS, ID, Long.valueOf(tourId), DEFAULT_PAGINATION_SIZE).get(0);
+		model.addAttribute("countriesDTO", countryDTOs);
+		model.addAttribute("tour", tour);
+		return "tourpage";
 	}
 }

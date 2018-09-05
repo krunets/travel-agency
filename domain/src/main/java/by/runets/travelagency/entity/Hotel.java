@@ -8,9 +8,11 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_ALL_HOTEL;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_ALL_HOTEL_NAMED_QUERY;
+
 /**
  * Class that represents the entity of the hotel.
- *
  */
 @Data
 @Entity
@@ -19,8 +21,11 @@ import javax.validation.constraints.NotNull;
 @Table(schema = "travel_agency", name = "hotel")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "country")
-@EqualsAndHashCode(exclude = "country")
+@ToString(exclude = "tour")
+@EqualsAndHashCode(exclude = "tour")
+@NamedQueries(
+		{@NamedQuery(name = FIND_ALL_HOTEL, query = FIND_ALL_HOTEL_NAMED_QUERY)}
+)
 public class Hotel {
 	@Id
 	@Min(value = 0)
@@ -49,6 +54,6 @@ public class Hotel {
 	 * This is a field which represents a country.
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "country")
-	private Country country;
+	@JoinColumn(name = "tour")
+	private Tour tour;
 }

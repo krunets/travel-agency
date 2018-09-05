@@ -1,4 +1,4 @@
-<ul class="sidebar bg-dark navbar-nav">
+<ul class="admin-sidebar bg-dark navbar-nav">
     <form id="getAllUser" action="/user/all" method="post">
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
     </form>

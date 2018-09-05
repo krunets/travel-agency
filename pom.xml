@@ -46,7 +46,6 @@
         <module>application</module>
         <module>hibernate-repository</module>
         <module>domain</module>
-        <module>database-repository</module>
         <module>service</module>
     </modules>
     <dependencyManagement>

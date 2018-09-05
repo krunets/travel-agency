@@ -36,7 +36,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCreate () {
-		Country expected = new Country(1, "BY", null, null);
+		Country expected = new Country(1, "BY", null);
 		final long id = countryService.create(expected);
 		Country actual = countryService.read(id);
 		
@@ -50,10 +50,10 @@ public class CountryServiceTest {
 		List<Country> expected =
 				new ArrayList<>(
 						Arrays.asList(
-								new Country(1, "BY", null, null),
-								new Country(2, "US", null, null),
-								new Country(3, "FR", null, null),
-								new Country(4, "IT", null, null)));
+								new Country(1, "BY", null),
+								new Country(2, "US", null),
+								new Country(3, "FR", null),
+								new Country(4, "IT", null)));
 		
 		Assert.assertEquals(expected, actual);
 	}
@@ -61,7 +61,7 @@ public class CountryServiceTest {
 	@Test
 	public void testReadById () {
 		final long id = 1;
-		Country expected = new Country(1, "BY", null, null);
+		Country expected = new Country(1, "BY", null);
 		Country actual = countryService.read(id);
 		
 		Assert.assertEquals(expected, actual);
@@ -70,7 +70,7 @@ public class CountryServiceTest {
 	@Test
 	public void testUpdate () {
 		final long id = 1;
-		Country expected = new Country(id, "newName", null, null);
+		Country expected = new Country(id, "newName", null);
 		countryService.update(expected);
 		Country actual = countryService.read(id);
 		
@@ -80,7 +80,7 @@ public class CountryServiceTest {
 	@Test(expected = ResourceNotFoundException.class)
 	public void testDelete () {
 		final long id = 1;
-		Country expected = new Country(id, "", null, null);
+		Country expected = new Country(id, "", null);
 		countryService.delete(expected);
 		
 		Assert.assertNull(countryService.read(id));

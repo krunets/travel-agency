@@ -38,7 +38,7 @@ public class HotelRepositoryTest {
 	@Test
 	public void testReadById () {
 		final long id = 1;
-		final Hotel expected = new Hotel(id, "Marriot", "123 23 23", 5, new Country(1, null, null, null));
+		final Hotel expected = new Hotel(id, "Marriot", "123 23 23", 5, null);
 		final Hotel actual = hotelRepository.read(Hotel.class, id).get();
 		Assert.assertEquals(actual, expected);
 	}
@@ -49,22 +49,22 @@ public class HotelRepositoryTest {
 				new ArrayList<>(
 						Arrays.asList(
 								Optional.of(
-										new Hotel(1, "Marriot", "123 23 23", 5, new Country())),
+										new Hotel(1, "Marriot", "123 23 23", 5, null)),
 								Optional.of(
 										new Hotel(
-												2, "DoubleTree by Hilton", "232 12 12", 5, new Country())),
+												2, "DoubleTree by Hilton", "232 12 12", 5, null)),
 								Optional.of(
 										new Hotel(
-												3, "Prezident-Otel", "111 11 11", 4, new Country())),
+												3, "Prezident-Otel", "111 11 11", 4, null)),
 								Optional.of(
-										new Hotel(4, "Aqua-Minsk", "123 11 11", 2, new Country())),
+										new Hotel(4, "Aqua-Minsk", "123 11 11", 2, null)),
 								Optional.of(
 										new Hotel(
 												5,
 												"Trump International Hotel Washington DC",
 												"101 10 01",
 												5,
-												new Country()))));
+												null))));
 		final List<Optional<Hotel>> actual = hotelRepository.readAll(Hotel.class, DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);
@@ -72,7 +72,7 @@ public class HotelRepositoryTest {
 	
 	@Test
 	public void testCreate () {
-		final Hotel expected = new Hotel(10, "testName", "+375 29 123 123 123", 5, new Country(1, null, null, null));
+		final Hotel expected = new Hotel(10, "testName", "+375 29 123 123 123", 5, null);
 		final long id = hotelRepository.create(expected);
 		final Hotel actual = hotelRepository.read(Hotel.class, id).get();
 		

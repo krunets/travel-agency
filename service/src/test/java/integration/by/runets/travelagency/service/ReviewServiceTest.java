@@ -37,7 +37,7 @@ public class ReviewServiceTest {
 	@Test
 	public void testReadById () {
 		final long id = 1;
-		Review expected = new Review(id, "Content 1", null);
+		Review expected = new Review(id, "Content 1", null, null);
 		Review actual = reviewService.read(id);
 		
 		Assert.assertEquals(expected, actual);
@@ -48,9 +48,9 @@ public class ReviewServiceTest {
 		List<Review> expected =
 				new ArrayList<>(
 						Arrays.asList(
-								new Review(1, "Content 1", null),
-								new Review(2, "Content 2", null),
-								new Review(3, "Content 3", null)));
+								new Review(1, "Content 1", null, null),
+								new Review(2, "Content 2", null, null),
+								new Review(3, "Content 3", null, null)));
 		List<Review> actual = reviewService.readAll(DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);
@@ -59,7 +59,7 @@ public class ReviewServiceTest {
 	@Test
 	public void testCreate () {
 		Review expected =
-				new Review(10, "testContent", new User(1, null, null, null, null, null));
+				new Review(10, "testContent", new User(1, null, null, null, null, null), null);
 		final long id = reviewService.create(expected);
 		Review actual = reviewService.read(id);
 		Assert.assertEquals(expected, actual);

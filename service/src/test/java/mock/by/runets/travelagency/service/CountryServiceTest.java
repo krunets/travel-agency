@@ -35,7 +35,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testUpdate () {
-		Country newCountry = new Country(1, "Belarus freedom", null, null);
+		Country newCountry = new Country(1, "Belarus freedom", null);
 		service.update(newCountry);
 		
 		verify(repository, times(1)).update(newCountry);
@@ -43,7 +43,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testCreate () {
-		Country newCountry = new Country(6, "Belarus freedom", null, null);
+		Country newCountry = new Country(6, "Belarus freedom", null);
 		service.create(newCountry);
 		
 		verify(repository, times(1)).create(newCountry);
@@ -51,7 +51,7 @@ public class CountryServiceTest {
 	
 	@Test
 	public void testDelete () {
-		Country deleteCountry = new Country(1, "Belarus", null, null);
+		Country deleteCountry = new Country(1, "Belarus", null);
 		service.delete(deleteCountry);
 		
 		verify(repository, times(1)).delete(deleteCountry);

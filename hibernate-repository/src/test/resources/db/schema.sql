@@ -12,14 +12,16 @@ CREATE TABLE travel_agency.hotel
   h_name varchar(255) NOT NULL,
   h_phone varchar(255) NOT NULL,
   h_stars INTEGER NOT NULL,
-  country BIGINT NOT NULL
+  tour BIGINT NOT NULL
 );
 CREATE TABLE travel_agency.review
 (
   r_id BIGINT PRIMARY KEY auto_increment NOT NULL,
   content varchar(255) NOT NULL,
-  user BIGINT
+  user BIGINT,
+  tour BIGINT
 );
+
 CREATE TABLE travel_agency.tour
 (
   t_id BIGINT PRIMARY KEY auto_increment NOT NULL,
@@ -54,8 +56,9 @@ CREATE TABLE travel_agency.user
   password varchar(255) NOT NULL,
   role  varchar(255) NOT NULL
 );
-ALTER TABLE travel_agency.hotel ADD FOREIGN KEY (country) REFERENCES travel_agency.country (c_id);
+ALTER TABLE travel_agency.hotel ADD FOREIGN KEY (tour) REFERENCES travel_agency.tour (t_id);
 ALTER TABLE travel_agency.review ADD FOREIGN KEY (user) REFERENCES travel_agency.user (u_id);
+ALTER TABLE travel_agency.review ADD FOREIGN KEY (tour) REFERENCES tour (t_id);
 ALTER TABLE travel_agency.tour ADD FOREIGN KEY (tour_type) REFERENCES travel_agency.tour_type (t_id);
 ALTER TABLE travel_agency.tour_m2m_country ADD FOREIGN KEY (t_id) REFERENCES travel_agency.tour (t_id);
 ALTER TABLE travel_agency.tour_m2m_country ADD FOREIGN KEY (c_id) REFERENCES travel_agency.country (c_id);
@@ -64,4 +67,3 @@ ALTER TABLE travel_agency.tour_m2m_user ADD FOREIGN KEY (u_id) REFERENCES travel
 
 CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE COUNTRY_SEQUENCE START WITH 1 INCREMENT BY 4;
-

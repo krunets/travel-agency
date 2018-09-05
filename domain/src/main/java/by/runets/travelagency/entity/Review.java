@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Class that represents the entity of the review.
- *
  */
 @Data
 @Entity
@@ -18,8 +17,8 @@ import javax.validation.constraints.NotNull;
 @Table(schema = "travel_agency", name = "review")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "user")
-@EqualsAndHashCode(exclude = "user")
+@ToString(exclude = {"user", "tour"})
+@EqualsAndHashCode(exclude = {"user", "tour"})
 public class Review {
 	@Id
 	@Column(name = "r_id")
@@ -33,7 +32,11 @@ public class Review {
 	/**
 	 * This is a field which represents a user who left feedback about tour.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "user")
 	private User user;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tour")
+	private Tour tour;
 }

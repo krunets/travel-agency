@@ -1,8 +1,12 @@
 package by.runets.travelagency.controller;
 
 import by.runets.travelagency.dto.CountryDTO;
+import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.entity.Tour;
+import by.runets.travelagency.service.IJoinService;
+import by.runets.travelagency.service.IService;
 import by.runets.travelagency.service.ITourService;
+import by.runets.travelagency.util.constant.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Locale;
 
+import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_ALL_HOTEL;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_TOUR_ALL_TOUR;
 import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_PAGINATION_SIZE;
 
 @Slf4j
@@ -22,11 +28,18 @@ public class PageController {
 	@Autowired
 	private ITourService<Tour, Long> tourService;
 	@Autowired
+	private IService<Hotel, Long> hotelService;
+	@Autowired
+	private IJoinService<Tour, Hotel> joinService;
+	@Autowired
 	private List<CountryDTO> countryDTOs;
 	
 	@GetMapping("/")
 	public String start (Locale locale, Model model) {
-		List<Tour> tours = tourService.readAll(DEFAULT_PAGINATION_SIZE);
+		List<Tour> tours = tourService.readAllByField(FIND_TOUR_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, DEFAULT_PAGINATION_SIZE);
+		List<Hotel> hotels = hotelService.readAllByField(FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, DEFAULT_PAGINATION_SIZE);
+		
+		joinService.join(tours, hotels);
 		
 		model.addAttribute("checkTours", false);
 		model.addAttribute("criteriaTour", "");

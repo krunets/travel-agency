@@ -49,7 +49,7 @@ public class TourServiceTest {
 						new BigDecimal(100),
 						TourType.ADVENTURE,
 						null,
-						null);
+						null,null, null);
 		final long id = tourService.create(expected);
 		Tour actual = tourService.read(id);
 		
@@ -61,11 +61,11 @@ public class TourServiceTest {
 		List<Tour> expected =
 				new ArrayList<>(
 						Arrays.asList(
-								new Tour(1, "photo/img1.png", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null),
-								new Tour(2, "photo/img2.png", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description2", new BigDecimal(200), TourType.ATOMIC, null, null),
-								new Tour(3, "photo/img3.png", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description3", new BigDecimal(300), TourType.BICYCLE, null, null),
-								new Tour(4, "photo/img4.png", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.CULTURAL, null, null),
-								new Tour(5, "photo/img5.png", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ECO, null, null)));
+								new Tour(1, "photo/img1.png", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null),
+								new Tour(2, "photo/img2.png", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description2", new BigDecimal(200), TourType.ATOMIC, null, null, null, null),
+								new Tour(3, "photo/img3.png", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description3", new BigDecimal(300), TourType.BICYCLE, null, null, null, null),
+								new Tour(4, "photo/img4.png", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.CULTURAL, null, null, null, null),
+								new Tour(5, "photo/img5.png", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ECO, null, null, null, null)));
 		
 		List<Tour> actual = tourService.readAll(DEFAULT_PAGINATION_SIZE);
 		Assert.assertEquals(expected, actual);
@@ -84,7 +84,7 @@ public class TourServiceTest {
 						new BigDecimal(100),
 						TourType.ADVENTURE,
 						null,
-						null);
+						null, null, null);
 		Tour actual = tourService.read(id);
 		
 		Assert.assertEquals(expected, actual);
@@ -133,7 +133,7 @@ public class TourServiceTest {
 				new BigDecimal(100),
 				TourType.ADVENTURE,
 				null,
-				null)));
+				null, null, null)));
 		List<Tour> actual = tourService.findTourByCountryAndDateAndDuration(country, startTourDate, tourDuration);
 		System.out.println(actual);
 		Assert.assertEquals(expected, actual);

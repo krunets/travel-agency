@@ -41,10 +41,14 @@ input, select {
 }
 
 .image-size {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
 }
 
+.image-size-card {
+    width: 1151px;
+    height: auto;
+}
 
 .margin-bottom {
     margin-bottom: 25px;
@@ -65,4 +69,51 @@ input[type=checkbox] {
 .margin-left-checkbox{
     margin-top: -1.9rem;
     margin-left: -34.15rem;
+}
+
+.custom-container {
+    margin: 0 5% 5% 5%;
+}
+
+.sidebar-container {
+    width: auto;
+    margin-left: 225px;
+}
+
+.admin-sidebar {
+    width: 225px;
+    height: 100%;
+    position: absolute;
+}
+
+.checked {
+    color: orange;
+}
+.thumbnail {
+    padding:0px;
+}
+.panel {
+    position:relative;
+}
+.panel>.panel-heading:after,.panel>.panel-heading:before{
+    position:absolute;
+    top:11px;left:-16px;
+    right:100%;
+    width:0;
+    height:0;
+    display:block;
+    content:" ";
+    border-color:transparent;
+    border-style:solid solid outset;
+    pointer-events:none;
+}
+.panel>.panel-heading:after{
+    border-width:7px;
+    border-right-color:#f7f7f7;
+    margin-top:1px;
+    margin-left:2px;
+}
+.panel>.panel-heading:before{
+    border-right-color:#ddd;
+    border-width:8px;
 }

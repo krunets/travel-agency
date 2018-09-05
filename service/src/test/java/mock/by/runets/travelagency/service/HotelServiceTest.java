@@ -1,6 +1,5 @@
 package mock.by.runets.travelagency.service;
 
-import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.hibernate.impl.HotelRepository;
 import by.runets.travelagency.service.impl.HotelService;
@@ -35,7 +34,7 @@ public class HotelServiceTest {
 	
 	@Test
 	public void testUpdate () {
-		Hotel hotel = new Hotel(1, "Marriot1", "123 24 23", 5, new Country());
+		Hotel hotel = new Hotel(1, "Marriot1", "123 24 23", 5, null);
 		
 		service.update(hotel);
 		
@@ -44,7 +43,7 @@ public class HotelServiceTest {
 	
 	@Test
 	public void testDelete () {
-		Hotel hotel = new Hotel(1, "Marriot1", "123 24 23", 5, new Country());
+		Hotel hotel = new Hotel(1, "Marriot1", "123 24 23", 5, null);
 		
 		service.delete(hotel);
 		
@@ -53,7 +52,7 @@ public class HotelServiceTest {
 	
 	@Test
 	public void testCreate () {
-		Hotel hotel = new Hotel(7, "Marriot2", "123 24 23", 5, new Country());
+		Hotel hotel = new Hotel(7, "Marriot2", "123 24 23", 5, null);
 		
 		service.create(hotel);
 		

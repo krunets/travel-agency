@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="padding-top-fourth align-self-center col-md-12">
-        <@spring.bind "userDTO"/>
+       <#-- <@spring.bind "userDTO"/>
 
             <form action="/registration" method="post">
                 First name:<br>
@@ -25,8 +25,8 @@
             <@spring.showErrors "<br>"/>
                 <br><br>
                 <input type="submit" value="Submit">
-            </form>
-        <#--<form name="registrationForm" action="/registration" method="post">
+            </form>-->
+        <form name="registrationForm" action="/registration" method="post">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
             <#if login_error>
                 <div class=" alert alert-danger" role="alert">
@@ -46,7 +46,7 @@
                     <input type="password" name="confirmedPassword" id="password" required/>
                 </div>
                 <button type="submit" class="btn btn-primary float-right">Sign up</button>
-            </form>-->
+            </form>
         </div>
     </div>
 </div>

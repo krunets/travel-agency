@@ -44,6 +44,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public FreeMarkerViewResolver freeMarkerViewResolver () {
 		FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
+		freeMarkerViewResolver.setContentType("text/html; charset=utf-8");
 		freeMarkerViewResolver.setCache(true);
 		freeMarkerViewResolver.setSuffix(".ftl");
 		freeMarkerViewResolver.setPrefix("");
@@ -54,6 +55,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	public FreeMarkerConfigurer freemarkerConfig () {
 		FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
 		freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/views/");
+		freeMarkerConfigurer.setDefaultEncoding("UTF-8");
 		return freeMarkerConfigurer;
 	}
 	
@@ -66,8 +68,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public CookieLocaleResolver localeResolver () {
 		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-		localeResolver.setDefaultLocale(Locale.US);
 		localeResolver.setCookieName("my-locale-cookie");
+		localeResolver.setDefaultLocale(Locale.ENGLISH);
 		localeResolver.setCookieMaxAge(3600);
 		return localeResolver;
 	}
@@ -77,6 +79,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
 		messageSource.setBasenames("i18n/messages");
 		messageSource.setDefaultEncoding("UTF-8");
+		messageSource.setUseCodeAsDefaultMessage(true);
 		return messageSource;
 	}
 	
