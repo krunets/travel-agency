@@ -44,7 +44,7 @@ public class DevelopmentHibernateBeanConfig {
 		
 		return dataSource;
 	}
-
+	
 	@Bean
 	public LocalSessionFactoryBean sessionFactory () {
 		LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
@@ -57,6 +57,7 @@ public class DevelopmentHibernateBeanConfig {
 		properties.put(HIBERNATE_HBM2DD1_AUTO, environment.getProperty(HIBERNATE_HBM2DD1_AUTO));
 		properties.put(HIBERNATE_USE_SQL_COMMENTS, environment.getProperty(HIBERNATE_USE_SQL_COMMENTS));
 		properties.put(HIBERNATE_GENERATE_STATISTICS, environment.getProperty(HIBERNATE_GENERATE_STATISTICS));
+		properties.put("hibernate.id.new_generator_mappings", Boolean.toString(false));
 		
 		localSessionFactoryBean.setHibernateProperties(properties);
 		localSessionFactoryBean.setPackagesToScan(SCAN);

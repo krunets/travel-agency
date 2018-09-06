@@ -1,7 +1,21 @@
-.user_name{
-    font-size:14px;
+.user_name {
+    font-size: 14px;
     font-weight: bold;
 }
-.comments-list .media{
+
+.comments-list .media {
     border-bottom: 1px dotted #ccc;
+}
+
+.comments-img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+    background-color: #ccc;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: 3px 20px 0 0;
 }

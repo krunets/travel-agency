@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Table(schema = "travel_agency", name = "review")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"user", "tour"})
+@ToString(exclude = {/*"user", "tour"*/})
 @EqualsAndHashCode(exclude = {"user", "tour"})
 public class Review {
 	@Id
@@ -33,7 +33,7 @@ public class Review {
 	 * This is a field which represents a user who left feedback about tour.
 	 */
 	@ManyToOne
-	@JoinColumn(name = "user")
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

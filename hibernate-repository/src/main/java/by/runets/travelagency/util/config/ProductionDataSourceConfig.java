@@ -34,6 +34,7 @@ public class ProductionDataSourceConfig {
 	private static final String HIBERNATE_USE_SQL_COMMENTS = "hibernate.use_sql_comments";
 	private static final String HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
 	private static final String HIBERNATE_GENERATE_STATISTICS = "hibernate.generate_statistics";
+	private static final String HIBERNATE_ID_NEW_GENERATOR_MAPPINGS = "hibernate.id.new_generator_mappings";
 	private static final String SCAN = "by.runets.travelagency.entity";
 	private static final String DIALECT = "hibernate.dialect";
 	
@@ -67,6 +68,7 @@ public class ProductionDataSourceConfig {
 		properties.put(HIBERNATE_USE_SQL_COMMENTS, environment.getProperty(HIBERNATE_USE_SQL_COMMENTS));
 		properties.put(HIBERNATE_GENERATE_STATISTICS, environment.getProperty(HIBERNATE_GENERATE_STATISTICS));
 		properties.put(DIALECT, environment.getProperty(DIALECT));
+		properties.put(HIBERNATE_ID_NEW_GENERATOR_MAPPINGS, environment.getProperty(HIBERNATE_GENERATE_STATISTICS));
 		
 		localSessionFactoryBean.setHibernateProperties(properties);
 		localSessionFactoryBean.setPackagesToScan(SCAN);

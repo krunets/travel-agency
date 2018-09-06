@@ -1,6 +1,8 @@
 package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Review;
+import by.runets.travelagency.entity.Tour;
+import by.runets.travelagency.entity.User;
 import by.runets.travelagency.hibernate.IDatabaseRepository;
 import by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig;
 import org.junit.Assert;

@@ -22,7 +22,7 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 @DynamicUpdate
 @Table(schema = "travel_agency", name = "user")
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @ToString(exclude = {"reviews", "tours"})
 @EqualsAndHashCode(exclude = {"reviews", "tours"})
 @NamedQueries({
@@ -32,16 +32,19 @@ public class User {
 	@Id
 	@Column(name = "u_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NonNull
 	private long id;
 	/**
 	 * This is a field which represents a user login.
 	 */
 	@NotNull
+	@NonNull
 	private String login;
 	/**
 	 * This is a field which represents a user password.
 	 */
 	@NotNull
+	@NonNull
 	private String password;
 	/**
 	 * This is a field which represents a user review of tour.
@@ -56,5 +59,7 @@ public class User {
 	
 	@Enumerated(EnumType.STRING)
 	@Convert(converter = RoleConverter.class)
+	@NonNull
 	private Role role;
+	private String photo;
 }

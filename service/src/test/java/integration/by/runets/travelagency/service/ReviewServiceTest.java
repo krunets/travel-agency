@@ -3,6 +3,7 @@ package integration.by.runets.travelagency.service;
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.exception.ResourceNotFoundException;
+import by.runets.travelagency.service.IReviewService;
 import by.runets.travelagency.service.IService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import org.junit.Assert;
@@ -32,7 +33,7 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 })
 public class ReviewServiceTest {
 	@Autowired
-	private IService<Review, Long> reviewService;
+	private IReviewService<Review, Long> reviewService;
 	
 	@Test
 	public void testReadById () {
@@ -59,7 +60,7 @@ public class ReviewServiceTest {
 	@Test
 	public void testCreate () {
 		Review expected =
-				new Review(10, "testContent", new User(1, null, null, null, null, null), null);
+				new Review(10, "testContent", null, null);
 		final long id = reviewService.create(expected);
 		Review actual = reviewService.read(id);
 		Assert.assertEquals(expected, actual);
@@ -89,5 +90,14 @@ public class ReviewServiceTest {
 		Review actual = reviewService.read(id);
 		
 		Assert.assertNull(actual);
+	}
+	
+	@Test
+	public void testCreateReview() {
+		Review review = new Review();
+		review.setContent("newContent");
+		Long id = reviewService.createReviewByUsernameAndTourId("root", 1L, review);
+		System.out.println(reviewService.read(id));
+		System.out.println(reviewService.readAll(20));
 	}
 }

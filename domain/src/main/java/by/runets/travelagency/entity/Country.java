@@ -36,7 +36,7 @@ public class Country {
 	@SequenceGenerator(
 			name = "country_generator",
 			sequenceName = "country_sequence",
-			allocationSize = 4
+			allocationSize = 1
 	)
 	private long id;
 	/**

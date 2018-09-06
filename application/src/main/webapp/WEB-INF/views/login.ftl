@@ -12,38 +12,43 @@
 <#include "include/header.ftl">
 <div class="container">
     <div class="row">
-        <div class="padding-top-fourth align-self-center col-md-12">
-            <form id="signInForm" method="post">
-                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
-            <#if error>
-                <div class=" alert alert-danger" role="alert">
-                    <p>Login or password is incorrect!</p>
-                </div>
-            </#if>
-                <div class="form-group">
-                    <label for="email">Login:</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter login" name="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter password"
-                           name="password">
-                </div>
-                <div class="form-group">
-                    <label class="margin-left-label form-check-label" for="exampleCheck1">Remember me</label>
-                    <input type="checkbox" name="remember-me" class="margin-left-checkbox" id="exampleCheck1">
-                </div>
+        <div class="padding-top-fourth col-md-12">
+            <div class="margin-bottom">
+                <form id="signInForm" method="post">
+                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+                <#if error>
+                    <div class=" alert alert-danger" role="alert">
+                        <p>Login or password is incorrect!</p>
+                    </div>
+                </#if>
+                    <div class="form-group">
+                        <label for="email">Login:</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter login" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password"
+                               name="password">
+                    </div>
+                    <div class="form-group">
+                        <label class="margin-left-label form-check-label" for="exampleCheck1">Remember me</label>
+                        <input type="checkbox" name="remember-me" class="margin-left-checkbox" id="exampleCheck1">
+                    </div>
 
-                <button type="button" onclick="signIn()" class="btn btn-primary float-right">Sign In</button>
-            </form>
-            <form id="signUpForm" action="/registration">
-                <button type="button" onclick="signUp()" class="btn btn-secondary float-right">Sign Up</button>
-            </form>
+                    <button type="button" onclick="signIn()" class="btn btn-primary float-right">Sign In</button>
+                </form>
+                <form id="signUpForm" action="/registration">
+                    <button type="button" onclick="signUp()" class="btn btn-secondary float-right">Sign Up</button>
+                </form>
+            </div>
         </div>
+
     </div>
 </div>
 
+<#--
 <#include "include/footer.ftl">
+-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

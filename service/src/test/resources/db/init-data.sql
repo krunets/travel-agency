@@ -27,9 +27,9 @@ INSERT INTO travel_agency.user(u_id, login, password, role) VALUES(1, 'root', 'r
 INSERT INTO travel_agency.user(u_id, login, password, role) VALUES(2, 'admin', 'admin', 'ADMIN');
 INSERT INTO travel_agency.user(u_id, login, password, role) VALUES(3, 'traveler1', 'traveler1', 'MEMBER');
 
-INSERT INTO travel_agency.review(r_id, content, user) VALUES(1, 'Content 1', 1);
-INSERT INTO travel_agency.review(r_id, content, user) VALUES(2, 'Content 2', 2);
-INSERT INTO travel_agency.review(r_id, content, user) VALUES(3, 'Content 3', 3);
+INSERT INTO travel_agency.review(r_id, content, user_id) VALUES(1, 'Content 1', 1);
+INSERT INTO travel_agency.review(r_id, content, user_id) VALUES(2, 'Content 2', 2);
+INSERT INTO travel_agency.review(r_id, content, user_id) VALUES(3, 'Content 3', 3);
 
 INSERT INTO travel_agency.tour_m2m_country(t_id, c_id) VALUES(1, 3);
 INSERT INTO travel_agency.tour_m2m_country(t_id, c_id) VALUES(1, 4);

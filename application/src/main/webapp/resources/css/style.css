@@ -89,31 +89,71 @@ input[type=checkbox] {
 .checked {
     color: orange;
 }
-.thumbnail {
-    padding:0px;
+
+.carousel-caption {
+    background-color: #3d6277;
+    width: 500px;
+    margin:auto;
 }
-.panel {
-    position:relative;
+
+
+footer{
+    color: white;
 }
-.panel>.panel-heading:after,.panel>.panel-heading:before{
-    position:absolute;
-    top:11px;left:-16px;
-    right:100%;
-    width:0;
-    height:0;
-    display:block;
-    content:" ";
-    border-color:transparent;
-    border-style:solid solid outset;
-    pointer-events:none;
+footer a{
+    color: #bfffff;
 }
-.panel>.panel-heading:after{
-    border-width:7px;
-    border-right-color:#f7f7f7;
-    margin-top:1px;
-    margin-left:2px;
+footer a:hover{
+    color: white;
 }
-.panel>.panel-heading:before{
-    border-right-color:#ddd;
-    border-width:8px;
+
+.footer-bottom{
+    background: #3d6277;
+    padding: 2em;
 }
+.footer-top{
+    background: #2d4958;
+}
+.footer-middle{
+    background: #3d6277;
+    padding-top: 2em;
+    color: white;
+}
+/**Sub Navigation**/
+.subnavigation-container{
+    background: #3d6277;
+}
+.subnavigation .nav-link{
+    color: white;
+    font-weight: bold;
+}
+.subnavigation-container{
+    text-align: center;
+}
+.subnavigation-container .navbar{
+    display: inline-block;
+    margin-bottom: -6px; /* Inline-block margin offffset HACK -Gilron */
+}
+.col-subnav a{
+    padding: 1rem 1rem;
+    color: white;
+    font-weight: bold;
+}
+.col-subnav .active{
+    border-top:5px solid orange;
+    background: white;
+    color: black;
+}
+
+.none {
+    display: none;
+}
+.auto-width {
+    width: auto;
+}
+
+.resize-none {
+    resize:none;
+    height: 200px;
+}
+

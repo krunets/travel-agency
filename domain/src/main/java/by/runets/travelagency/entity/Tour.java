@@ -28,7 +28,7 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"users", "countries", "hotels", "reviews"})
-@EqualsAndHashCode(exclude = {"users", "countries", "hotels"})
+@EqualsAndHashCode(exclude = {"users", "countries", "hotels", "reviews"})
 @NamedQueries({@NamedQuery(
 		name = FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION,
 		query = FIND_TOUR_BY_COUNTRY_AND_DATE_AND_DURATION_NAMED_QUERY

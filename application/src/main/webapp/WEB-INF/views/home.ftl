@@ -54,7 +54,6 @@
                         <#list tour.hotels as hotel>
                             <p><@spring.message "hotel.name.message"/>: ${hotel.name}</p>
                             <p><@spring.message "hotel.phone.message"/>: ${hotel.phone}</p>
-                            <@spring.message "hotel.stars.message"/>:
                             <#list 1..hotel.stars as index>
                                 <span class="fa fa-star checked"></span>
                             </#list>
@@ -64,6 +63,15 @@
                 </#list>
             </tbody>
         </table>
+       <#-- <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>-->
     </#if>
     </div>
 </div>

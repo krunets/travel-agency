@@ -1,16 +1,23 @@
 package by.runets.travelagency.controller;
 
+import by.runets.travelagency.dto.CountryDTO;
+import by.runets.travelagency.dto.ReviewDTO;
 import by.runets.travelagency.dto.UserDTO;
+import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.User;
+import by.runets.travelagency.service.IReviewService;
 import by.runets.travelagency.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -21,6 +28,7 @@ import java.util.List;
 public class UserController {
 	@Autowired
 	private IUserService<User, Long> userService;
+
 	@Autowired
 	private ModelMapper modelMapper;
 	
@@ -48,4 +56,6 @@ public class UserController {
 		model.addAttribute("users", users);
 		return "admin_homepage";
 	}
+	
+	
 }

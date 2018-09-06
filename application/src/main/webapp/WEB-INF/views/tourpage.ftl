@@ -1,8 +1,8 @@
 <#import "/spring.ftl" as spring/>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Login page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Tour page</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/comments.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -13,78 +13,97 @@
 <body>
 <#include "include/header.ftl">
 <#include "include/searchform.ftl">
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="page-header">
-                <h1><small class="pull-right">${tour.reviews?size} comments</small> Comments </h1>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="${tour.photo}" alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5><@spring.message "cost.message"/> ${tour.cost}$</h5>
+                            <p><@spring.message "date.message"/> ${tour.date}</p>
+                            <p><@spring.message "duration.message"/> ${tour.duration.toDays()}</p>
+                            <p>${tour.tourType}</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="margin-bottom">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><@spring.message "description.message"/></h5>
+                        <p class="card-text"> ${tour.description}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="margin-bottom">
+
+                <div class="page-header">
+                    <h1>
+                        <small class="pull-right">${tour.reviews?size} comments</small>
+                        Comments
+                    </h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="margin-bottom">
+                <form action="/user/review/${tour.id}/tour" method="post">
+                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+                    <textarea name="content" class="resize-none margin-bottom form-control input-sm chat-input"
+                              placeholder="Write your message here..." required></textarea>
+                    <input type="button" id="show-comments-button" class="auto-width btn btn-outline-info float-right"
+                           value="Show comments"/>
+                    <button type="submit" class="auto-width btn btn-outline-info float-right">Add comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="margin-bottom">
             <#list tour.reviews as review>
-                <div class="comments-list">
+                <div class="comments-list none">
                     <div class="media">
-                        <p class="float-right"><small>5 days ago</small></p>
-                        <a class="media-left" href="#"><img src="http://lorempixel.com/40/40/people/1/"></a>
+                        <a class="media-left" href="#"><img class="comments-img" src="${review.user.photo}"></a>
                         <div class="media-body">
                             <h4 class="media-heading user_name">${review.user.login}</h4>
-                            ${review.content}
+                            <p>${review.content}</p>
                         </div>
                     </div>
                 </div>
             </#list>
+            </div>
         </div>
     </div>
 </div>
-
-
-<#--
-<div class="container">
-    <div class="row">
-        <div class="margin-bottom">
-            <div class="card">
-                <p><img class="image-size-card" src="${tour.photo}"></p>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text"><@spring.message "date.message"/> ${tour.date}</p>
-                    <p class="card-text"><@spring.message "cost.message"/> ${tour.cost}$</p>
-                    <p class="card-text"><@spring.message "description.message"/> ${tour.description}</p>
-                    <p class="card-text"><@spring.message "duration.message"/> ${tour.duration.toDays()}</p>
-                    <p class="card-text"><@spring.message "tourtype.message"/> ${tour.tourType}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h3>User Comment Example</h3>
-        </div><
-    </div>
-    <#list tour.reviews as review>
-        <div class="row">
-            <div class="col-sm-1">
-                <div class="thumbnail">
-                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                </div>
-            </div>
-
-            <div class="col-sm-5">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>${review.user.login}</strong>&lt;#&ndash; <span class="text-muted">commented 5 days ago</span>&ndash;&gt;
-                    </div>
-                    <div class="panel-body">${review.content}</div>
-                </div>
-            </div>
-        </div>
-    </#list>
-</div>
--->
-
-
-<#list tour.reviews as review>
-<p>${review.content}</p>
-<p>${review.user.login}</p>
-</#list>
 <#include "include/footer.ftl">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -120,6 +139,14 @@
             $("input[name='size']").val($("select[name='example_length']").val());
             $("form[name='pagination']").submit();
         })
+    });
+    $('#show-comments-button').click(function () {
+        $('.comments-list').toggleClass('none');
+        if ($('#show-comments-button').val() == "Show comments") {
+            $('#show-comments-button').val("Hide comments");
+        } else {
+            $('#show-comments-button').val("Show comments");
+        }
     });
 </script>
 </body>

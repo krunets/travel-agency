@@ -1,6 +1,7 @@
 package by.runets.travelagency.repository;
 
 
+import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Role;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.hibernate.IDatabaseRepository;
@@ -37,7 +38,7 @@ public class UserRepositoryTest {
 
 	@Test
 	public void testCreate () {
-		final Optional<User> expected = Optional.of(new User(10, "testLogin", "testPassword", null, null, Role.MEMBER));
+		final Optional<User> expected = Optional.of(new User(10, "testLogin", "testPassword", Role.MEMBER));
 		final long id = userRepository.create(expected.get());
 		final Optional<User> actual = userRepository.read(User.class, id);
 		Assert.assertEquals(expected, actual);
@@ -46,7 +47,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testReadById () {
 		final long id = 1;
-		final Optional<User> expected = Optional.of(new User(id, "root", "root", null, null, Role.ADMIN));
+		final Optional<User> expected = Optional.of(new User(id, "root", "root", Role.ADMIN));
 		final Optional<User> actual = userRepository.read(User.class, id);
 		
 		Assert.assertEquals(expected, actual);
@@ -57,9 +58,9 @@ public class UserRepositoryTest {
 		final List<Optional<User>> expected =
 				new ArrayList<>(
 						Arrays.asList(
-								Optional.of(new User(1, "root", "root", null, null, Role.ADMIN)),
-								Optional.of(new User(2, "admin", "admin", null, null, Role.ADMIN)),
-								Optional.of(new User(3, "traveler1", "traveler1", null, null, Role.MEMBER))));
+								Optional.of(new User(1, "root", "root",  Role.ADMIN)),
+								Optional.of(new User(2, "admin", "admin", Role.ADMIN)),
+								Optional.of(new User(3, "traveler1", "traveler1", Role.MEMBER))));
 		final List<Optional<User>> actual = userRepository.readAll(User.class, DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);
@@ -92,8 +93,10 @@ public class UserRepositoryTest {
 	
 	@Test
 	public void readByNameQuery() {
-		final Optional<User> expected = Optional.of(new User(2, "admin", "admin", null, null, Role.ADMIN));
+		final Optional<User> expected = Optional.of(new User(2, "admin", "admin", Role.ADMIN));
 		final Optional<User> actual = userRepository.readByNameQuery("FIND_BY_LOGIN", "login", "admin", DEFAULT_PAGINATION_SIZE).get(0);
 		Assert.assertEquals(expected, actual);
 	}
+	
+	
 }

@@ -41,7 +41,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testCreate () {
-		User expected = new User(10, "testLogin", "testPassword", null, null, Role.ADMIN);
+		User expected = new User(10, "testLogin", "testPassword", Role.ADMIN);
 		final long id = userService.create(expected);
 		User actual = userService.read(id);
 		Assert.assertEquals(expected, actual);
@@ -50,7 +50,7 @@ public class UserServiceTest {
 	@Test
 	public void testReadById () {
 		final long id = 1;
-		User expected = new User(1, "root", "root", null, null, Role.ADMIN);
+		User expected = new User(1, "root", "root", Role.ADMIN);
 		User actual = userService.read(id);
 		
 		Assert.assertEquals(expected, actual);
@@ -61,9 +61,9 @@ public class UserServiceTest {
 		List<User> expected =
 				new ArrayList<>(
 						Arrays.asList(
-								new User(1, "root", "root", null, null, Role.ADMIN),
-								new User(2, "admin", "admin", null, null, Role.ADMIN),
-								new User(3, "traveler1", "traveler1", null, null, Role.MEMBER)));
+								new User(1, "root", "root", Role.ADMIN),
+								new User(2, "admin", "admin",  Role.ADMIN),
+								new User(3, "traveler1", "traveler1", Role.MEMBER)));
 		List<User> actual = userService.readAll(DEFAULT_PAGINATION_SIZE);
 		log.error(actual + "");
 		Assert.assertEquals(expected, actual);
@@ -106,7 +106,7 @@ public class UserServiceTest {
 	
 	@Test
 	public void testRegisterNotExistUser() {
-		User expected = new User(10, "testLogin", "testPassword", null, null, Role.MEMBER);
+		User expected = new User(10, "testLogin", "testPassword", Role.MEMBER);
 		Assert.assertTrue(userService.registerUserAccount(expected));
 		
 		User actual = userService.readAllByField(NAMED_QUERY, FIELD, "testLogin", DEFAULT_PAGINATION_SIZE).get(0);
@@ -118,7 +118,7 @@ public class UserServiceTest {
 		List<User> expected =
 				new ArrayList<>(
 						Arrays.asList(
-								new User(3, "traveler1", "traveler1", null, null, Role.MEMBER)));
+								new User(3, "traveler1", "traveler1", Role.MEMBER)));
 		List<User> actual = userService.readUserByRole();
 		Assert.assertEquals(actual, expected);
 	}
