@@ -84,13 +84,7 @@ public class TourController {
 		
 		String username = auth.getName();
 		Review review = modelMapper.map(reviewDTO, Review.class);
-		
 		reviewService.createReviewByUsernameAndTourId(username, Long.valueOf(tourId), review);
-		Tour tour = tourService.readAllByField(FIND_TOUR_BY_ID_WITH_USER_REVIEWS, ID, Long.valueOf(tourId), DEFAULT_PAGINATION_SIZE).get(0);
-		
-		model.addAttribute("countriesDTO", countryDTOs);
-		model.addAttribute("tour", tour);
-		
-		return "tourpage";
+		return "redirect:/tour/{tourId}/info";
 	}
 }

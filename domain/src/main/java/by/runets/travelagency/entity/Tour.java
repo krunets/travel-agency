@@ -27,6 +27,7 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 @Table(schema = "travel_agency", name = "tour")
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @ToString(exclude = {"users", "countries", "hotels", "reviews"})
 @EqualsAndHashCode(exclude = {"users", "countries", "hotels", "reviews"})
 @NamedQueries({@NamedQuery(
@@ -44,6 +45,7 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 })
 public class Tour {
 	@Id
+	@NonNull
 	@Column(name = "t_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;

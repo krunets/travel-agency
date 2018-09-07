@@ -99,4 +99,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	public RedirectStrategy redirectStrategy () {
 		return new DefaultRedirectStrategy();
 	}
+	
+	@Bean
+	public ClassPathTldsLoader classPathTldsLoader(){
+		return new ClassPathTldsLoader();
+	}
 }

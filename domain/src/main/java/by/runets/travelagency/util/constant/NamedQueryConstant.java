@@ -25,9 +25,8 @@ public class NamedQueryConstant {
 	public static final String FIND_TOUR_ALL_TOUR_NAMED_QUERY = "from Tour t JOIN FETCH t.countries";
 	public static final String FIND_ALL_HOTEL_NAMED_QUERY = "from Hotel h";
 	public static final String FIND_TOUR_BY_ID_WITH_USER_REVIEWS_NAMED_QUERY = "from Tour t " +
-			"JOIN FETCH t.reviews review" +
+			"LEFT JOIN FETCH t.reviews review" +
 			" WHERE t.id=:id";
-	
 	//field
 	public static final String ID = "id";
 	public static final String LOGIN_FIELD = "login";

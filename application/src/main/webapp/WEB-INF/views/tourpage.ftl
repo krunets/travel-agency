@@ -1,7 +1,8 @@
+<#assign  security=JspTaglibs["http://www.springframework.org/security/tags"] />
 <#import "/spring.ftl" as spring/>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Tour page</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/comments.css"/>
@@ -95,10 +96,41 @@
                         <a class="media-left" href="#"><img class="comments-img" src="${review.user.photo}"></a>
                         <div class="media-body">
                             <h4 class="media-heading user_name">${review.user.login}</h4>
-                            <p>${review.content}</p>
+                            <@security.authorize access="hasRole('ROLE_ADMIN')">
+                                <p>${review.content}</p>
+                                <div class="margin-bottom">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <form>
+                                                    <button type="button" class="btn btn-success"
+                                                            data-user-id="${review.user.id}"
+                                                            data-tour-id="${tour.id}" data-id="${review.id}"
+                                                            data-username="${review.user.login}"
+                                                            data-content="${review.content}" data-toggle="modal"
+                                                            data-target="#exampleModal">Edit
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="/review/${review.id}/delete/tour/${tour.id}"
+                                                      method="post">
+                                                    <input name="${_csrf.parameterName}" type="hidden"
+                                                           value="${_csrf.token}">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </@security.authorize>
+                            <@security.authorize access="hasRole('ROLE_MEMBER') || ! isAuthenticated()">
+                                <p>${review.content}</p>
+                            </@security.authorize>
                         </div>
                     </div>
                 </div>
+                <#include "include/model_comments_form.ftl">
             </#list>
             </div>
         </div>
@@ -120,35 +152,8 @@
 <script src="/resources/uui/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="/resources/uui/bootstrap/js/dataTables.bootstrap4.min.js"></script>
 <script src="/resources/js/controller.js"></script>
+<script src="/resources/js/tourpage.js"></script>
 <script src="/resources/uui/js/uui-rating.min.js"></script>
-<script>
-    $("input[placeholder]").each(function () {
-        $(this).attr('size', $(this).attr('placeholder').length);
-    });
-    $('#datepicker').uui_datepicker({todayHighlight: true});
-    $('.uui-carousel').carousel({
-        interval: 2000
-    });
-
-    $(document).ready(function () {
-        $('#example').DataTable();
-        $('#example_filter').hide();
-        $('#example_length').css("width", "100px");
-        $('example_length').css("width", "100px");
-        $("button[name = 'pagination_button']").click(function () {
-            $("input[name='size']").val($("select[name='example_length']").val());
-            $("form[name='pagination']").submit();
-        })
-    });
-    $('#show-comments-button').click(function () {
-        $('.comments-list').toggleClass('none');
-        if ($('#show-comments-button').val() == "Show comments") {
-            $('#show-comments-button').val("Hide comments");
-        } else {
-            $('#show-comments-button').val("Show comments");
-        }
-    });
-</script>
 </body>
 </html>
 

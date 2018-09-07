@@ -3,6 +3,7 @@ package by.runets.travelagency.entity;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,10 +18,12 @@ import javax.validation.constraints.NotNull;
 @Table(schema = "travel_agency", name = "review")
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @ToString(exclude = {/*"user", "tour"*/})
 @EqualsAndHashCode(exclude = {"user", "tour"})
 public class Review {
 	@Id
+	@NonNull
 	@Column(name = "r_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;

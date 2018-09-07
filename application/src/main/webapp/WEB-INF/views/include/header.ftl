@@ -1,3 +1,4 @@
+<#assign  security=JspTaglibs["http://www.springframework.org/security/tags"] />
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">EpamTravelAgency</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -27,19 +28,16 @@
                     <a class="dropdown-item" href="?lang=ru_RU">RU</a>
                 </div>
             </div>
-        <#if springMacroRequestContext.requestUri?contains("/admin/home") || springMacroRequestContext.requestUri?contains("/user/home")>
+        <@security.authorize access="isAuthenticated()">
             <form action="/logout">
                 <button type="submit" class="btn btn-success">Logout</button>
             </form>
-        </#if>
-        <#if springMacroRequestContext.requestUri?contains("/")
-        && !springMacroRequestContext.requestUri?contains("/login")
-        && !springMacroRequestContext.requestUri?contains("/admin/home")
-        && !springMacroRequestContext.requestUri?contains("/user/home")>
+        </@security.authorize>
+        <@security.authorize access="! isAuthenticated()">
             <form action="/login">
                 <button type="submit" class="btn btn-warning">Sign In</button>
             </form>
-        </#if>
+        </@security.authorize>
         </div>
     </div>
 </nav>
