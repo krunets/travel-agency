@@ -6,6 +6,7 @@ import by.runets.travelagency.dto.ReviewDTO;
 import by.runets.travelagency.dto.SearchTourDTO;
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Tour;
+import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.service.IReviewService;
 import by.runets.travelagency.service.ITourService;
 import by.runets.travelagency.util.converter.Converter;
@@ -75,6 +76,8 @@ public class TourController {
 			model.addAttribute("countriesDTO", countryDTOs);
 			model.addAttribute("tour", tours.get(0));
 		}
+		model.addAttribute("tourTypeEnum", TourType.values());
+		model.addAttribute("isDelete", false);
 		return "tourpage";
 	}
 	
@@ -86,5 +89,18 @@ public class TourController {
 		Review review = modelMapper.map(reviewDTO, Review.class);
 		reviewService.createReviewByUsernameAndTourId(username, Long.valueOf(tourId), review);
 		return "redirect:/tour/{tourId}/info";
+	}
+	
+	@PostMapping(value = "/tour/{tourId}/delete")
+	public String deleteTour (@PathVariable String tourId, Model model) {
+		tourService.delete(new Tour(Long.valueOf(tourId)));
+		model.addAttribute("isDelete", true);
+		return "redirect:/tour/{tourId}/info";
+	}
+	
+	
+	@PostMapping(value = "/tour/add")
+	public String addTour () {
+		return "";
 	}
 }

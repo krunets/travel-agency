@@ -4,6 +4,8 @@ import by.runets.travelagency.entity.Role;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.hibernate.IDatabaseRepository;
 import by.runets.travelagency.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,8 @@ import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_US
 
 @Service
 public class UserService extends AbstractService<User, Long> implements IUserService<User, Long> {
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public UserService (Class<User> classType, IDatabaseRepository<User, Long> abstractRepository) {
 		super(classType, abstractRepository);
@@ -30,6 +34,7 @@ public class UserService extends AbstractService<User, Long> implements IUserSer
 				.isEmpty();
 		if (isEmpty) {
 			user.setRole(Role.MEMBER);
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			userId = super.create(user);
 		}
 		return userId != 0;

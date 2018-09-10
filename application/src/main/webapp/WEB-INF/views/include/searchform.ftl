@@ -22,8 +22,7 @@
                                 <input autocomplete="off" type="text" id="startTourDate" name="startTourDate"
                                        class="uui-form-element" placeholder="<@spring.message "search.form.startDate"/>"
                                        required/>
-                                <span class="input-group-addon uui-button">
-                         </span>
+                                <span class="input-group-addon uui-button"></span>
                             </div>
                         </div>
                         <div class="form-group mb-2 group mx-sm-3">

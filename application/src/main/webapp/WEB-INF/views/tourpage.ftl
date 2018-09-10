@@ -13,10 +13,28 @@
 </head>
 <body>
 <#include "include/header.ftl">
+<#if isDelete>
+<p>The tour is deleted successfully!</p>
+</#if>
 <#include "include/searchform.ftl">
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+        <#--
+                    <button type="button" data-target="#add-tour-modal" data-toggle="modal">Add</button>
+        -->
+
+        <@security.authorize access="hasRole('ROLE_ADMIN')">
+            <#include "include/tour_add_modal.ftl">
+            <a class="add-button" data-target="#add-tour-modal" data-toggle="modal"
+               style="cursor: pointer;">Add<i
+                    class="fa fa-plus-circle"
+                    aria-hidden="true"></i></a>
+            <a class=edit-button" style="cursor: pointer;">Edit <i class="fa fa-pencil-square-o"
+                                                                   aria-hidden="true"></i></a>
+            <a class="delete-button" style="cursor: pointer;" href="/tour/${tour.id}/delete">Delete <i
+                    class="fa fa-times" aria-hidden="true"></i></a>
+        </@security.authorize>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -93,6 +111,7 @@
             <#list tour.reviews as review>
                 <div class="comments-list none">
                     <div class="media">
+
                         <a class="media-left" href="#"><img class="comments-img" src="${review.user.photo}"></a>
                         <div class="media-body">
                             <h4 class="media-heading user_name">${review.user.login}</h4>
@@ -130,7 +149,7 @@
                         </div>
                     </div>
                 </div>
-                <#include "include/model_comments_form.ftl">
+                <#include "include/modal_comments_form.ftl">
             </#list>
             </div>
         </div>

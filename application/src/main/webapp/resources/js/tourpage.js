@@ -2,6 +2,7 @@ $(document).ready(function () {
     $("input[placeholder]").each(function () {
         $(this).attr('size', $(this).attr('placeholder').length);
     });
+
     $('#datepicker').uui_datepicker({todayHighlight: true});
     $('.uui-carousel').carousel({
         interval: 2000
@@ -45,4 +46,4 @@ $('button[data-toggle=modal]').click(function () {
 
     var action = '/review/' + reviewId + '/edit/tour/' + tourId + '/user/' + userid;
     $('#edit-comment-form').attr('action', action);
-})
+});

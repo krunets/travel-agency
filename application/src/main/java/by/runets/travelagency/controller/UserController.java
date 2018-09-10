@@ -41,7 +41,7 @@ public class UserController {
 		User user = modelMapper.map(userDTO, User.class);
 		boolean login = userService.registerUserAccount(user);
 		if (login) {
-			return "index";
+			return "redirect:/login";
 		} else {
 			model.addAttribute("login_error", true);
 			return "registration";

@@ -157,3 +157,22 @@ footer a:hover{
     height: 200px;
 }
 
+a {
+    color: #3d6277;
+}
+
+.add-button {
+    color: green;
+}
+
+.delete-button {
+    color: red;
+}
+
+.edit-button {
+    color: #3d6277;
+}
+
+.button-group-float-right {
+    float: right;
+}

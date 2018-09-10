@@ -125,6 +125,9 @@
     $('#datepicker').uui_datepicker({todayHighlight: true});
     $('.uui-carousel').carousel({
         interval: 2000
+    }); $('#datepicker').uui_datepicker({todayHighlight: true});
+    $('.uui-carousel').carousel({
+        interval: 2000
     });
 
     $(document).ready(function () {
