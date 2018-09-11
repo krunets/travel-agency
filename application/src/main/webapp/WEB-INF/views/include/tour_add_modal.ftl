@@ -48,7 +48,7 @@
                         <textarea class="form-control" name="description" id="description"
                                   placeholder="Describe this tour:" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">Add</button>
+                    <button type="button" class="btn btn-primary float-right" onclick="addTour()">Add</button>
                 </form>
             </div>
         </div>

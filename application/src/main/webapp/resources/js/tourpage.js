@@ -47,3 +47,4 @@ $('button[data-toggle=modal]').click(function () {
     var action = '/review/' + reviewId + '/edit/tour/' + tourId + '/user/' + userid;
     $('#edit-comment-form').attr('action', action);
 });
+
