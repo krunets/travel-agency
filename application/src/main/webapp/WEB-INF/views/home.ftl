@@ -8,7 +8,8 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/uui/css/lib/components/datepicker3.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/></head>
 <body>
 <#include "include/header.ftl">
 <#include "include/searchform.ftl">
@@ -23,9 +24,14 @@
                     <button type="button" name="pagination_button"
                             class="btn btn-primary float-right"><@spring.message "paginate.message"/></button>
                 </form>
+
             </div>
             <thead>
             <tr>
+                <button class="btn btn-info btn-xs" data-target="#add-tour-modal" data-toggle="modal">
+                    Add
+                    <span class="fa fa-plus-circle"></span>
+                </button>
                 <th scope="col"><@spring.message "photo.message"/></th>
                 <th scope="col"><@spring.message "date.message"/></th>
                 <th scope="col"><@spring.message "cost.message"/></th>
@@ -34,12 +40,17 @@
                 <th scope="col"><@spring.message "tourtype.message"/></th>
                 <th scope="col"><@spring.message "country.message"/></th>
                 <th scope="col"><@spring.message "hotel.message"/></th>
+                <@security.authorize access="hasRole('ROLE_ADMIN')">
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </@security.authorize>
             </tr>
             </thead>
             <tbody>
                 <#list tours as tour>
                 <tr>
-                    <td><a style="cursor: pointer;" href="/tour/${tour.id}/info"><img class="image-size" src="${tour.photo}"></a></td>
+                    <td><a style="cursor: pointer;" href="/tour/${tour.id}/info"><img class="image-size"
+                                                                                      src="${tour.photo}"></a></td>
                     <td>${tour.date}</td>
                     <td>${tour.cost}$</td>
                     <td>${tour.description}</td>
@@ -59,19 +70,30 @@
                             </#list>
                         </#list>
                     </td>
+                    <@security.authorize access="hasRole('ROLE_ADMIN')">
+                        <td>
+                            <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
+                                        data-target="#edit">
+                                    <span class="fa fa-pencil-square-o"></span>
+                                </button>
+                            </p>
+                        </td>
+                        <td>
+                            <form action="/tour/${tour.id}/delete" method="post">
+                                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+                                <button type="submit" class="btn btn-danger btn-xs">
+                                    <span class="fa fa-times"></span>
+                                </button>
+                            </form>
+                        </td>
+                        <#include "include/tour_add_modal.ftl">
+                    </@security.authorize>
                 </tr>
                 </#list>
             </tbody>
         </table>
-       <#-- <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>-->
+
     </#if>
     </div>
 </div>
@@ -125,7 +147,8 @@
     $('#datepicker').uui_datepicker({todayHighlight: true});
     $('.uui-carousel').carousel({
         interval: 2000
-    }); $('#datepicker').uui_datepicker({todayHighlight: true});
+    });
+    $('#datepicker').uui_datepicker({todayHighlight: true});
     $('.uui-carousel').carousel({
         interval: 2000
     });
@@ -143,4 +166,16 @@
 </script>
 </body>
 </html>
+
+<#-- <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>-->
+
+
 

@@ -1,12 +1,9 @@
 package by.runets.travelagency.controller;
 
-import by.runets.travelagency.dto.CountryDTO;
-import by.runets.travelagency.dto.PaginationDTO;
-import by.runets.travelagency.dto.ReviewDTO;
-import by.runets.travelagency.dto.SearchTourDTO;
+import by.runets.travelagency.dto.*;
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Tour;
-import by.runets.travelagency.entity.TourType;
+import by.runets.travelagency.service.IPhotoService;
 import by.runets.travelagency.service.IReviewService;
 import by.runets.travelagency.service.ITourService;
 import by.runets.travelagency.util.converter.Converter;
@@ -44,6 +41,8 @@ public class TourController {
 	private ModelMapper modelMapper;
 	@Autowired
 	private IReviewService<Review, Long> reviewService;
+	@Autowired
+	private IPhotoService photoService;
 	
 	@PostMapping(value = "/tour/search")
 	public String seacrhTour (@Valid @ModelAttribute SearchTourDTO searchTourDTO, Model model) {
@@ -76,8 +75,6 @@ public class TourController {
 			model.addAttribute("countriesDTO", countryDTOs);
 			model.addAttribute("tour", tours.get(0));
 		}
-		model.addAttribute("tourTypeEnum", TourType.values());
-		model.addAttribute("isDelete", false);
 		return "tourpage";
 	}
 	
@@ -94,13 +91,16 @@ public class TourController {
 	@PostMapping(value = "/tour/{tourId}/delete")
 	public String deleteTour (@PathVariable String tourId, Model model) {
 		tourService.delete(new Tour(Long.valueOf(tourId)));
-		model.addAttribute("isDelete", true);
-		return "redirect:/tour/{tourId}/info";
+		return "redirect:/";
 	}
 	
 	
 	@PostMapping(value = "/tour/add")
-	public String addTour () {
-		return "";
+	public String addTour (@ModelAttribute TourDTO tourDTO, Model model) {
+/*
+		photoService.save(tourDTO.getPhoto(), "", "tour");
+*/
+		log.error(tourDTO.toString());
+		return "redirect:/";
 	}
 }

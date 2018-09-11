@@ -3,6 +3,7 @@ package by.runets.travelagency.controller;
 import by.runets.travelagency.dto.CountryDTO;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.entity.Tour;
+import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.service.IJoinService;
 import by.runets.travelagency.service.IService;
 import by.runets.travelagency.service.ITourService;
@@ -46,6 +47,7 @@ public class PageController {
 		model.addAttribute("tours", tours);
 		model.addAttribute("countriesDTO", countryDTOs);
 		model.addAttribute("locale", locale);
+		model.addAttribute("tourTypeEnum", TourType.values());
 		
 		return "home";
 	}

@@ -12,7 +12,7 @@
                 <form id="edit-comment-form" action="/tour/add" method="post" enctype="multipart/form-data">
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
                     <div class="form-group">
-                        <input type="file" class="form-control" name="photo" id="photo"/>
+                        <input type="file" name="photo" id="photo"/>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Date:</label>
