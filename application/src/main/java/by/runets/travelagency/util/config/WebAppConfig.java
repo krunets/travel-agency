@@ -10,9 +10,11 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -30,6 +32,7 @@ import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_CO
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = "by.runets.travelagency.*")
+@PropertySource("classpath:filepath/filepath.properties")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 	@Autowired
 	private IService<Country, Long> countryService;
@@ -101,7 +104,15 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public ClassPathTldsLoader classPathTldsLoader(){
+	public ClassPathTldsLoader classPathTldsLoader () {
 		return new ClassPathTldsLoader();
+	}
+	
+	@Bean(name = "multipartResolver")
+	public CommonsMultipartResolver createMultipartResolver () {
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setDefaultEncoding("utf-8");
+		resolver.setMaxUploadSizePerFile(5242880);//5MB
+		return resolver;
 	}
 }

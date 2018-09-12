@@ -8,8 +8,8 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/uui/css/lib/components/datepicker3.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
 <#include "include/header.ftl">
@@ -25,14 +25,15 @@
                     <button type="button" name="pagination_button"
                             class="btn btn-primary float-right"><@spring.message "paginate.message"/></button>
                 </form>
-
             </div>
             <thead>
             <tr>
-                <button class="btn btn-info btn-xs" data-target="#add-tour-modal" data-toggle="modal">
-                    Add
-                    <span class="fa fa-plus-circle"></span>
-                </button>
+                <@security.authorize access="hasRole('ROLE_ADMIN')">
+                    <button class="btn btn-info btn-xs" data-target="#add-tour-modal" data-toggle="modal">
+                        Add
+                        <span class="fa fa-plus-circle"></span>
+                    </button>
+                </@security.authorize>
                 <th scope="col"><@spring.message "photo.message"/></th>
                 <th scope="col"><@spring.message "date.message"/></th>
                 <th scope="col"><@spring.message "cost.message"/></th>
@@ -50,8 +51,7 @@
             <tbody>
                 <#list tours as tour>
                 <tr>
-                    <td><a style="cursor: pointer;" href="/tour/${tour.id}/info"><img class="image-size"
-                                                                                      src="${tour.photo}"></a></td>
+                    <td><a style="cursor: pointer;" href="/tour/${tour.id}/info"><img class="image-size" src="${tour.photo}"></a></td>
                     <td>${tour.date}</td>
                     <td>${tour.cost}$</td>
                     <td>${tour.description}</td>
@@ -74,8 +74,7 @@
                     <@security.authorize access="hasRole('ROLE_ADMIN')">
                         <td>
                             <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
-                                        data-target="#edit">
+                                <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="edit-modal" data-target="#edit-tour-modal">
                                     <span class="fa fa-pencil-square-o"></span>
                                 </button>
                             </p>
@@ -89,6 +88,7 @@
                             </form>
                         </td>
                         <#include "include/tour_add_modal.ftl">
+                        <#include "include/tour_edit_modal.ftl">
                     </@security.authorize>
                 </tr>
                 </#list>
@@ -145,14 +145,7 @@
     $("input[placeholder]").each(function () {
         $(this).attr('size', $(this).attr('placeholder').length);
     });
-    $('#datepicker').uui_datepicker({todayHighlight: true});
-    $('.uui-carousel').carousel({
-        interval: 2000
-    });
-    $('#datepicker').uui_datepicker({todayHighlight: true});
-    $('.uui-carousel').carousel({
-        interval: 2000
-    });
+    $('.custom-datepicker').uui_datepicker({todayHighlight: true});
 
     $(document).ready(function () {
         $('#example').DataTable();

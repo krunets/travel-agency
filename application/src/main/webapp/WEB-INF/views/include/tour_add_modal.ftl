@@ -9,15 +9,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="edit-comment-form" action="/tour/add" method="post" enctype="multipart/form-data">
+                <form id="add-tour-form" action="/tour/add" onsubmit="return addTour()" method="post" enctype="multipart/form-data">
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+                    <div id="photoExtensionError" class="alert alert-danger none" role="alert">
+                        <p>File must have PNG or JPG extension!</p>
+                    </div>
                     <div class="form-group">
-                        <input type="file" name="photo" id="photo"/>
+                        <input type="file" name="file" id="photo"/>
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Date:</label>
-                        <div id="datepicker" class="date uui-datepicker date-button">
-                            <input autocomplete="off" type="text" id="date" name="date" class="uui-form-element" placeholder="Date" required/>
+                        <div id="datepicker" class="custom-datepicker date uui-datepicker date-button">
+                            <input autocomplete="off" type="text" id="date" name="date" class="uui-form-element"
+                                   placeholder="Date" required/>
                             <span class="input-group-addon uui-button"></span>
                         </div>
                     </div>
@@ -36,11 +40,20 @@
                         <label for="tourType" class="col-form-label">Tour type:</label>
                         <select id="tourType" name="tourType" required>
                             <option disabled selected>Select tourtype:</option>
-                            <#if tourTypeEnum?has_content>
-                                <#list tourTypeEnum as tourType>
-                                    <option value="${tourType.id}">${tourType.type}</option>
-                                </#list>
-                            </#if>
+                        <#if tourTypeEnum?has_content>
+                            <#list tourTypeEnum as tourType>
+                                <option value="${tourType.type}">${tourType.type}</option>
+                            </#list>
+                        </#if>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="countryName" class="col-form-label">Country: </label>
+                        <select id="countryName" name="countryName" required>
+                            <option disabled selected>Select country from list</option>
+                        <#list countriesDTO as country>
+                            <option value="${country.code}">${country.name}</option>
+                        </#list>
                         </select>
                     </div>
                     <div class="form-group">
@@ -48,7 +61,7 @@
                         <textarea class="form-control" name="description" id="description"
                                   placeholder="Describe this tour:" required></textarea>
                     </div>
-                    <button type="button" class="btn btn-primary float-right" onclick="addTour()">Add</button>
+                    <button type="submit" class="btn btn-primary float-right">Add</button>
                 </form>
             </div>
         </div>

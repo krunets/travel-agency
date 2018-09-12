@@ -16,11 +16,12 @@ public class CountryConverter implements Converter<List<CountryDTO>, List<Countr
 		List<CountryDTO> countries = new ArrayList<>();
 		
 		for (Country country : countryList) {
+			long id = country.getId();
 			String code = country.getName();
 			Locale locale = new Locale("", code);
 			String name = locale.getDisplayCountry();
 			
-			countries.add(new CountryDTO(code, name));
+			countries.add(new CountryDTO(id, code, name));
 		}
 		
 		return countries;

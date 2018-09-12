@@ -18,7 +18,7 @@
                             </select>
                         </div>
                         <div class="form-group mx-sm-3 mb-2">
-                            <div id="datepicker" class="date uui-datepicker date-button">
+                            <div id="datepicker" class="custom-datepicker date uui-datepicker date-button">
                                 <input autocomplete="off" type="text" id="startTourDate" name="startTourDate"
                                        class="uui-form-element" placeholder="<@spring.message "search.form.startDate"/>"
                                        required/>

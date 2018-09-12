@@ -1,5 +1,6 @@
 package by.runets.travelagency.util.security;
 
+import by.runets.travelagency.util.encoding.EncodingFilter;
 import by.runets.travelagency.util.handler.SuccessUrlHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Slf4j
@@ -24,6 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 	@Autowired
 	private SuccessUrlHandler successUrlHandler;
+	@Autowired
+	private EncodingFilter encodingFilter;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder () {
@@ -40,6 +44,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure (HttpSecurity http) throws Exception {
 		http
+				.addFilterBefore(encodingFilter, ChannelProcessingFilter.class);
+		http
+				.csrf()
+				.ignoringAntMatchers("/tour/**")
+				.and()
 				.authorizeRequests()
 				.antMatchers("/admin/home", "/user/home", "/user/review/**").authenticated()
 				.antMatchers("/", "/tour*").permitAll()

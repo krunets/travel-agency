@@ -1,25 +1,27 @@
 package by.runets.travelagency.controller;
 
 import by.runets.travelagency.dto.*;
+import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Tour;
-import by.runets.travelagency.service.IPhotoService;
+import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.service.IReviewService;
 import by.runets.travelagency.service.ITourService;
 import by.runets.travelagency.util.converter.Converter;
+import by.runets.travelagency.util.fileuploader.IFileNameExtensionUtil;
+import by.runets.travelagency.util.fileuploader.IFileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,23 +36,32 @@ public class TourController {
 	@Autowired
 	private ITourService<Tour, Long> tourService;
 	@Autowired
-	private Converter<LocalDate, String> dateConverter;
+	private IReviewService<Review, Long> reviewService;
 	@Autowired
 	private List<CountryDTO> countryDTOs;
 	@Autowired
+	private IFileUtil fileUtil;
+	@Autowired
+	private IFileNameExtensionUtil fileNameExtensionUtil;
+	@Autowired
 	private ModelMapper modelMapper;
 	@Autowired
-	private IReviewService<Review, Long> reviewService;
-	@Autowired
-	private IPhotoService photoService;
+	private Converter<LocalDate, String> dateConverter;
+	
+	@Value("${tour.filepath}")
+	private String tourFilePath;
+	@Value("${tour.database.path}")
+	private String tourDatabasePath;
+	
 	
 	@PostMapping(value = "/tour/search")
-	public String seacrhTour (@Valid @ModelAttribute SearchTourDTO searchTourDTO, Model model) {
+	public String seacrhTour (@ModelAttribute SearchTourDTO searchTourDTO, Model model) {
 		List<Tour> tours = tourService.findTourByCountryAndDateAndDuration(
 				searchTourDTO.getCountryName(),
 				dateConverter.convert(searchTourDTO.getStartTourDate()),
-				Duration.ofDays(Long.parseLong(searchTourDTO.getTourDuration()))
+				Duration.ofDays(searchTourDTO.getTourDuration())
 		);
+		
 		model.addAttribute("checkTours", true);
 		model.addAttribute("criteriaTour", tours);
 		model.addAttribute("countriesDTO", countryDTOs);
@@ -96,11 +107,26 @@ public class TourController {
 	
 	
 	@PostMapping(value = "/tour/add")
-	public String addTour (@ModelAttribute TourDTO tourDTO, Model model) {
-/*
-		photoService.save(tourDTO.getPhoto(), "", "tour");
-*/
-		log.error(tourDTO.toString());
+	public String addTour (@RequestParam("file") MultipartFile file, @ModelAttribute TourDTO tourDTO) {
+		Tour tour = modelMapper.map(tourDTO, Tour.class);
+		
+		String newFileName = fileNameExtensionUtil.reformat(file);
+		fileUtil.save(file, tourFilePath, newFileName);
+		
+		tour.setDate(dateConverter.convert(tourDTO.getDate()));
+		tour.setDuration(Duration.ofDays(tourDTO.getDuration()));
+		tour.setPhoto(tourDatabasePath + File.separator + newFileName);
+		tour.setTourType(TourType.getTypeByValue(tourDTO.getTourType()));
+		
+		CountryDTO countryDTO = countryDTOs
+				.stream()
+				.filter(country -> country.getCode().equalsIgnoreCase(tourDTO.getCountryName()))
+				.findFirst()
+				.orElse(null);
+		
+		tour.getCountries().add(new Country(countryDTO.getId(), countryDTO.getCode()));
+		tourService.create(tour);
+		
 		return "redirect:/";
 	}
 }

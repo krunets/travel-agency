@@ -26,7 +26,14 @@ $('#show-comments-button').click(function () {
     }
 });
 
-$('button[data-toggle=modal]').click(function () {
+$('button[data-toggle=edit-modal]').click(function () {
+    var tourDuration = '';
+    var tourDescription = '';
+    var tourCost = '';
+    var tourDate = '';
+    var tourCountry = '';
+    var tourType = '';
+
     var tourId = '';
     var reviewId = '';
     var reviewContent = '';
@@ -34,17 +41,21 @@ $('button[data-toggle=modal]').click(function () {
     var userid = '';
 
     if (typeof $(this).data('id') !== 'undefined') {
-        tourId = $(this).data('tour-id');
-        reviewId = $(this).data('id');
-        reviewContent = $(this).data('content');
-        username = $(this).data('username');
-        userid = $(this).data('user-id');
-    }
+        tourDuration = $(this).data('edit-duration');
+        tourDescription = $(this).data('edit-description');
+        tourCost = $(this).data('edit-cost');
+        tourDate = $(this).data('edit-date');
+        tourCountry = $(this).data('edit-country');
+        tourType = $(this).data('edit-tourType');
+    };
+    $('#edit-duration').val(tourDuration);
+    $('#edit-description').val(tourDescription);
+    $('#edit-cost').val(tourCost);
+    $('#edit-date').val(tourDate);
+    $('#edit-country').val(tourCountry);
+    $('#edit-tourType').val(tourType);
 
-    $('#username').val(username);
-    $('#content').val(reviewContent);
-
-    var action = '/review/' + reviewId + '/edit/tour/' + tourId + '/user/' + userid;
-    $('#edit-comment-form').attr('action', action);
+/*    var action = '/review/' + reviewId + '/edit/tour/' + tourId + '/user/' + userid;
+    $('#edit-comment-form').attr('action', action);*/
 });
 

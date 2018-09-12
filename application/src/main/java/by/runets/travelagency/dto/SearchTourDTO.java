@@ -18,5 +18,5 @@ public class SearchTourDTO {
 	private String startTourDate;
 	@NonNull
 	@Pattern(regexp = REGEX)
-	private String tourDuration;
+	private long tourDuration;
 }
