@@ -78,8 +78,7 @@
             <div class="margin-bottom">
                 <form action="/user/review/${tour.id}/tour" method="post">
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
-                    <textarea name="content" class="resize-none margin-bottom form-control input-sm chat-input"
-                              placeholder="Write your message here..." required></textarea>
+                    <textarea name="content" class="resize-none margin-bottom form-control input-sm chat-input" placeholder="Write your message here..." required></textarea>
                     <input type="button" id="show-comments-button" class="auto-width btn btn-outline-info float-right"
                            value="Show comments"/>
                     <button type="submit" class="auto-width btn btn-outline-info float-right">Add comment</button>
@@ -104,12 +103,16 @@
                                         <tr>
                                             <td>
                                                 <form>
-                                                    <button type="button" class="btn btn-success"
+                                                    <button type="button"
+                                                            class="btn btn-success"
                                                             data-user-id="${review.user.id}"
-                                                            data-tour-id="${tour.id}" data-id="${review.id}"
+                                                            data-tour-id="${tour.id}"
+                                                            data-id="${review.id}"
                                                             data-username="${review.user.login}"
-                                                            data-content="${review.content}" data-toggle="modal"
-                                                            data-target="#exampleModal">Edit
+                                                            data-content="${review.content}"
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModal">
+                                                        Edit
                                                     </button>
                                                 </form>
                                             </td>

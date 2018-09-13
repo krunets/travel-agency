@@ -4,7 +4,6 @@ import by.runets.travelagency.dto.*;
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Tour;
-import by.runets.travelagency.entity.TourType;
 import by.runets.travelagency.service.IReviewService;
 import by.runets.travelagency.service.ITourService;
 import by.runets.travelagency.util.converter.Converter;
@@ -47,7 +46,8 @@ public class TourController {
 	private ModelMapper modelMapper;
 	@Autowired
 	private Converter<LocalDate, String> dateConverter;
-	
+	@Autowired
+	private Converter<Tour, TourDTO> tourConverter;
 	@Value("${tour.filepath}")
 	private String tourFilePath;
 	@Value("${tour.database.path}")
@@ -90,7 +90,7 @@ public class TourController {
 	}
 	
 	@PostMapping(value = "/user/review/{tourId}/tour")
-	public String review (@ModelAttribute ReviewDTO reviewDTO, @PathVariable String tourId, Model model) {
+	public String review (@ModelAttribute ReviewDTO reviewDTO, @PathVariable String tourId) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		String username = auth.getName();
@@ -100,7 +100,7 @@ public class TourController {
 	}
 	
 	@PostMapping(value = "/tour/{tourId}/delete")
-	public String deleteTour (@PathVariable String tourId, Model model) {
+	public String deleteTour (@PathVariable String tourId) {
 		tourService.delete(new Tour(Long.valueOf(tourId)));
 		return "redirect:/";
 	}
@@ -108,15 +108,10 @@ public class TourController {
 	
 	@PostMapping(value = "/tour/add")
 	public String addTour (@RequestParam("file") MultipartFile file, @ModelAttribute TourDTO tourDTO) {
-		Tour tour = modelMapper.map(tourDTO, Tour.class);
-		
 		String newFileName = fileNameExtensionUtil.reformat(file);
 		fileUtil.save(file, tourFilePath, newFileName);
-		
-		tour.setDate(dateConverter.convert(tourDTO.getDate()));
-		tour.setDuration(Duration.ofDays(tourDTO.getDuration()));
-		tour.setPhoto(tourDatabasePath + File.separator + newFileName);
-		tour.setTourType(TourType.getTypeByValue(tourDTO.getTourType()));
+		tourDTO.setPhoto(tourDatabasePath + File.separator + newFileName);
+		Tour tour = tourConverter.convert(tourDTO);
 		
 		CountryDTO countryDTO = countryDTOs
 				.stream()
@@ -127,6 +122,13 @@ public class TourController {
 		tour.getCountries().add(new Country(countryDTO.getId(), countryDTO.getCode()));
 		tourService.create(tour);
 		
+		return "redirect:/";
+	}
+	
+	@PostMapping(value = "/tour/edit")
+	public String editTour (@ModelAttribute TourDTO tourDTO) {
+		Tour tour = tourConverter.convert(tourDTO);
+		tourService.update(tour);
 		return "redirect:/";
 	}
 }

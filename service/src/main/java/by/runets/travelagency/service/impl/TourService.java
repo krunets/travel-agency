@@ -30,12 +30,27 @@ public class TourService extends AbstractService<Tour, Long> implements ITourSer
 	@Override
 	@Transactional(readOnly = true)
 	public List<Tour> findTourByCountryAndDateAndDuration (String countryName, LocalDate startTourDate, Duration tourDuration) {
-		List<Optional<Tour>> tours = tourRepository
-				.findTourByCountryAndDateAndDuration(countryName, startTourDate, tourDuration);
-		return tours.stream()
+		return tourRepository
+				.findTourByCountryAndDateAndDuration(countryName, startTourDate, tourDuration)
+				.stream()
 				.filter(Optional::isPresent)
 				.map(Optional::get)
 				.collect(Collectors.toList());
+	}
+	
+	@Override
+	@Transactional
+	public void update (Tour updatableEntity) {
+		Tour tour = this.read(updatableEntity.getId());
+		
+		tour.setPhoto(updatableEntity.getPhoto());
+		tour.setDescription(updatableEntity.getDescription());
+		tour.setCost(updatableEntity.getCost());
+		tour.setTourType(updatableEntity.getTourType());
+		tour.setDate(updatableEntity.getDate());
+		tour.setDuration(updatableEntity.getDuration());
+		
+		super.update(tour);
 	}
 	
 	@Override

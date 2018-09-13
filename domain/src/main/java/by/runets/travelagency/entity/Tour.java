@@ -117,5 +117,6 @@ public class Tour {
 	 */
 	@OneToMany(mappedBy = "tour")
 	@BatchSize(size = 5)
+	@Column(updatable = false)
 	private List<Review> reviews = new ArrayList<>();
 }

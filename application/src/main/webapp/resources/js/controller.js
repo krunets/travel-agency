@@ -1,44 +1,3 @@
-var getUsers = function () {
-    var token = $("meta[name='_csrf']").attr("content");
-    $.ajax({
-        type: 'POST',
-        url: '/user/all',
-        headers: {'X-CSRF-Token': token},
-        success: function (data) {
-            console.log(data);
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-};
-
-/*var addTour = function () {
- var tourDTO = {
- photo: $('#photo').val(),
- date: $('#date').val(),
- cost: $('#cost').val(),
- tourType: $('#tourType').val(),
- description: $('#description').val(),
- duration: $('#duration').val()
- };
- console.log(tourDTO);
- var token = $("meta[name='_csrf']").attr("content");
- $.ajax({
- type: 'POST',
- url: '/tour/add',
- multipart: true,
- data: tourDTO,
- headers: {'X-CSRF-Token': token},
- success: function (data) {
- console.log(data);
- },
- error: function (error) {
- console.log(error);
- }
- });
- };*/
-
 var getExtension = function (filename) {
     var parts = filename.split('.');
     return parts[parts.length - 1];
@@ -83,4 +42,20 @@ $('button[data-toggle=modal]').click(function () {
 
     var action = '/review/' + reviewId + '/edit/tour/' + tourId + '/user/' + userid;
     $('#edit-comment-form').attr('action', action);
+});
+
+$("input[placeholder]").each(function () {
+    $(this).attr('size', $(this).attr('placeholder').length);
+});
+$('.custom-datepicker').uui_datepicker({todayHighlight: true});
+
+$(document).ready(function () {
+    $('#example').DataTable();
+    $('#example_filter').hide();
+    $('#example_length').css("width", "100px");
+    $('example_length').css("width", "100px");
+    $("button[name = 'pagination_button']").click(function () {
+        $("input[name='size']").val($("select[name='example_length']").val());
+        $("form[name='pagination']").submit();
+    })
 });

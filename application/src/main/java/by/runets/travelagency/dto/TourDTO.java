@@ -15,6 +15,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TourDTO {
+	private long id;
+	private String photo;
 	@NotNull
 	private String date;
 	@NotNull
@@ -23,7 +25,7 @@ public class TourDTO {
 	@Size(min = 10, max = 256)
 	private String description;
 	@NotNull
-	private String cost;
+	private long cost;
 	@NotNull
 	private String tourType;
 	@NotNull

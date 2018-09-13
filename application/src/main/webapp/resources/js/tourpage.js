@@ -26,7 +26,10 @@ $('#show-comments-button').click(function () {
     }
 });
 
-$('button[data-toggle=edit-modal]').click(function () {
+
+$('.edit-modal').click(function () {
+    var tourPhoto = '';
+    var tourId = '';
     var tourDuration = '';
     var tourDescription = '';
     var tourCost = '';
@@ -34,28 +37,27 @@ $('button[data-toggle=edit-modal]').click(function () {
     var tourCountry = '';
     var tourType = '';
 
-    var tourId = '';
-    var reviewId = '';
-    var reviewContent = '';
-    var username = '';
-    var userid = '';
+    if (typeof $(this).data('tour-id') !== 'undefined') {
+        tourPhoto = $(this).data('tour-photo');
+        tourId = $(this).data('tour-id');
+        tourDuration = $(this).data('tour-duration');
+        tourDescription = $(this).data('tour-description');
+        tourCost = $(this).data('tour-cost');
+        tourDate = $(this).data('tour-date');
+        tourCountry = $(this).data('tour-country');
+        tourType = $(this).data('tour-type');
+    }
 
-    if (typeof $(this).data('id') !== 'undefined') {
-        tourDuration = $(this).data('edit-duration');
-        tourDescription = $(this).data('edit-description');
-        tourCost = $(this).data('edit-cost');
-        tourDate = $(this).data('edit-date');
-        tourCountry = $(this).data('edit-country');
-        tourType = $(this).data('edit-tourType');
-    };
+    var split = tourDate.split("-");
+    var newDate = split[1] + '/' + split[2] + '/' + split[0];
+
+    $('#edit-id').val(tourId);
+    $('#edit-photo').val(tourPhoto);
     $('#edit-duration').val(tourDuration);
     $('#edit-description').val(tourDescription);
     $('#edit-cost').val(tourCost);
-    $('#edit-date').val(tourDate);
+    $('#edit-date').val(newDate);
     $('#edit-country').val(tourCountry);
-    $('#edit-tourType').val(tourType);
-
-/*    var action = '/review/' + reviewId + '/edit/tour/' + tourId + '/user/' + userid;
-    $('#edit-comment-form').attr('action', action);*/
+    $('#edit-tourType').val(tourType).change();
 });
 

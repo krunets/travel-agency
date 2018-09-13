@@ -74,7 +74,16 @@
                     <@security.authorize access="hasRole('ROLE_ADMIN')">
                         <td>
                             <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="edit-modal" data-target="#edit-tour-modal">
+                                <button class="edit-modal btn btn-primary btn-xs" data-title="Edit"
+                                        data-toggle="modal"
+                                        data-target="#edit-tour-modal"
+                                        data-tour-photo="${tour.photo}"
+                                        data-tour-id="${tour.id}"
+                                        data-tour-date="${tour.date}"
+                                        data-tour-cost="${tour.cost}"
+                                        data-tour-description="${tour.description}"
+                                        data-tour-duration="${tour.duration.toDays()}"
+                                        data-tour-type="${tour.tourType.type}">
                                     <span class="fa fa-pencil-square-o"></span>
                                 </button>
                             </p>
@@ -140,23 +149,11 @@
 <script src="/resources/uui/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="/resources/uui/bootstrap/js/dataTables.bootstrap4.min.js"></script>
 <script src="/resources/js/controller.js"></script>
+<script src="/resources/js/tourpage.js"></script>
 <script src="/resources/uui/js/uui-rating.min.js"></script>
 <script>
-    $("input[placeholder]").each(function () {
-        $(this).attr('size', $(this).attr('placeholder').length);
-    });
-    $('.custom-datepicker').uui_datepicker({todayHighlight: true});
 
-    $(document).ready(function () {
-        $('#example').DataTable();
-        $('#example_filter').hide();
-        $('#example_length').css("width", "100px");
-        $('example_length').css("width", "100px");
-        $("button[name = 'pagination_button']").click(function () {
-            $("input[name='size']").val($("select[name='example_length']").val());
-            $("form[name='pagination']").submit();
-        })
-    });
+
 </script>
 </body>
 </html>
