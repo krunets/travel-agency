@@ -19,6 +19,16 @@
     <#if !checkTours>
         <table id="example" class="table table-striped">
             <div class="custom-margin">
+                <div class="dropdown show">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Show
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/tour?limit=5">5</a>
+                        <a class="dropdown-item" href="/tour?limit=10">10</a>
+                        <a class="dropdown-item" href="/tour?limit=15">15</a>
+                    </div>
+                </div>
                 <form action="/tour/pagination" name="pagination" method="post">
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
                     <input name="size" type="hidden" value="">
@@ -51,7 +61,8 @@
             <tbody>
                 <#list tours as tour>
                 <tr>
-                    <td><a style="cursor: pointer;" href="/tour/${tour.id}/info"><img class="image-size" src="${tour.photo}"></a></td>
+                    <td><a style="cursor: pointer;" href="/tour/${tour.id}/info"><img class="image-size"
+                                                                                      src="${tour.photo}"></a></td>
                     <td>${tour.date}</td>
                     <td>${tour.cost}$</td>
                     <td>${tour.description}</td>
@@ -103,7 +114,15 @@
                 </#list>
             </tbody>
         </table>
-
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <#list 1..tourPaginationDTO.pageAmount as i>
+                    <li class="page-item"><a class="page-link" href="/tour?page=${i}">${i}</a></li>
+                </#list>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
     </#if>
     </div>
 </div>
@@ -158,15 +177,7 @@
 </body>
 </html>
 
-<#-- <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    </nav>-->
+
 
 
 

@@ -8,8 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_ALL_HOTEL;
-import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_ALL_HOTEL_NAMED_QUERY;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 
 /**
  * Class that represents the entity of the hotel.
@@ -24,7 +23,10 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_ALL_H
 @ToString(exclude = "tour")
 @EqualsAndHashCode(exclude = "tour")
 @NamedQueries(
-		{@NamedQuery(name = FIND_ALL_HOTEL, query = FIND_ALL_HOTEL_NAMED_QUERY)}
+		{
+				@NamedQuery(name = FIND_ALL_HOTEL, query = FIND_ALL_HOTEL_NAMED_QUERY),
+				@NamedQuery(name = COUNT_HOTEL, query = COUNT_HOTEL_NAMED_QUERY)
+		}
 )
 public class Hotel {
 	@Id

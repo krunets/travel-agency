@@ -43,13 +43,6 @@ public class TourServiceTest {
 		verify(repository, times(1)).create(tour);
 	}
 	
-	@Test
-	public void testUpdate () {
-		Tour tour = new Tour(1, "Photo12", LocalDate.parse("2018-07-13"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null);
-		
-		service.update(tour);
-		verify(repository, times(1)).update(tour);
-	}
 	
 	@Test
 	public void testDelete () {

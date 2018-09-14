@@ -3,7 +3,6 @@ package integration.by.runets.travelagency.service;
 import by.runets.travelagency.entity.Role;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.service.IService;
 import by.runets.travelagency.service.IUserService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -62,7 +61,7 @@ public class UserServiceTest {
 				new ArrayList<>(
 						Arrays.asList(
 								new User(1, "root", "root", Role.ADMIN),
-								new User(2, "admin", "admin",  Role.ADMIN),
+								new User(2, "admin", "admin", Role.ADMIN),
 								new User(3, "traveler1", "traveler1", Role.MEMBER)));
 		List<User> actual = userService.readAll(DEFAULT_PAGINATION_SIZE);
 		log.error(actual + "");
@@ -96,7 +95,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void testRegisterExistUser() {
+	public void testRegisterExistUser () {
 		User user = new User();
 		user.setLogin("admin");
 		
@@ -105,16 +104,16 @@ public class UserServiceTest {
 	
 	
 	@Test
-	public void testRegisterNotExistUser() {
+	public void testRegisterNotExistUser () {
 		User expected = new User(10, "testLogin", "testPassword", Role.MEMBER);
 		Assert.assertTrue(userService.registerUserAccount(expected));
 		
-		User actual = userService.readAllByField(NAMED_QUERY, FIELD, "testLogin", DEFAULT_PAGINATION_SIZE).get(0);
+		User actual = userService.readAllByField(NAMED_QUERY, FIELD, "testLogin", 0, DEFAULT_PAGINATION_SIZE).get(0);
 		Assert.assertEquals(actual, expected);
 	}
 	
 	@Test
-	public void testReadUserByRole() {
+	public void testReadUserByRole () {
 		List<User> expected =
 				new ArrayList<>(
 						Arrays.asList(

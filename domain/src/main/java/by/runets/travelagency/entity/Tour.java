@@ -41,6 +41,10 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 		@NamedQuery(
 				name = FIND_TOUR_BY_ID_WITH_USER_REVIEWS,
 				query = FIND_TOUR_BY_ID_WITH_USER_REVIEWS_NAMED_QUERY
+		),
+		@NamedQuery(
+				name = COUNT_TOUR,
+				query = COUNT_TOUR_NAMED_QUERY
 		)
 })
 public class Tour {

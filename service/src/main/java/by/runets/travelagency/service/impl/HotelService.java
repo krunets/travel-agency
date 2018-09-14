@@ -5,7 +5,7 @@ import by.runets.travelagency.hibernate.IDatabaseRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HotelService extends AbstractService<Hotel, Long> {
+public class HotelService extends AbstractService<Hotel> {
 	
 	public HotelService (Class<Hotel> classType, IDatabaseRepository<Hotel, Long> abstractRepository) {
 		super(classType, abstractRepository);

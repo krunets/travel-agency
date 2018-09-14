@@ -1,6 +1,7 @@
 package by.runets.travelagency.controller;
 
 import by.runets.travelagency.dto.CountryDTO;
+import by.runets.travelagency.dto.PaginationDTO;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Locale;
 
+import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_TOUR;
 import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_ALL_HOTEL;
 import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_TOUR_ALL_TOUR;
 import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_PAGINATION_SIZE;
@@ -36,18 +37,21 @@ public class PageController {
 	private List<CountryDTO> countryDTOs;
 	
 	@GetMapping("/")
-	public String start (Locale locale, Model model) {
-		List<Tour> tours = tourService.readAllByField(FIND_TOUR_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, DEFAULT_PAGINATION_SIZE);
-		List<Hotel> hotels = hotelService.readAllByField(FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, DEFAULT_PAGINATION_SIZE);
-		
+	public String start (Model model) {
+		List<Tour> tours = tourService.readAllByField(FIND_TOUR_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, 1, DEFAULT_PAGINATION_SIZE);
+		List<Hotel> hotels = hotelService.readAllByField(FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, 1, DEFAULT_PAGINATION_SIZE);
 		joinService.join(tours, hotels);
 		
+		PaginationDTO<Tour> tourPaginationDTO = new PaginationDTO<>();
+		tourPaginationDTO.setPageAmount(tourService.count(COUNT_TOUR));
+		tourPaginationDTO.setData(tours);
+		
+		model.addAttribute("tours", tours);
 		model.addAttribute("checkTours", false);
 		model.addAttribute("criteriaTour", "");
-		model.addAttribute("tours", tours);
 		model.addAttribute("countriesDTO", countryDTOs);
-		model.addAttribute("locale", locale);
 		model.addAttribute("tourTypeEnum", TourType.values());
+		model.addAttribute("tourPaginationDTO", tourPaginationDTO);
 		
 		return "home";
 	}

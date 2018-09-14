@@ -13,6 +13,13 @@ public class NamedQueryConstant {
 	public static final String FIND_ALL_HOTEL = "FIND_ALL_HOTEL";
 	public static final String FIND_TOUR_BY_ID_WITH_USER_REVIEWS = "FIND_TOUR_BY_ID_WITH_USER_REVIEWS";
 	
+	public static final String COUNT_TOUR = "COUNT_TOUR";
+	public static final String COUNT_HOTEL = "COUNT_HOTEL";
+	public static final String COUNT_REVIEW = "COUNT_REVIEW";
+	public static final String COUNT_COUNTRY = "COUNT_COUNTRY";
+	public static final String COUNT_USER = "COUNT_USER";
+	
+	
 	//query
 	public static final String FIND_BY_ROLE_NAMED_QUERY = "from User u WHERE u.role=:role";
 	public static final String FIND_BY_LOGIN_NAMED_QUERY = "from User u WHERE u.login=:login";
@@ -27,6 +34,13 @@ public class NamedQueryConstant {
 	public static final String FIND_TOUR_BY_ID_WITH_USER_REVIEWS_NAMED_QUERY = "from Tour t " +
 			"LEFT JOIN FETCH t.reviews review" +
 			" WHERE t.id=:id";
+	
+	public static final String COUNT_TOUR_NAMED_QUERY = "SELECT count(t.id) FROM Tour t";
+	public static final String COUNT_HOTEL_NAMED_QUERY = "SELECT count(h.id) FROM Hotel h";
+	public static final String COUNT_REVIEW_NAMED_QUERY = "SELECT count(r.id) FROM Review r";
+	public static final String COUNT_COUNTRY_NAMED_QUERY = "SELECT count(c.id) FROM Country c";
+	public static final String COUNT_USER_NAMED_QUERY = "SELECT count(u.id) FROM User u";
+	
 	//field
 	public static final String ID = "id";
 	public static final String LOGIN_FIELD = "login";

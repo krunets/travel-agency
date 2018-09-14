@@ -3,10 +3,12 @@ package by.runets.travelagency.entity;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_REVIEW;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_REVIEW_NAMED_QUERY;
 
 /**
  * Class that represents the entity of the review.
@@ -19,8 +21,13 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-@ToString(exclude = {/*"user", "tour"*/})
+@ToString(exclude = {"user", "tour"})
 @EqualsAndHashCode(exclude = {"user", "tour"})
+@NamedQueries(
+		{
+				@NamedQuery(name = COUNT_REVIEW, query = COUNT_REVIEW_NAMED_QUERY)
+		}
+)
 public class Review {
 	@Id
 	@NonNull

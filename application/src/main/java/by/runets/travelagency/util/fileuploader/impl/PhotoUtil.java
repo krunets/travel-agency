@@ -24,11 +24,13 @@ public class PhotoUtil implements IFileUtil {
 				}
 				if (file.getContentType().equalsIgnoreCase("image/jpeg") || file.getContentType().equalsIgnoreCase("image/png")) {
 					File serverFile = new File(dir.getAbsolutePath() + File.separator + newFileName);
+/*
 					file.transferTo(serverFile);
-				/*	BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+*/
+					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 					stream.write(bytes);
-					stream.close();*/
-				}
+					stream.close();
+			}
 			} catch (IOException e) {
 				throw new ResourceNotFoundException();
 			}

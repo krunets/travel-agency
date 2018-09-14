@@ -1,6 +1,7 @@
 package by.runets.travelagency.hibernate.impl;
 
 import by.runets.travelagency.hibernate.IDatabaseRepository;
+import by.runets.travelagency.hibernate.impl.pagination.impl.PaginationResult;
 import by.runets.travelagency.util.annotation.Loggable;
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
@@ -60,17 +61,23 @@ public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Lo
 		sessionFactory.getCurrentSession().delete(entity);
 	}
 	
+	@Override
+	public Long count (final String namedQuery) {
+		return (Long) sessionFactory.getCurrentSession().getNamedQuery(namedQuery).getSingleResult();
+	}
+	
 	@Loggable
 	@Override
-	public <V> List<Optional<T>> readByNameQuery (String namedQuery, final String field, final V value, final int paginationSize) {
+	public <V> List<Optional<T>> readByNameQuery (String namedQuery, final String field, final V value, final int page, final int limit) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.getNamedQuery(namedQuery);
 		if (!field.isEmpty()) {
 			query.setParameter(field, value);
 		}
-		query.setMaxResults(paginationSize);
-		List<T> queryResultList = query.getResultList();
-		return queryResultList.stream()
+		PaginationResult<T> paginationResult = new PaginationResult<>(query, page, limit);
+		return paginationResult
+				.getResultList()
+				.stream()
 				.map(Optional::ofNullable)
 				.collect(Collectors.toList());
 	}

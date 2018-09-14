@@ -20,5 +20,7 @@ public interface IDatabaseRepository<T, K> {
 	
 	void delete (final T entity);
 	
-	<V> List<Optional<T>> readByNameQuery (final String namedQuery, final String field, final V value, final int paginationSize);
+	K count(final String namedQuery);
+	
+	<V> List<Optional<T>> readByNameQuery (final String namedQuery, final String field, final V value, final int page, final int paginationSize);
 }

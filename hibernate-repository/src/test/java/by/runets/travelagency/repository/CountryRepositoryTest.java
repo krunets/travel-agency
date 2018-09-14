@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_COUNTRY;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_TOUR;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -82,5 +84,12 @@ public class CountryRepositoryTest {
 		countryRepository.delete(expected);
 		
 		Assert.assertEquals(Optional.empty(), countryRepository.read(Country.class, id));
+	}
+	
+	@Test
+	public void testCount() {
+		final long expected = 4;
+		final long actual = countryRepository.count(COUNT_COUNTRY);
+		Assert.assertEquals(expected, actual);
 	}
 }

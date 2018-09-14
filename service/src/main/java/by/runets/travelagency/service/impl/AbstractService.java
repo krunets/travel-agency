@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
  */
 @Service
 @AllArgsConstructor
-public abstract class AbstractService<T, K> implements IService<T, K> {
+public abstract class AbstractService<T> implements IService<T, Long> {
 	@Autowired
 	private final Class<T> classType;
 	@Autowired
-	private final IDatabaseRepository<T, K> abstractRepository;
+	private final IDatabaseRepository<T, Long> abstractRepository;
 	
 	/**
 	 * This is a method which call create method from abstractRepository layer.
@@ -35,7 +35,7 @@ public abstract class AbstractService<T, K> implements IService<T, K> {
 	@Loggable
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	@Override
-	public K create (final T entity) {
+	public Long create (final T entity) {
 		return abstractRepository.create(entity);
 	}
 	
@@ -65,7 +65,7 @@ public abstract class AbstractService<T, K> implements IService<T, K> {
 	@Loggable
 	@Override
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-	public T read (final K id) {
+	public T read (final Long id) {
 		return abstractRepository
 				.read(classType, id)
 				.orElseThrow(() -> new ResourceNotFoundException("The entity by id " + id + " does not exist."));
@@ -95,12 +95,18 @@ public abstract class AbstractService<T, K> implements IService<T, K> {
 		abstractRepository.delete(entity);
 	}
 	
+	@Override
+	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+	public Long count (final String namedQuery) {
+		return abstractRepository.count(namedQuery);
+	}
+	
 	@Loggable
 	@Override
 	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-	public <V> List<T> readAllByField (final String namedQuery, final String field, final V value, final int paginationSize) {
+	public <V> List<T> readAllByField (final String namedQuery, final String field, final V value, final int page, final int paginationSize) {
 		return abstractRepository
-				.readByNameQuery(namedQuery, field, value, paginationSize)
+				.readByNameQuery(namedQuery, field, value, page, paginationSize)
 				.stream()
 				.filter(Optional::isPresent)
 				.map(Optional::get)

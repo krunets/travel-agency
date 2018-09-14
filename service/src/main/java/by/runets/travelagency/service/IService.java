@@ -19,5 +19,7 @@ public interface IService<T, K> {
 	
 	void delete (final T entity);
 	
-	<V> List<T> readAllByField (final String namedQuery, final String field, final V value, final int paginationSize);
+	K count(final String namedQuery);
+	
+	<V> List<T> readAllByField (final String namedQuery, final String field, final V value, final int page, final int paginationSize);
 }

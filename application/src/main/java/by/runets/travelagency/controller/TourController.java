@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -71,17 +72,14 @@ public class TourController {
 	
 	@PostMapping(value = "/tour/pagination")
 	public String paginateTour (@ModelAttribute("pagination") PaginationDTO paginationDTO, Model model) {
-		List<Tour> tours = tourService.readAll(paginationDTO.getSize());
-		model.addAttribute("checkTours", false);
-		model.addAttribute("criteriaTour", "");
+		List<Tour> tours = tourService.readAll(paginationDTO.getLimit());
 		model.addAttribute("tours", tours);
-		model.addAttribute("countriesDTO", countryDTOs);
-		return "home";
+		return "redirect:/";
 	}
 	
 	@GetMapping(value = "/tour/{tourId}/info")
 	public String getTourInfo (@PathVariable String tourId, Model model) {
-		List<Tour> tours = tourService.readAllByField(FIND_TOUR_BY_ID_WITH_USER_REVIEWS, ID, Long.valueOf(tourId), DEFAULT_PAGINATION_SIZE);
+		List<Tour> tours = tourService.readAllByField(FIND_TOUR_BY_ID_WITH_USER_REVIEWS, ID, Long.parseLong(tourId),0, DEFAULT_PAGINATION_SIZE);
 		if (!tours.isEmpty()) {
 			model.addAttribute("countriesDTO", countryDTOs);
 			model.addAttribute("tour", tours.get(0));
@@ -95,13 +93,13 @@ public class TourController {
 		
 		String username = auth.getName();
 		Review review = modelMapper.map(reviewDTO, Review.class);
-		reviewService.createReviewByUsernameAndTourId(username, Long.valueOf(tourId), review);
+		reviewService.createReviewByUsernameAndTourId(username, Long.parseLong(tourId), review);
 		return "redirect:/tour/{tourId}/info";
 	}
 	
 	@PostMapping(value = "/tour/{tourId}/delete")
 	public String deleteTour (@PathVariable String tourId) {
-		tourService.delete(new Tour(Long.valueOf(tourId)));
+		tourService.delete(new Tour(Long.parseLong(tourId)));
 		return "redirect:/";
 	}
 	

@@ -25,7 +25,7 @@ public class ReviewController {
 	@PostMapping(value = "/review/{reviewId}/delete/tour/{tourId}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteReview (@PathVariable String reviewId, @PathVariable String tourId) {
-		Review review = new Review(Long.valueOf(reviewId));
+		Review review = new Review(Long.parseLong(reviewId));
 		reviewService.delete(review);
 		return "redirect:/tour/{tourId}/info";
 	}
@@ -35,10 +35,10 @@ public class ReviewController {
 	public String editReview (@ModelAttribute ReviewDTO reviewDTO, @PathVariable String reviewId, @PathVariable String tourId, @PathVariable String userId) {
 		Review review = modelMapper.map(reviewDTO, Review.class);
 		User user = new User();
-		user.setId(Long.valueOf(userId));
+		user.setId(Long.parseLong(userId));
 		
-		review.setId(Long.valueOf(reviewId));
-		review.setTour(new Tour(Long.valueOf(tourId)));
+		review.setId(Long.parseLong(reviewId));
+		review.setTour(new Tour(Long.parseLong(tourId)));
 		review.setUser(user);
 		
 		reviewService.update(review);

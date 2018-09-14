@@ -16,7 +16,7 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.LOGIN_FIEL
 import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_USER_PAGINATION;
 
 @Service
-public class ReviewService extends AbstractService<Review, Long> implements IReviewService<Review, Long> {
+public class ReviewService extends AbstractService<Review> implements IReviewService<Review, Long> {
 	@Autowired
 	private IDatabaseRepository<Review, Long> abstractRepository;
 	@Autowired
@@ -32,7 +32,7 @@ public class ReviewService extends AbstractService<Review, Long> implements IRev
 	@Override
 	@Transactional
 	public Long createReviewByUsernameAndTourId (String username, Long tourId, Review review) {
-		User user = userService.readAllByField(FIND_BY_LOGIN, LOGIN_FIELD, username, DEFAULT_USER_PAGINATION).get(0);
+		User user = userService.readAllByField(FIND_BY_LOGIN, LOGIN_FIELD, username, 0, DEFAULT_USER_PAGINATION).get(0);
 		Tour tour = tourService.read(tourId);
 		review.setUser(user);
 		review.setTour(tour);

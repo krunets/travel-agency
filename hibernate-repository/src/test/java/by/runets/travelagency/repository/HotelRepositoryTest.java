@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_HOTEL;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -104,5 +105,12 @@ public class HotelRepositoryTest {
 		
 		final Optional<Hotel> actual = hotelRepository.read(Hotel.class, id);
 		Assert.assertEquals(Optional.empty(), actual);
+	}
+	
+	@Test
+	public void testCount() {
+		final long expected = 5;
+		final long actual = hotelRepository.count(COUNT_HOTEL);
+		Assert.assertEquals(expected, actual);
 	}
 }

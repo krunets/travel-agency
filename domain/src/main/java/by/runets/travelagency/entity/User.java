@@ -27,7 +27,9 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 @EqualsAndHashCode(exclude = {"reviews", "tours"})
 @NamedQueries({
 		@NamedQuery(name = FIND_BY_LOGIN, query = FIND_BY_LOGIN_NAMED_QUERY),
-		@NamedQuery(name = FIND_BY_ROLE, query = FIND_BY_ROLE_NAMED_QUERY)})
+		@NamedQuery(name = FIND_BY_ROLE, query = FIND_BY_ROLE_NAMED_QUERY),
+		@NamedQuery(name = COUNT_USER, query = COUNT_USER_NAMED_QUERY)
+})
 public class User {
 	@Id
 	@Column(name = "u_id")

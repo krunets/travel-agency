@@ -2,12 +2,16 @@ package by.runets.travelagency.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
-public class PaginationDTO {
-	@NotNull
+public class PaginationDTO<T> {
+	@Size
+	private long pageAmount;
+	@Size(min = 1)
+	private int page;
 	@Size(min = 10, max = 100)
-	private int size;
+	private int limit;
+	private List<T> data;
 }

@@ -25,7 +25,7 @@ public class UserDetailsSecurityService implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername (String login) throws UsernameNotFoundException {
-		return userRepository.readByNameQuery(FIND_BY_LOGIN, LOGIN_FIELD, login, DEFAULT_USER_PAGINATION)
+		return userRepository.readByNameQuery(FIND_BY_LOGIN, LOGIN_FIELD, login, 0, DEFAULT_USER_PAGINATION)
 				.get(0)
 				.map(user -> withUsername(login)
 						.password(user.getPassword())

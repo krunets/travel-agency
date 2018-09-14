@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class TourService extends AbstractService<Tour, Long> implements ITourService<Tour, Long>, IJoinService<Tour, Hotel> {
+public class TourService extends AbstractService<Tour> implements ITourService<Tour, Long>, IJoinService<Tour, Hotel> {
 	@Autowired
 	private ITourRepository<Tour, Long> tourRepository;
 	

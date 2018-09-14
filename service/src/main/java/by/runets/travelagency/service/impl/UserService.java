@@ -16,7 +16,7 @@ import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_PA
 import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_USER_PAGINATION;
 
 @Service
-public class UserService extends AbstractService<User, Long> implements IUserService<User, Long> {
+public class UserService extends AbstractService<User> implements IUserService<User, Long> {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
@@ -30,7 +30,7 @@ public class UserService extends AbstractService<User, Long> implements IUserSer
 		long userId = 0;
 		boolean isEmpty = super
 				.readAllByField(FIND_BY_LOGIN, LOGIN_FIELD,
-						user.getLogin(), DEFAULT_USER_PAGINATION)
+						user.getLogin(), 0, DEFAULT_USER_PAGINATION)
 				.isEmpty();
 		if (isEmpty) {
 			user.setRole(Role.MEMBER);
@@ -45,6 +45,6 @@ public class UserService extends AbstractService<User, Long> implements IUserSer
 	public List<User> readUserByRole () {
 		return super
 				.readAllByField(FIND_BY_ROLE, ROLE_FIELD,
-						Role.MEMBER, DEFAULT_PAGINATION_SIZE);
+						Role.MEMBER, 0, DEFAULT_PAGINATION_SIZE);
 	}
 }

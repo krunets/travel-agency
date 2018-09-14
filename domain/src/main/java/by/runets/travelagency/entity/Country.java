@@ -10,8 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_COUNTRY_BY_NAME;
-import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_COUNTRY_BY_NAME_NAMED_QUERY;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 
 /**
  * Class that represents the entity of the country.
@@ -26,7 +25,10 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_COUNT
 @RequiredArgsConstructor
 @ToString(exclude = {"tours"})
 @EqualsAndHashCode(exclude = {"tours"})
-@NamedQueries(@NamedQuery(name = FIND_COUNTRY_BY_NAME, query = FIND_COUNTRY_BY_NAME_NAMED_QUERY))
+@NamedQueries({
+		@NamedQuery(name = FIND_COUNTRY_BY_NAME, query = FIND_COUNTRY_BY_NAME_NAMED_QUERY),
+		@NamedQuery(name = COUNT_COUNTRY, query = COUNT_COUNTRY_NAMED_QUERY)
+})
 public class Country {
 	@Id
 	@Column(name = "c_id")
