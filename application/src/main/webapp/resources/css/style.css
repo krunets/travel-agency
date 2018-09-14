@@ -66,7 +66,7 @@ input[type=checkbox] {
     margin-left: 25px;
 }
 
-.margin-left-checkbox{
+.margin-left-checkbox {
     margin-top: -1.9rem;
     margin-left: -34.15rem;
 }
@@ -93,54 +93,63 @@ input[type=checkbox] {
 .carousel-caption {
     background-color: #3d6277;
     width: 500px;
-    margin:auto;
+    margin: auto;
 }
 
-
-footer{
+footer {
     color: white;
 }
-footer a{
+
+footer a {
     color: #bfffff;
 }
-footer a:hover{
+
+footer a:hover {
     color: white;
 }
 
-.footer-bottom{
+.footer-bottom {
     background: #3d6277;
     padding: 2em;
 }
-.footer-top{
+
+.footer-top {
     background: #2d4958;
 }
-.footer-middle{
+
+.footer-middle {
     background: #3d6277;
     padding-top: 2em;
     color: white;
 }
+
 /**Sub Navigation**/
-.subnavigation-container{
+.subnavigation-container {
     background: #3d6277;
 }
-.subnavigation .nav-link{
+
+.subnavigation .nav-link {
     color: white;
     font-weight: bold;
 }
-.subnavigation-container{
+
+.subnavigation-container {
     text-align: center;
 }
-.subnavigation-container .navbar{
+
+.subnavigation-container .navbar {
     display: inline-block;
     margin-bottom: -6px; /* Inline-block margin offffset HACK -Gilron */
 }
-.col-subnav a{
+
+.col-subnav a {
     padding: 1rem 1rem;
     color: white;
     font-weight: bold;
 }
-.col-subnav .active{
-    border-top:5px solid orange;
+
+.col-subnav .active {
+    border-top: 5px solid orange;
     background: white;
     color: black;
 }
@@ -148,12 +157,13 @@ footer a:hover{
 .none {
     display: none;
 }
+
 .auto-width {
     width: auto;
 }
 
 .resize-none {
-    resize:none;
+    resize: none;
     height: 200px;
 }
 
@@ -175,4 +185,10 @@ a {
 
 .button-group-float-right {
     float: right;
+}
+
+.horizontal-center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_TOUR;
-import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_ALL_HOTEL;
-import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_TOUR_ALL_TOUR;
-import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_PAGINATION_SIZE;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 
 @Slf4j
 @Controller
@@ -37,16 +34,22 @@ public class PageController {
 	private List<CountryDTO> countryDTOs;
 	
 	@GetMapping("/")
-	public String start (Model model) {
-		List<Tour> tours = tourService.readAllByField(FIND_TOUR_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, 1, DEFAULT_PAGINATION_SIZE);
-		List<Hotel> hotels = hotelService.readAllByField(FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, 1, DEFAULT_PAGINATION_SIZE);
+	public String start (
+			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+											 @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
+											 Model model) {
+		List<Tour> tours = tourService.readAllByField(FIND_TOUR_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, page, limit);
+		List<Hotel> hotels = hotelService.readAllByField(FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, page, limit);
 		joinService.join(tours, hotels);
 		
-		PaginationDTO<Tour> tourPaginationDTO = new PaginationDTO<>();
-		tourPaginationDTO.setPageAmount(tourService.count(COUNT_TOUR));
-		tourPaginationDTO.setData(tours);
+		long pageAmount = (long) Math.ceil((double) tourService.count(COUNT_TOUR) / limit);
 		
-		model.addAttribute("tours", tours);
+		PaginationDTO<Tour> tourPaginationDTO = new PaginationDTO<>();
+		tourPaginationDTO.setData(tours);
+		tourPaginationDTO.setPage(page);
+		tourPaginationDTO.setLimit(limit);
+		tourPaginationDTO.setPageAmount(pageAmount);
+		
 		model.addAttribute("checkTours", false);
 		model.addAttribute("criteriaTour", "");
 		model.addAttribute("countriesDTO", countryDTOs);

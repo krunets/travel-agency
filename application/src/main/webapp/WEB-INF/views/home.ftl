@@ -17,24 +17,19 @@
 <div class="custom-container">
     <div class="margin-bottom">
     <#if !checkTours>
-        <table id="example" class="table table-striped">
+        <table id="example" class="table">
             <div class="custom-margin">
                 <div class="dropdown show">
-                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Show
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="/tour?limit=5">5</a>
-                        <a class="dropdown-item" href="/tour?limit=10">10</a>
-                        <a class="dropdown-item" href="/tour?limit=15">15</a>
+                        <a class="dropdown-item" onclick="insertParam('limit', 5)">5</a>
+                        <a class="dropdown-item" onclick="insertParam('limit', 10)">10</a>
+                        <a class="dropdown-item" onclick="insertParam('limit', 15)">15</a>
                     </div>
                 </div>
-                <form action="/tour/pagination" name="pagination" method="post">
-                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
-                    <input name="size" type="hidden" value="">
-                    <button type="button" name="pagination_button"
-                            class="btn btn-primary float-right"><@spring.message "paginate.message"/></button>
-                </form>
             </div>
             <thead>
             <tr>
@@ -59,7 +54,7 @@
             </tr>
             </thead>
             <tbody>
-                <#list tours as tour>
+                <#list tourPaginationDTO.data as tour>
                 <tr>
                     <td><a style="cursor: pointer;" href="/tour/${tour.id}/info"><img class="image-size"
                                                                                       src="${tour.photo}"></a></td>
@@ -115,10 +110,18 @@
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul class="horizontal-center-container pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                 <#list 1..tourPaginationDTO.pageAmount as i>
-                    <li class="page-item"><a class="page-link" href="/tour?page=${i}">${i}</a></li>
+                    <#if tourPaginationDTO.page == i>
+                        <li class=" page-item"><a class="bg-primary page-link"
+                                                            onclick="insertParam('page', ${i})">${i}</a>
+                        </li>
+                    <#else>
+                        <li class="page-item"><a class="page-link"
+                                                 onclick="insertParam('page', ${i})">${i}</a>
+                        </li>
+                    </#if>
                 </#list>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
@@ -140,14 +143,14 @@
     </thead>
     <tbody>
         <#list criteriaTour as tour>
-        <tr>
-            <td><img class="image-size" src="${tour.photo}"></td>
-            <td>${tour.date}</td>
-            <td>${tour.cost}$</td>
-            <td>${tour.description}</td>
-            <td>${tour.duration.toDays()}</td>
-            <td>${tour.tourType}</td>
-        </tr>
+            <tr>
+                <td><img class="image-size" src="${tour.photo}"></td>
+                <td>${tour.date}</td>
+                <td>${tour.cost}$</td>
+                <td>${tour.description}</td>
+                <td>${tour.duration.toDays()}</td>
+                <td>${tour.tourType}</td>
+            </tr>
         </#list>
     </tbody>
 </table>
@@ -165,15 +168,9 @@
         crossorigin="anonymous"></script>
 <script src="/resources/uui/js/lib/components/bootstrap-datepicker.js"></script>
 <script src="/resources/uui/js/uui-datepicker.min.js"></script>
-<script src="/resources/uui/bootstrap/js/jquery.dataTables.min.js"></script>
-<script src="/resources/uui/bootstrap/js/dataTables.bootstrap4.min.js"></script>
 <script src="/resources/js/controller.js"></script>
 <script src="/resources/js/tourpage.js"></script>
 <script src="/resources/uui/js/uui-rating.min.js"></script>
-<script>
-
-
-</script>
 </body>
 </html>
 

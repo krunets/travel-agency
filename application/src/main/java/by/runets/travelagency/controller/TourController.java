@@ -6,6 +6,7 @@ import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.service.IReviewService;
 import by.runets.travelagency.service.ITourService;
+import by.runets.travelagency.util.constant.StringUtils;
 import by.runets.travelagency.util.converter.Converter;
 import by.runets.travelagency.util.fileuploader.IFileNameExtensionUtil;
 import by.runets.travelagency.util.fileuploader.IFileUtil;
@@ -13,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,8 +26,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 
-import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_TOUR_BY_ID_WITH_USER_REVIEWS;
-import static by.runets.travelagency.util.constant.NamedQueryConstant.ID;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_PAGINATION_SIZE;
 
 @Slf4j
@@ -70,16 +69,9 @@ public class TourController {
 		return "home";
 	}
 	
-	@PostMapping(value = "/tour/pagination")
-	public String paginateTour (@ModelAttribute("pagination") PaginationDTO paginationDTO, Model model) {
-		List<Tour> tours = tourService.readAll(paginationDTO.getLimit());
-		model.addAttribute("tours", tours);
-		return "redirect:/";
-	}
-	
 	@GetMapping(value = "/tour/{tourId}/info")
 	public String getTourInfo (@PathVariable String tourId, Model model) {
-		List<Tour> tours = tourService.readAllByField(FIND_TOUR_BY_ID_WITH_USER_REVIEWS, ID, Long.parseLong(tourId),0, DEFAULT_PAGINATION_SIZE);
+		List<Tour> tours = tourService.readAllByField(FIND_TOUR_BY_ID_WITH_USER_REVIEWS, ID, Long.parseLong(tourId), 0, DEFAULT_PAGINATION_SIZE);
 		if (!tours.isEmpty()) {
 			model.addAttribute("countriesDTO", countryDTOs);
 			model.addAttribute("tour", tours.get(0));
