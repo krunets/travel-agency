@@ -1,5 +1,7 @@
 package by.runets.travelagency.service;
 
-public interface IReviewService<T, K> extends IService<T, K> {
-	K createReviewByUsernameAndTourId (String username, Long tourId, T review);
+import by.runets.travelagency.entity.Review;
+
+public interface IReviewService extends IService<Review, Long> {
+	Long createReviewByUsernameAndTourId (String username, Long tourId, Review review);
 }

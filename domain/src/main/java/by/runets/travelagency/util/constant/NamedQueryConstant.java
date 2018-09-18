@@ -30,12 +30,12 @@ public class NamedQueryConstant {
 			"AND t.duration = :duration";
 	public static final String FIND_COUNTRY_BY_NAME_NAMED_QUERY = "from Country c WHERE c.name=:countryName";
 	public static final String FIND_TOUR_ALL_TOUR_NAMED_QUERY = "from Tour t JOIN FETCH t.countries";
-	public static final String FIND_ALL_HOTEL_NAMED_QUERY = "from Hotel h";
+	public static final String FIND_ALL_HOTEL_NAMED_QUERY = "from Hotel h WHERE h.latitude IS NOT NULL AND h.longitude IS NOT NULL";
 	public static final String FIND_TOUR_BY_ID_WITH_USER_REVIEWS_NAMED_QUERY = "from Tour t " +
 			"LEFT JOIN FETCH t.reviews review" +
 			" WHERE t.id=:id";
 	
-	public static final String COUNT_TOUR_NAMED_QUERY = "SELECT count(t.id) FROM Tour t";
+	public static final String COUNT_TOUR_NAMED_QUERY = "SELECT count(t.id) FROM Tour t JOIN t.countries";
 	public static final String COUNT_HOTEL_NAMED_QUERY = "SELECT count(h.id) FROM Hotel h";
 	public static final String COUNT_REVIEW_NAMED_QUERY = "SELECT count(r.id) FROM Review r";
 	public static final String COUNT_COUNTRY_NAMED_QUERY = "SELECT count(c.id) FROM Country c";

@@ -35,7 +35,7 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 })
 public class TourServiceTest {
 	@Autowired
-	private ITourService<Tour, Long> tourService;
+	private ITourService tourService;
 	
 	@Test
 	public void testCreate () {

@@ -20,8 +20,9 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 @Table(schema = "travel_agency", name = "hotel")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "tour")
-@EqualsAndHashCode(exclude = "tour")
+@RequiredArgsConstructor
+@ToString(exclude = {"tour"})
+@EqualsAndHashCode(exclude = {"tour", "geolocation"})
 @NamedQueries(
 		{
 				@NamedQuery(name = FIND_ALL_HOTEL, query = FIND_ALL_HOTEL_NAMED_QUERY),
@@ -32,24 +33,28 @@ public class Hotel {
 	@Id
 	@Min(value = 0)
 	@Column(name = "h_id")
+	@NonNull
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 	/**
 	 * This is a field which represents hotel name.
 	 */
 	@NotNull
+	@NonNull
 	@Column(name = "h_name")
 	private String name;
 	/**
 	 * This is a field which represents a hotel phone.
 	 */
 	@NotNull
+	@NonNull
 	@Column(name = "h_phone")
 	private String phone;
 	/**
 	 * This is a field which represents a hotel stars rating.
 	 */
 	@NotNull
+	@NonNull
 	@Column(name = "h_stars")
 	private int stars;
 	/**
@@ -58,4 +63,8 @@ public class Hotel {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tour")
 	private Tour tour;
+	@NonNull
+	private Double latitude;
+	@NonNull
+	private Double longitude;
 }

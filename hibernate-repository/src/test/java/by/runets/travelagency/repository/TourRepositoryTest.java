@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGE;
 import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
 import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_COUNTRY;
 import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_TOUR;
@@ -41,11 +42,8 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_TOUR_
 				scripts = {"classpath:db/init-data.sql"}
 		))
 public class TourRepositoryTest {
-	/*@Autowired
-	private IDatabaseRepository<Tour, Long> tourRepository;*/
-	
 	@Autowired
-	private ITourRepository<Tour, Long> tourRepository;
+	private ITourRepository tourRepository;
 	
 	@Test
 	public void testCreate () {
@@ -255,14 +253,14 @@ public class TourRepositoryTest {
 												null,
 												null, null, null))));
 		
-		List<Optional<Tour>> actual = tourRepository.readByNameQuery(FIND_TOUR_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, 0, DEFAULT_PAGINATION_SIZE);
+		List<Optional<Tour>> actual = tourRepository.readByNameQuery(FIND_TOUR_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, DEFAULT_PAGE, DEFAULT_PAGINATION_SIZE);
 		actual.forEach(o -> o.get().getCountries().forEach(System.out::println));
 		Assert.assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void testCount() {
-		final long expected = 5;
+		final long expected = 6;
 		final long actual = tourRepository.count(COUNT_TOUR);
 		Assert.assertEquals(expected, actual);
 	}

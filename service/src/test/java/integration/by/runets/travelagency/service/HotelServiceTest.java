@@ -1,9 +1,8 @@
 package integration.by.runets.travelagency.service;
 
-import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.exception.ResourceNotFoundException;
-import by.runets.travelagency.service.IService;
+import by.runets.travelagency.service.IHotelService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -33,12 +32,12 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 })
 public class HotelServiceTest {
 	@Autowired
-	private IService<Hotel, Long> hotelService;
+	private IHotelService hotelService;
 	
 	@Test
 	public void testCreate () {
 		Hotel expected =
-				new Hotel(10, "testName", "+375 29 123 123 123", 5, null);
+				new Hotel(10, "testName", "+375 29 123 123 123", 5, 0.0, 0.0);
 		final long id = hotelService.create(expected);
 		Hotel actual = hotelService.read(id);
 		
@@ -49,7 +48,7 @@ public class HotelServiceTest {
 	public void testReadById () {
 		final long id = 1;
 		Hotel expected =
-				new Hotel(1, "Marriot", "123 23 23", 5, null);
+				new Hotel(1, "Marriot", "123 23 23", 5, 0.0, 0.0);
 		Hotel actual = hotelService.read(id);
 		Assert.assertEquals(actual, expected);
 	}
@@ -60,22 +59,21 @@ public class HotelServiceTest {
 				new ArrayList<>(
 						Arrays.asList(
 								
-								new Hotel(1, "Marriot", "123 23 23", 5, null),
+								new Hotel(1, "Marriot", "123 23 23", 5, 0.0, 0.0),
 								
 								new Hotel(
-										2, "DoubleTree by Hilton", "232 12 12", 5, null),
+										2, "DoubleTree by Hilton", "232 12 12", 5, 0.0, 0.0),
 								
 								new Hotel(
-										3, "Prezident-Otel", "111 11 11", 4, null),
+										3, "Prezident-Otel", "111 11 11", 4, 0.0, 0.0),
 								
-								new Hotel(4, "Aqua-Minsk", "123 11 11", 2, null),
+								new Hotel(4, "Aqua-Minsk", "123 11 11", 2, 0.0, 0.0),
 								
 								new Hotel(
 										5,
 										"Trump International Hotel Washington DC",
 										"101 10 01",
-										5,
-										null)));
+										5, 0.0, 0.0)));
 		List<Hotel> actual = hotelService.readAll(DEFAULT_PAGINATION_SIZE);
 		
 		Assert.assertEquals(expected, actual);

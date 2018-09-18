@@ -5,8 +5,8 @@ import by.runets.travelagency.dto.PaginationDTO;
 import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.entity.Tour;
 import by.runets.travelagency.entity.TourType;
+import by.runets.travelagency.service.IHotelService;
 import by.runets.travelagency.service.IJoinService;
-import by.runets.travelagency.service.IService;
 import by.runets.travelagency.service.ITourService;
 import by.runets.travelagency.util.constant.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -25,9 +25,9 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 @Controller
 public class PageController {
 	@Autowired
-	private ITourService<Tour, Long> tourService;
+	private ITourService tourService;
 	@Autowired
-	private IService<Hotel, Long> hotelService;
+	private IHotelService hotelService;
 	@Autowired
 	private IJoinService<Tour, Hotel> joinService;
 	@Autowired
@@ -36,8 +36,8 @@ public class PageController {
 	@GetMapping("/")
 	public String start (
 			@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-											 @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
-											 Model model) {
+			@RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
+			Model model) {
 		List<Tour> tours = tourService.readAllByField(FIND_TOUR_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, page, limit);
 		List<Hotel> hotels = hotelService.readAllByField(FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, page, limit);
 		joinService.join(tours, hotels);

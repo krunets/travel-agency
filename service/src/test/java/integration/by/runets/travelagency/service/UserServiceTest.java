@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGE;
 import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
 
 @Transactional
@@ -36,7 +37,7 @@ public class UserServiceTest {
 	private static final String FIELD = "login";
 	
 	@Autowired
-	private IUserService<User, Long> userService;
+	private IUserService userService;
 	
 	@Test
 	public void testCreate () {
@@ -108,7 +109,7 @@ public class UserServiceTest {
 		User expected = new User(10, "testLogin", "testPassword", Role.MEMBER);
 		Assert.assertTrue(userService.registerUserAccount(expected));
 		
-		User actual = userService.readAllByField(NAMED_QUERY, FIELD, "testLogin", 0, DEFAULT_PAGINATION_SIZE).get(0);
+		User actual = userService.readAllByField(NAMED_QUERY, FIELD, "testLogin", DEFAULT_PAGE, DEFAULT_PAGINATION_SIZE).get(0);
 		Assert.assertEquals(actual, expected);
 	}
 	

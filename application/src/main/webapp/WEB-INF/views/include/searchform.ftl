@@ -10,7 +10,7 @@
                     <form name="searchFormDTO" action="/tour/search" class="form-inline" method="post">
                         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
                         <div class="form-group group mx-sm-3 mb-2">
-                            <select name="countryName" required>
+                            <select class="input-select" name="countryName" required>
                                 <option disabled selected><@spring.message "search.form.country"/></option>
                             <#list countriesDTO as country>
                                 <option value="${country.code}">${country.name}</option>
@@ -20,7 +20,7 @@
                         <div class="form-group mx-sm-3 mb-2">
                             <div id="datepicker" class="custom-datepicker date uui-datepicker date-button">
                                 <input autocomplete="off" type="text" id="startTourDate" name="startTourDate"
-                                       class="uui-form-element" placeholder="<@spring.message "search.form.startDate"/>"
+                                       class="input-select uui-form-element" placeholder="<@spring.message "search.form.startDate"/>"
                                        required/>
                                 <span class="input-group-addon uui-button"></span>
                             </div>

@@ -1,9 +1,11 @@
 package by.runets.travelagency.service;
 
+import by.runets.travelagency.entity.User;
+
 import java.util.List;
 
-public interface IUserService<T, K> extends IService<T, K> {
-	boolean registerUserAccount (T user);
+public interface IUserService extends IService<User, Long> {
+	boolean registerUserAccount (User user);
 	
-	List<T> readUserByRole ();
+	List<User> readUserByRole ();
 }

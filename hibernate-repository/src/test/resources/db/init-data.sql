@@ -17,7 +17,7 @@ INSERT INTO travel_agency.tour(t_id,photo, date, duration, description, cost, to
 INSERT INTO travel_agency.tour(t_id, photo, date, duration, description, cost, tour_type) VALUES(4,'photo/img4.png', '2018-07-30', 40, 'description4', 400, 4);
 INSERT INTO travel_agency.tour(t_id,photo, date, duration, description, cost, tour_type) VALUES(5,'photo/img5.png', '2018-08-05', 50, 'description5', 500, 5);
 
-INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, tour) VALUES(1,'Marriot', '123 23 23', 5, 1);
+INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, tour, latitude, longitude) VALUES(1,'Marriot', '123 23 23', 5, 1, 53.932717, 27.511248);
 INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, tour) VALUES(2,'DoubleTree by Hilton', '232 12 12', 5, 2);
 INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, tour) VALUES(3,'Prezident-Otel', '111 11 11', 4, 3);
 INSERT INTO travel_agency.hotel(h_id, h_name, h_phone, h_stars, tour) VALUES(4,'Aqua-Minsk', '123 11 11', 2, 4);

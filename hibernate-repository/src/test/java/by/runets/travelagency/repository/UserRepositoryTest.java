@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGE;
 import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
 
 @Transactional
@@ -94,7 +95,7 @@ public class UserRepositoryTest {
 	@Test
 	public void readByNameQuery() {
 		final Optional<User> expected = Optional.of(new User(2, "admin", "admin", Role.ADMIN));
-		final Optional<User> actual = userRepository.readByNameQuery("FIND_BY_LOGIN", "login", "admin",0, DEFAULT_PAGINATION_SIZE).get(0);
+		final Optional<User> actual = userRepository.readByNameQuery("FIND_BY_LOGIN", "login", "admin", DEFAULT_PAGE, DEFAULT_PAGINATION_SIZE).get(0);
 		Assert.assertEquals(expected, actual);
 	}
 	

@@ -1,10 +1,12 @@
 package by.runets.travelagency.hibernate;
 
+import by.runets.travelagency.entity.Tour;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface ITourRepository<T, K> extends IDatabaseRepository<T, K> {
-	List<Optional<T>> findTourByCountryAndDateAndDuration (final String countryName, final LocalDate startTourDate, final Duration endTourDate);
+public interface ITourRepository extends IDatabaseRepository<Tour, Long> {
+	List<Optional<Tour>> findTourByCountryAndDateAndDuration (final String countryName, final LocalDate startTourDate, final Duration endTourDate);
 }

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 
 @Repository
-public class TourRepository extends AbstractRepository<Tour> implements ITourRepository<Tour, Long> {
+public class TourRepository extends AbstractRepository<Tour> implements ITourRepository {
 	@Autowired
 	private SessionFactory sessionFactory;
 	

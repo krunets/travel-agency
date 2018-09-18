@@ -33,7 +33,7 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 })
 public class ReviewServiceTest {
 	@Autowired
-	private IReviewService<Review, Long> reviewService;
+	private IReviewService reviewService;
 	
 	@Test
 	public void testReadById () {

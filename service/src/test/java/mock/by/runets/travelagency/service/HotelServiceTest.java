@@ -34,7 +34,7 @@ public class HotelServiceTest {
 	
 	@Test
 	public void testUpdate () {
-		Hotel hotel = new Hotel(1, "Marriot1", "123 24 23", 5, null);
+		Hotel hotel = new Hotel(1, "Marriot1", "123 24 23", 5, 0.0, 0.0);
 		
 		service.update(hotel);
 		
@@ -43,7 +43,7 @@ public class HotelServiceTest {
 	
 	@Test
 	public void testDelete () {
-		Hotel hotel = new Hotel(1, "Marriot1", "123 24 23", 5, null);
+		Hotel hotel = new Hotel(1, "Marriot1", "123 24 23", 5, 0.0, 0.0);
 		
 		service.delete(hotel);
 		
@@ -52,7 +52,7 @@ public class HotelServiceTest {
 	
 	@Test
 	public void testCreate () {
-		Hotel hotel = new Hotel(7, "Marriot2", "123 24 23", 5, null);
+		Hotel hotel = new Hotel(7, "Marriot2", "123 24 23", 5, 0.0, 0.0);
 		
 		service.create(hotel);
 		

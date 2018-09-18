@@ -112,17 +112,31 @@
         <nav aria-label="Page navigation example">
             <ul class="horizontal-center-container pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <#list 1..tourPaginationDTO.pageAmount as i>
+                <#--<#if tourPaginationDTO.page == i>
+                    <li class=" page-item"><a class="bg-primary page-link"
+                                              onclick="insertParam('page', ${tourPaginationDTO.page})">${tourPaginationDTO.page}</a>
+                    </li>
+                </#if>-->
+                <li class=" page-item"><a class="bg-primary page-link"
+                                          onclick="insertParam('page', ${tourPaginationDTO.page})">${tourPaginationDTO.page} + 1</a>
+                </li>
+                <li class=" page-item"><a class="bg-primary page-link"
+                                          onclick="insertParam('page', ${tourPaginationDTO.page})">${tourPaginationDTO.page} + 2</a>
+                </li>
+                <li class=" page-item"><a class="bg-primary page-link"
+                                          onclick="insertParam('page', ${tourPaginationDTO.page})">${tourPaginationDTO.page} + 3</a>
+                </li>
+               <#-- <#list 1..tourPaginationDTO.pageAmount as i>
                     <#if tourPaginationDTO.page == i>
                         <li class=" page-item"><a class="bg-primary page-link"
-                                                            onclick="insertParam('page', ${i})">${i}</a>
+                                                            onclick="insertParam('page', ${tourPaginationDTO.page})">${tourPaginationDTO.page}</a>
                         </li>
                     <#else>
                         <li class="page-item"><a class="page-link"
-                                                 onclick="insertParam('page', ${i})">${i}</a>
+                                                 onclick="insertParam('page', ${tourPaginationDTO.page})">${tourPaginationDTO.page}</a>
                         </li>
                     </#if>
-                </#list>
+                </#list>-->
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </nav>

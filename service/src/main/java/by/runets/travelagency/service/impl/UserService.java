@@ -16,7 +16,7 @@ import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_PA
 import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_USER_PAGINATION;
 
 @Service
-public class UserService extends AbstractService<User> implements IUserService<User, Long> {
+public class UserService extends AbstractService<User> implements IUserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	

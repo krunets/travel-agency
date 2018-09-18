@@ -78,7 +78,8 @@
             <div class="margin-bottom">
                 <form action="/user/review/${tour.id}/tour" method="post">
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
-                    <textarea name="content" class="resize-none margin-bottom form-control input-sm chat-input" placeholder="Write your message here..." required></textarea>
+                    <textarea name="content" class="resize-none margin-bottom form-control input-sm chat-input"
+                              placeholder="Write your message here..." required></textarea>
                     <input type="button" id="show-comments-button" class="auto-width btn btn-outline-info float-right"
                            value="Show comments"/>
                     <button type="submit" class="auto-width btn btn-outline-info float-right">Add comment</button>
@@ -92,7 +93,6 @@
             <#list tour.reviews as review>
                 <div class="comments-list none">
                     <div class="media">
-
                         <a class="media-left" href="#"><img class="comments-img" src="${review.user.photo}"></a>
                         <div class="media-body">
                             <h4 class="media-heading user_name">${review.user.login}</h4>

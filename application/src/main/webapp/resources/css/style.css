@@ -15,7 +15,7 @@
     color: #003580;
 }
 
-input, select {
+.input-select {
     display: block;
     width: 100%;
     height: calc(2.25rem + 2px);
@@ -56,10 +56,6 @@ input, select {
 
 .custom-margin {
     margin: 20px;
-}
-
-input[type=checkbox] {
-    transform: scale(0.5);
 }
 
 .margin-left-label {
@@ -191,4 +187,18 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.hotel-search-form {
+    padding: 0 20px 0 20px;
+    height: 450px;
+    width: 285px;
+    background-color: #ffc107;
+    border-radius: 9px;
+    margin-left: 100px;
+}
+
+.hotel-search-block {
+    padding: 0 20px 0 20px;
+
 }

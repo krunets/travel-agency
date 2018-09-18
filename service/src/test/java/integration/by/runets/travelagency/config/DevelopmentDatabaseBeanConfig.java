@@ -11,6 +11,7 @@ import org.springframework.context.annotation.*;
 )
 public class DevelopmentDatabaseBeanConfig {
 	public static final int DEFAULT_PAGINATION_SIZE = 10;
+	public static final int DEFAULT_PAGE = 1;
 	
 	@Bean
 	public Class<Country> countryClass() {

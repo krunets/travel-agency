@@ -1,4 +1,6 @@
 package by.runets.travelagency.service;
 
-public interface ICountryService<T, K> extends IService<T, K> {
+import by.runets.travelagency.entity.Country;
+
+public interface ICountryService extends IService<Country, Long> {
 }

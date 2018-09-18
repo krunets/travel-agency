@@ -16,13 +16,13 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.LOGIN_FIEL
 import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_USER_PAGINATION;
 
 @Service
-public class ReviewService extends AbstractService<Review> implements IReviewService<Review, Long> {
+public class ReviewService extends AbstractService<Review> implements IReviewService {
 	@Autowired
 	private IDatabaseRepository<Review, Long> abstractRepository;
 	@Autowired
-	private IUserService<User, Long> userService;
+	private IUserService userService;
 	@Autowired
-	private ITourService<Tour, Long> tourService;
+	private ITourService tourService;
 	
 	public ReviewService (Class<Review> classType, IDatabaseRepository<Review, Long> abstractRepository) {
 		super(classType, abstractRepository);

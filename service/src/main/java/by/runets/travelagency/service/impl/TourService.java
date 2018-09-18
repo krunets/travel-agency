@@ -18,13 +18,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class TourService extends AbstractService<Tour> implements ITourService<Tour, Long>, IJoinService<Tour, Hotel> {
+public class TourService extends AbstractService<Tour> implements ITourService, IJoinService<Tour, Hotel> {
 	@Autowired
-	private ITourRepository<Tour, Long> tourRepository;
+	private ITourRepository tourRepository;
 	
 	public TourService (Class<Tour> classType, IDatabaseRepository<Tour, Long> abstractRepository) {
 		super(classType, abstractRepository);
-		this.tourRepository = (ITourRepository<Tour, Long>) abstractRepository;
+		this.tourRepository = (ITourRepository) abstractRepository;
 	}
 	
 	@Override

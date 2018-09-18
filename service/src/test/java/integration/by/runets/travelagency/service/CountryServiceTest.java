@@ -2,6 +2,7 @@ package integration.by.runets.travelagency.service;
 
 import by.runets.travelagency.entity.Country;
 import by.runets.travelagency.exception.ResourceNotFoundException;
+import by.runets.travelagency.service.ICountryService;
 import by.runets.travelagency.service.IService;
 import integration.by.runets.travelagency.config.DevelopmentDatabaseBeanConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 })
 public class CountryServiceTest {
 	@Autowired
-	private IService<Country, Long> countryService;
+	private ICountryService countryService;
 	
 	@Test
 	public void testCreate () {
