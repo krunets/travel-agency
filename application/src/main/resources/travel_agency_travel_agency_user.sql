@@ -1,0 +1,4 @@
+INSERT INTO travel_agency."user" (u_id, login, password, role, photo) VALUES (2, 'admin', '$2a$10$sC5060k8xHwwQHeJ/OUb7uphcUDqreJn/zOS7JO38zZu1Soz2vGtW', 'ADMIN', '/resources/photo/user/admin.jpg');
+INSERT INTO travel_agency."user" (u_id, login, password, role, photo) VALUES (10, 'Baby2', '$2a$10$sC5060k8xHwwQHeJ/OUb7uphcUDqreJn/zOS7JO38zZu1Soz2vGtW', 'MEMBER', '/resources/photo/user/second-user.jpg');
+INSERT INTO travel_agency."user" (u_id, login, password, role, photo) VALUES (1, 'Baby1', '$2a$10$sC5060k8xHwwQHeJ/OUb7uphcUDqreJn/zOS7JO38zZu1Soz2vGtW', 'MEMBER', '/resources/photo/user/first-user.jpg');
+INSERT INTO travel_agency."user" (u_id, login, password, role, photo) VALUES (3, 'traveler1', '$2a$10$sC5060k8xHwwQHeJ/OUb7uphcUDqreJn/zOS7JO38zZu1Soz2vGtW', 'MEMBER', '/resources/photo/user/third-user.jpg');

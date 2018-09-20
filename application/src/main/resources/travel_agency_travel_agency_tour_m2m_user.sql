@@ -1,0 +1,1 @@
+INSERT INTO travel_agency.tour_m2m_user (t_id, u_id) VALUES (1, 3);

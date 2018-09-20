@@ -1,0 +1,4 @@
+INSERT INTO travel_agency.hotel (h_id, h_name, h_phone, h_stars, tour, latitude, longitude) VALUES (1, 'Marriot', '123 23 23', 5, 1, 53.932717, 27.511248);
+INSERT INTO travel_agency.hotel (h_id, h_name, h_phone, h_stars, tour, latitude, longitude) VALUES (2, 'DoubleTree By Hilton', '232 12 12', 5, 2, 51.1248, 53.932717);
+INSERT INTO travel_agency.hotel (h_id, h_name, h_phone, h_stars, tour, latitude, longitude) VALUES (4, 'Trump International Hotel Washington DC', '101 10 01', 5, 4, 27.511248, 51.1248);
+INSERT INTO travel_agency.hotel (h_id, h_name, h_phone, h_stars, tour, latitude, longitude) VALUES (3, 'Aqua-Minsk', '123 11 11', 3, 3, 53.932717, 53.932717);
