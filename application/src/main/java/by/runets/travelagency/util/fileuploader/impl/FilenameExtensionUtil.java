@@ -8,9 +8,9 @@ import java.util.UUID;
 
 @Component
 public class FilenameExtensionUtil implements IFileNameExtensionUtil {
-	@Override
-	public String reformat (MultipartFile file) {
-		String[] fileNameExtension = file.getOriginalFilename().split("\\.");
-		return fileNameExtension[0] + "-" + UUID.randomUUID() + "." + fileNameExtension[fileNameExtension.length - 1];
-	}
+  @Override
+  public String reformat(MultipartFile file) {
+	String[] fileNameExtension = file.getOriginalFilename().split("\\.");
+	return fileNameExtension[0] + "-" + UUID.randomUUID() + "." + fileNameExtension[fileNameExtension.length - 1];
+  }
 }

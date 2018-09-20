@@ -9,13 +9,13 @@ import java.time.Duration;
 @Component
 @Converter(autoApply = true)
 public class DurationConverter implements AttributeConverter<Duration, Long> {
-	@Override
-	public Long convertToDatabaseColumn (Duration duration) {
-		return duration.toDays();
-	}
-	
-	@Override
-	public Duration convertToEntityAttribute (Long attribute) {
-		return Duration.ofDays(attribute);
-	}
+  @Override
+  public Long convertToDatabaseColumn(Duration duration) {
+	return duration.toDays();
+  }
+
+  @Override
+  public Duration convertToEntityAttribute(Long attribute) {
+	return Duration.ofDays(attribute);
+  }
 }

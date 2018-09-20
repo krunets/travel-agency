@@ -29,75 +29,75 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @ActiveProfiles(profiles = "development")
 @SqlGroup({
-		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
+	@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
 })
 public class ReviewServiceTest {
-	@Autowired
-	private IReviewService reviewService;
-	
-	@Test
-	public void testReadById () {
-		final long id = 1;
-		Review expected = new Review(id, "Content 1", null, null);
-		Review actual = reviewService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testReadAll () {
-		List<Review> expected =
-				new ArrayList<>(
-						Arrays.asList(
-								new Review(1, "Content 1", null, null),
-								new Review(2, "Content 2", null, null),
-								new Review(3, "Content 3", null, null)));
-		List<Review> actual = reviewService.readAll(DEFAULT_PAGINATION_SIZE);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testCreate () {
-		Review expected =
-				new Review(10, "testContent", null, null);
-		final long id = reviewService.create(expected);
-		Review actual = reviewService.read(id);
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testUpdate () {
-		final long id = 1;
-		Review expected = reviewService.read(id);
-		
-		expected.setContent("testContent");
-		reviewService.update(expected);
-		
-		Review actual = reviewService.read(id);
-		
-		Assert.assertEquals(actual, expected);
-	}
-	
-	@Test(expected = ResourceNotFoundException.class)
-	public void testDelete () {
-		final long id = 1;
-		Review expected = reviewService.read(id);
-		Assert.assertNotNull(expected);
-		
-		reviewService.delete(expected);
-		
-		Review actual = reviewService.read(id);
-		
-		Assert.assertNull(actual);
-	}
-	
-	@Test
-	public void testCreateReview() {
-		Review review = new Review();
-		review.setContent("newContent");
-		Long id = reviewService.createReviewByUsernameAndTourId("root", 1L, review);
-		System.out.println(reviewService.read(id));
-		System.out.println(reviewService.readAll(20));
-	}
+  @Autowired
+  private IReviewService reviewService;
+
+  @Test
+  public void testReadById() {
+	final long id = 1;
+	Review expected = new Review(id, "Content 1", null, null);
+	Review actual = reviewService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testReadAll() {
+	List<Review> expected =
+		new ArrayList<>(
+			Arrays.asList(
+				new Review(1, "Content 1", null, null),
+				new Review(2, "Content 2", null, null),
+				new Review(3, "Content 3", null, null)));
+	List<Review> actual = reviewService.readAll(DEFAULT_PAGINATION_SIZE);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testCreate() {
+	Review expected =
+		new Review(10, "testContent", null, null);
+	final long id = reviewService.create(expected);
+	Review actual = reviewService.read(id);
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testUpdate() {
+	final long id = 1;
+	Review expected = reviewService.read(id);
+
+	expected.setContent("testContent");
+	reviewService.update(expected);
+
+	Review actual = reviewService.read(id);
+
+	Assert.assertEquals(actual, expected);
+  }
+
+  @Test(expected = ResourceNotFoundException.class)
+  public void testDelete() {
+	final long id = 1;
+	Review expected = reviewService.read(id);
+	Assert.assertNotNull(expected);
+
+	reviewService.delete(expected);
+
+	Review actual = reviewService.read(id);
+
+	Assert.assertNull(actual);
+  }
+
+  @Test
+  public void testCreateReview() {
+	Review review = new Review();
+	review.setContent("newContent");
+	Long id = reviewService.createReviewByUsernameAndTourId("root", 1L, review);
+	System.out.println(reviewService.read(id));
+	System.out.println(reviewService.readAll(20));
+  }
 }

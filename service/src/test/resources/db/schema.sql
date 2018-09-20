@@ -12,8 +12,11 @@ CREATE TABLE travel_agency.hotel
   h_name varchar(255) NOT NULL,
   h_phone varchar(255) NOT NULL,
   h_stars INTEGER NOT NULL,
-  tour BIGINT NOT NULL
+  tour BIGINT NOT NULL,
+  latitude DOUBLE PRECISION,
+  longitude DOUBLE PRECISION
 );
+
 CREATE TABLE travel_agency.review
 (
   r_id BIGINT PRIMARY KEY auto_increment NOT NULL,

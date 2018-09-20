@@ -28,44 +28,44 @@ import static org.mockito.Mockito.*;
 @ActiveProfiles(profiles = "development")
 
 public class UserServiceTest {
-	@Mock
-	private UserRepository repository;
-	private UserService service;
-	
-	@Before
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-		service = new UserService(User.class, repository);
-	}
-	
-	@Test
-	public void testReadAll () {
-		when(repository.readAll(User.class, DEFAULT_PAGINATION_SIZE)).thenReturn(new ArrayList<Optional<User>>());
-		
-		assertThat(service.readAll(DEFAULT_PAGINATION_SIZE), is(notNullValue()));
-	}
-	
-	@Test
-	public void testCreate () {
-		User user = new User(5, "admin", "admin",  Role.ADMIN);
-		
-		service.create(user);
-		verify(repository, times(1)).create(user);
-	}
-	
-	@Test
-	public void testUpdate () {
-		User user = new User(2, "admin1", "admin1", Role.ADMIN);
-		
-		service.update(user);
-		verify(repository, times(1)).update(user);
-	}
-	
-	@Test
-	public void testDelete () {
-		User user = new User(2, "admin", "admin", Role.ADMIN);
-		
-		service.delete(user);
-		verify(repository, times(1)).delete(user);
-	}
+  @Mock
+  private UserRepository repository;
+  private UserService service;
+
+  @Before
+  public void setUp() {
+	MockitoAnnotations.initMocks(this);
+	service = new UserService(User.class, repository);
+  }
+
+  @Test
+  public void testReadAll() {
+	when(repository.readAll(User.class, DEFAULT_PAGINATION_SIZE)).thenReturn(new ArrayList<Optional<User>>());
+
+	assertThat(service.readAll(DEFAULT_PAGINATION_SIZE), is(notNullValue()));
+  }
+
+  @Test
+  public void testCreate() {
+	User user = new User(5, "admin", "admin", Role.ADMIN);
+
+	service.create(user);
+	verify(repository, times(1)).create(user);
+  }
+
+  @Test
+  public void testUpdate() {
+	User user = new User(2, "admin1", "admin1", Role.ADMIN);
+
+	service.update(user);
+	verify(repository, times(1)).update(user);
+  }
+
+  @Test
+  public void testDelete() {
+	User user = new User(2, "admin", "admin", Role.ADMIN);
+
+	service.delete(user);
+	verify(repository, times(1)).delete(user);
+  }
 }

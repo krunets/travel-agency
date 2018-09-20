@@ -21,7 +21,7 @@
                             <ul class="list-unstyled">
                                 <li>
                                     City Hall<br>
-                                    212  Street<br>
+                                    212 Street<br>
                                     Lawoma<br>
                                     735<br>
                                 </li>
@@ -84,7 +84,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!--Footer Bottom-->
-                    <p class="text-xs-center">&copy; 2018 Copyright: EpamTravelAgency.  All rights reserved.</p>
+                    <p class="text-xs-center">&copy; 2018 Copyright: EpamTravelAgency. All rights reserved.</p>
                 </div>
             </div>
         </div>

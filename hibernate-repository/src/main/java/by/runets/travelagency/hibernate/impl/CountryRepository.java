@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CountryRepository extends AbstractRepository<Country> {
-	public CountryRepository (SessionFactory sessionFactory) {
-		super(sessionFactory);
-	}
+  public CountryRepository(SessionFactory sessionFactory) {
+	super(sessionFactory);
+  }
 }

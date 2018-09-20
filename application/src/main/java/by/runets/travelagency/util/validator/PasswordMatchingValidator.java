@@ -7,8 +7,8 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 public class PasswordMatchingValidator implements ConstraintValidator<PasswordMatches, UserDTO> {
-	@Override
-	public boolean isValid (UserDTO userDTO, ConstraintValidatorContext constraintValidatorContext) {
-		return userDTO.getPassword().equals(userDTO.getConfirmedPassword());
-	}
+  @Override
+  public boolean isValid(UserDTO userDTO, ConstraintValidatorContext constraintValidatorContext) {
+	return userDTO.getPassword().equals(userDTO.getConfirmedPassword());
+  }
 }

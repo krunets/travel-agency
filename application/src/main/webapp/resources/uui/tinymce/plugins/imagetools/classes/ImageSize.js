@@ -11,17 +11,17 @@
 /**
  * Returns the size of images.
  */
-define("tinymce/imagetoolsplugin/ImageSize", [], function() {
-	function getWidth(image) {
-		return image.naturalWidth || image.width;
-	}
+define("tinymce/imagetoolsplugin/ImageSize", [], function () {
+    function getWidth(image) {
+        return image.naturalWidth || image.width;
+    }
 
-	function getHeight(image) {
-		return image.naturalHeight || image.height;
-	}
+    function getHeight(image) {
+        return image.naturalHeight || image.height;
+    }
 
-	return {
-		getWidth: getWidth,
-		getHeight: getHeight
-	};
+    return {
+        getWidth: getWidth,
+        getHeight: getHeight
+    };
 });

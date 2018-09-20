@@ -19,18 +19,18 @@ import static org.springframework.security.core.userdetails.User.withUsername;
 @Service
 @AllArgsConstructor
 public class UserDetailsSecurityService implements UserDetailsService {
-	@Autowired
-	private IDatabaseRepository<User, Long> userRepository;
-	
-	@Override
-	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername (String login) throws UsernameNotFoundException {
-		return userRepository.readByNameQuery(FIND_BY_LOGIN, LOGIN_FIELD, login, 0, DEFAULT_USER_PAGINATION)
-				.get(0)
-				.map(user -> withUsername(login)
-						.password(user.getPassword())
-						.roles(user.getRole().name())
-						.build())
-				.orElseThrow(ResourceNotFoundException::new);
-	}
+  @Autowired
+  private IDatabaseRepository<User, Long> userRepository;
+
+  @Override
+  @Transactional(readOnly = true)
+  public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+	return userRepository.readByNameQuery(FIND_BY_LOGIN, LOGIN_FIELD, login, 0, DEFAULT_USER_PAGINATION)
+		.get(0)
+		.map(user -> withUsername(login)
+			.password(user.getPassword())
+			.roles(user.getRole().name())
+			.build())
+		.orElseThrow(ResourceNotFoundException::new);
+  }
 }

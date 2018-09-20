@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class HotelRepository extends AbstractRepository<Hotel> {
   public HotelRepository(SessionFactory sessionFactory) {
-    super(sessionFactory);
+	super(sessionFactory);
   }
 }

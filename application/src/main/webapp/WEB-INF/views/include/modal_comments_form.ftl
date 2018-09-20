@@ -1,4 +1,5 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,10 +14,11 @@
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Username:</label>
                         <input type="text" class="form-control" id="username" value="${review.user.login}" disabled/>
-                    </div><div class="form-group">
-                    <label for="message-text" class="col-form-label">Message:</label>
-                    <textarea class="form-control" name="content" id="content">${review.content}</textarea>
-                </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" name="content" id="content">${review.content}</textarea>
+                    </div>
                     <button type="submit" class="btn btn-primary float-right">Edit</button>
                 </form>
             </div>

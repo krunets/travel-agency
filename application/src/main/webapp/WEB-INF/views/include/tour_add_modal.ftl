@@ -9,7 +9,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="add-tour-form" action="/tour/add" onsubmit="return addTour()" method="post" enctype="multipart/form-data">
+                <form id="add-tour-form" action="/tour/add" onsubmit="return addTour()" method="post"
+                      enctype="multipart/form-data">
                     <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
                     <div id="photoExtensionError" class="alert alert-danger none" role="alert">
                         <p>File must have PNG or JPG extension!</p>

@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Hotel page</title>
+    <title>Hotel</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/comments.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -13,20 +13,51 @@
 </head>
 <body>
 <#include "include/header.ftl">
+<div class="col-md-12">
+    <#include "include/map_modal.ftl">
+</div>
 <div class="row">
     <div class="col-md-12">
         <div class="margin-bottom">
             <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col"><@spring.message "hotel.name.message"/></th>
-                    <th scope="col"><@spring.message "hotel.phone.message"/></th>
-                    <th scope="col"><@spring.message "hotel.stars.message"/></th>
-                </tr>
-                </thead>
-                <tbody>
+                <div class="custom-margin">
+                    <div class="dropdown show">
+                        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Show
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" onclick="insertParam('limit', 5)">5</a>
+                            <a class="dropdown-item" onclick="insertParam('limit', 10)">10</a>
+                            <a class="dropdown-item" onclick="insertParam('limit', 15)">15</a>
+                        </div>
+                    </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="horizontal-center-container pagination">
+                        <#if hotelPaginationDTO.page gt 1>
+                            <li class="page-item"><a class="page-link" onclick="insertParam('page', ${hotelPaginationDTO.page-1})">Previous</a></li>
+                        </#if>
+                        <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount>
+                         <li class="page-item"><a class="page-link" onclick="insertParam('page', ${hotelPaginationDTO.page+1})">Next</a></li>
+                        </#if>
+                        </ul>
+                    </nav>
+                    <thead>
+                    <tr>
+                        <th scope="col"><@spring.message "hotel.name.message"/></th>
+                        <th scope="col"><@spring.message "hotel.phone.message"/></th>
+                        <th scope="col"><@spring.message "hotel.stars.message"/></th>
+                    </tr>
+                    </thead>
+                    <tbody>
                 <#list hotelPaginationDTO.data as hotel>
-                <tr>
+                <tr class="cursor-pointer"
+                    data-target="#add-tour-modal"
+                    data-toggle="modal"
+
+                    data-hotel-latitude="${hotel.latitude}"
+                    data-hotel-longitude="${hotel.longitude}">
+
                     <td>${hotel.name}</td>
                     <td>${hotel.phone}</td>
                     <td>
@@ -36,23 +67,68 @@
                     </td>
                 </tr>
                 </#list>
-                </tbody>
+                    </tbody>
             </table>
             <nav aria-label="Page navigation example">
                 <ul class="horizontal-center-container pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <#list 1..hotelPaginationDTO.pageAmount as i>
-                    <#if hotelPaginationDTO.page == i>
-                        <li class=" page-item"><a class="bg-primary page-link"
-                                                  onclick="insertParam('page', ${i})">${i}</a>
-                        </li>
-                    <#else>
-                        <li class="page-item"><a class="page-link"
-                                                 onclick="insertParam('page', ${i})">${i}</a>
+                <#if hotelPaginationDTO.page gt 1>
+                            <li class="page-item"><a class="page-link"
+                                                     onclick="insertParam('page', ${hotelPaginationDTO.page-1})">Previous</a>
+                            </li>
+                </#if>
+                    <li class=" page-item"><a class="bg-primary page-link"
+                                              onclick="insertParam('page', ${hotelPaginationDTO.page})">${hotelPaginationDTO.page}</a>
+                    </li>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount>
+                        <li class=" page-item"><a class="page-link"
+                                                  onclick="insertParam('page', ${hotelPaginationDTO.page+1})">${hotelPaginationDTO.page+1}</a>
                         </li>
                     </#if>
-                </#list>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount - 2>
+                        <li class=" page-item"><a class="page-link"
+                                                  onclick="insertParam('page', ${hotelPaginationDTO.page+2})">${hotelPaginationDTO.page+2}</a>
+                        </li>
+                    </#if>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount - 3>
+                     <li class=" page-item"><a class="page-link"
+                                               onclick="insertParam('page', ${hotelPaginationDTO.page+3})">${hotelPaginationDTO.page+3}</a>
+                     </li>
+                    </#if>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount - 4>
+                     <li class=" page-item"><a class="page-link"
+                                               onclick="insertParam('page', ${hotelPaginationDTO.page+4})">${hotelPaginationDTO.page+4}</a>
+                     </li>
+                    </#if>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount - 5>
+                         <li class=" page-item"><a class="page-link"
+                                                   onclick="insertParam('page', ${hotelPaginationDTO.page+5})">${hotelPaginationDTO.page+5}</a>
+                         </li>
+                    </#if>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount - 6>
+                        <li class=" page-item"><a class="page-link"
+                                                  onclick="insertParam('page', ${hotelPaginationDTO.page+6})">${hotelPaginationDTO.page+6}</a>
+                        </li>
+                    </#if>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount - 7>
+                         <li class=" page-item"><a class="page-link"
+                                                   onclick="insertParam('page', ${hotelPaginationDTO.page+7})">${hotelPaginationDTO.page+7}</a>
+                         </li>
+                    </#if>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount - 8>
+                        <li class=" page-item"><a class="page-link"
+                                                  onclick="insertParam('page', ${hotelPaginationDTO.page+8})">${hotelPaginationDTO.page+8}</a>
+                        </li>
+                    </#if>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount - 9>
+                         <li class=" page-item"><a class="page-link"
+                                                   onclick="insertParam('page', ${hotelPaginationDTO.page+9})">${hotelPaginationDTO.page+9}</a>
+                         </li>
+                    </#if>
+                    <#if hotelPaginationDTO.page < hotelPaginationDTO.pageAmount>
+                        <li class="page-item"><a class="page-link"
+                                                 onclick="insertParam('page', ${hotelPaginationDTO.page+1})">Next</a>
+                        </li>
+                    </#if>
                 </ul>
             </nav>
         </div>
@@ -76,6 +152,31 @@
 <script src="/resources/js/controller.js"></script>
 <script src="/resources/js/tourpage.js"></script>
 <script src="/resources/uui/js/uui-rating.min.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript">
+</script>
+<script type="text/javascript">
+    $('tr[data-toggle=modal]').click(function () {
+        var latitude = $(this).data('hotel-latitude');
+        var longitude = $(this).data('hotel-longitude');
+
+        ymaps.ready(function () {
+
+            var map = new ymaps.Map("map", {
+                center: [latitude, longitude],
+                zoom: 10
+            });
+
+            var myGeoObject = new ymaps.GeoObject({
+                geometry: {
+                    type: "Point", // тип геометрии - точка
+                    coordinates: [latitude, longitude],
+                    zoom: 25
+                }
+            });
+            map.geoObjects.add(myGeoObject);
+        });
+    });
+</script>
 </body>
 </html>
 

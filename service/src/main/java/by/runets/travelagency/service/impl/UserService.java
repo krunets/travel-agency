@@ -17,34 +17,34 @@ import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_US
 
 @Service
 public class UserService extends AbstractService<User> implements IUserService {
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	public UserService (Class<User> classType, IDatabaseRepository<User, Long> abstractRepository) {
-		super(classType, abstractRepository);
+  @Autowired
+  private PasswordEncoder passwordEncoder;
+
+  public UserService(Class<User> classType, IDatabaseRepository<User, Long> abstractRepository) {
+	super(classType, abstractRepository);
+  }
+
+  @Override
+  @Transactional
+  public boolean registerUserAccount(User user) {
+	long userId = 0;
+	boolean isEmpty = super
+		.readAllByField(FIND_BY_LOGIN, LOGIN_FIELD,
+			user.getLogin(), 0, DEFAULT_USER_PAGINATION)
+		.isEmpty();
+	if (isEmpty) {
+	  user.setRole(Role.MEMBER);
+	  user.setPassword(passwordEncoder.encode(user.getPassword()));
+	  userId = super.create(user);
 	}
-	
-	@Override
-	@Transactional
-	public boolean registerUserAccount (User user) {
-		long userId = 0;
-		boolean isEmpty = super
-				.readAllByField(FIND_BY_LOGIN, LOGIN_FIELD,
-						user.getLogin(), 0, DEFAULT_USER_PAGINATION)
-				.isEmpty();
-		if (isEmpty) {
-			user.setRole(Role.MEMBER);
-			user.setPassword(passwordEncoder.encode(user.getPassword()));
-			userId = super.create(user);
-		}
-		return userId != 0;
-	}
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<User> readUserByRole () {
-		return super
-				.readAllByField(FIND_BY_ROLE, ROLE_FIELD,
-						Role.MEMBER, 0, DEFAULT_PAGINATION_SIZE);
-	}
+	return userId != 0;
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<User> readUserByRole() {
+	return super
+		.readAllByField(FIND_BY_ROLE, ROLE_FIELD,
+			Role.MEMBER, 0, DEFAULT_PAGINATION_SIZE);
+  }
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ReviewRepository extends AbstractRepository<Review> {
-	public ReviewRepository (SessionFactory sessionFactory) {
-		super(sessionFactory);
-	}
+  public ReviewRepository(SessionFactory sessionFactory) {
+	super(sessionFactory);
+  }
 }

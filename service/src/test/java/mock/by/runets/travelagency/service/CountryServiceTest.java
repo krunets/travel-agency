@@ -20,46 +20,46 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class CountryServiceTest {
-	@Mock
-	private CountryRepository repository;
-	@InjectMocks
-	private CountryService service;
-	
-	@Test(expected = ResourceNotFoundException.class)
-	public void testReadThrowingException () {
-		final long id = 1111;
-		when(repository.read(eq(Country.class), anyLong())).thenThrow(ResourceNotFoundException.class);
-		
-		service.read(id);
-	}
-	
-	@Test
-	public void testUpdate () {
-		Country newCountry = new Country(1, "Belarus freedom", null);
-		service.update(newCountry);
-		
-		verify(repository, times(1)).update(newCountry);
-	}
-	
-	@Test
-	public void testCreate () {
-		Country newCountry = new Country(6, "Belarus freedom", null);
-		service.create(newCountry);
-		
-		verify(repository, times(1)).create(newCountry);
-	}
-	
-	@Test
-	public void testDelete () {
-		Country deleteCountry = new Country(1, "Belarus", null);
-		service.delete(deleteCountry);
-		
-		verify(repository, times(1)).delete(deleteCountry);
-	}
-	
-	@Test
-	public void testReadAll () {
-		when(repository.readAll(Country.class, DEFAULT_PAGINATION_SIZE)).thenReturn(new ArrayList<>());
-		assertThat(service.readAll(DEFAULT_PAGINATION_SIZE), is(notNullValue()));
-	}
+  @Mock
+  private CountryRepository repository;
+  @InjectMocks
+  private CountryService service;
+
+  @Test(expected = ResourceNotFoundException.class)
+  public void testReadThrowingException() {
+	final long id = 1111;
+	when(repository.read(eq(Country.class), anyLong())).thenThrow(ResourceNotFoundException.class);
+
+	service.read(id);
+  }
+
+  @Test
+  public void testUpdate() {
+	Country newCountry = new Country(1, "Belarus freedom", null);
+	service.update(newCountry);
+
+	verify(repository, times(1)).update(newCountry);
+  }
+
+  @Test
+  public void testCreate() {
+	Country newCountry = new Country(6, "Belarus freedom", null);
+	service.create(newCountry);
+
+	verify(repository, times(1)).create(newCountry);
+  }
+
+  @Test
+  public void testDelete() {
+	Country deleteCountry = new Country(1, "Belarus", null);
+	service.delete(deleteCountry);
+
+	verify(repository, times(1)).delete(deleteCountry);
+  }
+
+  @Test
+  public void testReadAll() {
+	when(repository.readAll(Country.class, DEFAULT_PAGINATION_SIZE)).thenReturn(new ArrayList<>());
+	assertThat(service.readAll(DEFAULT_PAGINATION_SIZE), is(notNullValue()));
+  }
 }

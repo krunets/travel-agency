@@ -10,20 +10,20 @@ import java.io.IOException;
 
 @Component
 public class PhotoUtil implements IFileUtil {
-	
-	@Override
-	public boolean save (MultipartFile file, String path, String newFileName) {
-		if (!file.isEmpty()) {
-			try {
-				File dir = new File(path);
-				if (file.getContentType().equalsIgnoreCase("image/jpeg") || file.getContentType().equalsIgnoreCase("image/png")) {
-					File serverFile = new File(dir.getAbsolutePath() + File.separator + newFileName);
-					file.transferTo(serverFile);
-				}
-			} catch (IOException e) {
-				throw new ResourceNotFoundException();
-			}
+
+  @Override
+  public boolean save(MultipartFile file, String path, String newFileName) {
+	if (!file.isEmpty()) {
+	  try {
+		File dir = new File(path);
+		if (file.getContentType().equalsIgnoreCase("image/jpeg") || file.getContentType().equalsIgnoreCase("image/png")) {
+		  File serverFile = new File(dir.getAbsolutePath() + File.separator + newFileName);
+		  file.transferTo(serverFile);
 		}
-		return false;
+	  } catch (IOException e) {
+		throw new ResourceNotFoundException();
+	  }
 	}
+	return false;
+  }
 }

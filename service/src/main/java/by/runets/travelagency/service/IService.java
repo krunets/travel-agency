@@ -9,17 +9,17 @@ import java.util.List;
  * @param <K> is a generic param which represents a key param.
  */
 public interface IService<T, K> {
-	K create (final T entity);
-	
-	List<T> readAll (final int paginationSize);
-	
-	T read (final K id);
-	
-	void update (final T entity);
-	
-	void delete (final T entity);
-	
-	K count(final String namedQuery);
-	
-	<V> List<T> readAllByField (final String namedQuery, final String field, final V value, final int page, final int paginationSize);
+  K create(final T entity);
+
+  List<T> readAll(final int paginationSize);
+
+  T read(final K id);
+
+  void update(final T entity);
+
+  void delete(final T entity);
+
+  K count(final String namedQuery);
+
+  <V> List<T> readAllByField(final String namedQuery, final String field, final V value, final int page, final int paginationSize);
 }

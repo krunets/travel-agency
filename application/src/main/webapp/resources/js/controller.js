@@ -27,6 +27,7 @@ function insertParam(key, value) {
 
     document.location.search = kvp.join('&');
 }
+
 var isImage = function (filename) {
     var ext = getExtension(filename);
     switch (ext.toLowerCase()) {

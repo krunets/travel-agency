@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 @Data
 public class ReviewDTO {
-	@NotNull
-	@Size(max = 255)
-	private String content;
+  @NotNull
+  @Size(max = 255)
+  private String content;
 }

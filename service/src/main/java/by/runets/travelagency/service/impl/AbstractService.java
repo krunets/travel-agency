@@ -22,94 +22,94 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public abstract class AbstractService<T> implements IService<T, Long> {
-	@Autowired
-	private final Class<T> classType;
-	@Autowired
-	private final IDatabaseRepository<T, Long> abstractRepository;
-	
-	/**
-	 * This is a method which call create method from abstractRepository layer.
-	 *
-	 * @param entity generic exemplar.
-	 */
-	@Loggable
-	@Transactional(isolation = Isolation.SERIALIZABLE)
-	@Override
-	public Long create (final T entity) {
-		return abstractRepository.create(entity);
-	}
-	
-	/**
-	 * This is a method which returns list of entities.
-	 *
-	 * @return list of entities.
-	 */
-	@Loggable
-	@Override
-	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-	public List<T> readAll (final int paginationSize) {
-		return abstractRepository
-				.readAll(classType, paginationSize)
-				.stream()
-				.filter(Optional::isPresent)
-				.map(Optional::get)
-				.collect(Collectors.toList());
-	}
-	
-	/**
-	 * This is a method which return entity by id.
-	 *
-	 * @param id is a generic param which represents a key param.
-	 * @return entity.
-	 */
-	@Loggable
-	@Override
-	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-	public T read (final Long id) {
-		return abstractRepository
-				.read(classType, id)
-				.orElseThrow(() -> new ResourceNotFoundException("The entity by id " + id + " does not exist."));
-	}
-	
-	/**
-	 * This is a method which call update method from abstractRepository.
-	 *
-	 * @param entity generic exemplar.
-	 */
-	@Loggable
-	@Override
-	@Transactional(isolation = Isolation.SERIALIZABLE)
-	public void update (final T entity) {
-		abstractRepository.update(entity);
-	}
-	
-	/**
-	 * This is a method which call update method from abstractRepository.
-	 *
-	 * @param entity generic exemplar.
-	 */
-	@Loggable
-	@Override
-	@Transactional(isolation = Isolation.SERIALIZABLE)
-	public void delete (final T entity) {
-		abstractRepository.delete(entity);
-	}
-	
-	@Override
-	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-	public Long count (final String namedQuery) {
-		return abstractRepository.count(namedQuery);
-	}
-	
-	@Loggable
-	@Override
-	@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
-	public <V> List<T> readAllByField (final String namedQuery, final String field, final V value, final int page, final int paginationSize) {
-		return abstractRepository
-				.readByNameQuery(namedQuery, field, value, page, paginationSize)
-				.stream()
-				.filter(Optional::isPresent)
-				.map(Optional::get)
-				.collect(Collectors.toList());
-	}
+  @Autowired
+  private final Class<T> classType;
+  @Autowired
+  private final IDatabaseRepository<T, Long> abstractRepository;
+
+  /**
+   * This is a method which call create method from abstractRepository layer.
+   *
+   * @param entity generic exemplar.
+   */
+  @Loggable
+  @Transactional(isolation = Isolation.SERIALIZABLE)
+  @Override
+  public Long create(final T entity) {
+	return abstractRepository.create(entity);
+  }
+
+  /**
+   * This is a method which returns list of entities.
+   *
+   * @return list of entities.
+   */
+  @Loggable
+  @Override
+  @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+  public List<T> readAll(final int paginationSize) {
+	return abstractRepository
+		.readAll(classType, paginationSize)
+		.stream()
+		.filter(Optional::isPresent)
+		.map(Optional::get)
+		.collect(Collectors.toList());
+  }
+
+  /**
+   * This is a method which return entity by id.
+   *
+   * @param id is a generic param which represents a key param.
+   * @return entity.
+   */
+  @Loggable
+  @Override
+  @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+  public T read(final Long id) {
+	return abstractRepository
+		.read(classType, id)
+		.orElseThrow(() -> new ResourceNotFoundException("The entity by id " + id + " does not exist."));
+  }
+
+  /**
+   * This is a method which call update method from abstractRepository.
+   *
+   * @param entity generic exemplar.
+   */
+  @Loggable
+  @Override
+  @Transactional(isolation = Isolation.SERIALIZABLE)
+  public void update(final T entity) {
+	abstractRepository.update(entity);
+  }
+
+  /**
+   * This is a method which call update method from abstractRepository.
+   *
+   * @param entity generic exemplar.
+   */
+  @Loggable
+  @Override
+  @Transactional(isolation = Isolation.SERIALIZABLE)
+  public void delete(final T entity) {
+	abstractRepository.delete(entity);
+  }
+
+  @Override
+  @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+  public Long count(final String namedQuery) {
+	return abstractRepository.count(namedQuery);
+  }
+
+  @Loggable
+  @Override
+  @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+  public <V> List<T> readAllByField(final String namedQuery, final String field, final V value, final int page, final int paginationSize) {
+	return abstractRepository
+		.readByNameQuery(namedQuery, field, value, page, paginationSize)
+		.stream()
+		.filter(Optional::isPresent)
+		.map(Optional::get)
+		.collect(Collectors.toList());
+  }
 }

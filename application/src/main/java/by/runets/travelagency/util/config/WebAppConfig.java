@@ -36,85 +36,85 @@ import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_CO
 @ComponentScan(basePackages = "by.runets.travelagency.*")
 @PropertySource("classpath:filepath/filepath.properties")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
-	@Autowired
-	private IService<Country, Long> countryService;
-	@Autowired
-	private Converter<List<CountryDTO>, List<Country>> countryConverter;
-	
-	@Override
-	public void addResourceHandlers (ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
-	
-	@Bean
-	public FreeMarkerViewResolver freeMarkerViewResolver () {
-		FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
-		freeMarkerViewResolver.setContentType("text/html; charset=utf-8");
-		freeMarkerViewResolver.setCache(true);
-		freeMarkerViewResolver.setSuffix(".ftl");
-		freeMarkerViewResolver.setPrefix("");
-		return freeMarkerViewResolver;
-	}
-	
-	@Bean
-	public FreeMarkerConfigurer freemarkerConfig () {
-		FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
-		freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/views/");
-		freeMarkerConfigurer.setDefaultEncoding("UTF-8");
-		return freeMarkerConfigurer;
-	}
-	
-	@Bean
-	public List<CountryDTO> countryDTOs () {
-		List<Country> countries = countryService.readAll(DEFAULT_COUNTRY_PAGINATION_SIZE);
-		return countryConverter.convert(countries);
-	}
-	
-	@Bean
-	public CookieLocaleResolver localeResolver () {
-		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-		localeResolver.setCookieName("my-locale-cookie");
-		localeResolver.setDefaultLocale(Locale.ENGLISH);
-		localeResolver.setCookieMaxAge(3600);
-		return localeResolver;
-	}
-	
-	@Bean
-	public MessageSource messageSource () {
-		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasenames("i18n/messages");
-		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setUseCodeAsDefaultMessage(true);
-		return messageSource;
-	}
-	
-	@Bean
-	public LocaleChangeInterceptor localeInterceptor () {
-		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-		interceptor.setParamName("lang");
-		return interceptor;
-	}
-	
-	@Override
-	public void addInterceptors (InterceptorRegistry registry) {
-		registry.addInterceptor(localeInterceptor());
-	}
-	
-	@Bean
-	public RedirectStrategy redirectStrategy () {
-		return new DefaultRedirectStrategy();
-	}
-	
-	@Bean
-	public ClassPathTldsLoader classPathTldsLoader () {
-		return new ClassPathTldsLoader();
-	}
-	
-	@Bean(name = "multipartResolver")
-	public CommonsMultipartResolver createMultipartResolver () {
-		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-		resolver.setDefaultEncoding("utf-8");
-		resolver.setMaxUploadSizePerFile(5242880);//5MB
-		return resolver;
-	}
+  @Autowired
+  private IService<Country, Long> countryService;
+  @Autowired
+  private Converter<List<CountryDTO>, List<Country>> countryConverter;
+
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+  }
+
+  @Bean
+  public FreeMarkerViewResolver freeMarkerViewResolver() {
+	FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
+	freeMarkerViewResolver.setContentType("text/html; charset=utf-8");
+	freeMarkerViewResolver.setCache(true);
+	freeMarkerViewResolver.setSuffix(".ftl");
+	freeMarkerViewResolver.setPrefix("");
+	return freeMarkerViewResolver;
+  }
+
+  @Bean
+  public FreeMarkerConfigurer freemarkerConfig() {
+	FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
+	freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/views/");
+	freeMarkerConfigurer.setDefaultEncoding("UTF-8");
+	return freeMarkerConfigurer;
+  }
+
+  @Bean
+  public List<CountryDTO> countryDTOs() {
+	List<Country> countries = countryService.readAll(DEFAULT_COUNTRY_PAGINATION_SIZE);
+	return countryConverter.convert(countries);
+  }
+
+  @Bean
+  public CookieLocaleResolver localeResolver() {
+	CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+	localeResolver.setCookieName("my-locale-cookie");
+	localeResolver.setDefaultLocale(Locale.ENGLISH);
+	localeResolver.setCookieMaxAge(3600);
+	return localeResolver;
+  }
+
+  @Bean
+  public MessageSource messageSource() {
+	ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+	messageSource.setBasenames("i18n/messages");
+	messageSource.setDefaultEncoding("UTF-8");
+	messageSource.setUseCodeAsDefaultMessage(true);
+	return messageSource;
+  }
+
+  @Bean
+  public LocaleChangeInterceptor localeInterceptor() {
+	LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+	interceptor.setParamName("lang");
+	return interceptor;
+  }
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+	registry.addInterceptor(localeInterceptor());
+  }
+
+  @Bean
+  public RedirectStrategy redirectStrategy() {
+	return new DefaultRedirectStrategy();
+  }
+
+  @Bean
+  public ClassPathTldsLoader classPathTldsLoader() {
+	return new ClassPathTldsLoader();
+  }
+
+  @Bean(name = "multipartResolver")
+  public CommonsMultipartResolver createMultipartResolver() {
+	CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+	resolver.setDefaultEncoding("utf-8");
+	resolver.setMaxUploadSizePerFile(5242880);//5MB
+	return resolver;
+  }
 }

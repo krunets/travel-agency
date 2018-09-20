@@ -23,32 +23,32 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class TourServiceTest {
-	@Mock
-	private TourRepository repository;
-	@InjectMocks
-	private TourService service;
-	
-	@Test
-	public void testReadAll () {
-		when(repository.readAll(Tour.class, DEFAULT_PAGINATION_SIZE)).thenReturn(new ArrayList<>());
-		
-		assertThat(service.readAll(DEFAULT_PAGINATION_SIZE), is(notNullValue()));
-	}
-	
-	@Test
-	public void testCreate () {
-		Tour tour = new Tour(123, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null);
-		
-		service.create(tour);
-		verify(repository, times(1)).create(tour);
-	}
-	
-	
-	@Test
-	public void testDelete () {
-		Tour tour = new Tour(1, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null);
-		
-		service.delete(tour);
-		verify(repository, times(1)).delete(tour);
-	}
+  @Mock
+  private TourRepository repository;
+  @InjectMocks
+  private TourService service;
+
+  @Test
+  public void testReadAll() {
+	when(repository.readAll(Tour.class, DEFAULT_PAGINATION_SIZE)).thenReturn(new ArrayList<>());
+
+	assertThat(service.readAll(DEFAULT_PAGINATION_SIZE), is(notNullValue()));
+  }
+
+  @Test
+  public void testCreate() {
+	Tour tour = new Tour(123, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null);
+
+	service.create(tour);
+	verify(repository, times(1)).create(tour);
+  }
+
+
+  @Test
+  public void testDelete() {
+	Tour tour = new Tour(1, "Photo1", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null);
+
+	service.delete(tour);
+	verify(repository, times(1)).delete(tour);
+  }
 }

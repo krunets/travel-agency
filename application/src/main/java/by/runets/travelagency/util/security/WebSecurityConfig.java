@@ -20,43 +20,43 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private UserDetailsService userDetailsService;
-	@Autowired
-	private SuccessUrlHandler successUrlHandler;
-	@Autowired
-	private EncodingFilter encodingFilter;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception {
-		auth
-				.userDetailsService(userDetailsService)
-				.passwordEncoder(passwordEncoder);
-	}
-	
-	@Override
-	protected void configure (HttpSecurity http) throws Exception {
-		http
-				.addFilterBefore(encodingFilter, ChannelProcessingFilter.class);
-		http
-				.csrf()
-				.ignoringAntMatchers("/tour/**")
-				.and()
-				.authorizeRequests()
-				.antMatchers("/admin/home", "/user/home", "/user/review/**").authenticated()
-				.antMatchers("/", "/tour*").permitAll()
-				.and()
-				.formLogin()
-				.loginPage("/login")
-				.successHandler(successUrlHandler)
-				.and()
-				.logout().deleteCookies("JSESSIONID")
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/")
-				.permitAll()
-				.and()
-				.rememberMe().key("uniqueAndSecret");
-	}
+  @Autowired
+  private UserDetailsService userDetailsService;
+  @Autowired
+  private SuccessUrlHandler successUrlHandler;
+  @Autowired
+  private EncodingFilter encodingFilter;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
+
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	auth
+		.userDetailsService(userDetailsService)
+		.passwordEncoder(passwordEncoder);
+  }
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+	http
+		.addFilterBefore(encodingFilter, ChannelProcessingFilter.class);
+	http
+		.csrf()
+		.ignoringAntMatchers("/tour/**")
+		.and()
+		.authorizeRequests()
+		.antMatchers("/admin/home", "/user/home", "/user/review/**").authenticated()
+		.antMatchers("/", "/tour*").permitAll()
+		.and()
+		.formLogin()
+		.loginPage("/login")
+		.successHandler(successUrlHandler)
+		.and()
+		.logout().deleteCookies("JSESSIONID")
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/")
+		.permitAll()
+		.and()
+		.rememberMe().key("uniqueAndSecret");
+  }
 }

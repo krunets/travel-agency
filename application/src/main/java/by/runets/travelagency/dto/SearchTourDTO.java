@@ -11,12 +11,12 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SearchTourDTO {
-	private static final String REGEX = "[0-9]+";
-	@NonNull
-	private String countryName;
-	@NonNull
-	private String startTourDate;
-	@NonNull
-	@Pattern(regexp = REGEX)
-	private long tourDuration;
+  private static final String REGEX = "[0-9]+";
+  @NonNull
+  private String countryName;
+  @NonNull
+  private String startTourDate;
+  @NonNull
+  @Pattern(regexp = REGEX)
+  private long tourDuration;
 }

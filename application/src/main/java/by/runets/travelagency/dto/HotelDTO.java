@@ -10,17 +10,17 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 public class HotelDTO {
-	private static final String HOTEL_NAME_REGEXP = "([A-Za-z-]{5,20})";
-	private static final String INTERNATIONAL_PHONE_REGEXP = "^\\+(?:[0-9] ?){6,14}[0-9]$";
-	@NotNull
-	private long id;
-	@NotNull
-	@Pattern(regexp = HOTEL_NAME_REGEXP)
-	private String name;
-	@NotNull
-	@Pattern(regexp = INTERNATIONAL_PHONE_REGEXP)
-	private String phone;
-	@NotNull
-	@Size(max = 5)
-	private int stars;
+  private static final String HOTEL_NAME_REGEXP = "([A-Za-z-]{5,20})";
+  private static final String INTERNATIONAL_PHONE_REGEXP = "^\\+(?:[0-9] ?){6,14}[0-9]$";
+  @NotNull
+  private long id;
+  @NotNull
+  @Pattern(regexp = HOTEL_NAME_REGEXP)
+  private String name;
+  @NotNull
+  @Pattern(regexp = INTERNATIONAL_PHONE_REGEXP)
+  private String phone;
+  @NotNull
+  @Size(max = 5)
+  private int stars;
 }

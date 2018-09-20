@@ -31,111 +31,111 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @ActiveProfiles(profiles = "development")
 @SqlGroup({
-		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
+	@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
 })
 public class TourServiceTest {
-	@Autowired
-	private ITourService tourService;
-	
-	@Test
-	public void testCreate () {
-		Tour expected =
-				new Tour(
-						12,
-						"Photo1",
-						LocalDate.parse("2018-07-17"),
-						Duration.ofDays(10),
-						"description1",
-						new BigDecimal(100),
-						TourType.ADVENTURE,
-						null,
-						null,null, null);
-		final long id = tourService.create(expected);
-		Tour actual = tourService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testReadAll () {
-		List<Tour> expected =
-				new ArrayList<>(
-						Arrays.asList(
-								new Tour(1, "photo/img1.png", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null),
-								new Tour(2, "photo/img2.png", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description2", new BigDecimal(200), TourType.ATOMIC, null, null, null, null),
-								new Tour(3, "photo/img3.png", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description3", new BigDecimal(300), TourType.BICYCLE, null, null, null, null),
-								new Tour(4, "photo/img4.png", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.CULTURAL, null, null, null, null),
-								new Tour(5, "photo/img5.png", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ECO, null, null, null, null)));
-		
-		List<Tour> actual = tourService.readAll(DEFAULT_PAGINATION_SIZE);
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testReadById () {
-		final long id = 1;
-		Tour expected =
-				new Tour(
-						1,
-						"photo/img1.png",
-						LocalDate.parse("2018-07-17"),
-						Duration.ofDays(10),
-						"description1",
-						new BigDecimal(100),
-						TourType.ADVENTURE,
-						null,
-						null, null, null);
-		Tour actual = tourService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test(expected = ResourceNotFoundException.class)
-	public void testDelete () {
-		final long id = 1;
-		Tour entityToDelete = tourService.read(id);
-		Assert.assertNotNull(entityToDelete);
-		
-		tourService.delete(entityToDelete);
-		
-		Tour actual = tourService.read(id);
-		Assert.assertNull(actual);
-	}
-	
-	@Test
-	public void testUpdate () {
-		final long id = 1;
-		Tour expected = tourService.read(id);
-		
-		expected.setPhoto("newPhoto");
-		expected.setDate(LocalDate.now());
-		
-		tourService.update(expected);
-		
-		Tour actual = tourService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testFindTourByCountryAndDateAndDuration () {
-		final String country = "FR";
-		final LocalDate startTourDate = LocalDate.of(2018, 7, 17);
-		final Duration tourDuration = Duration.ofDays(10);
-		
-		
-		List<Tour> expected = new ArrayList<>(Arrays.asList(new Tour(
-				1,
-				"photo/img1.png",
-				LocalDate.parse("2018-07-17"),
-				Duration.ofDays(10),
-				"description1",
-				new BigDecimal(100),
-				TourType.ADVENTURE,
-				null,
-				null, null, null)));
-		List<Tour> actual = tourService.findTourByCountryAndDateAndDuration(country, startTourDate, tourDuration);
-		System.out.println(actual);
-		Assert.assertEquals(expected, actual);
-	}
+  @Autowired
+  private ITourService tourService;
+
+  @Test
+  public void testCreate() {
+	Tour expected =
+		new Tour(
+			12,
+			"Photo1",
+			LocalDate.parse("2018-07-17"),
+			Duration.ofDays(10),
+			"description1",
+			new BigDecimal(100),
+			TourType.ADVENTURE,
+			null,
+			null, null, null);
+	final long id = tourService.create(expected);
+	Tour actual = tourService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testReadAll() {
+	List<Tour> expected =
+		new ArrayList<>(
+			Arrays.asList(
+				new Tour(1, "photo/img1.png", LocalDate.parse("2018-07-17"), Duration.ofDays(10), "description1", new BigDecimal(100), TourType.ADVENTURE, null, null, null, null),
+				new Tour(2, "photo/img2.png", LocalDate.parse("2018-07-20"), Duration.ofDays(20), "description2", new BigDecimal(200), TourType.ATOMIC, null, null, null, null),
+				new Tour(3, "photo/img3.png", LocalDate.parse("2018-07-25"), Duration.ofDays(30), "description3", new BigDecimal(300), TourType.BICYCLE, null, null, null, null),
+				new Tour(4, "photo/img4.png", LocalDate.parse("2018-07-30"), Duration.ofDays(40), "description4", new BigDecimal(400), TourType.CULTURAL, null, null, null, null),
+				new Tour(5, "photo/img5.png", LocalDate.parse("2018-08-05"), Duration.ofDays(50), "description5", new BigDecimal(500), TourType.ECO, null, null, null, null)));
+
+	List<Tour> actual = tourService.readAll(DEFAULT_PAGINATION_SIZE);
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testReadById() {
+	final long id = 1;
+	Tour expected =
+		new Tour(
+			1,
+			"photo/img1.png",
+			LocalDate.parse("2018-07-17"),
+			Duration.ofDays(10),
+			"description1",
+			new BigDecimal(100),
+			TourType.ADVENTURE,
+			null,
+			null, null, null);
+	Tour actual = tourService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test(expected = ResourceNotFoundException.class)
+  public void testDelete() {
+	final long id = 1;
+	Tour entityToDelete = tourService.read(id);
+	Assert.assertNotNull(entityToDelete);
+
+	tourService.delete(entityToDelete);
+
+	Tour actual = tourService.read(id);
+	Assert.assertNull(actual);
+  }
+
+  @Test
+  public void testUpdate() {
+	final long id = 1;
+	Tour expected = tourService.read(id);
+
+	expected.setPhoto("newPhoto");
+	expected.setDate(LocalDate.now());
+
+	tourService.update(expected);
+
+	Tour actual = tourService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testFindTourByCountryAndDateAndDuration() {
+	final String country = "FR";
+	final LocalDate startTourDate = LocalDate.of(2018, 7, 17);
+	final Duration tourDuration = Duration.ofDays(10);
+
+
+	List<Tour> expected = new ArrayList<>(Arrays.asList(new Tour(
+		1,
+		"photo/img1.png",
+		LocalDate.parse("2018-07-17"),
+		Duration.ofDays(10),
+		"description1",
+		new BigDecimal(100),
+		TourType.ADVENTURE,
+		null,
+		null, null, null)));
+	List<Tour> actual = tourService.findTourByCountryAndDateAndDuration(country, startTourDate, tourDuration);
+	System.out.println(actual);
+	Assert.assertEquals(expected, actual);
+  }
 }

@@ -28,81 +28,81 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 @ActiveProfiles(profiles = "development")
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @SqlGroup({
-		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
+	@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
 })
 public class HotelServiceTest {
-	@Autowired
-	private IHotelService hotelService;
-	
-	@Test
-	public void testCreate () {
-		Hotel expected =
-				new Hotel(10, "testName", "+375 29 123 123 123", 5, 0.0, 0.0);
-		final long id = hotelService.create(expected);
-		Hotel actual = hotelService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testReadById () {
-		final long id = 1;
-		Hotel expected =
-				new Hotel(1, "Marriot", "123 23 23", 5, 0.0, 0.0);
-		Hotel actual = hotelService.read(id);
-		Assert.assertEquals(actual, expected);
-	}
-	
-	@Test
-	public void testReadAll () {
-		List<Hotel> expected =
-				new ArrayList<>(
-						Arrays.asList(
-								
-								new Hotel(1, "Marriot", "123 23 23", 5, 0.0, 0.0),
-								
-								new Hotel(
-										2, "DoubleTree by Hilton", "232 12 12", 5, 0.0, 0.0),
-								
-								new Hotel(
-										3, "Prezident-Otel", "111 11 11", 4, 0.0, 0.0),
-								
-								new Hotel(4, "Aqua-Minsk", "123 11 11", 2, 0.0, 0.0),
-								
-								new Hotel(
-										5,
-										"Trump International Hotel Washington DC",
-										"101 10 01",
-										5, 0.0, 0.0)));
-		List<Hotel> actual = hotelService.readAll(DEFAULT_PAGINATION_SIZE);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test(expected = ResourceNotFoundException.class)
-	public void testDelete () {
-		final long id = 1;
-		Hotel expected = hotelService.read(id);
-		Assert.assertNotNull(expected);
-		hotelService.delete(expected);
-		
-		Hotel actual = hotelService.read(id);
-		Assert.assertNull(actual);
-	}
-	
-	@Test
-	public void testUpdate () {
-		final long id = 1;
-		Hotel expected = hotelService.read(id);
-		
-		expected.setName("newName");
-		expected.setStars(10);
-		expected.setPhone("111 111 11");
-		
-		hotelService.update(expected);
-		
-		Hotel actual = hotelService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
+  @Autowired
+  private IHotelService hotelService;
+
+  @Test
+  public void testCreate() {
+	Hotel expected =
+		new Hotel(10, "testName", "+375 29 123 123 123", 5, 53.932717, 27.511248);
+	final long id = hotelService.create(expected);
+	Hotel actual = hotelService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testReadById() {
+	final long id = 1;
+	Hotel expected =
+		new Hotel(1, "Marriot", "123 23 23", 5, 53.932717, 27.511248);
+	Hotel actual = hotelService.read(id);
+	Assert.assertEquals(actual, expected);
+  }
+
+  @Test
+  public void testReadAll() {
+	List<Hotel> expected =
+		new ArrayList<>(
+			Arrays.asList(
+
+				new Hotel(1, "Marriot", "123 23 23", 5, 53.932717, 27.511248),
+
+				new Hotel(
+					2, "DoubleTree by Hilton", "232 12 12", 5, 53.932717, 27.511248),
+
+				new Hotel(
+					3, "Prezident-Otel", "111 11 11", 4, 53.932717, 27.511248),
+
+				new Hotel(4, "Aqua-Minsk", "123 11 11", 2, 53.932717, 27.511248),
+
+				new Hotel(
+					5,
+					"Trump International Hotel Washington DC",
+					"101 10 01",
+					5, 53.932717, 27.511248)));
+	List<Hotel> actual = hotelService.readAll(DEFAULT_PAGINATION_SIZE);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test(expected = ResourceNotFoundException.class)
+  public void testDelete() {
+	final long id = 1;
+	Hotel expected = hotelService.read(id);
+	Assert.assertNotNull(expected);
+	hotelService.delete(expected);
+
+	Hotel actual = hotelService.read(id);
+	Assert.assertNull(actual);
+  }
+
+  @Test
+  public void testUpdate() {
+	final long id = 1;
+	Hotel expected = hotelService.read(id);
+
+	expected.setName("newName");
+	expected.setStars(10);
+	expected.setPhone("111 111 11");
+
+	hotelService.update(expected);
+
+	Hotel actual = hotelService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
 }

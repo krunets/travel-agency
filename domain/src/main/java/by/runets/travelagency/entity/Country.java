@@ -26,32 +26,32 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
 @ToString(exclude = {"tours"})
 @EqualsAndHashCode(exclude = {"tours"})
 @NamedQueries({
-		@NamedQuery(name = FIND_COUNTRY_BY_NAME, query = FIND_COUNTRY_BY_NAME_NAMED_QUERY),
-		@NamedQuery(name = COUNT_COUNTRY, query = COUNT_COUNTRY_NAMED_QUERY)
+	@NamedQuery(name = FIND_COUNTRY_BY_NAME, query = FIND_COUNTRY_BY_NAME_NAMED_QUERY),
+	@NamedQuery(name = COUNT_COUNTRY, query = COUNT_COUNTRY_NAMED_QUERY)
 })
 public class Country {
-	@Id
-	@Column(name = "c_id")
-	@Min(value = 0)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_generator")
-	@SequenceGenerator(
-			name = "country_generator",
-			sequenceName = "country_sequence",
-			allocationSize = 1
-	)
-	@NonNull
-	private long id;
-	/**
-	 * This is a field which represents a Country short name by ISO_3166.
-	 */
-	@NonNull
-	@Size(min = 2, max = 2)
-	@Column(name = "c_name")
-	private String name;
-	
-	/**
-	 * This is a field which represents a list of tours in exist country.
-	 */
-	@ManyToMany(mappedBy = "countries")
-	private List<Tour> tours = new ArrayList<>();
+  @Id
+  @Column(name = "c_id")
+  @Min(value = 0)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_generator")
+  @SequenceGenerator(
+	  name = "country_generator",
+	  sequenceName = "country_sequence",
+	  allocationSize = 1
+  )
+  @NonNull
+  private long id;
+  /**
+   * This is a field which represents a Country short name by ISO_3166.
+   */
+  @NonNull
+  @Size(min = 2, max = 2)
+  @Column(name = "c_name")
+  private String name;
+
+  /**
+   * This is a field which represents a list of tours in exist country.
+   */
+  @ManyToMany(mappedBy = "countries")
+  private List<Tour> tours = new ArrayList<>();
 }

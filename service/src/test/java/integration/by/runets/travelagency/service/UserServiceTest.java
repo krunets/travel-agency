@@ -30,96 +30,96 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @ActiveProfiles(profiles = "development")
 @SqlGroup({
-		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
+	@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
 })
 public class UserServiceTest {
-	private static final String NAMED_QUERY = "FIND_BY_LOGIN";
-	private static final String FIELD = "login";
-	
-	@Autowired
-	private IUserService userService;
-	
-	@Test
-	public void testCreate () {
-		User expected = new User(10, "testLogin", "testPassword", Role.ADMIN);
-		final long id = userService.create(expected);
-		User actual = userService.read(id);
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testReadById () {
-		final long id = 1;
-		User expected = new User(1, "root", "root", Role.ADMIN);
-		User actual = userService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testReadAll () {
-		List<User> expected =
-				new ArrayList<>(
-						Arrays.asList(
-								new User(1, "root", "root", Role.ADMIN),
-								new User(2, "admin", "admin", Role.ADMIN),
-								new User(3, "traveler1", "traveler1", Role.MEMBER)));
-		List<User> actual = userService.readAll(DEFAULT_PAGINATION_SIZE);
-		log.error(actual + "");
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test(expected = ResourceNotFoundException.class)
-	public void testDelete () {
-		final long id = 1;
-		User expected = userService.read(id);
-		Assert.assertNotNull(expected);
-		userService.delete(expected);
-		User actual = userService.read(id);
-		
-		Assert.assertNull(actual);
-	}
-	
-	@Test
-	public void testUpdate () {
-		final long id = 1;
-		User expected = userService.read(id);
-		
-		expected.setLogin("newTestLogin");
-		expected.setPassword("newTestPassword");
-		
-		userService.update(expected);
-		
-		User actual = userService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testRegisterExistUser () {
-		User user = new User();
-		user.setLogin("admin");
-		
-		Assert.assertFalse(userService.registerUserAccount(user));
-	}
-	
-	
-	@Test
-	public void testRegisterNotExistUser () {
-		User expected = new User(10, "testLogin", "testPassword", Role.MEMBER);
-		Assert.assertTrue(userService.registerUserAccount(expected));
-		
-		User actual = userService.readAllByField(NAMED_QUERY, FIELD, "testLogin", DEFAULT_PAGE, DEFAULT_PAGINATION_SIZE).get(0);
-		Assert.assertEquals(actual, expected);
-	}
-	
-	@Test
-	public void testReadUserByRole () {
-		List<User> expected =
-				new ArrayList<>(
-						Arrays.asList(
-								new User(3, "traveler1", "traveler1", Role.MEMBER)));
-		List<User> actual = userService.readUserByRole();
-		Assert.assertEquals(actual, expected);
-	}
+  private static final String NAMED_QUERY = "FIND_BY_LOGIN";
+  private static final String FIELD = "login";
+
+  @Autowired
+  private IUserService userService;
+
+  @Test
+  public void testCreate() {
+	User expected = new User(10, "testLogin", "testPassword", Role.ADMIN);
+	final long id = userService.create(expected);
+	User actual = userService.read(id);
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testReadById() {
+	final long id = 1;
+	User expected = new User(1, "root", "root", Role.ADMIN);
+	User actual = userService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testReadAll() {
+	List<User> expected =
+		new ArrayList<>(
+			Arrays.asList(
+				new User(1, "root", "root", Role.ADMIN),
+				new User(2, "admin", "admin", Role.ADMIN),
+				new User(3, "traveler1", "traveler1", Role.MEMBER)));
+	List<User> actual = userService.readAll(DEFAULT_PAGINATION_SIZE);
+	log.error(actual + "");
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test(expected = ResourceNotFoundException.class)
+  public void testDelete() {
+	final long id = 1;
+	User expected = userService.read(id);
+	Assert.assertNotNull(expected);
+	userService.delete(expected);
+	User actual = userService.read(id);
+
+	Assert.assertNull(actual);
+  }
+
+  @Test
+  public void testUpdate() {
+	final long id = 1;
+	User expected = userService.read(id);
+
+	expected.setLogin("newTestLogin");
+	expected.setPassword("newTestPassword");
+
+	userService.update(expected);
+
+	User actual = userService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testRegisterExistUser() {
+	User user = new User();
+	user.setLogin("admin");
+
+	Assert.assertFalse(userService.registerUserAccount(user));
+  }
+
+
+  @Test
+  public void testRegisterNotExistUser() {
+	User expected = new User(10, "testLogin", "testPassword", Role.MEMBER);
+	Assert.assertTrue(userService.registerUserAccount(expected));
+
+	User actual = userService.readAllByField(NAMED_QUERY, FIELD, "testLogin", DEFAULT_PAGE, DEFAULT_PAGINATION_SIZE).get(0);
+	Assert.assertEquals(actual, expected);
+  }
+
+  @Test
+  public void testReadUserByRole() {
+	List<User> expected =
+		new ArrayList<>(
+			Arrays.asList(
+				new User(3, "traveler1", "traveler1", Role.MEMBER)));
+	List<User> actual = userService.readUserByRole();
+	Assert.assertEquals(actual, expected);
+  }
 }

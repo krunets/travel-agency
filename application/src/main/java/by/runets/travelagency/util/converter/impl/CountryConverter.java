@@ -11,19 +11,19 @@ import java.util.Locale;
 
 @Service
 public class CountryConverter implements Converter<List<CountryDTO>, List<Country>> {
-	@Override
-	public List<CountryDTO> convert (List<Country> countryList) {
-		List<CountryDTO> countries = new ArrayList<>();
-		
-		for (Country country : countryList) {
-			long id = country.getId();
-			String code = country.getName();
-			Locale locale = new Locale("", code);
-			String name = locale.getDisplayCountry();
-			
-			countries.add(new CountryDTO(id, code, name));
-		}
-		
-		return countries;
+  @Override
+  public List<CountryDTO> convert(List<Country> countryList) {
+	List<CountryDTO> countries = new ArrayList<>();
+
+	for (Country country : countryList) {
+	  long id = country.getId();
+	  String code = country.getName();
+	  Locale locale = new Locale("", code);
+	  String name = locale.getDisplayCountry();
+
+	  countries.add(new CountryDTO(id, code, name));
 	}
+
+	return countries;
+  }
 }

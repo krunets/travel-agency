@@ -29,61 +29,61 @@ import static integration.by.runets.travelagency.config.DevelopmentDatabaseBeanC
 @ActiveProfiles(profiles = "development")
 @ContextConfiguration(classes = DevelopmentDatabaseBeanConfig.class)
 @SqlGroup({
-		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
+	@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:db/init-data.sql"})
 })
 public class CountryServiceTest {
-	@Autowired
-	private ICountryService countryService;
-	
-	@Test
-	public void testCreate () {
-		Country expected = new Country(1, "BY", null);
-		final long id = countryService.create(expected);
-		Country actual = countryService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void  testReadAll () {
-		List<Country> actual = countryService.readAll(DEFAULT_PAGINATION_SIZE);
-		
-		List<Country> expected =
-				new ArrayList<>(
-						Arrays.asList(
-								new Country(1, "BY", null),
-								new Country(2, "US", null),
-								new Country(3, "FR", null),
-								new Country(4, "IT", null)));
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testReadById () {
-		final long id = 1;
-		Country expected = new Country(1, "BY", null);
-		Country actual = countryService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test
-	public void testUpdate () {
-		final long id = 1;
-		Country expected = new Country(id, "newName", null);
-		countryService.update(expected);
-		Country actual = countryService.read(id);
-		
-		Assert.assertEquals(expected, actual);
-	}
-	
-	@Test(expected = ResourceNotFoundException.class)
-	public void testDelete () {
-		final long id = 1;
-		Country expected = new Country(id, "", null);
-		countryService.delete(expected);
-		
-		Assert.assertNull(countryService.read(id));
-	}
+  @Autowired
+  private ICountryService countryService;
+
+  @Test
+  public void testCreate() {
+	Country expected = new Country(1, "BY", null);
+	final long id = countryService.create(expected);
+	Country actual = countryService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testReadAll() {
+	List<Country> actual = countryService.readAll(DEFAULT_PAGINATION_SIZE);
+
+	List<Country> expected =
+		new ArrayList<>(
+			Arrays.asList(
+				new Country(1, "BY", null),
+				new Country(2, "US", null),
+				new Country(3, "FR", null),
+				new Country(4, "IT", null)));
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testReadById() {
+	final long id = 1;
+	Country expected = new Country(1, "BY", null);
+	Country actual = countryService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testUpdate() {
+	final long id = 1;
+	Country expected = new Country(id, "newName", null);
+	countryService.update(expected);
+	Country actual = countryService.read(id);
+
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test(expected = ResourceNotFoundException.class)
+  public void testDelete() {
+	final long id = 1;
+	Country expected = new Country(id, "", null);
+	countryService.delete(expected);
+
+	Assert.assertNull(countryService.read(id));
+  }
 }

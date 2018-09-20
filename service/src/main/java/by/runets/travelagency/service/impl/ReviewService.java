@@ -17,25 +17,25 @@ import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_US
 
 @Service
 public class ReviewService extends AbstractService<Review> implements IReviewService {
-	@Autowired
-	private IDatabaseRepository<Review, Long> abstractRepository;
-	@Autowired
-	private IUserService userService;
-	@Autowired
-	private ITourService tourService;
-	
-	public ReviewService (Class<Review> classType, IDatabaseRepository<Review, Long> abstractRepository) {
-		super(classType, abstractRepository);
-		this.abstractRepository = abstractRepository;
-	}
-	
-	@Override
-	@Transactional
-	public Long createReviewByUsernameAndTourId (String username, Long tourId, Review review) {
-		User user = userService.readAllByField(FIND_BY_LOGIN, LOGIN_FIELD, username, 0, DEFAULT_USER_PAGINATION).get(0);
-		Tour tour = tourService.read(tourId);
-		review.setUser(user);
-		review.setTour(tour);
-		return abstractRepository.create(review);
-	}
+  @Autowired
+  private IDatabaseRepository<Review, Long> abstractRepository;
+  @Autowired
+  private IUserService userService;
+  @Autowired
+  private ITourService tourService;
+
+  public ReviewService(Class<Review> classType, IDatabaseRepository<Review, Long> abstractRepository) {
+	super(classType, abstractRepository);
+	this.abstractRepository = abstractRepository;
+  }
+
+  @Override
+  @Transactional
+  public Long createReviewByUsernameAndTourId(String username, Long tourId, Review review) {
+	User user = userService.readAllByField(FIND_BY_LOGIN, LOGIN_FIELD, username, 0, DEFAULT_USER_PAGINATION).get(0);
+	Tour tour = tourService.read(tourId);
+	review.setUser(user);
+	review.setTour(tour);
+	return abstractRepository.create(review);
+  }
 }

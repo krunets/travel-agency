@@ -200,5 +200,12 @@ a {
 
 .hotel-search-block {
     padding: 0 20px 0 20px;
+}
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.custom-modal {
+    width:800px;
 }

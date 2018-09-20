@@ -18,67 +18,67 @@ import java.util.stream.Collectors;
 @Repository
 @AllArgsConstructor
 public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Long> {
-	private static final String READ_ALL_QUERY = "SELECT * FROM ";
-	
-	@Autowired
-	private final SessionFactory sessionFactory;
-	
-	@Loggable
-	@Override
-	public Long create (T entity) {
-		return (Long) sessionFactory.getCurrentSession().save(entity);
+  private static final String READ_ALL_QUERY = "SELECT * FROM ";
+
+  @Autowired
+  private final SessionFactory sessionFactory;
+
+  @Loggable
+  @Override
+  public Long create(T entity) {
+	return (Long) sessionFactory.getCurrentSession().save(entity);
+  }
+
+  @Override
+  public List<Optional<T>> readAll(final Class<T> classType, final int paginationSize) {
+	Table table = classType.getAnnotation(Table.class);
+	String fullTableNameWithSchema = table.schema() + "." + table.name();
+	Session currentSession = sessionFactory.getCurrentSession();
+	Query query = currentSession.createNativeQuery(READ_ALL_QUERY + fullTableNameWithSchema, classType);
+	query.setMaxResults(paginationSize);
+	List<T> queryResultList = query.getResultList();
+	return queryResultList.stream()
+		.map(Optional::ofNullable)
+		.collect(Collectors.toList());
+  }
+
+  @Loggable
+  @Override
+  public Optional<T> read(final Class<T> classType, final Long id) {
+	Session session = sessionFactory.getCurrentSession();
+	return Optional.ofNullable(session.get(classType, id));
+  }
+
+  @Loggable
+  @Override
+  public void update(final T entity) {
+	sessionFactory.getCurrentSession().saveOrUpdate(entity);
+  }
+
+  @Loggable
+  @Override
+  public void delete(final T entity) {
+	sessionFactory.getCurrentSession().delete(entity);
+  }
+
+  @Override
+  public Long count(final String namedQuery) {
+	return (Long) sessionFactory.getCurrentSession().getNamedQuery(namedQuery).getSingleResult();
+  }
+
+  @Loggable
+  @Override
+  public <V> List<Optional<T>> readByNameQuery(String namedQuery, final String field, final V value, final int page, final int limit) {
+	Session session = sessionFactory.getCurrentSession();
+	Query query = session.getNamedQuery(namedQuery);
+	if (!field.isEmpty()) {
+	  query.setParameter(field, value);
 	}
-	
-	@Override
-	public List<Optional<T>> readAll (final Class<T> classType, final int paginationSize) {
-		Table table = classType.getAnnotation(Table.class);
-		String fullTableNameWithSchema = table.schema() + "." + table.name();
-		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = currentSession.createNativeQuery(READ_ALL_QUERY + fullTableNameWithSchema, classType);
-		query.setMaxResults(paginationSize);
-		List<T> queryResultList = query.getResultList();
-		return queryResultList.stream()
-				.map(Optional::ofNullable)
-				.collect(Collectors.toList());
-	}
-	
-	@Loggable
-	@Override
-	public Optional<T> read (final Class<T> classType, final Long id) {
-		Session session = sessionFactory.getCurrentSession();
-		return Optional.ofNullable(session.get(classType, id));
-	}
-	
-	@Loggable
-	@Override
-	public void update (final T entity) {
-		sessionFactory.getCurrentSession().saveOrUpdate(entity);
-	}
-	
-	@Loggable
-	@Override
-	public void delete (final T entity) {
-		sessionFactory.getCurrentSession().delete(entity);
-	}
-	
-	@Override
-	public Long count (final String namedQuery) {
-		return (Long) sessionFactory.getCurrentSession().getNamedQuery(namedQuery).getSingleResult();
-	}
-	
-	@Loggable
-	@Override
-	public <V> List<Optional<T>> readByNameQuery (String namedQuery, final String field, final V value, final int page, final int limit) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.getNamedQuery(namedQuery);
-		if (!field.isEmpty()) {
-			query.setParameter(field, value);
-		}
-		PaginationResult<T> paginationResult = new PaginationResult<>(query, page, limit);
-		return paginationResult
-				.getResultList()
-				.stream()
-				.map(Optional::ofNullable)
-				.collect(Collectors.toList());
-	}
+	PaginationResult<T> paginationResult = new PaginationResult<>(query, page, limit);
+	return paginationResult
+		.getResultList()
+		.stream()
+		.map(Optional::ofNullable)
+		.collect(Collectors.toList());
+  }
 }

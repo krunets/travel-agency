@@ -14,29 +14,33 @@
 <#include "include/admin_sidebar.ftl">
 <div class="sidebar-container">
  <#if getUsers>
-      <table class="table table-striped">
-          <thead>
-          <tr>
-              <th scope="col">Login</th>
-              <th scope="col">Password</th>
-              <th scope="col">Role</th>
-              <th scope="col">Action</th>
-              <th scope="col">Action</th>
-          </tr>
-          </thead>
-          <tbody>
+     <table class="table table-striped">
+         <thead>
+         <tr>
+             <th scope="col">Login</th>
+             <th scope="col">Password</th>
+             <th scope="col">Role</th>
+             <th scope="col">Action</th>
+             <th scope="col">Action</th>
+         </tr>
+         </thead>
+         <tbody>
               <#list users as user>
               <tr>
                   <td>${user.login}</td>
                   <td>${user.password}</td>
                   <td>${user.role}</td>
-                  <td><button>Edit</button></td>
-                  <td><button>Delete</button></td>
+                  <td>
+                      <button>Edit</button>
+                  </td>
+                  <td>
+                      <button>Delete</button>
+                  </td>
               </tr>
               </#list>
-          </tbody>
-      </table>
-  </#if>
+         </tbody>
+     </table>
+ </#if>
 </div>
 <#include "include/footer.ftl">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -15,19 +15,19 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TourDTO {
-	private long id;
-	private String photo;
-	@NotNull
-	private String date;
-	@NotNull
-	private long duration;
-	@NotNull
-	@Size(min = 10, max = 256)
-	private String description;
-	@NotNull
-	private long cost;
-	@NotNull
-	private String tourType;
-	@NotNull
-	private String countryName;
+  private long id;
+  private String photo;
+  @NotNull
+  private String date;
+  @NotNull
+  private long duration;
+  @NotNull
+  @Size(min = 10, max = 256)
+  private String description;
+  @NotNull
+  private long cost;
+  @NotNull
+  private String tourType;
+  @NotNull
+  private String countryName;
 }

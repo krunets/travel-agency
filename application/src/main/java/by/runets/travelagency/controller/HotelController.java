@@ -13,30 +13,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_HOTEL;
 import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_TOUR;
 
 
 @Controller
 public class HotelController {
-	@Autowired
-	private IHotelService hotelService;
-	
-	@GetMapping("/hotel/all")
-	public String hotels (@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-												@RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
-												Model model) {
-		List<Hotel> hotels = hotelService.readAllByField(NamedQueryConstant.FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, page, limit);
-		long pageAmount = (long) Math.ceil((double) hotelService.count(COUNT_TOUR) / limit);
-		
-		PaginationDTO<Hotel> paginationDTO = new PaginationDTO<>();
-		paginationDTO.setData(hotels);
-		paginationDTO.setPage(page);
-		paginationDTO.setLimit(limit);
-		paginationDTO.setPageAmount(pageAmount);
-		
-		model.addAttribute("hotelPaginationDTO", paginationDTO);
-		
-		return "hotelpage";
-	}
-	
+  @Autowired
+  private IHotelService hotelService;
+
+  @GetMapping("/hotel/all")
+  public String hotels(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+					   @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
+					   Model model) {
+	List<Hotel> hotels = hotelService.readAllByField(NamedQueryConstant.FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, page, limit);
+	long pageAmount = (long) Math.ceil((double) hotelService.count(COUNT_HOTEL) / limit);
+
+	PaginationDTO<Hotel> paginationDTO = new PaginationDTO<>();
+	paginationDTO.setData(hotels);
+	paginationDTO.setPage(page);
+	paginationDTO.setLimit(limit);
+	paginationDTO.setPageAmount(pageAmount);
+
+	model.addAttribute("hotelPaginationDTO", paginationDTO);
+
+	return "hotelpage";
+  }
+
 }

@@ -24,29 +24,29 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_REVI
 @ToString(exclude = {"user", "tour"})
 @EqualsAndHashCode(exclude = {"user", "tour"})
 @NamedQueries(
-		{
-				@NamedQuery(name = COUNT_REVIEW, query = COUNT_REVIEW_NAMED_QUERY)
-		}
+	{
+		@NamedQuery(name = COUNT_REVIEW, query = COUNT_REVIEW_NAMED_QUERY)
+	}
 )
 public class Review {
-	@Id
-	@NonNull
-	@Column(name = "r_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
-	/**
-	 * This is a field which represents a content of review.
-	 */
-	@NotNull
-	private String content;
-	/**
-	 * This is a field which represents a user who left feedback about tour.
-	 */
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tour")
-	private Tour tour;
+  @Id
+  @NonNull
+  @Column(name = "r_id")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  private long id;
+  /**
+   * This is a field which represents a content of review.
+   */
+  @NotNull
+  private String content;
+  /**
+   * This is a field which represents a user who left feedback about tour.
+   */
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User user;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "tour")
+  private Tour tour;
 }
