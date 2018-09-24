@@ -17,6 +17,7 @@ $(document).ready(function () {
         $("form[name='pagination']").submit();
     })
 });
+
 $('#show-comments-button').click(function () {
     $('.comments-list').toggleClass('none');
     if ($('#show-comments-button').val() == "Show comments") {
@@ -25,7 +26,6 @@ $('#show-comments-button').click(function () {
         $('#show-comments-button').val("Show comments");
     }
 });
-
 
 $('.edit-modal').click(function () {
     var tourPhoto = '';

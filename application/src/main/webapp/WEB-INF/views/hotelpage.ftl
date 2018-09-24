@@ -10,11 +10,13 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/uui/css/lib/components/datepicker3.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
 <#include "include/header.ftl">
 <div class="col-md-12">
-    <#include "include/map_modal.ftl">
+    <#include "include/modal_map.ftl">
 </div>
 <div class="row">
     <div class="col-md-12">

@@ -72,6 +72,7 @@ $('button[data-toggle=modal]').click(function () {
 $("input[placeholder]").each(function () {
     $(this).attr('size', $(this).attr('placeholder').length);
 });
+
 $('.custom-datepicker').uui_datepicker({todayHighlight: true});
 
 $(document).ready(function () {
@@ -84,3 +85,4 @@ $(document).ready(function () {
         $("form[name='pagination']").submit();
     })
 });
+

@@ -118,8 +118,8 @@
                                 </button>
                             </form>
                         </td>
-                        <#include "include/tour_add_modal.ftl">
-                        <#include "include/tour_edit_modal.ftl">
+                        <#include "include/modal_tour_add.ftl">
+                        <#include "include/modal_tour_edit.ftl">
                     </@security.authorize>
                 </tr>
                 </#list>
