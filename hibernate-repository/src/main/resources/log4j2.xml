@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Properties>
+        <Property name="LOG_FILE_PATH">D:\apache-tomcat-8.5.33\logs</Property>
+        <Property name="PATTERN_TOMCAT">%d{dd-MMM-yyyy HH:mm:ss.SSS} %-5p [%t] %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN_TOMCAT}"/>
+        </Console>
+
+        <RollingFile name="daily-file" fileName="${LOG_FILE_PATH}\global-log.log"
+                     filePattern="${LOG_FILE_PATH}/global-log-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${PATTERN_TOMCAT}"/>
+            <TimeBasedTriggeringPolicy/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.log4j.xml" level="info"/>
+        <Root level="debug">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

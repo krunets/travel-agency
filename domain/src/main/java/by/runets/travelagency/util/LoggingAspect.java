@@ -1,6 +1,6 @@
 package by.runets.travelagency.util;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
-@Slf4j
+@Log4j2
 @Aspect
 @Component
 public class LoggingAspect {
