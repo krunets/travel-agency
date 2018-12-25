@@ -25,6 +25,14 @@ CREATE TABLE travel_agency.review
   tour BIGINT
 );
 
+CREATE TABLE travel_agency.room
+(
+  room_id BIGINT PRIMARY KEY auto_increment NOT NULL,
+  beds INTEGER,
+  hotel BIGINT,
+  user_id BIGINT
+);
+
 CREATE TABLE travel_agency.tour
 (
   t_id BIGINT PRIMARY KEY auto_increment NOT NULL,
@@ -41,11 +49,11 @@ CREATE TABLE travel_agency.tour_m2m_country
   c_id BIGINT NOT NULL,
   CONSTRAINT tour_m2m_country_pk PRIMARY KEY (t_id, c_id)
 );
-CREATE TABLE travel_agency.tour_m2m_user
+CREATE TABLE travel_agency.hotel_m2m_user
 (
-  t_id BIGINT NOT NULL,
+  h_id BIGINT NOT NULL,
   u_id BIGINT NOT NULL,
-  CONSTRAINT tour_m2m_user_pk PRIMARY KEY (t_id, u_id)
+  CONSTRAINT tour_m2m_user_pk PRIMARY KEY (h_id, u_id)
 );
 CREATE TABLE travel_agency.tour_type
 (
@@ -60,14 +68,20 @@ CREATE TABLE travel_agency.user
   role  varchar(255) NOT NULL,
   photo varchar(255),
 );
+
 ALTER TABLE travel_agency.hotel ADD FOREIGN KEY (tour) REFERENCES travel_agency.tour (t_id);
 ALTER TABLE travel_agency.review ADD FOREIGN KEY (user_id) REFERENCES travel_agency.user (u_id);
 ALTER TABLE travel_agency.review ADD FOREIGN KEY (tour) REFERENCES tour (t_id);
 ALTER TABLE travel_agency.tour ADD FOREIGN KEY (tour_type) REFERENCES travel_agency.tour_type (t_id);
+
+ALTER TABLE travel_agency.room ADD FOREIGN KEY (hotel) REFERENCES travel_agency.hotel (h_id);
+ALTER TABLE travel_agency.room ADD FOREIGN KEY (user_id) REFERENCES travel_agency.user (u_id);
+
 ALTER TABLE travel_agency.tour_m2m_country ADD FOREIGN KEY (t_id) REFERENCES travel_agency.tour (t_id);
 ALTER TABLE travel_agency.tour_m2m_country ADD FOREIGN KEY (c_id) REFERENCES travel_agency.country (c_id);
-ALTER TABLE travel_agency.tour_m2m_user ADD FOREIGN KEY (t_id) REFERENCES travel_agency.tour (t_id);
-ALTER TABLE travel_agency.tour_m2m_user ADD FOREIGN KEY (u_id) REFERENCES travel_agency.user (u_id);
+
+ALTER TABLE travel_agency.hotel_m2m_user ADD FOREIGN KEY (h_id) REFERENCES travel_agency.hotel (h_id);
+ALTER TABLE travel_agency.hotel_m2m_user ADD FOREIGN KEY (u_id) REFERENCES travel_agency.user (u_id);
 
 CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE COUNTRY_SEQUENCE START WITH 1 INCREMENT BY 1;

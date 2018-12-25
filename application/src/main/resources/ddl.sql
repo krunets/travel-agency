@@ -1,67 +1,211 @@
-CREATE TABLE country
+create table if not exists travel_agency.country
 (
-    c_id BIGINT PRIMARY KEY NOT NULL,
-    c_name VARCHAR(2) NOT NULL
-);
-CREATE TABLE hotel
+	c_id bigint not null
+		constraint country_pkey
+			primary key,
+	c_name varchar(2) not null
+)
+;
+
+create unique index if not exists country_c_name_uindex
+	on travel_agency.country (c_name)
+;
+
+create table if not exists travel_agency.tour
 (
-    h_id BIGINT PRIMARY KEY NOT NULL,
-    h_name TEXT NOT NULL,
-    h_phone TEXT NOT NULL,
-    h_stars INTEGER NOT NULL,
-    tour BIGINT,
-    latitude DOUBLE PRECISION,
-    longitude DOUBLE PRECISION
-);
-CREATE TABLE review
+	t_id bigint default nextval('travel_agency.tour_sequence'::regclass) not null
+		constraint tour_pkey
+			primary key,
+	photo text,
+	date date not null,
+	description text,
+	cost numeric,
+	tour_type integer not null,
+	duration bigint not null
+)
+;
+
+create table if not exists travel_agency.hotel
 (
-    r_id BIGINT PRIMARY KEY NOT NULL,
-    content TEXT NOT NULL,
-    user_id BIGINT,
-    tour BIGINT NOT NULL
-);
-CREATE TABLE tour
+	h_id bigint default nextval('travel_agency.hotel_sequence'::regclass) not null
+		constraint hotel_pkey
+			primary key,
+	h_name text not null,
+	h_phone text not null,
+	h_stars integer not null,
+	tour bigint
+		constraint hotel_tour_fkey
+			references tour,
+	latitude double precision,
+	longitude double precision
+)
+;
+
+create table if not exists travel_agency.tour_m2m_country
 (
-    t_id BIGINT PRIMARY KEY NOT NULL,
-    photo TEXT,
-    date DATE NOT NULL,
-    description TEXT,
-    cost NUMERIC,
-    tour_type INTEGER NOT NULL,
-    duration BIGINT NOT NULL
-);
-CREATE TABLE tour_m2m_country
+	t_id bigint not null
+		constraint tour_m2m_country_t_id_fkey
+			references tour,
+	c_id bigint not null
+		constraint tour_m2m_country_c_id_fkey
+			references country,
+	constraint tour_m2m_country_pk
+		primary key (t_id, c_id)
+)
+;
+
+create table if not exists travel_agency.tour_type
 (
-    t_id BIGINT NOT NULL,
-    c_id BIGINT NOT NULL,
-    CONSTRAINT tour_m2m_country_pk PRIMARY KEY (t_id, c_id)
-);
-CREATE TABLE tour_m2m_user
+	t_id integer not null
+		constraint tour_type_pkey
+			primary key,
+	t_type text
+)
+;
+
+create unique index if not exists tour_type_t_type_uindex
+	on travel_agency.tour_type (t_type)
+;
+
+create table if not exists travel_agency."user"
 (
-    t_id BIGINT NOT NULL,
-    u_id BIGINT NOT NULL,
-    CONSTRAINT tour_m2m_user_pk PRIMARY KEY (t_id, u_id)
-);
-CREATE TABLE tour_type
+	u_id bigint default nextval('travel_agency.user_sequence'::regclass) not null
+		constraint user_pkey
+			primary key,
+	login text not null,
+	password text not null,
+	role text not null,
+	photo text
+)
+;
+
+create table if not exists travel_agency.review
 (
-    t_id INTEGER PRIMARY KEY NOT NULL,
-    t_type TEXT
-);
-CREATE TABLE "user"
+	r_id bigint default nextval('travel_agency.review_sequence'::regclass) not null
+		constraint review_pkey
+			primary key,
+	content text not null,
+	user_id bigint
+		constraint review_user_id_fkey
+			references "user",
+	tour bigint not null
+		constraint review_tour_fkey
+			references tour,
+	rating integer not null
+)
+;
+
+create table if not exists travel_agency.hotel_m2m_user
 (
-    u_id BIGINT PRIMARY KEY NOT NULL,
-    login TEXT NOT NULL,
-    password TEXT NOT NULL,
-    role TEXT NOT NULL,
-    photo TEXT
-);
-CREATE UNIQUE INDEX country_c_name_uindex ON country (c_name);
-ALTER TABLE hotel ADD FOREIGN KEY (tour) REFERENCES tour (t_id);
-ALTER TABLE review ADD FOREIGN KEY (user_id) REFERENCES "user" (u_id);
-ALTER TABLE review ADD FOREIGN KEY (tour) REFERENCES tour (t_id);
-ALTER TABLE tour_m2m_country ADD FOREIGN KEY (t_id) REFERENCES tour (t_id);
-ALTER TABLE tour_m2m_country ADD FOREIGN KEY (c_id) REFERENCES country (c_id);
-ALTER TABLE tour_m2m_user ADD FOREIGN KEY (t_id) REFERENCES tour (t_id);
-ALTER TABLE tour_m2m_user ADD FOREIGN KEY (u_id) REFERENCES "user" (u_id);
-CREATE UNIQUE INDEX tour_type_t_type_uindex ON tour_type (t_type);
-CREATE UNIQUE INDEX user_login_uindex ON "user" (login);
+	h_id bigint not null
+		constraint hotel_m2m_user_hotel_fk_c
+			references hotel,
+	u_id bigint not null
+		constraint hotel_m2m_user_user_fk_c
+			references "user",
+	constraint hotel_m2m_user_h_id_u_id_pk
+		primary key (h_id, u_id)
+)
+;
+
+create index if not exists fki_hotel_m2m_user_user
+	on travel_agency.hotel_m2m_user (u_id)
+;
+
+create unique index if not exists user_login_uindex
+	on travel_agency."user" (login)
+;
+
+create table if not exists travel_agency.room
+(
+	room_id bigserial not null
+		constraint room_pkey
+			primary key,
+	beds integer not null,
+	hotel bigint not null
+		constraint room_hotel_fk
+			references hotel,
+	user_id bigint
+		constraint room_user_fk_c
+			references "user"
+)
+;
+
+create unique index if not exists room_r_id_uindex
+	on travel_agency.room (room_id)
+;
+
+create index if not exists fki_room_hotel_fk
+	on travel_agency.room (hotel)
+;
+
+create index if not exists fki_room_user_fk_c
+	on travel_agency.room (user_id)
+;
+
+create table if not exists travel_agency.transfer_type
+(
+	tt_id bigserial not null
+		constraint transfer_type_tt_id_pk
+			primary key
+		constraint transfer_type_tour_fk
+			references tour,
+	description text not null,
+	price_coefficient double precision not null,
+	code text not null
+)
+;
+
+create unique index if not exists transfer_type_tt_id_uindex
+	on travel_agency.transfer_type (tt_id)
+;
+
+create table if not exists travel_agency.transfertype_m2m_tour
+(
+	tt_id bigint not null
+		constraint transfertype_m2m_tt_id_fk
+			references transfer_type,
+	t_id bigint not null
+		constraint tourtype_m2m_tour_fk
+			references tour,
+	constraint trasfertype_m2m_tour_t_id_tt_id_pk
+		primary key (t_id, tt_id)
+)
+;
+
+create index if not exists fki_transfertype_m2m_tt_id_fk
+	on travel_agency.transfertype_m2m_tour (tt_id)
+;
+
+-- we don't know how to generate schema travel_agency (class Schema) :(
+create sequence room_r_id_seq
+;
+
+create sequence transfer_type_tt_id_seq
+;
+
+create sequence tour_t_id_seq
+;
+
+create sequence hotel_h_id_seq
+;
+
+create sequence review_sequence
+;
+
+create sequence tour_sequence
+;
+
+create sequence hotel_sequence
+;
+
+create sequence room_sequence
+;
+
+create sequence transfer_type_sequence
+;
+
+create sequence user_sequence
+;
+
+

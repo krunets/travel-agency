@@ -39,6 +39,8 @@
         <jstl.version>1.2</jstl.version>
         <tomcat.version>8.5.33</tomcat.version>
         <commons.version>1.3.3</commons.version>
+        <jackson.databind.version>2.9.4</jackson.databind.version>
+        <jackson-mapper-asl-version>1.9.10</jackson-mapper-asl-version>
 
         <jacoco.version>0.8.1</jacoco.version>
         <checkstyle.version>3.0.0</checkstyle.version>
@@ -251,6 +253,17 @@
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
                 <version>${commons.version}</version>
+            </dependency>
+            <!-- Jackson JSON Mapper -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson-mapper-asl-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

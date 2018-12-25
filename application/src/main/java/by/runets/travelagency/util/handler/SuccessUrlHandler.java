@@ -1,6 +1,6 @@
 package by.runets.travelagency.util.handler;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Slf4j
+@Log4j2
 @Component
 public class SuccessUrlHandler extends SimpleUrlAuthenticationSuccessHandler {
   @Autowired
@@ -39,15 +39,7 @@ public class SuccessUrlHandler extends SimpleUrlAuthenticationSuccessHandler {
 	  roles.add(a.getAuthority());
 	}
 	log.error(roles.toString());
-	if (isAdmin(roles)) {
-	  url = "/admin/home";
-	} else if (isUser(roles)) {
-	  url = "/user/home";
-	} else {
-	  url = "/accessDenied";
-	}
-
-	return url;
+	return isAdmin(roles) || isUser(roles) ? "/" : "/accessDenied";
   }
 
   private boolean isUser(List<String> roles) {

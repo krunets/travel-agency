@@ -10,10 +10,16 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/uui/css/lib/components/datepicker3.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
 <#include "include/header.ftl">
 <#include "include/searchform.ftl">
+<#if hotels??>
+    <#include "include/map.ftl">
+    <#include "include/beds_modal.ftl">
+</#if>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -29,6 +35,9 @@
                             <p><@spring.message "date.message"/> ${tour.date}</p>
                             <p><@spring.message "duration.message"/> ${tour.duration.toDays()}</p>
                             <p>${tour.tourType}</p>
+                            <p>
+                                <button type="button" data-target="#show-tour-hotels" data-toggle="modal" class="btn btn-outline-danger"><@spring.message "tour.hotels.message"/></button>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -66,7 +75,7 @@
                 <div class="page-header">
                     <h1>
                         <small class="pull-right">${tour.reviews?size} comments</small>
-                        Comments
+                        <@spring.message "comments.upper.message"/>
                     </h1>
                 </div>
 
@@ -81,8 +90,8 @@
                     <textarea name="content" class="resize-none margin-bottom form-control input-sm chat-input"
                               placeholder="Write your message here..." required></textarea>
                     <input type="button" id="show-comments-button" class="auto-width btn btn-outline-info float-right"
-                           value="Show comments"/>
-                    <button type="submit" class="auto-width btn btn-outline-info float-right">Add comment</button>
+                           value="<@spring.message "show.comments.message"/>"/>
+                    <button type="submit" class="auto-width btn btn-outline-info float-right"><@spring.message "add.comment.message"/></button>
                 </form>
             </div>
         </div>
@@ -158,6 +167,9 @@
 <script src="/resources/js/controller.js"></script>
 <script src="/resources/js/tourpage.js"></script>
 <script src="/resources/uui/js/uui-rating.min.js"></script>
-</body>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=9811e4c7-b644-4ec2-b535-0133719fa2af&lang=en_RU" type="text/javascript"></script>
+<script src="/resources/js/map.js"></script>
+<script src="/resources/js/jquery.autocomplete.js"></script>
+<script src="/resources/js/search.js"></script></body>
 </html>
 

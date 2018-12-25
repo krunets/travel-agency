@@ -38,6 +38,23 @@ INSERT INTO travel_agency.tour_m2m_country(t_id, c_id) VALUES(4, 2);
 INSERT INTO travel_agency.tour_m2m_country(t_id, c_id) VALUES(3, 3);
 INSERT INTO travel_agency.tour_m2m_country(t_id, c_id) VALUES(5, 1);
 
-INSERT INTO travel_agency.tour_m2m_user(t_id, u_id) VALUES(1, 3);
-INSERT INTO travel_agency.tour_m2m_user(t_id, u_id) VALUES(2, 3);
-INSERT INTO travel_agency.tour_m2m_user(t_id, u_id) VALUES(2, 2)
+INSERT INTO travel_agency.hotel_m2m_user(h_id, u_id) VALUES(1, 3);
+INSERT INTO travel_agency.hotel_m2m_user(h_id, u_id) VALUES(2, 3);
+INSERT INTO travel_agency.hotel_m2m_user(h_id, u_id) VALUES(2, 2);
+
+
+INSERT  INTO travel_agency.room(room_id, beds, hotel, user_id) values (1, 2, 1, null);
+INSERT  INTO travel_agency.room(room_id,beds, hotel, user_id) values (2, 2, 1, null);
+
+INSERT  INTO travel_agency.room(room_id,beds, hotel, user_id) values (3,2, 2, null);
+INSERT  INTO travel_agency.room(room_id,beds, hotel, user_id) values (4,2, 2, null);
+
+INSERT  INTO travel_agency.room(room_id,beds, hotel, user_id) values (5,2, 3, null);
+INSERT  INTO travel_agency.room(room_id,beds, hotel, user_id) values (6,2, 3, null);
+
+INSERT  INTO travel_agency.room(room_id,beds, hotel, user_id) values (7,2, 4, null);
+INSERT  INTO travel_agency.room(room_id,beds, hotel, user_id) values (8,2, 4, null);
+
+INSERT  INTO travel_agency.room(room_id,beds, hotel, user_id) values (9,2, 5, null);
+INSERT  INTO travel_agency.room(room_id,beds, hotel, user_id) values (10,2, 5, null);
+

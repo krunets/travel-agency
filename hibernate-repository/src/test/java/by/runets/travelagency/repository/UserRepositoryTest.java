@@ -1,11 +1,14 @@
 package by.runets.travelagency.repository;
 
 
+import by.runets.travelagency.entity.Hotel;
 import by.runets.travelagency.entity.Review;
 import by.runets.travelagency.entity.Role;
 import by.runets.travelagency.entity.User;
 import by.runets.travelagency.hibernate.IDatabaseRepository;
 import by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig;
+import com.sun.xml.internal.bind.v2.model.core.ID;
+import lombok.extern.log4j.Log4j2;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,14 +21,15 @@ import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGE;
 import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.FIND_USER_WITH_HOTELS;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.LOGIN_FIELD;
+import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_USER_PAGINATION;
 
+@Log4j2
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "development")
@@ -36,6 +40,8 @@ import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.D
 public class UserRepositoryTest {
   @Autowired
   private IDatabaseRepository<User, Long> userRepository;
+  @Autowired
+  private IDatabaseRepository<Hotel, Long> hotelRepository;
 
   @Test
   public void testCreate() {
@@ -99,5 +105,38 @@ public class UserRepositoryTest {
 	Assert.assertEquals(expected, actual);
   }
 
+  @Test
+  public void testBookHotel() {
+	Hotel marriot = new Hotel(1, "Marriot", "123 23 23", 5, 53.932717, 27.511248);
+	User user = new User(6, "root", "root", Role.ADMIN);
+
+	Set<Hotel> expected = new HashSet<>();
+	expected.add(marriot);
+
+	user.setHotels(expected);
+
+	Long aLong = userRepository.create(user);
+
+	Optional<User> dbUser = userRepository.read(User.class, aLong);
+
+	Assert.assertEquals(expected, dbUser.get().getHotels());
+  }
+
+
+  @Test
+  public void testUpdateHotel() {
+	Hotel marriot = new Hotel(1, "Marriot", "123 23 23", 5, 53.932717, 27.511248);
+	Optional<User> read = userRepository.read(User.class, Long.parseLong("1"));
+
+	read.get().getHotels().add(marriot);
+
+	userRepository.update(read.get());
+
+	Optional<User> read2 = userRepository.read(User.class, Long.parseLong("1"));
+
+    System.out.println(read2.get().getHotels());
+
+	Assert.assertEquals(read.get().getHotels(), read2.get().getHotels());
+  }
 
 }

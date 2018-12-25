@@ -1,14 +1,21 @@
 package by.runets.travelagency.repository;
 
 import by.runets.travelagency.entity.Hotel;
+import by.runets.travelagency.entity.Role;
+import by.runets.travelagency.entity.Room;
+import by.runets.travelagency.entity.User;
 import by.runets.travelagency.hibernate.IDatabaseRepository;
 import by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig;
 import by.runets.travelagency.util.constant.NamedQueryConstant;
 import by.runets.travelagency.util.constant.StringUtils;
+import lombok.extern.log4j.Log4j2;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -16,14 +23,14 @@ import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static by.runets.travelagency.util.config.DevelopmentDatabaseBeanConfig.DEFAULT_PAGINATION_SIZE;
-import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_HOTEL;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.*;
+import static by.runets.travelagency.util.constant.NamedQueryConstant.LOGIN_FIELD;
+import static by.runets.travelagency.util.constant.PaginationConstant.DEFAULT_USER_PAGINATION;
 
+@Log4j2
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "development")
@@ -36,13 +43,15 @@ import static by.runets.travelagency.util.constant.NamedQueryConstant.COUNT_HOTE
 public class HotelRepositoryTest {
   @Autowired
   private IDatabaseRepository<Hotel, Long> hotelRepository;
+  @Autowired
+  private IDatabaseRepository<Room, Long> roomRepository;
 
   @Test
   public void testReadById() {
 	final long id = 1;
 	final Hotel expected = new Hotel(id, "Marriot", "123 23 23", 5, 53.932717, 27.511248);
 	final Hotel actual = hotelRepository.read(Hotel.class, id).get();
-	Assert.assertEquals(actual, expected);
+	Assert.assertEquals(expected, actual);
   }
 
   @Test
@@ -137,5 +146,25 @@ public class HotelRepositoryTest {
 						5, 53.932717, 27.511248))));
 	List<Optional<Hotel>> actual = hotelRepository.readByNameQuery(NamedQueryConstant.FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, 1, 10);
 	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testReadHotelsByTourIdNamedQuery() {
+	final List<Optional<Hotel>> expected =
+		new ArrayList<>(
+			Collections.singletonList(
+				Optional.of(
+					new Hotel(1, "Marriot", "123 23 23", 5, 53.932717, 27.511248))));
+	List<Optional<Hotel>> actual = hotelRepository.readByNameQuery(NamedQueryConstant.FIND_HOTELS_BY_TOUR_ID, NamedQueryConstant.TOUR_FIELD, Long.parseLong("1"), 1, 10);
+	Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void test() {
+	roomRepository.read(Room.class, Long.parseLong("1"))
+		.ifPresent(room -> {
+		  room.setUser(new User(2, "admin", "admin", Role.ADMIN));
+		  roomRepository.update(room);
+		});
   }
 }

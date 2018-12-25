@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Date:</label>
-                        <div id="datepicker" class="custom-datepicker date uui-datepicker date-button">
+                        <div id="datepicker" class="form-control custom-datepicker date uui-datepicker date-button">
                             <input autocomplete="off" type="text" id="date" name="date" class="uui-form-element"
                                    placeholder="Date" required/>
                             <span class="input-group-addon uui-button"></span>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tourType" class="col-form-label">Tour type:</label>
-                        <select id="tourType" name="tourType" required>
+                        <select id="tourType" class="form-control" name="tourType" required>
                             <option disabled selected>Select tourtype:</option>
                         <#if tourTypeEnum?has_content>
                             <#list tourTypeEnum as tourType>
@@ -49,13 +49,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="countryName" class="col-form-label">Country: </label>
-                        <select id="countryName" name="countryName" required>
-                            <option disabled selected>Select country from list</option>
-                        <#list countriesDTO as country>
-                            <option value="${country.code}">${country.name}</option>
-                        </#list>
-                        </select>
+                        <div class="form-group">
+                            <label for="country-search-field">Country</label>
+                            <input type="text"
+                                   class="form-control autocomplete"
+                                   id="country-search-field"
+                                   name="countryName"
+                                   placeholder="<@spring.message "search.form.country"/>"/>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="description" class="col-form-label">Description:</label>

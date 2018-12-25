@@ -83,6 +83,22 @@ $(document).ready(function () {
     $("button[name = 'pagination_button']").click(function () {
         $("input[name='size']").val($("select[name='example_length']").val());
         $("form[name='pagination']").submit();
-    })
-});
+    });
 
+    $('#country-search-field').autocomplete({
+        serviceUrl: '/country/read/all',
+        paramName: "searchCriteria",
+        delimiter: ",",
+        transformResult: function(response) {
+            return {
+
+                suggestions: $.map($.parseJSON(response), function(item) {
+                    return { value: item.code, data: item.name };
+                })
+
+            };
+
+        }
+    });
+
+});

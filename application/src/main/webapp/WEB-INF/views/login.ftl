@@ -30,15 +30,16 @@
                         <input type="password" class="form-control" id="password" placeholder="Enter password"
                                name="password">
                     </div>
-                    <div class="form-group">
-                        <label class="margin-left-label form-check-label" for="exampleCheck1">Remember me</label>
-                        <input type="checkbox" name="remember-me" class="margin-left-checkbox" id="exampleCheck1">
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="remember-me"  class="custom-control-input" id="exampleCheck1">
+                        <label class="custom-control-label" for="exampleCheck1">Remember me</label>
                     </div>
 
                     <button type="button" onclick="signIn()" class="btn btn-primary float-right">Sign In</button>
+                    <button type="button" onclick="signUp()" class="btn btn-secondary float-right">Sign Up</button>
                 </form>
                 <form id="signUpForm" action="/registration">
-                    <button type="button" onclick="signUp()" class="btn btn-secondary float-right">Sign Up</button>
                 </form>
             </div>
         </div>
@@ -46,9 +47,6 @@
     </div>
 </div>
 
-<#--
-<#include "include/footer.ftl">
--->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -63,14 +61,8 @@
         $('#signInForm').submit();
     };
     var signUp = function () {
-        console.log("click");
         $('#signUpForm').submit();
     }
 </script>
-<#--<script src="/resources/uui/jquery/jquery-2.2.4.min.js"></script>
-<script src="/resources/uui/jquery/jquery-3.3.1.min.js"></script>
-<script src="/resources/uui/jquery-ui/jquery-ui.min.js"></script>
-<script src="/resources/uui/bootstrap/js/bootstrap.min.js"></script>&ndash;&gt;
-<script src="/resources/js/controller.js" type="text/javascript"></script>-->
 </body>
 </html>

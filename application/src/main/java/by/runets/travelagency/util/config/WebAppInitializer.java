@@ -1,6 +1,6 @@
 package by.runets.travelagency.util.config;
 
-import by.runets.travelagency.util.security.WebSecurityConfig;
+import by.runets.travelagency.security.WebSecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;

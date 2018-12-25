@@ -15,9 +15,7 @@
 </head>
 <body>
 <#include "include/header.ftl">
-<div class="col-md-12">
-    <#include "include/modal_map.ftl">
-</div>
+<div class="col-md-12"></div>
 <div class="row">
     <div class="col-md-12">
         <div class="margin-bottom">
@@ -154,8 +152,7 @@
 <script src="/resources/js/controller.js"></script>
 <script src="/resources/js/tourpage.js"></script>
 <script src="/resources/uui/js/uui-rating.min.js"></script>
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript">
-</script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 <script type="text/javascript">
     $('tr[data-toggle=modal]').click(function () {
         var latitude = $(this).data('hotel-latitude');

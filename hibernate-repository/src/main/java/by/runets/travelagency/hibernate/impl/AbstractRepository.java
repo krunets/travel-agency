@@ -52,7 +52,7 @@ public abstract class AbstractRepository<T> implements IDatabaseRepository<T, Lo
   @Loggable
   @Override
   public void update(final T entity) {
-	sessionFactory.getCurrentSession().saveOrUpdate(entity);
+	sessionFactory.getCurrentSession().merge(entity);
   }
 
   @Loggable

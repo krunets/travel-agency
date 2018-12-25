@@ -9,23 +9,6 @@
 <div class="container">
     <div class="row">
         <div class="padding-top-fourth align-self-center col-md-12">
-        <#-- <@spring.bind "userDTO"/>
-
-             <form action="/registration" method="post">
-                 First name:<br>
-             <@spring.formInput "userDTO.login"/>
-             <@spring.showErrors "<br>"/>
-                 <br><br>
-                 Last name:<br>
-             <@spring.formPasswordInput "userDTO.password"/>
-             <@spring.showErrors "<br>"/>
-                 <br><br>
-                 Email:<br>
-             <@spring.formPasswordInput "user.confirmedPassword"/>
-             <@spring.showErrors "<br>"/>
-                 <br><br>
-                 <input type="submit" value="Submit">
-             </form>-->
             <form name="registrationForm" action="/registration" method="post">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
             <#if login_error>
@@ -50,7 +33,6 @@
         </div>
     </div>
 </div>
-<#include "include/footer.ftl">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

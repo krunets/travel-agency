@@ -49,6 +49,4 @@ public class UserController {
 	model.addAttribute("users", users);
 	return "admin_homepage";
   }
-
-
 }

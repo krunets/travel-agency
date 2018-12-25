@@ -1,4 +1,5 @@
 <#assign  security=JspTaglibs["http://www.springframework.org/security/tags"] />
+<#import "/spring.ftl" as spring/>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">EpamTravelAgency</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -9,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/"><@spring.message "home.message"/> <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/hotel/all">Hotel</a>
+                <a class="nav-link" href="/hotel/all"><@spring.message "hotel.message"/></a>
             </li>
         </ul>
         <div class="btn-group">
@@ -20,7 +21,7 @@
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                    Locale
+                    <@spring.message "locale.message"/>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="?lang=en_US">EN</a>
@@ -29,12 +30,12 @@
             </div>
         <@security.authorize access="isAuthenticated()">
             <form action="/logout">
-                <button type="submit" class="btn btn-success">Logout</button>
+                <button type="submit" class="btn btn-success"><@spring.message "logout.message"/></button>
             </form>
         </@security.authorize>
         <@security.authorize access="! isAuthenticated()">
             <form action="/login">
-                <button type="submit" class="btn btn-warning">Sign In</button>
+                <button type="submit" class="btn btn-warning"><@spring.message "signin.message"/></button>
             </form>
         </@security.authorize>
         </div>

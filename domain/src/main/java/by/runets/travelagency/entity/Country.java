@@ -33,10 +33,11 @@ public class Country {
   @Id
   @Column(name = "c_id")
   @Min(value = 0)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_generator")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_sequence_generator")
   @SequenceGenerator(
-	  name = "country_generator",
+	  name = "country_sequence_generator",
 	  sequenceName = "country_sequence",
+	  schema = "travel_agency",
 	  allocationSize = 1
   )
   @NonNull

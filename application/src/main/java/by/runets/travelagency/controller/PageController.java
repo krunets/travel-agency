@@ -1,5 +1,6 @@
 package by.runets.travelagency.controller;
 
+import by.runets.travelagency.converter.Converter;
 import by.runets.travelagency.dto.CountryDTO;
 import by.runets.travelagency.dto.PaginationDTO;
 import by.runets.travelagency.entity.Hotel;
@@ -31,28 +32,26 @@ public class PageController {
   @Autowired
   private IJoinService<Tour, Hotel> joinService;
   @Autowired
-  private List<CountryDTO> countryDTOs;
+  private Converter<List<Tour>, List<Tour>> tourCountryConverter;
 
   @GetMapping("/")
   public String start(
 	  @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
 	  @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
 	  Model model) {
-	List<Tour> tours = tourService.readAllByField(FIND_TOUR_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, page, limit);
+	List<Tour> tours = tourService.readAllByField(FIND_ALL_TOUR, StringUtils.EMPTY, StringUtils.EMPTY, page, limit);
+	List<Tour> convertedTours = tourCountryConverter.convert(tours);
 	List<Hotel> hotels = hotelService.readAllByField(FIND_ALL_HOTEL, StringUtils.EMPTY, StringUtils.EMPTY, page, limit);
-	joinService.join(tours, hotels);
+	joinService.join(convertedTours, hotels);
 
 	long pageAmount = (long) Math.ceil((double) tourService.count(COUNT_TOUR) / limit);
 
 	PaginationDTO<Tour> tourPaginationDTO = new PaginationDTO<>();
-	tourPaginationDTO.setData(tours);
+	tourPaginationDTO.setData(convertedTours);
 	tourPaginationDTO.setPage(page);
 	tourPaginationDTO.setLimit(limit);
 	tourPaginationDTO.setPageAmount(pageAmount);
 
-	model.addAttribute("checkTours", false);
-	model.addAttribute("criteriaTour", "");
-	model.addAttribute("countriesDTO", countryDTOs);
 	model.addAttribute("tourTypeEnum", TourType.values());
 	model.addAttribute("tourPaginationDTO", tourPaginationDTO);
 
